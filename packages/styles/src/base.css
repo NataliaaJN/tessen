@@ -1,0 +1,84 @@
+/* Optional page defaults driven by semantic tokens. Import `@tessen-ui/styles/base.css`. Every selector is zero-specificity (`:where`). */
+@layer tessen.base {
+  :where(body) {
+    background: var(--tessen-color-surface-canvas);
+    color: var(--tessen-color-text-primary);
+    font-family: var(--tessen-typography-body-md-font-family);
+    font-size: var(--tessen-typography-body-md-font-size);
+    font-weight: var(--tessen-typography-body-md-font-weight);
+    line-height: var(--tessen-typography-body-md-line-height);
+    letter-spacing: var(--tessen-typography-body-md-letter-spacing);
+  }
+
+  :where(h1) {
+    font: var(--tessen-typography-heading-xl-font-weight)
+      var(--tessen-typography-heading-xl-font-size) /
+      var(--tessen-typography-heading-xl-line-height)
+      var(--tessen-typography-heading-xl-font-family);
+    letter-spacing: var(--tessen-typography-heading-xl-letter-spacing);
+  }
+
+  :where(h2) {
+    font: var(--tessen-typography-heading-lg-font-weight)
+      var(--tessen-typography-heading-lg-font-size) /
+      var(--tessen-typography-heading-lg-line-height)
+      var(--tessen-typography-heading-lg-font-family);
+    letter-spacing: var(--tessen-typography-heading-lg-letter-spacing);
+  }
+
+  :where(h3) {
+    font: var(--tessen-typography-heading-md-font-weight)
+      var(--tessen-typography-heading-md-font-size) /
+      var(--tessen-typography-heading-md-line-height)
+      var(--tessen-typography-heading-md-font-family);
+    letter-spacing: var(--tessen-typography-heading-md-letter-spacing);
+  }
+
+  :where(h4) {
+    font: var(--tessen-typography-heading-sm-font-weight)
+      var(--tessen-typography-heading-sm-font-size) /
+      var(--tessen-typography-heading-sm-line-height)
+      var(--tessen-typography-heading-sm-font-family);
+    letter-spacing: var(--tessen-typography-heading-sm-letter-spacing);
+  }
+
+  :where(h5, h6) {
+    font: var(--tessen-typography-heading-xs-font-weight)
+      var(--tessen-typography-heading-xs-font-size) /
+      var(--tessen-typography-heading-xs-line-height)
+      var(--tessen-typography-heading-xs-font-family);
+    letter-spacing: var(--tessen-typography-heading-xs-letter-spacing);
+  }
+
+  :where(a) {
+    color: var(--tessen-color-text-link);
+    text-underline-offset: 0.15em;
+  }
+
+  :where(a:hover) {
+    color: var(--tessen-color-text-link-hover);
+  }
+
+  :where(code, kbd, samp, pre) {
+    font-family: var(--tessen-typography-code-font-family);
+    font-size: var(--tessen-typography-code-font-size);
+    line-height: var(--tessen-typography-code-line-height);
+  }
+
+  :where(hr) {
+    border: 0;
+    border-block-start: var(--tessen-border-width-hairline) solid var(--tessen-color-border-subtle);
+  }
+
+  /* One focus ring for everything that has no component style of its own. */
+  :where(:focus-visible) {
+    outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+    outline-offset: var(--tessen-focus-ring-offset);
+  }
+
+  @media (forced-colors: active) {
+    :where(:focus-visible) {
+      outline-color: Highlight;
+    }
+  }
+}
