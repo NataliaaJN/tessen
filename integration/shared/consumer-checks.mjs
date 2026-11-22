@@ -16,6 +16,8 @@ export const JS_ENTRIES = [
   '@tessen-ui/core/codegen',
   '@tessen-ui/core/contracts',
   '@tessen-ui/core/contracts/button',
+  '@tessen-ui/core/contracts/dialog',
+  '@tessen-ui/core/contracts/tabs',
   '@tessen-ui/motion',
 ];
 
@@ -30,6 +32,10 @@ export const FILE_ENTRIES = [
   '@tessen-ui/styles/reset.css',
   '@tessen-ui/styles/base.css',
   '@tessen-ui/styles/components/button.css',
+  '@tessen-ui/styles/components/dialog.css',
+  '@tessen-ui/styles/components/tabs.css',
+  '@tessen-ui/styles/components/layout.css',
+  '@tessen-ui/styles/components/toggles.css',
   '@tessen-ui/motion/motion.css',
   '@tessen-ui/icons/sprite.svg',
   '@tessen-ui/icons/manifest.json',
@@ -130,12 +136,18 @@ export function checkBuildOutput(cwd) {
     errors.push('built CSS has no motion keyframes (motion.css missing)');
 
   // Tree-shaking: the app uses the Button component, never the contract cases.
-  for (const marker of ['role-name-defaults', 'loading-keeps-focus', 'defineContract']) {
+  for (const marker of [
+    'role-name-defaults',
+    'loading-keeps-focus',
+    'escape-closes-and-restores-focus',
+    'defineContract',
+  ]) {
     if (js.includes(marker))
       errors.push(`bundle contains "${marker}": unused core exports were not tree-shaken`);
   }
-  if (!js.includes('t-button'))
-    errors.push('bundle has no "t-button": core is not wired into the app');
+  for (const cls of ['t-button', 't-dialog', 't-tabs', 't-field', 't-checkbox']) {
+    if (!js.includes(cls)) errors.push(`bundle has no "${cls}": core is not wired into the app`);
+  }
   return errors;
 }
 

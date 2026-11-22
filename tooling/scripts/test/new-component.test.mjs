@@ -51,27 +51,27 @@ describe('new-component', () => {
   });
 
   it('puts the same defaults in the contract and uses the contract in both frameworks', () => {
-    const contract = files['packages/core/src/contracts/status-dot.contract.ts'];
+    const contract = files['packages/core/src/contracts/status-dot.contract.ts'] ?? '';
     assert.match(contract, /defaults: \{ tone: 'neutral', size: 'sm', pulse: false \}/);
     assert.match(contract, /'data-tone': 'success'/);
     assert.match(
-      files['packages/vue/src/components/status-dot/StatusDot.vue'],
+      files['packages/vue/src/components/status-dot/StatusDot.vue'] ?? '',
       /statusDotVariants/,
     );
     assert.match(
-      files['packages/react/src/components/status-dot/StatusDot.tsx'],
+      files['packages/react/src/components/status-dot/StatusDot.tsx'] ?? '',
       /statusDotVariants/,
     );
     assert.match(
-      files['packages/react/src/components/status-dot/StatusDot.tsx'],
+      files['packages/react/src/components/status-dot/StatusDot.tsx'] ?? '',
       /HTMLSpanElement/,
     );
   });
 
   it('renders the barrel lines', () => {
     const exportsMap = renderExports(spec);
-    assert.match(exportsMap['packages/vue/src/index.ts'], /status-dot\/index\.js/);
-    assert.match(exportsMap['packages/react/src/index.ts'], /status-dot\/index\.ts/);
-    assert.match(exportsMap['packages/core/src/contracts/index.ts'], /statusDotContract/);
+    assert.match(exportsMap['packages/vue/src/index.ts'] ?? '', /status-dot\/index\.js/);
+    assert.match(exportsMap['packages/react/src/index.ts'] ?? '', /status-dot\/index\.ts/);
+    assert.match(exportsMap['packages/core/src/contracts/index.ts'] ?? '', /statusDotContract/);
   });
 });

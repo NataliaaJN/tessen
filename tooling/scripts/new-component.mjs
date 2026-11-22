@@ -22,13 +22,13 @@ export const toKebab = (name) =>
 export const toPascal = (name) =>
   toKebab(name)
     .split('-')
-    .map((part) => part[0].toUpperCase() + part.slice(1))
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join('');
 
 /** @param {string} name */
 const toCamel = (name) => {
   const pascal = toPascal(name);
-  return pascal[0].toLowerCase() + pascal.slice(1);
+  return pascal.charAt(0).toLowerCase() + pascal.slice(1);
 };
 
 /**

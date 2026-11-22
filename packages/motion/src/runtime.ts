@@ -3,7 +3,7 @@
  * No framework imports; every function degrades to "no animation" where the browser or the
  * user's settings say so, and never throws for a missing API.
  */
-import { motionModes, type MotionMode } from './index.ts';
+import { motionModes, type MotionMode } from './modes.ts';
 import { presets, type PresetName } from './presets.ts';
 
 const ATTRIBUTE = 'data-tessen-motion';
