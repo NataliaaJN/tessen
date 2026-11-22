@@ -1,0 +1,164 @@
+/* Spike F1-T07: shared Button CSS. Only semantic tokens and --t-button-* overrides, one layer. */
+@layer tessen.components {
+  .t-button {
+    /* Tone -> accent colours (primary tone = brand, danger tone = danger). */
+    --_accent: var(--tessen-color-action-primary-default);
+    --_accent-hover: var(--tessen-color-action-primary-hover);
+    --_accent-active: var(--tessen-color-action-primary-active);
+    --_accent-subtle: var(--tessen-color-action-primary-subtle);
+    --_on-accent: var(--tessen-color-action-primary-on);
+
+    /* Variant -> resolved colours (primary is the default). */
+    --_bg: var(--t-button-bg, var(--_accent));
+    --_bg-hover: var(--_accent-hover);
+    --_bg-active: var(--_accent-active);
+    --_fg: var(--t-button-fg, var(--_on-accent));
+    --_border: transparent;
+
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--tessen-space-2);
+    block-size: var(--_height);
+    padding-inline: var(--_padding-x);
+    border: 1px solid var(--_border);
+    border-radius: var(--t-button-radius, var(--tessen-radius-md));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--tessen-font-family-sans);
+    font-size: var(--_font-size);
+    font-weight: var(--tessen-font-weight-medium);
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition:
+      background-color var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard),
+      transform var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard);
+
+    &[data-size='sm'] {
+      --_height: var(--tessen-size-control-sm);
+      --_padding-x: var(--tessen-space-3);
+      --_font-size: var(--tessen-font-size-sm);
+    }
+    &[data-size='md'] {
+      --_height: var(--tessen-size-control-md);
+      --_padding-x: var(--tessen-space-4);
+      --_font-size: var(--tessen-font-size-md);
+    }
+    &[data-size='lg'] {
+      --_height: var(--tessen-size-control-lg);
+      --_padding-x: var(--tessen-space-5);
+      --_font-size: var(--tessen-font-size-lg);
+    }
+
+    &[data-tone='danger'] {
+      --_accent: var(--tessen-color-action-danger-default);
+      --_accent-hover: var(--tessen-color-action-danger-hover);
+      --_accent-active: var(--tessen-color-action-danger-active);
+      --_accent-subtle: var(--tessen-color-action-danger-subtle);
+      --_on-accent: var(--tessen-color-text-on-action);
+    }
+
+    &[data-variant='secondary'] {
+      --_bg: var(--t-button-bg, var(--tessen-color-action-neutral-default));
+      --_bg-hover: var(--tessen-color-action-neutral-hover);
+      --_bg-active: var(--tessen-color-action-neutral-active);
+      --_fg: var(--t-button-fg, var(--tessen-color-text-primary));
+    }
+    &[data-variant='outline'] {
+      --_bg: var(--t-button-bg, transparent);
+      --_bg-hover: var(--_accent-subtle);
+      --_bg-active: var(--_accent-subtle);
+      --_fg: var(--t-button-fg, var(--_accent));
+      --_border: var(--tessen-color-border-strong);
+    }
+    &[data-variant='ghost'] {
+      --_bg: var(--t-button-bg, transparent);
+      --_bg-hover: var(--_accent-subtle);
+      --_bg-active: var(--_accent-subtle);
+      --_fg: var(--t-button-fg, var(--_accent));
+    }
+    &[data-variant='link'] {
+      --_bg: var(--t-button-bg, transparent);
+      --_bg-hover: transparent;
+      --_bg-active: transparent;
+      --_fg: var(--t-button-fg, var(--tessen-color-text-link));
+      block-size: auto;
+      padding-inline: 0;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    &[data-block] {
+      display: flex;
+      inline-size: 100%;
+    }
+
+    @media (hover: hover) {
+      &:hover:not(:disabled, [aria-disabled='true']) {
+        background: var(--_bg-hover);
+      }
+    }
+    &:active:not(:disabled, [aria-disabled='true']) {
+      background: var(--_bg-active);
+      transform: scale(var(--tessen-motion-scale-press));
+    }
+    &:focus-visible {
+      outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+      outline-offset: var(--tessen-focus-ring-offset);
+    }
+    &:disabled {
+      cursor: not-allowed;
+      background: var(--tessen-color-action-primary-disabled);
+      color: var(--tessen-color-text-disabled);
+    }
+    &[aria-disabled='true'] {
+      cursor: progress;
+    }
+  }
+
+  .t-button__icon {
+    display: inline-flex;
+    flex: none;
+  }
+
+  /* The label keeps its width while loading: the spinner is absolutely centred and the label hidden. */
+  .t-button[aria-busy='true'] {
+    position: relative;
+    > .t-button__label,
+    > .t-button__icon {
+      visibility: hidden;
+    }
+  }
+  .t-button__spinner {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    inline-size: 1em;
+    block-size: 1em;
+    border: 2px solid currentColor;
+    border-inline-end-color: transparent;
+    border-radius: 50%;
+    animation: t-button-spin 0.7s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .t-button {
+      transition: none;
+      &:active:not(:disabled, [aria-disabled='true']) {
+        transform: none;
+      }
+    }
+    .t-button__spinner {
+      animation-duration: 2s;
+    }
+  }
+}
+
+@keyframes t-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

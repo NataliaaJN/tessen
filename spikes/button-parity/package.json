@@ -1,0 +1,35 @@
+{
+  "name": "@tessen-ui/spike-button-parity",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Spike F1-T07 (roadmap S2): Button contract -> snippet codegen -> contract runner in Vue/React -> visual parity diff. Throwaway; findings go to docs/planning/T07-button-parity.md.",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "parity": "node scripts/parity.ts"
+  },
+  "devDependencies": {
+    "@tessen-ui/styles": "workspace:*",
+    "@tessen-ui/tsconfig": "workspace:*",
+    "@testing-library/dom": "catalog:",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "catalog:",
+    "@types/node": "catalog:",
+    "@types/pngjs": "^6.0.5",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-vue": "^6.0.11",
+    "@vue/test-utils": "^2.6.0",
+    "jsdom": "catalog:",
+    "pixelmatch": "^8.0.0",
+    "playwright-core": "^1.65.1",
+    "pngjs": "^7.0.0",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:",
+    "vue": "catalog:"
+  }
+}
