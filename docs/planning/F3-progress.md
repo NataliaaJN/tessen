@@ -1,6 +1,6 @@
 # F3 · Framework support y paridad: estado
 
-> **Estado:** F3 **iniciada, no cerrada** (2026-11-22). Se cerró primero la deuda del gate de F2 (paridad visual y navegador real) y se entregaron los componentes T2: el lote nativo (§2) y el lote sobre Zag (§2b). **El catálogo T2 queda completo.** `parity:api` y el aviso de terceros ya están (§3b). Quedan SSR, matriz de versiones, `size-limit` y lector de pantalla (§4).
+> **Estado:** F3 **iniciada, no cerrada** (2026-11-22). Se cerró primero la deuda del gate de F2 (paridad visual y navegador real) y se entregaron los componentes T2: el lote nativo (§2) y el lote sobre Zag (§2b). **El catálogo T2 queda completo.** `parity:api` y el aviso de terceros ya están (§3b). Quedan matriz de versiones, `size-limit` y lector de pantalla (§4).
 
 ## 1. Deuda de F2 cerrada
 
@@ -12,7 +12,7 @@
 
 **Hallazgo de las pruebas en navegador:** el `Portal` de React se montaba en un `useEffect`, así que un `Dialog` con `defaultOpen` arrancaba su motor antes de que existiera su contenido: no atrapaba el foco, no cerraba con Escape y no ocultaba el resto de la página. jsdom no lo detectó. Ahora el `Portal` usa `useSyncExternalStore` (el servidor y la hidratación no renderizan nada; un render de cliente monta el portal en el mismo commit).
 
-> Límite conocido: con SSR + hidratación + `defaultOpen`, el primer commit sigue sin contenido y el problema podría reaparecer. Se cubrirá con las fixtures de Nuxt/Next (§4).
+> Límite conocido: con SSR + hidratación + `defaultOpen`, el primer commit sigue sin contenido y el problema podría reaparecer. Cubierto con las fixtures de Nuxt/Next (§3c): hidrata y funciona.
 
 ## 2. Componentes T2 entregados (Vue y React)
 
@@ -54,14 +54,20 @@ Decisiones:
 - **`pnpm parity:api`** (`tooling/scripts/parity-api.mjs`): carga los bundles **construidos** de `@tessen-ui/vue` y `@tessen-ui/react`, asigna `TButton` → `Button` (ADR 0011) y falla si un componente existe en un framework y no en el otro, o si un componente Vue pierde el prefijo `T`. Una asimetría deliberada debe listarse en `ALLOWED_ONLY_IN` con su motivo. Hoy: 82 exports compartidos, sin asimetrías. Corre en `pnpm verify` y en el job `verify` de CI, después del build. No compara las props (los nombres difieren por convención: `v-model` frente a `value`/`onValueChange`); eso lo cubren los contratos compartidos.
 - **`pnpm licenses:check`** (`tooling/scripts/licenses-check.mjs`): recorre las dependencias de producción de los paquetes, falla si una licencia no está en la lista blanca (MIT, ISC, Apache-2.0, BSD-2/3-Clause, 0BSD; en expresiones SPDX, `OR` pide una permitida y `AND` todas) y falla si `THIRD-PARTY-NOTICES.md` está desactualizado (`pnpm licenses:check --write` lo regenera). 34 paquetes de terceros, todos permitidos. Prettier ignora el archivo generado.
 
+## 3c. SSR: fixtures de Next y Nuxt
+
+- **`integration/next`** (Next 16, App Router) y **`integration/nuxt`** (Nuxt 4) son proyectos consumidores (ADR 0016): se instalan desde los tarballs, sin alias ni `transpilePackages`. Una página renderiza en servidor `Button`, `Tabs`, `Select`, `Accordion` y `Progress`, y un `Dialog` con `defaultOpen`. En Next, la página es un **componente de servidor** que importa `@tessen-ui/react` directamente (el paquete lleva `'use client'`, C4).
+- **`pnpm integration:test`** construye cada uno y su `check` arranca el servidor de producción y comprueba el HTML servido (contenido del lado servidor, hoja de estilos, y que el portal del `Dialog` **no** se renderiza en servidor).
+- **`pnpm ssr:e2e`** (`tooling/e2e/ssr`) arranca ambos servidores y, en un navegador real, comprueba la hidratación: sin errores ni avisos de desajuste ni respuestas ≥ 400; el `Dialog` `defaultOpen` queda abierto, modal, con el foco dentro y se cierra con Escape (**el límite de §1 queda cubierto y no reaparece**); `Tabs`, `Select` y `Accordion` renderizados en servidor responden tras hidratar. Mismas aserciones para Vue y React. Corre en el job `verify` de CI (instala Chromium).
+- `INTEGRATION_ONLY=next pnpm integration:install` limita la instalación a un proyecto.
+
 ## 4. Pendiente de F3 (no hecho)
 
 | Pendiente | Nota |
 | --- | --- |
 | Compilación de snippets de la documentación | Sin construir |
-| Fixtures SSR de Nuxt y Next (hidratación) | Incluye el límite de `defaultOpen` de arriba |
 | Matriz Vue 3.5 / React 18.3–19 y `size-limit` | |
 | Checklist manual con lector de pantalla (NVDA, VoiceOver) de los compuestos | Antes de una alpha publicada (C9) |
 | Beta `0.5.0` en tarballs | Requiere ≥ 25 componentes **estables** y el gate de paridad obligatorio (hoy en CI, sin protección de rama por decisión del propietario) |
 
-**Gate de F3** («≥ 25 componentes estables; paridad obligatoria en CI; `0.5.0` beta»): **parcial**. 41 componentes (catálogo T2 completo) y paridad visual en CI; faltan SSR y la beta.
+**Gate de F3** («≥ 25 componentes estables; paridad obligatoria en CI; `0.5.0` beta»): **parcial**. 41 componentes (catálogo T2 completo) y paridad visual en CI; SSR cubierto (§3c); falta la beta (matriz, `size-limit`, lector de pantalla).

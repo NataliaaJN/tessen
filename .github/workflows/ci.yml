@@ -53,6 +53,9 @@ jobs:
       - run: pnpm tarball:check
       - run: pnpm integration:install
       - run: pnpm integration:test
+      # Hydration of the Next/Nuxt consumers in a real browser (Playwright's own Chromium).
+      - run: pnpm --filter @tessen-ui/e2e exec playwright install --with-deps chromium
+      - run: pnpm ssr:e2e
       - run: pnpm scope:check
 
   # Real browser (ADR 0004 C3) and Vue <-> React visual parity over the built packages.

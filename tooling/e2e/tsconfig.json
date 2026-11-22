@@ -5,5 +5,12 @@
     "jsx": "react-jsx",
     "lib": ["ES2023", "DOM", "DOM.Iterable"]
   },
-  "include": ["harness/**/*.ts", "harness/**/*.tsx", "tests/**/*.ts", "playwright.config.ts"]
+  "include": [
+    "harness/**/*.ts",
+    "harness/**/*.tsx",
+    "tests/**/*.ts",
+    "playwright.config.ts",
+    "playwright.ssr.config.ts",
+    "ssr/**/*.ts"
+  ]
 }
