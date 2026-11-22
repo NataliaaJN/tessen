@@ -45,4 +45,25 @@ describe('public API (@tessen-ui/react)', () => {
       expect(names, name).toContain(name);
     }
   });
+
+  it('exports the native T2 components', () => {
+    for (const name of [
+      'Progress',
+      'Avatar',
+      'Breadcrumbs',
+      'BreadcrumbItem',
+      'EmptyState',
+      'List',
+      'ListItem',
+      'ToggleButton',
+      'ButtonGroup',
+      'Table',
+      'TableRow',
+      'TableCell',
+      'TableHeaderCell',
+      'Pagination',
+    ]) {
+      expect(names, name).toContain(name);
+    }
+  });
 });

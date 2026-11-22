@@ -3,6 +3,7 @@ export const sceneNames = [
   'buttons',
   'feedback',
   'surfaces',
+  'data-display',
   'forms',
   'tabs',
   'dialog-open',

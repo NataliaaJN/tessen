@@ -48,7 +48,9 @@ export function reactAdapter(
       else if (labelAs === 'prop' && label !== undefined) all.label = label;
       if (leading) all[leadingAs] = leading;
       if (trailing) all[trailingAs] = trailing;
-      if (valueEvent) all[valueEvent] = (value: string | boolean) => emitted.push(value);
+      if (valueEvent)
+        all[valueEvent] = (value: string | number | boolean) =>
+          emitted.push(typeof value === 'number' ? String(value) : value);
       const result = render(
         createElement(component as unknown as ComponentType<Record<string, unknown>>, all),
       );

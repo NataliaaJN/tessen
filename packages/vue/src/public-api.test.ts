@@ -45,4 +45,25 @@ describe('public API (@tessen-ui/vue)', () => {
       expect(names, name).toContain(name);
     }
   });
+
+  it('exports the native T2 components', () => {
+    for (const name of [
+      'TProgress',
+      'TAvatar',
+      'TBreadcrumbs',
+      'TBreadcrumbItem',
+      'TEmptyState',
+      'TList',
+      'TListItem',
+      'TToggleButton',
+      'TButtonGroup',
+      'TTable',
+      'TTableRow',
+      'TTableCell',
+      'TTableHeaderCell',
+      'TPagination',
+    ]) {
+      expect(names, name).toContain(name);
+    }
+  });
 });

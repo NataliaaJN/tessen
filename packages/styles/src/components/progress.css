@@ -1,0 +1,70 @@
+/* Progress: determinate or indeterminate bar. Contract: @tessen-ui/core progressContract. Overrides: --t-progress-track, --t-progress-fill, --t-progress-height. */
+@layer tessen.components {
+  .t-progress {
+    --_value: 0%;
+
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    inline-size: 100%;
+    block-size: var(--t-progress-height, var(--_height));
+    border-radius: var(--tessen-radius-full);
+    background: var(--t-progress-track, var(--tessen-color-action-neutral-default));
+
+    &[data-size='sm'] {
+      --_height: 0.25rem;
+    }
+    &[data-size='md'] {
+      --_height: 0.5rem;
+    }
+    &[data-size='lg'] {
+      --_height: 0.75rem;
+    }
+
+    &[data-tone='brand'] {
+      --_fill: var(--tessen-color-action-primary-default);
+    }
+    &[data-tone='success'] {
+      --_fill: var(--tessen-color-feedback-success-solid);
+    }
+    &[data-tone='warning'] {
+      --_fill: var(--tessen-color-feedback-warning-solid);
+    }
+    &[data-tone='danger'] {
+      --_fill: var(--tessen-color-action-danger-default);
+    }
+  }
+
+  .t-progress__bar {
+    block-size: 100%;
+    inline-size: var(--_value);
+    border-radius: inherit;
+    background: var(--t-progress-fill, var(--_fill));
+    transition: inline-size var(--tessen-motion-duration-normal)
+      var(--tessen-motion-easing-standard);
+  }
+
+  .t-progress[data-state='indeterminate'] .t-progress__bar {
+    inline-size: 40%;
+    animation: t-progress-slide 1.4s var(--tessen-motion-easing-standard) infinite;
+  }
+
+  /* Reduced motion: no sliding; the bar sits at 40 % so "busy" is still visible. */
+  @media (prefers-reduced-motion: reduce) {
+    .t-progress__bar {
+      transition: none;
+    }
+    .t-progress[data-state='indeterminate'] .t-progress__bar {
+      animation: none;
+    }
+  }
+
+  @keyframes t-progress-slide {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(250%);
+    }
+  }
+}
