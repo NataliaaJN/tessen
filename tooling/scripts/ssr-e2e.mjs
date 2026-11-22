@@ -2,7 +2,7 @@
 /**
  * `pnpm ssr:e2e` - hydration of the SSR consumer projects in a real browser.
  *
- * Starts the PRODUCTION servers of `integration/next` and `integration/nuxt` (already installed
+ * Starts the PRODUCTION servers of `integration/next`, `integration/nuxt` and `integration/vite-react18` and `integration/vite-vue352` (version matrix) (already installed
  * from the tarballs and built by `pnpm integration:test`) and runs `tooling/e2e/ssr`. Set
  * `PW_CHANNEL=chrome` to use the installed Chrome locally; CI installs Playwright's Chromium.
  */
@@ -25,6 +25,19 @@ async function main() {
     ['.output/server/index.mjs'],
     3422,
   );
+  // Version matrix: the React 18.3 consumer, built and served as static files.
+  const react18 = await startServer(
+    join(root, 'integration', 'vite-react18'),
+    'pnpm',
+    ['exec', 'vite', 'preview', '--host', '127.0.0.1', '--port', '3423', '--strictPort'],
+    3423,
+  );
+  const vue352 = await startServer(
+    join(root, 'integration', 'vite-vue352'),
+    'pnpm',
+    ['exec', 'vite', 'preview', '--host', '127.0.0.1', '--port', '3424', '--strictPort'],
+    3424,
+  );
   /** @type {number} */
   let status;
   try {
@@ -32,12 +45,20 @@ async function main() {
       cwd: root,
       stdio: 'inherit',
       shell: process.platform === 'win32',
-      env: { ...process.env, SSR_NEXT_URL: next.url, SSR_NUXT_URL: nuxt.url },
+      env: {
+        ...process.env,
+        SSR_NEXT_URL: next.url,
+        SSR_NUXT_URL: nuxt.url,
+        MATRIX_REACT18_URL: react18.url,
+        MATRIX_VUE352_URL: vue352.url,
+      },
     });
     status = result.status ?? 1;
   } finally {
     stopServer(next.child);
     stopServer(nuxt.child);
+    stopServer(react18.child);
+    stopServer(vue352.child);
   }
   process.exit(status);
 }

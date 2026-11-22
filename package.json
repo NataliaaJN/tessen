@@ -20,11 +20,12 @@
     "deps:check": "depcruise --config .dependency-cruiser.cjs tooling packages",
     "scope:check": "node tooling/scripts/scope-check.mjs",
     "parity:api": "node tooling/scripts/parity-api.mjs",
+    "size": "size-limit",
     "licenses:check": "node tooling/scripts/licenses-check.mjs",
     "e2e": "pnpm --filter @tessen-ui/e2e run e2e",
     "ssr:e2e": "node tooling/scripts/ssr-e2e.mjs",
     "new:component": "node tooling/scripts/new-component.mjs",
-    "verify": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm tokens:check && pnpm deps:check && pnpm scope:check && pnpm licenses:check && pnpm test && pnpm build && pnpm parity:api",
+    "verify": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm tokens:check && pnpm deps:check && pnpm scope:check && pnpm licenses:check && pnpm test && pnpm build && pnpm parity:api && pnpm size",
     "pack:all": "node tooling/scripts/pack-all.mjs",
     "pack:alpha": "node tooling/scripts/pack-all.mjs --base 0.1.0-alpha",
     "tarball:check": "node tooling/scripts/tarball-check.mjs",
@@ -34,6 +35,8 @@
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
+    "@size-limit/esbuild": "14.3.0",
+    "@size-limit/file": "14.3.0",
     "@tessen-ui/eslint-config": "workspace:*",
     "@tessen-ui/scripts": "workspace:*",
     "@tessen-ui/tsconfig": "workspace:*",
@@ -42,6 +45,7 @@
     "eslint": "catalog:",
     "globals": "catalog:",
     "prettier": "catalog:",
+    "size-limit": "14.3.0",
     "turbo": "catalog:",
     "typescript": "catalog:"
   }

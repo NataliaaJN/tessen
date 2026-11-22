@@ -1,0 +1,28 @@
+{
+  "name": "tessen-integration-vite-vue352",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Consumer project (ADR 0016): installs the packed @tessen-ui tarballs like an external Vue 3.5.2 + Vite app (version matrix, peer range ^3.5.2). Not part of the workspace.",
+  "type": "module",
+  "scripts": {
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.nodenext.json",
+    "build": "vite build",
+    "check": "node scripts/check.mjs",
+    "test": "pnpm typecheck && pnpm build && pnpm check"
+  },
+  "dependencies": {
+    "@tessen-ui/core": "*",
+    "@tessen-ui/icons": "*",
+    "@tessen-ui/motion": "*",
+    "@tessen-ui/styles": "*",
+    "@tessen-ui/tokens": "*",
+    "@tessen-ui/vue": "*",
+    "vue": "3.5.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.11",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.8",
+    "vue-tsc": "^3.3.14"
+  }
+}
