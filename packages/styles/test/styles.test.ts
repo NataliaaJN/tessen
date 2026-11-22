@@ -70,14 +70,16 @@ describe('token usage', () => {
 
 describe('build output', () => {
   it('emits the public entry points', () => {
-    expect(Object.keys(outputs).sort()).toEqual([
-      'base.css',
-      'components/button.css',
-      'index.css',
-      'layers.css',
-      'reset.css',
-      'tokens.css',
-    ]);
+    expect(Object.keys(outputs).sort()).toEqual(
+      [
+        'base.css',
+        ...componentSources,
+        'index.css',
+        'layers.css',
+        'reset.css',
+        'tokens.css',
+      ].sort(),
+    );
   });
 
   it('declares the layer order exactly once per file', () => {

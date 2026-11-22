@@ -117,6 +117,6 @@ module.exports = {
     tsPreCompilationDeps: true,
     tsConfig: { fileName: 'tsconfig.json' },
     enhancedResolveOptions: { exportsFields: ['exports'], conditionNames: ['import', 'types'] },
-    exclude: { path: '(\\.test\\.|\\.stories\\.|/dist/)' },
+    exclude: { path: '(\\.test\\.|\\.stories\\.|/dist/|^packages/(vue|react)/test/)' },
   },
 };
