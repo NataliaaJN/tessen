@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spike S2 harness</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 16px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        font-size: 14px;
+      }
+      section > div {
+        margin-bottom: 12px;
+      }
+      [data-part='content'],
+      .t-select__content,
+      .t-menu__content,
+      .t-combobox__content {
+        background: white;
+        border: 1px solid #888;
+        list-style: none;
+        margin: 0;
+        padding: 4px;
+        min-width: 160px;
+      }
+      [data-highlighted] {
+        background: #dbe8fb;
+      }
+      [data-disabled] {
+        opacity: 0.5;
+      }
+      .t-dialog__backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgb(0 0 0 / 40%);
+      }
+      .t-dialog__positioner {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+      }
+      .t-dialog__content,
+      .t-popover__content {
+        background: white;
+        border: 1px solid #888;
+        padding: 16px;
+        min-width: 260px;
+      }
+      [data-part='table-cell-trigger'] {
+        padding: 4px;
+        cursor: pointer;
+        text-align: center;
+      }
+      [data-part='table-cell-trigger'][data-selected] {
+        background: #2b7be0;
+        color: white;
+      }
+      [data-part='table-cell-trigger'][data-disabled],
+      [data-part='table-cell-trigger'][data-unavailable] {
+        opacity: 0.4;
+      }
+      .t-tooltip__content {
+        background: #0a1a3e;
+        color: white;
+        padding: 4px 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h2>Vue</h2>
+      <div id="vue"></div>
+    </section>
+    <section>
+      <h2>React</h2>
+      <div id="react"></div>
+    </section>
+    <script type="module" src="./main.tsx"></script>
+  </body>
+</html>

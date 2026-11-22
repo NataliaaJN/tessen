@@ -1,0 +1,17 @@
+{
+  "name": "@tessen-ui/spike-zag-s2-nuxt",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Spike S2 fixture: real Nuxt SSR and hydration of the Zag-based Vue components. Throwaway.",
+  "type": "module",
+  "scripts": {
+    "ssr:dev": "nuxt dev --port 5193",
+    "ssr:build": "nuxt build",
+    "ssr:preview": "nuxt preview --port 5194"
+  },
+  "dependencies": {
+    "@tessen-ui/spike-zag-s2": "workspace:*",
+    "nuxt": "4.6.4",
+    "vue": "catalog:"
+  }
+}

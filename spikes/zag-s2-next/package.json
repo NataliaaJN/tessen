@@ -1,0 +1,23 @@
+{
+  "name": "@tessen-ui/spike-zag-s2-next",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Spike S2 fixture: real Next.js SSR and hydration of the Zag-based React components. Throwaway.",
+  "type": "module",
+  "scripts": {
+    "ssr:dev": "next dev --port 5195",
+    "ssr:build": "next build",
+    "ssr:start": "next start --port 5196"
+  },
+  "dependencies": {
+    "@tessen-ui/spike-zag-s2": "workspace:*",
+    "next": "16.4.6",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "typescript": "catalog:"
+  }
+}

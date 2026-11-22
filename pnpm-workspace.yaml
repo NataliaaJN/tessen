@@ -8,6 +8,11 @@ packages:
 # `integration/*` is deliberately NOT a workspace member: it installs the
 # packed tarballs like an external consumer would (ADR 0016).
 
+# esbuild's postinstall only re-verifies a binary that the platform package already ships;
+# it is reviewed and deliberately not run. No dependency build script is approved.
+allowBuilds:
+  esbuild: false
+
 # Single source of truth for third-party versions used by more than one package.
 catalog:
   '@eslint/js': ^10.0.1

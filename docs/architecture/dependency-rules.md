@@ -35,7 +35,7 @@ Reglas derivadas: `vue ↮ react`; fundamentos libres de Vue/React/Zag; import d
 | **react** | — | — | — (peer CSS) | opt | ✔ | opt | **—** | | — |
 | **apps** | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | (solo la propia) |
 
-- `vue`/`react` dependen de `@zag-js/*` (npm) **solo ellos**; ningún fundamento importa Zag (permite el plan de contingencia del ADR 0004).
+- `vue`/`react` dependen de `@zag-js/*` (npm) **solo ellos**; ningún fundamento importa Zag (permite el plan de contingencia del ADR 0004). Dentro de `vue`/`react`, solo los archivos `*.zag.ts(x)` (el adaptador de comportamiento de cada componente) pueden importar `@zag-js/*` (regla `zag-only-in-adapter-files`).
 - `tooling/` e `integration/` pueden depender de todo; **nada** depende de ellos.
 
 ## 3. Reglas dentro de un paquete de componentes (component-oriented)

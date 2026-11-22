@@ -7,7 +7,20 @@ import tseslint from 'typescript-eslint';
  * Framework-specific rules (Vue, React) are added by the packages that need them.
  */
 export const base = tseslint.config(
-  { ignores: ['**/dist/**', '**/.turbo/**', '**/node_modules/**', '.tarballs/**', 'docs/**'] },
+  {
+    ignores: [
+      '**/dist/**',
+      '**/.turbo/**',
+      '**/node_modules/**',
+      // Output of the Next/Nuxt fixtures in spikes/.
+      '**/.next/**',
+      '**/.nuxt/**',
+      '**/.output/**',
+      '**/next-env.d.ts',
+      '.tarballs/**',
+      'docs/**',
+    ],
+  },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
