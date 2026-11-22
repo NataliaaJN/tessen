@@ -13,7 +13,8 @@
       "import": "./dist/js/index.js"
     },
     "./tokens.css": "./dist/css/tokens.css",
-    "./tokens.json": "./dist/json/tokens.json"
+    "./tokens.json": "./dist/json/tokens.json",
+    "./contrast-pairs.json": "./src/contrast-pairs.json"
   },
   "files": [
     "dist",

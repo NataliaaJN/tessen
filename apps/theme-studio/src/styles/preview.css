@@ -1,0 +1,136 @@
+/* Scene-only helpers for the preview page. Everything else comes from @tessen-ui/styles. */
+@layer tessen.utilities {
+  body {
+    margin: 0;
+    background: var(--tessen-color-surface-canvas);
+    color: var(--tessen-color-text-primary);
+    font-family: var(--tessen-font-family-sans);
+    font-size: var(--tessen-typography-body-md-font-size);
+    line-height: var(--tessen-typography-body-md-line-height);
+  }
+
+  .stage {
+    box-sizing: border-box;
+    padding: var(--tessen-space-6);
+    max-inline-size: 72rem;
+    margin-inline: auto;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    margin: 0;
+  }
+
+  .group {
+    font-family: var(--tessen-font-family-display);
+    font-size: var(--tessen-typography-heading-sm-font-size);
+    font-weight: var(--tessen-typography-heading-sm-font-weight);
+    margin-block-end: var(--tessen-space-3);
+  }
+
+  .muted {
+    color: var(--tessen-color-text-secondary);
+  }
+
+  .page-title,
+  .display,
+  .card-title,
+  h2.center {
+    font-family: var(--tessen-font-family-display);
+  }
+
+  .page-title {
+    font-size: var(--tessen-typography-heading-lg-font-size);
+  }
+
+  .display {
+    font-size: var(--tessen-typography-display-md-font-size);
+    line-height: var(--tessen-typography-display-md-line-height);
+    max-inline-size: 22ch;
+  }
+
+  .center {
+    text-align: center;
+    margin-block-end: var(--tessen-space-5);
+  }
+
+  .kpi {
+    font-size: var(--tessen-typography-heading-xl-font-size);
+    font-family: var(--tessen-font-family-display);
+    margin-block: var(--tessen-space-1) var(--tessen-space-2);
+  }
+
+  .price {
+    font-size: var(--tessen-typography-heading-xl-font-size);
+    font-family: var(--tessen-font-family-display);
+    margin-block-end: var(--tessen-space-3);
+  }
+
+  .price small {
+    font-size: var(--tessen-typography-body-sm-font-size);
+    color: var(--tessen-color-text-secondary);
+  }
+
+  ul.plain {
+    margin: 0;
+    padding-inline-start: var(--tessen-space-5);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--tessen-space-4);
+    flex-wrap: wrap;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--tessen-space-4);
+    padding-block: var(--tessen-space-8);
+  }
+
+  .hero .lead {
+    max-inline-size: 48ch;
+    color: var(--tessen-color-text-secondary);
+    font-size: var(--tessen-typography-body-lg-font-size);
+  }
+
+  .type-row {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: var(--tessen-space-4);
+    align-items: baseline;
+    border-block-end: 1px solid var(--tessen-color-border-subtle);
+    padding-block-end: var(--tessen-space-3);
+  }
+
+  .type-name {
+    color: var(--tessen-color-text-tertiary);
+    font-family: var(--tessen-font-family-mono);
+    font-size: var(--tessen-typography-caption-font-size);
+  }
+
+  /* Narrow frames: collapse the multi-column grids. */
+  @media (max-width: 760px) {
+    .kpis,
+    .panes {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .stage {
+      padding: var(--tessen-space-4);
+    }
+    .type-row {
+      grid-template-columns: 1fr;
+      gap: var(--tessen-space-1);
+    }
+  }
+}

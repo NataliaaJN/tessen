@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "name": "acme",
+  "accent": "#D9822B",
+  "radius": 12,
+  "density": "compact",
+  "motion": "full",
+  "fonts": { "sans": "Inter", "display": "Outfit", "mono": "JetBrains Mono" },
+  "previewMode": "light",
+  "overrides": {
+    "primitives": {},
+    "light": { "color.text.link": "{color.brand.600}" },
+    "dark": {}
+  }
+}

@@ -9,12 +9,12 @@ interface Props {
   description?: string;
   current?: string;
 }
-const { title, description = 'Tessen design system for Vue and React.', current } = Astro.props;
+const { title, description = 'Sistema de diseño Tessen para Vue y React.', current } = Astro.props;
 const groups = byCategory();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,12 +22,12 @@ const groups = byCategory();
     <title>{title} · Tessen</title>
     <link rel="icon" href="data:," />
     <script is:inline>
-      // Theme: follow the system unless the person chose one (kept in this browser only).
+      // Tema: sigue al sistema salvo que la persona elija uno (solo en este navegador).
       try {
         const t = localStorage.getItem('tessen:docs:theme');
         if (t === 'light' || t === 'dark') document.documentElement.dataset.tessenTheme = t;
       } catch {}
-      // Framework: ?fw=vue|react wins, then the saved choice, else both side by side.
+      // Framework: gana ?fw=vue|react, luego la elección guardada; si no, ambos a la vez.
       try {
         const q = new URLSearchParams(location.search).get('fw');
         const f = q === 'vue' || q === 'react' ? q : localStorage.getItem('tessen:docs:fw');
@@ -36,19 +36,19 @@ const groups = byCategory();
     </script>
   </head>
   <body>
-    <a class="skip" href="#main">Skip to content</a>
+    <a class="skip" href="#main">Saltar al contenido</a>
     <header class="top">
       <a class="brand" href="/">Tessen</a>
-      <nav aria-label="Main">
+      <nav aria-label="Principal">
         <a href="/components/" aria-current={current === 'components' ? 'page' : undefined}
-          >Components</a
+          >Componentes</a
         >
         <a href="/get-started/" aria-current={current === 'get-started' ? 'page' : undefined}
-          >Get started</a
+          >Empezar</a
         >
         <a href="/tokens/" aria-current={current === 'tokens' ? 'page' : undefined}>Tokens</a>
         <a href="/guidelines/" aria-current={current === 'guidelines' ? 'page' : undefined}
-          >Guidelines</a
+          >Guías</a
         >
         <a href="/llms.txt">llms.txt</a>
       </nav>
@@ -58,17 +58,19 @@ const groups = byCategory();
         id="search-open"
         aria-keyshortcuts="Control+K Meta+K"
       >
-        Search <kbd>⌘K</kbd>
+        Buscar <kbd>⌘K</kbd>
       </button>
       <div class="fw-switch" role="group" aria-label="Framework">
-        <button type="button" data-set-fw="both" aria-pressed="true">Both</button>
+        <button type="button" data-set-fw="both" aria-pressed="true">Ambos</button>
         <button type="button" data-set-fw="vue" aria-pressed="false">Vue</button>
         <button type="button" data-set-fw="react" aria-pressed="false">React</button>
       </div>
-      <button type="button" class="theme" id="theme" aria-label="Toggle colour theme">◐</button>
+      <button type="button" class="search-open" id="appearance-open" aria-haspopup="dialog">Apariencia</button>
+      <a class="search-open" href="/studio/">Theme Studio</a>
+      <button type="button" class="theme" id="theme" aria-label="Cambiar tema de color">◐</button>
     </header>
     <div class="shell">
-      <nav class="side" aria-label="Components">
+      <nav class="side" aria-label="Componentes">
         {
           groups.map(([category, list]) => (
             <section>
@@ -91,17 +93,41 @@ const groups = byCategory();
       </nav>
       <main id="main"><slot /></main>
     </div>
-    <dialog id="search" class="search" aria-label="Search">
+    <dialog id="search" class="search" aria-label="Buscar">
       <input
         id="search-input"
         type="search"
-        placeholder="Search components and guides"
-        aria-label="Search"
+        placeholder="Buscar componentes y guías"
+        aria-label="Buscar"
         autocomplete="off"
       />
-      <ul id="search-results" role="listbox" aria-label="Results"></ul>
+      <ul id="search-results" role="listbox" aria-label="Resultados"></ul>
+    </dialog>
+    <dialog id="appearance" class="search appearance" aria-labelledby="appearance-title">
+      <h2 id="appearance-title">Apariencia</h2>
+      <p>Prueba otro acento, radio o densidad sobre esta documentación. Se guarda solo en este navegador.</p>
+      <h3>Acento</h3>
+      <div class="swatch-row" data-appearance-swatches></div>
+      <label class="range-row">
+        <span>Radio de esquina <output data-appearance-radius-out></output></span>
+        <input type="range" min="0" max="16" step="1" data-appearance-radius />
+      </label>
+      <fieldset class="density-row">
+        <legend>Densidad</legend>
+        <label><input type="radio" name="appearance-density" value="compact" /> Compacta</label>
+        <label><input type="radio" name="appearance-density" value="default" /> Normal</label>
+        <label><input type="radio" name="appearance-density" value="comfortable" /> Cómoda</label>
+      </fieldset>
+      <div class="appearance-actions">
+        <button type="button" data-appearance-reset>Restablecer</button>
+        <a data-appearance-studio href="/studio/">Abrir en Theme Studio →</a>
+        <button type="button" data-appearance-close>Cerrar</button>
+      </div>
     </dialog>
     <script is:inline src="/docs-ui.js"></script>
+    <script>
+      import '../lib/appearance';
+    </script>
     <script is:inline>
       document.getElementById('theme')?.addEventListener('click', () => {
         const root = document.documentElement;

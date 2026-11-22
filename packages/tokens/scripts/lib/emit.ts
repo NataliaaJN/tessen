@@ -272,6 +272,14 @@ export function renderJson(model: Model): string {
           values: Object.fromEntries(
             Object.entries(token.modes.values).map(([mode, v]) => [mode, v.resolved]),
           ),
+          // Per-mode alias target, so consumers (Theme Studio) can re-resolve after a palette change.
+          aliases: Object.fromEntries(
+            Object.entries(token.modes.values).flatMap(([mode, v]) => {
+              const target =
+                typeof v.original === 'string' ? REFERENCE.exec(v.original)?.[1] : undefined;
+              return target ? [[mode, target]] : [];
+            }),
+          ),
         }
       : { value: token.resolved }),
   }));

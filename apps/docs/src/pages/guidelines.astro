@@ -2,50 +2,51 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="Guidelines" current="guidelines">
+<Base title="Guías" current="guidelines">
   <div class="prose">
-    <h1>Guidelines</h1>
-    <p class="lead">How Tessen is meant to be used. Components enforce most of this; the rest is up to you.</p>
+    <h1>Guías</h1>
+    <p class="lead">Cómo está pensado Tessen para usarse. Los componentes aplican la mayor parte; el resto depende de ti.</p>
 
-    <h2 id="principles">Principles</h2>
+    <h2 id="principles">Principios</h2>
     <ul>
-      <li><strong>One contract, two frameworks.</strong> Props, behaviour and accessibility are identical in Vue and React. If they differ, it is a bug.</li>
-      <li><strong>Tokens, not values.</strong> Colour, spacing, type and motion come from <code>--tessen-*</code> variables. Do not hard-code them.</li>
-      <li><strong>Accessible by default.</strong> Keyboard, focus and screen-reader behaviour are part of the component, and tested in both frameworks.</li>
-      <li><strong>Composable and restrained.</strong> Prefer composing small parts over adding props. Use one primary action per view.</li>
+      <li><strong>Un contrato, dos frameworks.</strong> Props, comportamiento y accesibilidad son idénticos en Vue y React. Si difieren, es un error.</li>
+      <li><strong>Tokens, no valores.</strong> Color, espaciado, tipografía y movimiento salen de variables <code>--tessen-*</code>. No los escribas a mano.</li>
+      <li><strong>Accesible por defecto.</strong> El teclado, el foco y el lector de pantalla forman parte del componente y se prueban en ambos frameworks.</li>
+      <li><strong>Componible y sobrio.</strong> Prefiere componer piezas pequeñas antes que añadir props. Usa una sola acción primaria por vista.</li>
     </ul>
 
-    <h2 id="accessibility">Accessibility</h2>
+    <h2 id="accessibility">Accesibilidad</h2>
     <ul>
-      <li>Every form control needs a visible label. Use <a href="/components/field/">Field</a>; a placeholder is not a label.</li>
-      <li>Icon-only controls need an accessible name: <code>label</code> on <a href="/components/icon-button/">IconButton</a> or <a href="/components/visually-hidden/">VisuallyHidden</a> text.</li>
-      <li>Never convey meaning with colour alone: pair tones with text or an icon.</li>
-      <li>Text contrast meets WCAG 2.2 AA with the shipped tokens. If you override brand colours, check them again.</li>
-      <li>Motion respects <code>prefers-reduced-motion</code>. Do not rely on animation to communicate state.</li>
-      <li>Overlays (<a href="/components/dialog/">Dialog</a>, <a href="/components/popover/">Popover</a>, menus) trap or return focus for you. Do not move focus away manually.</li>
+      <li>Todo control de formulario necesita una etiqueta visible. Usa <a href="/components/field/">Field</a>; un placeholder no es una etiqueta.</li>
+      <li>Los controles solo con icono necesitan un nombre accesible: <code>label</code> en <a href="/components/icon-button/">IconButton</a> o texto con <a href="/components/visually-hidden/">VisuallyHidden</a>.</li>
+      <li>Nunca transmitas significado solo con color: acompaña los tonos con texto o un icono.</li>
+      <li>El contraste del texto cumple WCAG 2.2 AA con los tokens incluidos. Si sustituyes los colores de marca, vuelve a comprobarlo.</li>
+      <li>El movimiento respeta <code>prefers-reduced-motion</code>. No dependas de la animación para comunicar un estado.</li>
+      <li>Las superposiciones (<a href="/components/dialog/">Dialog</a>, <a href="/components/popover/">Popover</a>, menús) atrapan y devuelven el foco por ti. No muevas el foco manualmente.</li>
     </ul>
     <p>
-      Each component page lists its keyboard behaviour and the WAI-ARIA pattern it follows. The behaviours listed are tests that run against both frameworks.
+      Cada página de componente indica su comportamiento de teclado y el patrón WAI-ARIA que sigue. Los comportamientos listados son pruebas que se ejecutan contra ambos frameworks.
     </p>
 
-    <h2 id="content">Content</h2>
+    <h2 id="content">Contenido</h2>
     <ul>
-      <li>Use sentence case. Start button labels with a verb: "Save changes", not "OK".</li>
-      <li>Say what happened and what to do next in errors; do not blame the person.</li>
-      <li>Keep labels short and consistent: the same action has the same name everywhere.</li>
+      <li>Usa mayúscula solo al inicio de la frase. Empieza las etiquetas de botón con un verbo: «Guardar cambios», no «Aceptar».</li>
+      <li>En los errores di qué ocurrió y qué hacer a continuación; no culpes a la persona.</li>
+      <li>Mantén las etiquetas cortas y coherentes: la misma acción se llama igual en todas partes.</li>
     </ul>
 
-    <h2 id="layout">Layout and responsive</h2>
+    <h2 id="layout">Layout y responsive</h2>
     <ul>
-      <li>Use <a href="/components/stack/">Stack</a> and <a href="/components/grid/">Grid</a> with space tokens instead of ad-hoc margins.</li>
-      <li>Constrain reading width with <a href="/components/container/">Container</a>.</li>
-      <li>Design for touch: pick the <code>lg</code> size for controls people tap, and keep space between neighbouring targets.</li>
+      <li>Usa <a href="/components/stack/">Stack</a> y <a href="/components/grid/">Grid</a> con tokens de espaciado en lugar de márgenes ad hoc.</li>
+      <li>Limita el ancho de lectura con <a href="/components/container/">Container</a>.</li>
+      <li>Diseña para táctil: elige el tamaño <code>lg</code> en los controles que se tocan y deja espacio entre objetivos contiguos.</li>
     </ul>
 
-    <h2 id="theming">Theming</h2>
+    <h2 id="theming">Temas</h2>
     <ul>
-      <li>Override tokens, not component CSS. Set variables on a scope selector or use <code>data-tessen-theme</code>.</li>
-      <li>Component styles live in the <code>tessen.components</code> layer, so your own CSS wins without specificity fights.</li>
+      <li>Sobrescribe tokens, no el CSS de los componentes. Define variables en un selector de ámbito o usa <code>data-tessen-theme</code>.</li>
+      <li>Los estilos de los componentes viven en la capa <code>tessen.components</code>, así tu CSS gana sin pelear por especificidad.</li>
+      <li>El <a href="/studio/">Theme Studio</a> genera y exporta temas listos para aplicar.</li>
     </ul>
   </div>
 </Base>

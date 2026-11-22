@@ -1,0 +1,7 @@
+{
+  "extends": "@tessen-ui/tsconfig/node.json",
+  "compilerOptions": {
+    "lib": ["ES2023", "DOM"]
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts"]
+}

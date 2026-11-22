@@ -180,6 +180,11 @@ describe('json', () => {
     expect(action.layer).toBe('semantic');
     expect(action.alias).toBe('color.brand.800');
     expect(Object.keys(action.values!)).toEqual(['light', 'dark']);
+    // Per-mode alias targets: Theme Studio re-resolves semantic colors after a palette change.
+    expect((action as { aliases?: unknown }).aliases).toEqual({
+      light: 'color.brand.800',
+      dark: 'color.accent.400',
+    });
 
     expect(byPath.get('typography.body-md')!.cssVariables).toHaveLength(5);
     expect(byPath.get('breakpoint.md')!.cssVariables).toEqual([]);

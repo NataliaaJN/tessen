@@ -7,7 +7,7 @@
 | D-01 | ✅ Resuelta | Asset del logotipo (propuesta 11) — incorporado en `docs/brand/` | — |
 | D-02 | ✅ Resuelta (interno) | Scope interno `@tessen-ui` aprobado tras evaluar 5 candidatos (ADR 0015); `tessen` y `@tessen` **ocupados**; el scope **público** sigue en D-18 | — |
 | D-03 | ✅ Resuelta | Nomenclatura pública: Vue `T`-prefijo, React sin prefijo (ADR 0011 `Accepted`) | — |
-| D-04 | 🟡 | Framework del *shell* de Theme Studio y Playground (ADR 0008) | F5 |
+| D-04 | ✅ Resuelta (Studio) | Framework del *shell*: **Vue 3 + Vite** para Theme Studio ([ADR 0017](13-architecture-decisions/0017-theme-engine-and-studio.md)); el Playground (F6) usará el mismo | — |
 | D-05 | ✅ Resuelta con condiciones | Motor de comportamiento: **Zag.js** (spike S1 5/6 y validación [S2](S2-zag-validation.md) *APPROVE WITH CONDITIONS*; ADR 0004 `Accepted` con condiciones C1–C10) | — |
 | D-06 | ✅ Resuelta | Inter (interfaz), JetBrains Mono (código), Outfit (marca/titulares), con pila del sistema de respaldo | — |
 | D-07 | ✅ Resuelta (provisional) | Lucide (ISC) como set abierto, 35 iconos iniciales en `@tessen-ui/icons`; revisable cambiando `src/svg` | — |
@@ -17,7 +17,7 @@
 | D-11 | ✅ Resuelta | Vue ≥ 3.5 y React ≥ 18.3 (CI en 18.3 y 19) | — |
 | D-12 | ✅ Resuelta | Hosting y dominio: **ninguno** (todo en local; ADR 0014) | — |
 | D-13 | 🟢 | Alcance de «superficies translúcidas» (estilo «Cristal» de rM) | F5 |
-| D-14 | 🟡 | Idioma de la documentación pública e i18n | F4 |
+| D-14 | ✅ Resuelta (provisional) | **Español** para la documentación y el Studio (decisión del propietario, 2026-11-23); la i18n (PLT-11) sigue abierta | — |
 | D-15 | 🟢 | Estrategia Figma | F7 |
 | D-16 | 🟡 | Repositorio público en GitHub, protección de ramas y flujo de PR | F1-T01 |
 | D-17 | ✅ | Formato del contrato (TS vs esquema JSON) | F1-T08 |
@@ -82,6 +82,7 @@
 - Alternativas: fuera de v1 · opción experimental en Studio. Riesgo: rendimiento (`backdrop-filter`), contraste y alto contraste. Recomendación: experimental y desactivada por defecto.
 
 ### D-14 — Idioma de la documentación pública
+- **Resolución (2026-11-23):** el propietario decidió que **el idioma del sitio es el español**. La interfaz, las guías, el texto editorial y el Theme Studio están en español; los enunciados de las pruebas de los contratos siguen en inglés (son nombres de tests). Abierto: i18n ES/EN (PLT-11) si algún día se quiere un segundo idioma.
 - Alternativas: **inglés primero, español después (recomendado para alcance internacional)** · español primero · bilingüe desde F4. Los documentos de `docs/planning` y `docs/architecture` permanecen en español (equipo).
 - Impacto: coste de redacción y mantenimiento; infraestructura i18n (PLT-11).
 

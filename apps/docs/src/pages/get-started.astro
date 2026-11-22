@@ -1,28 +1,28 @@
 ---
 import Base from '../layouts/Base.astro';
 
-// Import lines are the ones the integration consumers (integration/*) build and test in CI.
+// Las líneas de importación son las que los consumidores de integration/* compilan y prueban en CI.
 const css = `import '@tessen-ui/styles/index.css';
-import '@tessen-ui/motion/motion.css'; // optional: motion tokens and presets`;
+import '@tessen-ui/motion/motion.css'; // opcional: tokens y presets de movimiento`;
 ---
 
-<Base title="Get started" current="get-started">
+<Base title="Empezar" current="get-started">
   <div class="prose">
-    <h1>Get started</h1>
+    <h1>Empezar</h1>
     <p class="lead">
-      Install the framework package you use plus the styles. The CSS and tokens are the same for Vue
-      and React.
+      Instala el paquete del framework que uses más los estilos. El CSS y los tokens son los mismos
+      para Vue y React.
     </p>
     <p>
-      Packages are published under the internal <code>@tessen-ui</code> scope; until a public
-      release they are consumed from the monorepo tarballs (<code>pnpm pack:alpha</code>).
+      Los paquetes se publican bajo el ámbito interno <code>@tessen-ui</code>; hasta que haya una
+      publicación pública se consumen desde los tarballs del monorepo (<code>pnpm pack:alpha</code>).
     </p>
 
-    <h2>Requirements</h2>
+    <h2>Requisitos</h2>
     <ul>
-      <li>Vue ≥ 3.5.2 <em>or</em> React ≥ 18.3 (19 supported).</li>
-      <li>A bundler that handles CSS imports (Vite, Nuxt, Next, webpack).</li>
-      <li>No Tailwind or CSS-in-JS runtime required.</li>
+      <li>Vue ≥ 3.5.2 <em>o</em> React ≥ 18.3 (compatible con 19).</li>
+      <li>Un bundler que gestione importaciones de CSS (Vite, Nuxt, Next, webpack).</li>
+      <li>No hace falta Tailwind ni un runtime de CSS-in-JS.</li>
     </ul>
 
     <h2 id="vue">Vue 3 (Vite)</h2>
@@ -35,8 +35,8 @@ import '@tessen-ui/motion/motion.css'; // optional: motion tokens and presets`;
 // src/App.vue
 import {'{'} TButton {'}'} from '@tessen-ui/vue';</code
       ></pre>
-    <pre><code>&lt;TButton variant="primary"&gt;Save&lt;/TButton&gt;</code></pre>
-    <p>Vue components use the <code>T</code> prefix and <code>v-model</code> for controlled values.</p>
+    <pre><code>&lt;TButton variant="primary"&gt;Guardar&lt;/TButton&gt;</code></pre>
+    <p>Los componentes de Vue llevan el prefijo <code>T</code> y usan <code>v-model</code> para los valores controlados.</p>
 
     <h2 id="react">React (Vite)</h2>
     <pre><code
@@ -47,58 +47,59 @@ import {'{'} TButton {'}'} from '@tessen-ui/vue';</code
 
 import {'{'} Button {'}'} from '@tessen-ui/react';
 
-export const App = () =&gt; &lt;Button variant="primary"&gt;Save&lt;/Button&gt;;</code
+export const App = () =&gt; &lt;Button variant="primary"&gt;Guardar&lt;/Button&gt;;</code
       ></pre>
     <p>
-      React components have no prefix; controlled values use <code>value</code> with an
-      <code>on…Change</code> callback (for example <code>onValueChange</code>).
+      Los componentes de React no llevan prefijo; los valores controlados usan <code>value</code>
+      con un callback <code>on…Change</code> (por ejemplo <code>onValueChange</code>).
     </p>
 
     <h2 id="nuxt">Nuxt</h2>
-    <p>Add the styles to <code>nuxt.config.ts</code>; no transpile or alias settings are needed.</p>
+    <p>Añade los estilos a <code>nuxt.config.ts</code>; no hacen falta ajustes de transpilación ni alias.</p>
     <pre><code
         >export default defineNuxtConfig({'{'}
   css: ['@tessen-ui/styles/index.css', '@tessen-ui/motion/motion.css'],
 {'}'});</code
       ></pre>
     <p>
-      Import components from <code>@tessen-ui/vue</code> in your pages. Server rendering and
-      hydration are covered by the <code>integration/nuxt</code> test.
+      Importa los componentes desde <code>@tessen-ui/vue</code> en tus páginas. El renderizado en
+      servidor y la hidratación están cubiertos por la prueba de <code>integration/nuxt</code>.
     </p>
 
     <h2 id="nextjs">Next.js (App Router)</h2>
     <p>
-      Import the CSS once in the root layout. Components that use state must be rendered from a
-      client component (<code>'use client'</code>).
+      Importa el CSS una sola vez en el layout raíz. Los componentes con estado deben renderizarse
+      desde un componente de cliente (<code>'use client'</code>).
     </p>
     <pre><code
         >// app/layout.tsx
 {css}</code
       ></pre>
     <p>
-      Server rendering and hydration are covered by the <code>integration/next</code> test.
+      El renderizado en servidor y la hidratación están cubiertos por la prueba de
+      <code>integration/next</code>.
     </p>
 
     <h2 id="tailwind">Tailwind</h2>
     <p>
-      Tessen does not depend on Tailwind. They coexist: the library ships its CSS inside
-      <code>@layer</code>s, so your utility classes win over component styles without
-      <code>!important</code>. Import Tessen's CSS before your Tailwind entry.
+      Tessen no depende de Tailwind y conviven: la librería incluye su CSS dentro de <code>@layer</code>,
+      de modo que tus clases de utilidad ganan a los estilos de los componentes sin
+      <code>!important</code>. Importa el CSS de Tessen antes de tu entrada de Tailwind.
     </p>
     <pre><code
         >@import '@tessen-ui/styles/index.css';
 @import 'tailwindcss';</code
       ></pre>
     <p>
-      Tokens are CSS variables (<code>--tessen-*</code>), so you can reference them in utilities,
-      for example <code>bg-[var(--tessen-color-surface-subtle)]</code>.
+      Los tokens son variables CSS (<code>--tessen-*</code>), así que puedes usarlos en utilidades,
+      por ejemplo <code>bg-[var(--tessen-color-surface-subtle)]</code>.
     </p>
 
-    <h2>Theming</h2>
+    <h2>Temas</h2>
     <p>
-      Light and dark come from <code>data-tessen-theme="light|dark"</code> on any ancestor, or from
-      the system preference when it is absent. See the <a href="/tokens/">token explorer</a> for every
-      variable.
+      Claro y oscuro salen de <code>data-tessen-theme="light|dark"</code> en cualquier ancestro, o de
+      la preferencia del sistema cuando no está. Consulta el <a href="/tokens/">explorador de tokens</a>
+      para ver cada variable y el <a href="/studio/">Theme Studio</a> para crear tu propio tema.
     </p>
   </div>
 </Base>

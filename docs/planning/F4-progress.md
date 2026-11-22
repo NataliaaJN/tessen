@@ -1,5 +1,7 @@
 # F4 · Plataforma de documentación: estado
 
+> **Siguiente fase:** [F5](F5-progress.md) (Theme Studio).
+>
 > **Estado:** F4 **cerrada para el alcance de `apps/docs`** (2026-11-22): sitio local con catálogo, página por componente con demos vivas Vue/React, explorador de tokens, getting started, guidelines, búsqueda `⌘K` y selector de framework. Theme Studio y Playground son F5/F6. F3 sigue con la beta pendiente (lector de pantalla y gate de paridad obligatorio, decisión del propietario de dejarlos para más adelante).
 
 ## 1. Entregado
@@ -15,7 +17,7 @@
 
 ## 2. Decisiones tomadas por defecto
 
-- **Idioma del sitio: inglés** (D-14, recomendada, no confirmada). Reversible: el texto está en las plantillas.
+- **Idioma del sitio: español** (decisión del propietario, 2026-11-23; antes era inglés por defecto). El texto está en las plantillas y en `src/lib/editorial.ts`. Los enunciados de comportamiento de cada contrato siguen en inglés.
 - **Búsqueda sin Pagefind:** con ~44 entradas un índice JSON estático evita una dependencia y un binario; si el contenido crece (MDX, muchas guías) se reevalúa.
 - **Comprobación de ejemplos:** las demos son fuentes reales, compiladas por `astro build` y `astro check` y ejecutadas por `docs:smoke`. El bloque «Usage» generado desde el contrato es mínimo (marcador).
 

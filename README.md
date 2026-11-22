@@ -8,7 +8,7 @@
 
 Design system and component library for **Vue** and **React**, plus a web platform (docs, Theme Studio, Playground).
 
-**Status:** Phase 1 (foundations) in progress. The monorepo skeleton and [`@tessen-ui/tokens`](packages/tokens/README.md) are in place; no component packages exist yet. Start with [`docs/`](docs/README.md). Brand assets: [`docs/brand/`](docs/brand/README.md).
+**Status:** Phases 1–5 done locally: 41 components for Vue and React, the documentation site (in Spanish, `apps/docs`) and Theme Studio (`apps/theme-studio`, served at `/studio/` from the docs build). Playground (F6) is next. Per-phase notes: [`docs/planning`](docs/planning) (`F3`–`F5-progress.md`). Start with [`docs/`](docs/README.md). Brand assets: [`docs/brand/`](docs/brand/README.md).
 
 ## Development
 
@@ -17,6 +17,14 @@ Requires Node 26 (see `.nvmrc`) and pnpm 12 (`npm install -g pnpm@12.21.0`). Not
 ```sh
 pnpm install
 pnpm verify   # lint, format, types, tokens check, dependency rules, scope check, tests, build
+```
+
+Local apps (nothing is deployed, [ADR 0014](docs/planning/13-architecture-decisions/0014-zero-cost-github-first-infrastructure.md)):
+
+```sh
+pnpm --filter @tessen-ui/docs dev           # documentation, http://localhost:4321
+pnpm --filter @tessen-ui/theme-studio dev   # Theme Studio, http://localhost:5174
+pnpm --filter @tessen-ui/docs build         # docs + Studio under /studio/ (then: astro preview)
 ```
 
 Branching: `main` is production, `develop` is pre-production; work happens in short-lived English-named branches merged into `develop` through auto-merging pull requests ([workflow](docs/architecture/development-workflow.md)).

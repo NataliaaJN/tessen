@@ -6,6 +6,20 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["--filter", "@tessen-ui/docs", "exec", "astro", "preview", "--port", "4321"],
       "port": 4321
+    },
+    {
+      "name": "theme-studio",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--filter",
+        "@tessen-ui/theme-studio",
+        "exec",
+        "vite",
+        "--port",
+        "5174",
+        "--strictPort"
+      ],
+      "port": 5174
     }
   ]
 }
