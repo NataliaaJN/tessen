@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Guidelines" current="guidelines">
+  <div class="prose">
+    <h1>Guidelines</h1>
+    <p class="lead">How Tessen is meant to be used. Components enforce most of this; the rest is up to you.</p>
+
+    <h2 id="principles">Principles</h2>
+    <ul>
+      <li><strong>One contract, two frameworks.</strong> Props, behaviour and accessibility are identical in Vue and React. If they differ, it is a bug.</li>
+      <li><strong>Tokens, not values.</strong> Colour, spacing, type and motion come from <code>--tessen-*</code> variables. Do not hard-code them.</li>
+      <li><strong>Accessible by default.</strong> Keyboard, focus and screen-reader behaviour are part of the component, and tested in both frameworks.</li>
+      <li><strong>Composable and restrained.</strong> Prefer composing small parts over adding props. Use one primary action per view.</li>
+    </ul>
+
+    <h2 id="accessibility">Accessibility</h2>
+    <ul>
+      <li>Every form control needs a visible label. Use <a href="/components/field/">Field</a>; a placeholder is not a label.</li>
+      <li>Icon-only controls need an accessible name: <code>label</code> on <a href="/components/icon-button/">IconButton</a> or <a href="/components/visually-hidden/">VisuallyHidden</a> text.</li>
+      <li>Never convey meaning with colour alone: pair tones with text or an icon.</li>
+      <li>Text contrast meets WCAG 2.2 AA with the shipped tokens. If you override brand colours, check them again.</li>
+      <li>Motion respects <code>prefers-reduced-motion</code>. Do not rely on animation to communicate state.</li>
+      <li>Overlays (<a href="/components/dialog/">Dialog</a>, <a href="/components/popover/">Popover</a>, menus) trap or return focus for you. Do not move focus away manually.</li>
+    </ul>
+    <p>
+      Each component page lists its keyboard behaviour and the WAI-ARIA pattern it follows. The behaviours listed are tests that run against both frameworks.
+    </p>
+
+    <h2 id="content">Content</h2>
+    <ul>
+      <li>Use sentence case. Start button labels with a verb: "Save changes", not "OK".</li>
+      <li>Say what happened and what to do next in errors; do not blame the person.</li>
+      <li>Keep labels short and consistent: the same action has the same name everywhere.</li>
+    </ul>
+
+    <h2 id="layout">Layout and responsive</h2>
+    <ul>
+      <li>Use <a href="/components/stack/">Stack</a> and <a href="/components/grid/">Grid</a> with space tokens instead of ad-hoc margins.</li>
+      <li>Constrain reading width with <a href="/components/container/">Container</a>.</li>
+      <li>Design for touch: pick the <code>lg</code> size for controls people tap, and keep space between neighbouring targets.</li>
+    </ul>
+
+    <h2 id="theming">Theming</h2>
+    <ul>
+      <li>Override tokens, not component CSS. Set variables on a scope selector or use <code>data-tessen-theme</code>.</li>
+      <li>Component styles live in the <code>tessen.components</code> layer, so your own CSS wins without specificity fights.</li>
+    </ul>
+  </div>
+</Base>

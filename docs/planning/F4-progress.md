@@ -1,25 +1,30 @@
 # F4 · Plataforma de documentación: estado
 
-> **Estado:** F4 **iniciada, no cerrada** (2026-11-22). Se hizo primero la base: datos generados desde los contratos y un sitio Astro local con catálogo y página por componente. F3 sigue con la beta pendiente (lector de pantalla y gate de paridad obligatorio, decisión del propietario de dejarlos para más adelante).
+> **Estado:** F4 **cerrada para el alcance de `apps/docs`** (2026-11-22): sitio local con catálogo, página por componente con demos vivas Vue/React, explorador de tokens, getting started, guidelines, búsqueda `⌘K` y selector de framework. Theme Studio y Playground son F5/F6. F3 sigue con la beta pendiente (lector de pantalla y gate de paridad obligatorio, decisión del propietario de dejarlos para más adelante).
 
-## 1. Entregado (F4-T01)
+## 1. Entregado
 
-- **`tooling/docs-gen`** (`@tessen-ui/docs-gen`): lee los contratos (`@tessen-ui/core`) y los paquetes **construidos** de Vue y React y genera un JSON por componente (props, valores, defaults, partes compuestas, anatomía, comportamientos tal como los describe el contrato, ejemplo Vue/React), un índice y `llms.txt`. La lógica es pura y está probada (`node --test`).
-- **`pnpm docs:check`** (en `pnpm verify` y en el job `verify` de CI): falla si un componente no existe en ambos frameworks, si un contrato no tiene casos, o si una prop del contrato no existe en el componente de Vue. `value`/`checked` se aceptan como `modelValue` y `aria-label` como `ariaLabel`; las excepciones deliberadas están en `KNOWN_EXCEPTIONS` con su motivo (`Dialog.size` vive en `DialogContent`, `placeholder` es un atributo nativo), y una excepción obsoleta también falla. Después ejecuta `astro check` sobre el sitio.
-- **`apps/docs`** (Astro 7, estático, solo local, ADR 0014): inicio, catálogo por categoría y una página por componente (uso en Vue y React, anatomía, partes, tabla de props, comportamiento y accesibilidad) más `/components/<slug>.json` y `/llms.txt`. Usa solo los tokens y el CSS públicos de `@tessen-ui/styles`, con tema claro/oscuro. `pnpm --filter @tessen-ui/docs dev` lo arranca; los datos generados (`src/generated`, `public/llms.txt`) no se versionan.
+- **F4-T01 `tooling/docs-gen`** (`@tessen-ui/docs-gen`): contratos + paquetes construidos → JSON por componente, índice y `llms.txt`. **`pnpm docs:check`** (en `verify` y CI) falla por drift entre contrato, Vue y React.
+- **F4-T01 `apps/docs`** (Astro 7, estático, solo local, ADR 0014): inicio, catálogo, página por componente, `/components/<slug>.json`, `/llms.txt`.
+- **F4-T02** explorador de tokens (`/tokens/`).
+- **F4-T03** demos vivas: islas Vue/React `client:visible`; ejemplos en `src/examples/<slug>/<id>.{vue,tsx}`; el build falla si falta uno de los dos.
+- **F4-T04** demos para **los 41 componentes** (antes 9); **`pnpm docs:smoke`** visita las 41 páginas, hidrata todas las islas y falla ante cualquier error o aviso de consola (necesita el sitio servido en `DOCS_URL`, p. ej. `astro preview`).
+- **F4-T05** `/get-started/` (Vue, React, Nuxt, Next, Tailwind, tema) y `/guidelines/` (principios, accesibilidad, contenido, layout, theming).
+- **F4-T06** selector global **Both / Vue / React** persistente (`localStorage` y `?fw=`), búsqueda **⌘K / Ctrl+K** sobre un índice estático (`/search-index.json`).
+- **F4-T07** prosa editorial por componente (`src/lib/editorial.ts`): «cuándo usarlo», alternativas con enlace y reglas de contenido.
 
-## 2. Decisión tomada por defecto
+## 2. Decisiones tomadas por defecto
 
-**Idioma del sitio: inglés** (D-14, opción recomendada). Los documentos de planificación y arquitectura siguen en español. Es reversible: todo el texto está en las plantillas de `apps/docs`.
+- **Idioma del sitio: inglés** (D-14, recomendada, no confirmada). Reversible: el texto está en las plantillas.
+- **Búsqueda sin Pagefind:** con ~44 entradas un índice JSON estático evita una dependencia y un binario; si el contenido crece (MDX, muchas guías) se reevalúa.
+- **Comprobación de ejemplos:** las demos son fuentes reales, compiladas por `astro build` y `astro check` y ejecutadas por `docs:smoke`. El bloque «Usage» generado desde el contrato es mínimo (marcador).
 
-## 3. Pendiente de F4
+## 3. Pendiente (no bloquea el cierre de F4)
 
 | Pendiente | Nota |
 | --- | --- |
-| Demos vivas: cobertura | Infraestructura hecha (F4-T03): islas Vue/React `client:visible`, ejemplos en `apps/docs/src/examples/<slug>/<id>.{vue,tsx}` (el build falla si falta uno de los dos). Hay ejemplos para 9 componentes (button, checkbox, switch, tabs, dialog, tooltip, accordion, alert, field); faltan los otros 32 |
-| Búsqueda `⌘K` (Pagefind) | Sin construir |
-| ~~Explorador de tokens~~ | Hecho (F4-T02, `/tokens/`). Faltan las páginas de fundamentos editoriales (principios, accesibilidad) |
-| Getting started (Vue, React, Nuxt, Next, Tailwind) y guidelines | Sin construir |
-| Selector global Vue / React persistente | Hoy se ven los dos lado a lado |
-| Descripciones editoriales («cuándo usarlo», contenido) y *Do/Don't* | El contrato no tiene prosa todavía: hace falta un lugar para ella |
-| Comprobación de ejemplos (compilar los snippets) | Es el pendiente de F3 «compilación de snippets» |
+| *Do / Don't* con ejemplos vivos | Hoy hay reglas de texto; faltan los pares visuales |
+| Fundamentos editoriales (`/foundations/*`) y `/motion/` | Los tokens se ven en `/tokens/`; falta la prosa por disciplina |
+| `docs:smoke` en CI | Necesita levantar `astro preview` en el job `e2e` |
+| Usage del contrato → ejemplo real | Sustituir el bloque mínimo por el primer ejemplo |
+| Beta 0.5.0 (F3) | Lector de pantalla (C9) y gate de paridad obligatorio |

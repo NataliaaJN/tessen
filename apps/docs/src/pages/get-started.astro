@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Import lines are the ones the integration consumers (integration/*) build and test in CI.
+const css = `import '@tessen-ui/styles/index.css';
+import '@tessen-ui/motion/motion.css'; // optional: motion tokens and presets`;
+---
+
+<Base title="Get started" current="get-started">
+  <div class="prose">
+    <h1>Get started</h1>
+    <p class="lead">
+      Install the framework package you use plus the styles. The CSS and tokens are the same for Vue
+      and React.
+    </p>
+    <p>
+      Packages are published under the internal <code>@tessen-ui</code> scope; until a public
+      release they are consumed from the monorepo tarballs (<code>pnpm pack:alpha</code>).
+    </p>
+
+    <h2>Requirements</h2>
+    <ul>
+      <li>Vue ≥ 3.5.2 <em>or</em> React ≥ 18.3 (19 supported).</li>
+      <li>A bundler that handles CSS imports (Vite, Nuxt, Next, webpack).</li>
+      <li>No Tailwind or CSS-in-JS runtime required.</li>
+    </ul>
+
+    <h2 id="vue">Vue 3 (Vite)</h2>
+    <pre><code
+        >pnpm add @tessen-ui/vue @tessen-ui/styles @tessen-ui/motion</code
+      ></pre>
+    <pre><code
+        >{css}
+
+// src/App.vue
+import {'{'} TButton {'}'} from '@tessen-ui/vue';</code
+      ></pre>
+    <pre><code>&lt;TButton variant="primary"&gt;Save&lt;/TButton&gt;</code></pre>
+    <p>Vue components use the <code>T</code> prefix and <code>v-model</code> for controlled values.</p>
+
+    <h2 id="react">React (Vite)</h2>
+    <pre><code
+        >pnpm add @tessen-ui/react @tessen-ui/styles @tessen-ui/motion</code
+      ></pre>
+    <pre><code
+        >{css}
+
+import {'{'} Button {'}'} from '@tessen-ui/react';
+
+export const App = () =&gt; &lt;Button variant="primary"&gt;Save&lt;/Button&gt;;</code
+      ></pre>
+    <p>
+      React components have no prefix; controlled values use <code>value</code> with an
+      <code>on…Change</code> callback (for example <code>onValueChange</code>).
+    </p>
+
+    <h2 id="nuxt">Nuxt</h2>
+    <p>Add the styles to <code>nuxt.config.ts</code>; no transpile or alias settings are needed.</p>
+    <pre><code
+        >export default defineNuxtConfig({'{'}
+  css: ['@tessen-ui/styles/index.css', '@tessen-ui/motion/motion.css'],
+{'}'});</code
+      ></pre>
+    <p>
+      Import components from <code>@tessen-ui/vue</code> in your pages. Server rendering and
+      hydration are covered by the <code>integration/nuxt</code> test.
+    </p>
+
+    <h2 id="nextjs">Next.js (App Router)</h2>
+    <p>
+      Import the CSS once in the root layout. Components that use state must be rendered from a
+      client component (<code>'use client'</code>).
+    </p>
+    <pre><code
+        >// app/layout.tsx
+{css}</code
+      ></pre>
+    <p>
+      Server rendering and hydration are covered by the <code>integration/next</code> test.
+    </p>
+
+    <h2 id="tailwind">Tailwind</h2>
+    <p>
+      Tessen does not depend on Tailwind. They coexist: the library ships its CSS inside
+      <code>@layer</code>s, so your utility classes win over component styles without
+      <code>!important</code>. Import Tessen's CSS before your Tailwind entry.
+    </p>
+    <pre><code
+        >@import '@tessen-ui/styles/index.css';
+@import 'tailwindcss';</code
+      ></pre>
+    <p>
+      Tokens are CSS variables (<code>--tessen-*</code>), so you can reference them in utilities,
+      for example <code>bg-[var(--tessen-color-surface-subtle)]</code>.
+    </p>
+
+    <h2>Theming</h2>
+    <p>
+      Light and dark come from <code>data-tessen-theme="light|dark"</code> on any ancestor, or from
+      the system preference when it is absent. See the <a href="/tokens/">token explorer</a> for every
+      variable.
+    </p>
+  </div>
+</Base>

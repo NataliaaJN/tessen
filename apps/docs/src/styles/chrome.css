@@ -1,0 +1,85 @@
+/* Framework switch: hide the other framework's column */
+html[data-fw='vue'] [data-fw='react'],
+html[data-fw='react'] [data-fw='vue'] {
+  display: none;
+}
+/* The switch's own buttons carry data-set-fw, so they are never hidden by the rule above. */
+.fw-switch {
+  display: inline-flex;
+  border: 1px solid var(--tessen-color-border-default);
+  border-radius: var(--tessen-radius-md);
+  overflow: hidden;
+}
+.fw-switch button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: var(--tessen-space-1) var(--tessen-space-3);
+  cursor: pointer;
+}
+.fw-switch button[aria-pressed='true'] {
+  background: var(--tessen-color-surface-subtle);
+  font-weight: var(--tessen-font-weight-semibold);
+}
+
+/* Search palette */
+.search-open {
+  border: 1px solid var(--tessen-color-border-default);
+  background: transparent;
+  color: var(--tessen-color-text-secondary);
+  border-radius: var(--tessen-radius-md);
+  padding: var(--tessen-space-1) var(--tessen-space-3);
+  cursor: pointer;
+}
+.search-open kbd {
+  margin-inline-start: var(--tessen-space-2);
+  font-size: 0.8em;
+}
+dialog.search {
+  inline-size: min(36rem, 92vw);
+  margin-block-start: 12vh;
+  padding: var(--tessen-space-3);
+  border: 1px solid var(--tessen-color-border-default);
+  border-radius: var(--tessen-radius-lg);
+  background: var(--tessen-color-surface-default);
+  color: var(--tessen-color-text-primary);
+}
+dialog.search::backdrop {
+  background: rgb(0 0 0 / 0.4);
+}
+dialog.search input {
+  inline-size: 100%;
+  box-sizing: border-box;
+  padding: var(--tessen-space-2) var(--tessen-space-3);
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--tessen-color-border-default);
+  border-radius: var(--tessen-radius-md);
+}
+dialog.search ul {
+  list-style: none;
+  margin: var(--tessen-space-2) 0 0;
+  padding: 0;
+}
+dialog.search li a {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--tessen-space-2) var(--tessen-space-3);
+  border-radius: var(--tessen-radius-md);
+  text-decoration: none;
+}
+dialog.search li[aria-selected='true'] a {
+  background: var(--tessen-color-surface-subtle);
+}
+dialog.search small {
+  color: var(--tessen-color-text-tertiary);
+}
+
+/* Prose pages */
+.prose pre {
+  overflow-x: auto;
+}
+.prose h3 {
+  margin-block: var(--tessen-space-6) var(--tessen-space-2);
+}

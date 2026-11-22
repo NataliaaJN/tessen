@@ -1,6 +1,7 @@
 ---
 import '@tessen-ui/styles';
 import '../styles/docs.css';
+import '../styles/chrome.css';
 import { byCategory, categoryLabel } from '../lib/data';
 
 interface Props {
@@ -26,6 +27,12 @@ const groups = byCategory();
         const t = localStorage.getItem('tessen:docs:theme');
         if (t === 'light' || t === 'dark') document.documentElement.dataset.tessenTheme = t;
       } catch {}
+      // Framework: ?fw=vue|react wins, then the saved choice, else both side by side.
+      try {
+        const q = new URLSearchParams(location.search).get('fw');
+        const f = q === 'vue' || q === 'react' ? q : localStorage.getItem('tessen:docs:fw');
+        if (f === 'vue' || f === 'react') document.documentElement.dataset.fw = f;
+      } catch {}
     </script>
   </head>
   <body>
@@ -36,9 +43,28 @@ const groups = byCategory();
         <a href="/components/" aria-current={current === 'components' ? 'page' : undefined}
           >Components</a
         >
+        <a href="/get-started/" aria-current={current === 'get-started' ? 'page' : undefined}
+          >Get started</a
+        >
         <a href="/tokens/" aria-current={current === 'tokens' ? 'page' : undefined}>Tokens</a>
+        <a href="/guidelines/" aria-current={current === 'guidelines' ? 'page' : undefined}
+          >Guidelines</a
+        >
         <a href="/llms.txt">llms.txt</a>
       </nav>
+      <button
+        type="button"
+        class="search-open"
+        id="search-open"
+        aria-keyshortcuts="Control+K Meta+K"
+      >
+        Search <kbd>⌘K</kbd>
+      </button>
+      <div class="fw-switch" role="group" aria-label="Framework">
+        <button type="button" data-set-fw="both" aria-pressed="true">Both</button>
+        <button type="button" data-set-fw="vue" aria-pressed="false">Vue</button>
+        <button type="button" data-set-fw="react" aria-pressed="false">React</button>
+      </div>
       <button type="button" class="theme" id="theme" aria-label="Toggle colour theme">◐</button>
     </header>
     <div class="shell">
@@ -65,6 +91,17 @@ const groups = byCategory();
       </nav>
       <main id="main"><slot /></main>
     </div>
+    <dialog id="search" class="search" aria-label="Search">
+      <input
+        id="search-input"
+        type="search"
+        placeholder="Search components and guides"
+        aria-label="Search"
+        autocomplete="off"
+      />
+      <ul id="search-results" role="listbox" aria-label="Results"></ul>
+    </dialog>
+    <script is:inline src="/docs-ui.js"></script>
     <script is:inline>
       document.getElementById('theme')?.addEventListener('click', () => {
         const root = document.documentElement;

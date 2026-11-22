@@ -3,6 +3,7 @@ import type { GetStaticPaths } from 'astro';
 import Base from '../../layouts/Base.astro';
 import { components, categoryLabel } from '../../lib/data';
 import { examplesFor } from '../../lib/examples';
+import { editorial } from '../../lib/editorial';
 import ReactDemo from '../../components/ReactDemo';
 import VueDemo from '../../components/VueDemo.vue';
 
@@ -11,6 +12,8 @@ export const getStaticPaths = (() =>
 
 const { c } = Astro.props;
 const examples = examplesFor(c.slug);
+const note = editorial[c.slug];
+const nameOf = (slug: string) => components.find((x) => x.slug === slug)?.name ?? slug;
 
 /** How the prop is spelled in Vue, when it differs from the contract. */
 function vueSpelling(status: string): string {
@@ -33,6 +36,34 @@ function vueSpelling(status: string): string {
   </ul>
 
   {
+    note && (
+      <>
+        <h2>When to use it</h2>
+        <p>{note.use}</p>
+        {note.instead && (
+          <ul>
+            {note.instead.map(([slug, why]) => (
+              <li>
+                Use <a href={`/components/${slug}/`}>{nameOf(slug)}</a> when: {why}
+              </li>
+            ))}
+          </ul>
+        )}
+        {note.rules && (
+          <>
+            <h3>Guidance</h3>
+            <ul>
+              {note.rules.map((r) => (
+                <li>{r}</li>
+              ))}
+            </ul>
+          </>
+        )}
+      </>
+    )
+  }
+
+  {
     examples.length > 0 && (
       <>
         <h2>Examples</h2>
@@ -40,7 +71,7 @@ function vueSpelling(status: string): string {
           <section class="example" aria-label={e.id}>
             <h3>{e.id}</h3>
             <div class="code-pair">
-              <div>
+              <div data-fw="vue">
                 <p class="fw">Vue</p>
                 <div class="demo">
                   <VueDemo client:visible slug={c.slug} id={e.id} />
@@ -50,7 +81,7 @@ function vueSpelling(status: string): string {
                   <pre><code>{e.vue}</code></pre>
                 </details>
               </div>
-              <div>
+              <div data-fw="react">
                 <p class="fw">React</p>
                 <div class="demo">
                   <ReactDemo client:visible slug={c.slug} id={e.id} />
@@ -69,11 +100,11 @@ function vueSpelling(status: string): string {
 
   <h2>Usage</h2>
   <div class="code-pair">
-    <div>
+    <div data-fw="vue">
       <h3>Vue · <code>{c.names.vue}</code></h3>
       <pre><code>{c.example.vue}</code></pre>
     </div>
-    <div>
+    <div data-fw="react">
       <h3>React · <code>{c.names.react}</code></h3>
       <pre><code>{c.example.react}</code></pre>
     </div>
