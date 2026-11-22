@@ -1,0 +1,318 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "color": {
+    "$type": "color",
+    "text": {
+      "primary": {
+        "$value": "{color.neutral.900}",
+        "$description": "Default text."
+      },
+      "secondary": {
+        "$value": "{color.neutral.700}",
+        "$description": "Supporting text."
+      },
+      "tertiary": {
+        "$value": "{color.neutral.600}",
+        "$description": "Hints and metadata (still meets 4.5:1)."
+      },
+      "disabled": {
+        "$value": "{color.neutral.400}",
+        "$description": "Disabled text; exempt from contrast, must not rely on color alone."
+      },
+      "inverse": {
+        "$value": "{color.neutral.50}",
+        "$description": "Text on color.surface.inverse."
+      },
+      "link": {
+        "$value": "{color.brand.700}",
+        "$description": "Links."
+      },
+      "link-hover": {
+        "$value": "{color.brand.900}",
+        "$description": "Links on hover."
+      },
+      "on-action": {
+        "$value": "{color.white}",
+        "$description": "Text on filled actions (primary, danger)."
+      },
+      "on-feedback": {
+        "$value": "{color.white}",
+        "$description": "Text on solid feedback fills."
+      }
+    },
+    "surface": {
+      "canvas": {
+        "$value": "{color.neutral.50}",
+        "$description": "Application background."
+      },
+      "default": {
+        "$value": "{color.white}",
+        "$description": "Default container background."
+      },
+      "raised": {
+        "$value": "{color.white}",
+        "$description": "Raised container (cards)."
+      },
+      "sunken": {
+        "$value": "{color.neutral.100}",
+        "$description": "Recessed areas."
+      },
+      "overlay": {
+        "$value": "{color.white}",
+        "$description": "Popovers, menus and dialogs."
+      },
+      "inverse": {
+        "$value": "{color.neutral.900}",
+        "$description": "High-emphasis inverted surface (tooltips)."
+      }
+    },
+    "border": {
+      "subtle": {
+        "$value": "{color.neutral.200}",
+        "$description": "Decorative dividers."
+      },
+      "default": {
+        "$value": "{color.neutral.300}",
+        "$description": "Default dividers and card borders."
+      },
+      "strong": {
+        "$value": "{color.neutral.500}",
+        "$description": "Borders that must be perceivable (3:1)."
+      },
+      "focus": {
+        "$value": "{color.brand.600}",
+        "$description": "Focus indication on bordered elements."
+      },
+      "disabled": {
+        "$value": "{color.neutral.200}",
+        "$description": "Borders of disabled controls."
+      }
+    },
+    "action": {
+      "primary": {
+        "default": {
+          "$value": "{color.brand.800}",
+          "$description": "Primary action fill."
+        },
+        "hover": {
+          "$value": "{color.brand.900}",
+          "$description": "Primary action on hover."
+        },
+        "active": {
+          "$value": "{color.brand.950}",
+          "$description": "Primary action while pressed."
+        },
+        "disabled": {
+          "$value": "{color.neutral.200}",
+          "$description": "Primary action when disabled."
+        },
+        "subtle": {
+          "$value": "{color.brand.100}",
+          "$description": "Soft primary background."
+        },
+        "on": {
+          "$value": "{color.text.on-action}",
+          "$description": "Text on primary action fills."
+        }
+      },
+      "neutral": {
+        "default": {
+          "$value": "{color.neutral.200}",
+          "$description": "Neutral action fill."
+        },
+        "hover": {
+          "$value": "{color.neutral.300}",
+          "$description": "Neutral action on hover."
+        },
+        "active": {
+          "$value": "{color.neutral.400}",
+          "$description": "Neutral action while pressed."
+        },
+        "disabled": {
+          "$value": "{color.neutral.100}",
+          "$description": "Neutral action when disabled."
+        },
+        "subtle": {
+          "$value": "{color.neutral.100}",
+          "$description": "Hover background of ghost actions."
+        }
+      },
+      "danger": {
+        "default": {
+          "$value": "{color.danger.700}",
+          "$description": "Destructive action fill."
+        },
+        "hover": {
+          "$value": "{color.danger.800}",
+          "$description": "Destructive action on hover."
+        },
+        "active": {
+          "$value": "{color.danger.900}",
+          "$description": "Destructive action while pressed."
+        },
+        "disabled": {
+          "$value": "{color.neutral.200}",
+          "$description": "Destructive action when disabled."
+        },
+        "subtle": {
+          "$value": "{color.danger.100}",
+          "$description": "Soft destructive background."
+        }
+      }
+    },
+    "selected": {
+      "background": {
+        "$value": "{color.brand.100}",
+        "$description": "Selected item background."
+      },
+      "border": {
+        "$value": "{color.brand.700}",
+        "$description": "Selected item border."
+      },
+      "text": {
+        "$value": "{color.brand.900}",
+        "$description": "Selected item text."
+      }
+    },
+    "focus": {
+      "ring": {
+        "$value": "{color.brand.600}",
+        "$description": "Focus ring (3:1 against adjacent surfaces)."
+      },
+      "ring-offset": {
+        "$value": "{color.white}",
+        "$description": "Gap between element and ring."
+      }
+    },
+    "feedback": {
+      "success": {
+        "background": {
+          "$value": "{color.success.50}",
+          "$description": "Background of a success message."
+        },
+        "border": {
+          "$value": "{color.success.300}",
+          "$description": "Border of a success message."
+        },
+        "text": {
+          "$value": "{color.success.800}",
+          "$description": "Text on the success background."
+        },
+        "icon": {
+          "$value": "{color.success.600}",
+          "$description": "Icon on the success background."
+        },
+        "solid": {
+          "$value": "{color.success.700}",
+          "$description": "Solid success fill; text on it uses color.text.on-feedback."
+        }
+      },
+      "warning": {
+        "background": {
+          "$value": "{color.warning.50}",
+          "$description": "Background of a warning message."
+        },
+        "border": {
+          "$value": "{color.warning.300}",
+          "$description": "Border of a warning message."
+        },
+        "text": {
+          "$value": "{color.warning.800}",
+          "$description": "Text on the warning background."
+        },
+        "icon": {
+          "$value": "{color.warning.600}",
+          "$description": "Icon on the warning background."
+        },
+        "solid": {
+          "$value": "{color.warning.700}",
+          "$description": "Solid warning fill; text on it uses color.text.on-feedback."
+        }
+      },
+      "danger": {
+        "background": {
+          "$value": "{color.danger.50}",
+          "$description": "Background of a danger message."
+        },
+        "border": {
+          "$value": "{color.danger.300}",
+          "$description": "Border of a danger message."
+        },
+        "text": {
+          "$value": "{color.danger.800}",
+          "$description": "Text on the danger background."
+        },
+        "icon": {
+          "$value": "{color.danger.600}",
+          "$description": "Icon on the danger background."
+        },
+        "solid": {
+          "$value": "{color.danger.700}",
+          "$description": "Solid danger fill; text on it uses color.text.on-feedback."
+        }
+      },
+      "info": {
+        "background": {
+          "$value": "{color.info.50}",
+          "$description": "Background of a info message."
+        },
+        "border": {
+          "$value": "{color.info.300}",
+          "$description": "Border of a info message."
+        },
+        "text": {
+          "$value": "{color.info.800}",
+          "$description": "Text on the info background."
+        },
+        "icon": {
+          "$value": "{color.info.600}",
+          "$description": "Icon on the info background."
+        },
+        "solid": {
+          "$value": "{color.info.700}",
+          "$description": "Solid info fill; text on it uses color.text.on-feedback."
+        }
+      }
+    },
+    "overlay": {
+      "scrim": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0, 0, 0],
+          "alpha": 0.5
+        },
+        "$description": "Backdrop behind modal layers."
+      },
+      "backdrop-blur": {
+        "$type": "dimension",
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        },
+        "$description": "Blur applied to the backdrop when the platform supports it."
+      }
+    },
+    "input": {
+      "background": {
+        "$value": "{color.white}",
+        "$description": "Field background."
+      },
+      "border": {
+        "$value": "{color.neutral.500}",
+        "$description": "Field border (3:1)."
+      },
+      "border-hover": {
+        "$value": "{color.neutral.700}",
+        "$description": "Field border on hover."
+      },
+      "border-invalid": {
+        "$value": "{color.danger.600}",
+        "$description": "Field border when invalid."
+      },
+      "placeholder": {
+        "$value": "{color.neutral.600}",
+        "$description": "Placeholder text."
+      }
+    }
+  }
+}

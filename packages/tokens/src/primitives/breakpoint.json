@@ -1,0 +1,12 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "breakpoint": {
+    "$type": "dimension",
+    "$description": "Viewport breakpoints. CSS variables do not work inside @media, so these are published as TypeScript and JSON only. Components adapt with container queries wherever possible.",
+    "sm": { "$value": { "value": 640, "unit": "px" } },
+    "md": { "$value": { "value": 768, "unit": "px" } },
+    "lg": { "$value": { "value": 1024, "unit": "px" } },
+    "xl": { "$value": { "value": 1280, "unit": "px" } },
+    "2xl": { "$value": { "value": 1536, "unit": "px" } }
+  }
+}

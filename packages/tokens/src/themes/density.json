@@ -1,0 +1,27 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "default": {
+    "density": {
+      "$type": "number",
+      "scale": {
+        "$value": 1
+      }
+    }
+  },
+  "compact": {
+    "density": {
+      "$type": "number",
+      "scale": {
+        "$value": 0.875
+      }
+    }
+  },
+  "comfortable": {
+    "density": {
+      "$type": "number",
+      "scale": {
+        "$value": 1.125
+      }
+    }
+  }
+}

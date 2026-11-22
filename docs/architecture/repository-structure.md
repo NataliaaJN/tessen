@@ -71,11 +71,12 @@ tessen/
 ```text
 packages/tokens/
 ├── src/
-│   ├── primitives/     color.json  space.json  typography.json  radius.json  shadow.json  motion.json
-│   ├── semantic/       color.json  typography.json  focus.json  motion.json
+│   ├── primitives/     color.json (generado)  space.json  typography.json  radius.json  shadow.json  motion.json  layer.json  breakpoint.json
+│   ├── semantic/       typography.json  focus.json  elevation.json   # el color semántico vive en themes/
 │   ├── components/     button.json …   # solo si el componente necesita token propio
-│   └── themes/         light.json  dark.json  density.json
-├── scripts/            build-tokens.ts  check-tokens.ts
+│   ├── themes/         light.json  dark.json  density.json
+│   └── contrast-pairs.json            # pares que `tokens:check` valida en cada tema
+├── scripts/            build-tokens.ts  check-tokens.ts  generate-scales.ts  lib/
 └── dist/               (generado, solo lectura)  css/  js/  json/  tailwind/
 
 packages/styles/

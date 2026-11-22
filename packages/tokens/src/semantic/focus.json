@@ -1,0 +1,18 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "focus": {
+    "$type": "dimension",
+    "$description": "Focus ring geometry. Applied with :focus-visible and drawn with outline so it survives forced-colors.",
+    "ring": {
+      "width": {
+        "$value": "{border.width.focus}"
+      },
+      "offset": {
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        }
+      }
+    }
+  }
+}

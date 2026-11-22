@@ -5,6 +5,7 @@
   "description": "Shared TypeScript configurations for the TESSEN workspace.",
   "files": [
     "base.json",
+    "node.json",
     "scripts.json"
   ]
 }

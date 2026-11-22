@@ -1,0 +1,157 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "typography": {
+    "$type": "typography",
+    "$description": "Composite text styles. Components consume these, never loose sizes.",
+    "display-lg": {
+      "$value": {
+        "fontFamily": "{font.family.display}",
+        "fontSize": "{font.size.6xl}",
+        "fontWeight": "{font.weight.semibold}",
+        "lineHeight": "{font.lineHeight.tight}",
+        "letterSpacing": "{font.letterSpacing.tight}"
+      },
+      "$description": "Hero headlines."
+    },
+    "display-md": {
+      "$value": {
+        "fontFamily": "{font.family.display}",
+        "fontSize": "{font.size.5xl}",
+        "fontWeight": "{font.weight.semibold}",
+        "lineHeight": "{font.lineHeight.tight}",
+        "letterSpacing": "{font.letterSpacing.tight}"
+      },
+      "$description": "Large page titles."
+    },
+    "heading-xl": {
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "{font.size.4xl}",
+        "fontWeight": "{font.weight.semibold}",
+        "lineHeight": "{font.lineHeight.tight}",
+        "letterSpacing": "{font.letterSpacing.tight}"
+      },
+      "$description": "Page title."
+    },
+    "heading-lg": {
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "{font.size.3xl}",
+        "fontWeight": "{font.weight.semibold}",
+        "lineHeight": "{font.lineHeight.tight}",
+        "letterSpacing": "{font.letterSpacing.tight}"
+      },
+      "$description": "Section title."
+    },
+    "heading-md": {
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "{font.size.2xl}",
+        "fontWeight": "{font.weight.semibold}",
+        "lineHeight": "{font.lineHeight.snug}",
+        "letterSpacing": "{font.letterSpacing.tight}"
+      },
+      "$description": "Subsection title."
+    },
+    "heading-sm": {
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "{font.size.xl}",
+        "fontWeight": "{font.weight.semibold}",
+        "lineHeight": "{font.lineHeight.snug}",
+        "letterSpacing": "{font.letterSpacing.normal}"
+      },
+      "$description": "Card and dialog title."
+    },
+    "heading-xs": {
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "{font.size.lg}",
+        "fontWeight": "{font.weight.semibold}",
+        "lineHeight": "{font.lineHeight.snug}",
+        "letterSpacing": "{font.letterSpacing.normal}"
+      },
+      "$description": "Small heading."
+    },
+    "body-lg": {
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "{font.size.lg}",
+        "fontWeight": "{font.weight.regular}",
+        "lineHeight": "{font.lineHeight.relaxed}",
+        "letterSpacing": "{font.letterSpacing.normal}"
+      },
+      "$description": "Lead paragraph."
+    },
+    "body-md": {
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "{font.size.md}",
+        "fontWeight": "{font.weight.regular}",
+        "lineHeight": "{font.lineHeight.normal}",
+        "letterSpacing": "{font.letterSpacing.normal}"
+      },
+      "$description": "Default body text."
+    },
+    "body-sm": {
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "{font.size.sm}",
+        "fontWeight": "{font.weight.regular}",
+        "lineHeight": "{font.lineHeight.normal}",
+        "letterSpacing": "{font.letterSpacing.normal}"
+      },
+      "$description": "Secondary body text."
+    },
+    "label-lg": {
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "{font.size.md}",
+        "fontWeight": "{font.weight.medium}",
+        "lineHeight": "{font.lineHeight.snug}",
+        "letterSpacing": "{font.letterSpacing.normal}"
+      },
+      "$description": "Large control label."
+    },
+    "label-md": {
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "{font.size.sm}",
+        "fontWeight": "{font.weight.medium}",
+        "lineHeight": "{font.lineHeight.snug}",
+        "letterSpacing": "{font.letterSpacing.normal}"
+      },
+      "$description": "Default control label."
+    },
+    "label-sm": {
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "{font.size.xs}",
+        "fontWeight": "{font.weight.medium}",
+        "lineHeight": "{font.lineHeight.snug}",
+        "letterSpacing": "{font.letterSpacing.wide}"
+      },
+      "$description": "Small control label."
+    },
+    "caption": {
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "{font.size.xs}",
+        "fontWeight": "{font.weight.regular}",
+        "lineHeight": "{font.lineHeight.normal}",
+        "letterSpacing": "{font.letterSpacing.normal}"
+      },
+      "$description": "Captions and helper text."
+    },
+    "code": {
+      "$value": {
+        "fontFamily": "{font.family.mono}",
+        "fontSize": "{font.size.sm}",
+        "fontWeight": "{font.weight.regular}",
+        "lineHeight": "{font.lineHeight.normal}",
+        "letterSpacing": "{font.letterSpacing.normal}"
+      },
+      "$description": "Inline and block code."
+    }
+  }
+}

@@ -6,6 +6,10 @@
     },
     "test": {
       "dependsOn": ["^build"]
+    },
+    "typecheck": {},
+    "tokens:check": {
+      "inputs": ["src/**", "scripts/**"]
     }
   }
 }

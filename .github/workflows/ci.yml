@@ -39,6 +39,7 @@ jobs:
       - run: pnpm lint
       - run: pnpm format:check
       - run: pnpm typecheck
+      - run: pnpm tokens:check
       - run: pnpm deps:check
       - run: pnpm scope:check
       - run: pnpm test
