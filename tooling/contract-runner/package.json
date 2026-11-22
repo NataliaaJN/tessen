@@ -1,0 +1,25 @@
+{
+  "name": "@tessen-ui/contract-runner",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Test helpers shared by the Vue and React packages: executes the contract cases (data) with a framework adapter and runs axe. Never published, never imported by library code.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@tessen-ui/core": "workspace:*",
+    "@testing-library/dom": "catalog:",
+    "@testing-library/user-event": "catalog:",
+    "axe-core": "catalog:"
+  },
+  "devDependencies": {
+    "@tessen-ui/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

@@ -16,6 +16,7 @@
     "@tessen-ui/motion": "*",
     "@tessen-ui/styles": "*",
     "@tessen-ui/tokens": "*",
+    "@tessen-ui/vue": "*",
     "vue": "^3.5.46"
   },
   "devDependencies": {

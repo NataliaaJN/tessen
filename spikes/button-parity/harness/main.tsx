@@ -1,5 +1,5 @@
 import '@tessen-ui/styles';
-import '../src/css/button.css';
+import '../../../packages/styles/src/components/button.css';
 import { createApp, h } from 'vue';
 import { createRoot } from 'react-dom/client';
 import type { NeutralProps } from '../src/core/contract.ts';

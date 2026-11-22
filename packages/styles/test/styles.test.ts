@@ -8,7 +8,11 @@ const tokensCss = readFileSync(
   fileURLToPath(import.meta.resolve('@tessen-ui/tokens/tokens.css')),
   'utf8',
 );
-const sources = readdirSync(srcDir).filter((f) => f.endsWith('.css') && f !== 'layers.css');
+const componentSources = readdirSync(`${srcDir}/components`).map((f) => `components/${f}`);
+const sources = [
+  ...readdirSync(srcDir).filter((f) => f.endsWith('.css') && f !== 'layers.css'),
+  ...componentSources,
+];
 
 let outputs: Record<string, string>;
 beforeAll(() => {
@@ -68,6 +72,7 @@ describe('build output', () => {
   it('emits the public entry points', () => {
     expect(Object.keys(outputs).sort()).toEqual([
       'base.css',
+      'components/button.css',
       'index.css',
       'layers.css',
       'reset.css',
@@ -79,6 +84,12 @@ describe('build output', () => {
     for (const [file, css] of Object.entries(outputs)) {
       expect(css.match(/^@layer [\w.]+(?:, [\w.]+)+;$/gm), file).toHaveLength(1);
     }
+  });
+
+  it('bundles component CSS in the default entry and ships each one on its own', () => {
+    expect(outputs['index.css']).toContain('.t-button {');
+    expect(outputs['components/button.css']).toContain('.t-button {');
+    expect(outputs['components/button.css']).not.toContain('@layer tessen.tokens {');
   });
 
   it('keeps reset and base out of the default entry', () => {

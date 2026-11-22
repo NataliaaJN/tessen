@@ -1,15 +1,13 @@
 <script setup lang="ts">
-// Uses only the public subpaths. The contract cases and `defineContract` are NOT used here
+// Uses only the public entry points. The contract cases and `defineContract` are NOT used here
 // on purpose: the build check asserts they are tree-shaken out of the bundle.
-import { buttonVariants } from '@tessen-ui/core/contracts/button';
 import { CheckIcon } from '@tessen-ui/icons/vue';
-
-const result = buttonVariants({ variant: 'primary', tone: 'danger', block: true });
+import { TButton } from '@tessen-ui/vue';
 </script>
 
 <template>
-  <button type="button" :class="result.class" v-bind="result.attrs">
-    <CheckIcon :size="16" />
+  <TButton tone="danger" block>
+    <template #leading><CheckIcon :size="16" /></template>
     Save
-  </button>
+  </TButton>
 </template>

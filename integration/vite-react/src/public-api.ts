@@ -7,6 +7,7 @@ import { buttonContract as sameContract } from '@tessen-ui/core/contracts/button
 import { defineVariants as sameVariants } from '@tessen-ui/core/variants';
 import { CheckIcon } from '@tessen-ui/icons/react';
 import { presets } from '@tessen-ui/motion';
+import { Button } from '@tessen-ui/react';
 import { tokens } from '@tessen-ui/tokens';
 
 const className: string = buttonVariants({ variant: 'outline', size: 'sm' }).class;
@@ -17,6 +18,7 @@ const snippet: string = generateSnippet(buttonContract, 'react', { label: 'Save'
 const white: string = tokens.color.white;
 
 export {
+  Button,
   CheckIcon,
   className,
   defineContract,

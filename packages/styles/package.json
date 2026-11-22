@@ -13,7 +13,8 @@
     "./layers.css": "./dist/layers.css",
     "./tokens.css": "./dist/tokens.css",
     "./reset.css": "./dist/reset.css",
-    "./base.css": "./dist/base.css"
+    "./base.css": "./dist/base.css",
+    "./components/*.css": "./dist/components/*.css"
   },
   "files": [
     "dist"

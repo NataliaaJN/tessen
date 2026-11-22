@@ -108,6 +108,22 @@ const cases: ContractCase[] = [
     },
   },
   {
+    id: 'passthrough-class',
+    describe: 'a consumer class is added to the component class, never replaces it',
+    props: { label: 'Save', class: 'custom' },
+    expect: { classes: ['t-button', 'custom'] },
+  },
+  {
+    id: 'passthrough-attrs',
+    describe: 'native attributes from the consumer reach the root button',
+    props: { label: 'Save', attrs: { 'aria-label': 'Save draft', 'data-testid': 'save' } },
+    expect: {
+      role: 'button',
+      name: 'Save draft',
+      attrs: { 'aria-label': 'Save draft', 'data-testid': 'save' },
+    },
+  },
+  {
     id: 'no-icons-no-wrapper',
     describe: 'without icons there is no icon wrapper',
     props: { label: 'Save' },
