@@ -22,7 +22,7 @@ Hay que verificar comportamiento **y** consistencia visual entre frameworks sin 
 | Vitest `toMatchScreenshot` como oficial | Parte visual más reciente **[V]** |
 
 ## Consecuencias
-(+) La paridad es medible y el contrato sirve también a docs/agentes. (−) Mantener el contrato es trabajo extra: se amortiza porque lo reutilizan docs, Playground y agentes.
+(+) La paridad es medible y el contrato sirve también a docs/agentes. F1-T07 demostró P1–P4 con `Button` ([resultados](../T07-button-parity.md)). (−) Mantener el contrato es trabajo extra: se amortiza porque lo reutilizan docs, Playground y agentes.
 
 ## Disparadores de revisión
 Coste de baselines visuales excesivo; maduración del visual de Vitest 4.
