@@ -10,7 +10,7 @@
 | D-04 | 🟡 | Framework del *shell* de Theme Studio y Playground (ADR 0008) | F5 |
 | D-05 | 🔴 | Motor de comportamiento (ADR 0004, spike S1) | F2 |
 | D-06 | 🟡 | Tipografía por defecto (la marca ya usa Inter/Outfit/JetBrains Mono) | F1-T03 |
-| D-07 | 🟡 | Fuente del set de iconos | F1-T04 |
+| D-07 | ✅ Resuelta (provisional) | Lucide (ISC) como set abierto, 35 iconos iniciales en `@tessen-ui/icons`; revisable cambiando `src/svg` | — |
 | D-08 | 🔴 | Licencia de Tessen | Primera publicación |
 | D-09 | 🟢 | Librería base de gráficos | F7 |
 | D-10 | 🟢 | Polimorfismo (`as`/`asChild`) | F3 |

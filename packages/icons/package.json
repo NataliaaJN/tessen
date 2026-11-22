@@ -1,0 +1,55 @@
+{
+  "name": "@tessen-ui/icons",
+  "private": true,
+  "version": "0.0.0",
+  "description": "TESSEN icons: curated SVG source turned into Vue components, React components, plain SVG and a sprite.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./vue": {
+      "types": "./dist/vue/index.d.ts",
+      "import": "./dist/vue/index.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
+    },
+    "./sprite.svg": "./dist/sprite.svg",
+    "./svg/*.svg": "./dist/svg/*.svg",
+    "./manifest.json": "./dist/manifest.json"
+  },
+  "files": [
+    "dist",
+    "LICENSE-lucide.txt"
+  ],
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "vue": "^3.5.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build-icons.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@tessen-ui/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "svgo": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:",
+    "vue": "catalog:"
+  }
+}
