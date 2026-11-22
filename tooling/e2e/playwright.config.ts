@@ -18,10 +18,19 @@ export default defineConfig({
     deviceScaleFactor: 1,
     trace: 'retain-on-failure',
   },
-  webServer: {
-    command: 'vite --config harness/vite.config.ts --port 5199 --strictPort',
-    url: 'http://localhost:5199/',
-    reuseExistingServer: !process.env['CI'],
-    timeout: 60_000,
-  },
+  webServer: [
+    {
+      command: 'vite --config harness/vite.config.ts --port 5199 --strictPort',
+      url: 'http://localhost:5199/',
+      reuseExistingServer: !process.env['CI'],
+      timeout: 60_000,
+    },
+    {
+      // Theme Studio (apps/theme-studio) for tests/studio.spec.ts.
+      command: 'pnpm --filter @tessen-ui/theme-studio exec vite --port 5174 --strictPort',
+      url: 'http://localhost:5174/',
+      reuseExistingServer: !process.env['CI'],
+      timeout: 60_000,
+    },
+  ],
 });

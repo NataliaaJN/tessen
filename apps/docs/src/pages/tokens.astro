@@ -16,30 +16,30 @@ import {
 } from '../lib/tokens';
 
 const sections = [
-  ['color', 'Colour'],
-  ['typography', 'Typography'],
-  ['spacing', 'Spacing'],
-  ['radius', 'Radius'],
-  ['elevation', 'Elevation'],
-  ['motion', 'Motion'],
+  ['color', 'Color'],
+  ['typography', 'Tipografía'],
+  ['spacing', 'Espaciado'],
+  ['radius', 'Radio'],
+  ['elevation', 'Elevación'],
+  ['motion', 'Movimiento'],
 ] as const;
 ---
 
-<Base title="Tokens" current="tokens" description="Design tokens: colour, type, spacing, radius, elevation and motion.">
+<Base title="Tokens" current="tokens" description="Tokens de diseño: color, tipografía, espaciado, radio, elevación y movimiento.">
   <h1>Tokens</h1>
   <p class="lead">
-    Every value is a CSS custom property prefixed <code>--tessen-</code>. Semantic roles change with
-    the theme; use the toggle in the header to see them switch. Click a swatch's name to copy its
-    variable.
+    Cada valor es una propiedad CSS personalizada con prefijo <code>--tessen-</code>. Los roles
+    semánticos cambian con el tema; usa el interruptor de la cabecera para verlos cambiar. Haz clic
+    en el nombre de una muestra para copiar su variable.
   </p>
-  <nav class="toc" aria-label="On this page">
+  <nav class="toc" aria-label="En esta página">
     {sections.map(([id, label]) => <a href={`#${id}`}>{label}</a>)}
   </nav>
 
   <section id="color">
-    <h2>Colour</h2>
-    <h3>Semantic roles</h3>
-    <p>Use these in components. They resolve per theme and are checked for contrast.</p>
+    <h2>Color</h2>
+    <h3>Roles semánticos</h3>
+    <p>Úsalos en los componentes. Se resuelven por tema y se comprueba su contraste.</p>
     {
       semanticColors().map(({ group, tokens }) => (
         <>
@@ -58,8 +58,8 @@ const sections = [
         </>
       ))
     }
-    <h3>Primitive scales</h3>
-    <p>Raw palette. Reach for these only when no semantic role fits.</p>
+    <h3>Escalas primitivas</h3>
+    <p>Paleta en bruto. Recurre a ellas solo cuando ningún rol semántico encaje.</p>
     {
       colorScales().map(({ name, steps }) => (
         <>
@@ -80,8 +80,8 @@ const sections = [
   </section>
 
   <section id="typography">
-    <h2>Typography</h2>
-    <h3>Families</h3>
+    <h2>Tipografía</h2>
+    <h3>Familias</h3>
     <ul class="plain">
       {
         fontFamilies().map((t) => (
@@ -89,12 +89,12 @@ const sections = [
             <button type="button" class="copy" data-copy={`var(${cssVar(t)})`}>
               {t.path.replace('font.family.', '')}
             </button>
-            — The quick brown fox jumps over the lazy dog
+            — El veloz murciélago hindú comía feliz cardillo y kiwi
           </li>
         ))
       }
     </ul>
-    <h3>Styles</h3>
+    <h3>Estilos</h3>
     <ul class="plain">
       {
         typography().map((t) => (
@@ -105,7 +105,7 @@ const sections = [
             <span
               style={`font-family:${typographyVar(t, 'font-family')};font-size:${typographyVar(t, 'font-size')};font-weight:${typographyVar(t, 'font-weight')};line-height:${typographyVar(t, 'line-height')};letter-spacing:${typographyVar(t, 'letter-spacing')}`}
             >
-              Tessen design system
+              Sistema de diseño Tessen
             </span>
             {t.description && <small>{t.description}</small>}
           </li>
@@ -115,7 +115,7 @@ const sections = [
   </section>
 
   <section id="spacing">
-    <h2>Spacing</h2>
+    <h2>Espaciado</h2>
     <ul class="plain">
       {
         spacing()
@@ -134,7 +134,7 @@ const sections = [
   </section>
 
   <section id="radius">
-    <h2>Radius</h2>
+    <h2>Radio</h2>
     <ul class="swatches">
       {
         radii().map((t) => (
@@ -151,7 +151,7 @@ const sections = [
   </section>
 
   <section id="elevation">
-    <h2>Elevation</h2>
+    <h2>Elevación</h2>
     <ul class="swatches">
       {
         elevations().map((t) => (
@@ -168,9 +168,9 @@ const sections = [
   </section>
 
   <section id="motion">
-    <h2>Motion</h2>
-    <p>Hover or focus a row to preview the curve. Durations collapse to zero under reduced motion.</p>
-    <h3>Duration</h3>
+    <h2>Movimiento</h2>
+    <p>Pasa el cursor o enfoca una fila para ver la curva. Las duraciones pasan a cero con movimiento reducido.</p>
+    <h3>Duración</h3>
     <ul class="plain">
       {
         durations().map((t) => (
@@ -183,7 +183,7 @@ const sections = [
         ))
       }
     </ul>
-    <h3>Easing</h3>
+    <h3>Curva de easing</h3>
     <ul class="plain">
       {
         easings().map((t) => (
@@ -206,7 +206,7 @@ const sections = [
       const text = b.getAttribute('data-copy');
       const label = b.textContent;
       navigator.clipboard?.writeText(text).then(() => {
-        b.textContent = 'Copied';
+        b.textContent = 'Copiado';
         setTimeout(() => (b.textContent = label), 900);
       });
     });

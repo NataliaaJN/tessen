@@ -76,7 +76,7 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm turbo run build --filter=@tessen-ui/vue --filter=@tessen-ui/react
+      - run: pnpm turbo run build --filter=@tessen-ui/vue --filter=@tessen-ui/react --filter=@tessen-ui/theme-studio
       - run: pnpm --filter @tessen-ui/e2e exec playwright install --with-deps chromium
       - run: pnpm e2e
       - if: failure()

@@ -8,13 +8,15 @@
     "typecheck": "vue-tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.nodenext.json",
     "build": "vite build",
     "check": "node scripts/check.mjs",
-    "test": "pnpm typecheck && pnpm build && pnpm check"
+    "test": "pnpm gen:theme && pnpm typecheck && pnpm build && pnpm check",
+    "gen:theme": "node scripts/gen-theme.mjs"
   },
   "dependencies": {
     "@tessen-ui/core": "*",
     "@tessen-ui/icons": "*",
     "@tessen-ui/motion": "*",
     "@tessen-ui/styles": "*",
+    "@tessen-ui/theme": "*",
     "@tessen-ui/tokens": "*",
     "@tessen-ui/vue": "*",
     "vue": "^3.5.46"

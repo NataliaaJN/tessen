@@ -1,4 +1,4 @@
-// Docs chrome: framework switch (persisted, ?fw=) and the ⌘K search palette.
+// Cromo de la documentación: selector de framework (persistente, ?fw=) y paleta de búsqueda ⌘K.
 (function () {
   var root = document.documentElement;
 

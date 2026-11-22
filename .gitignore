@@ -22,3 +22,6 @@ integration/*/pnpm-lock.yaml
 
 # Playwright output (tooling/e2e)
 tooling/e2e/.out/
+
+# Generated from the Studio theme fixture by integration/vite-vue/scripts/gen-theme.mjs
+integration/*/src/*.generated.css

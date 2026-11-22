@@ -1,29 +1,29 @@
 ---
 import Base from '../layouts/Base.astro';
-import { components, byCategory } from '../lib/data';
+import { components, byCategory, categoryLabel } from '../lib/data';
 ---
 
 <Base title="Tessen">
   <h1>Tessen</h1>
   <p class="lead">
-    One design system for Vue 3 and React. Every component has a single contract: the same props,
-    behaviour and accessibility in both frameworks, and the same CSS and tokens.
+    Un solo sistema de diseño para Vue 3 y React. Cada componente tiene un único contrato: las
+    mismas props, comportamiento y accesibilidad en ambos frameworks, y el mismo CSS y tokens.
   </p>
   <ul class="badges">
-    <li>{components.length} components</li>
+    <li>{components.length} componentes</li>
     <li>Vue ≥ 3.5.2</li>
     <li>React ≥ 18.3</li>
-    <li>SSR-ready</li>
+    <li>Listo para SSR</li>
   </ul>
-  <p><a href="/components/">Browse all components →</a></p>
-  <h2>Where to start</h2>
+  <p><a href="/components/">Ver todos los componentes →</a></p>
+  <h2>Por dónde empezar</h2>
   <ul class="cards">
     {
       byCategory().map(([category, list]) => (
         <li>
           <a href={`/components/${list[0]!.slug}/`}>
-            {category.replace(/-/g, ' ')}
-            <small>{list.length} components</small>
+            {categoryLabel(category)}
+            <small>{list.length} componentes</small>
           </a>
         </li>
       ))

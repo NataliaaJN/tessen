@@ -15,43 +15,43 @@ const examples = examplesFor(c.slug);
 const note = editorial[c.slug];
 const nameOf = (slug: string) => components.find((x) => x.slug === slug)?.name ?? slug;
 
-/** How the prop is spelled in Vue, when it differs from the contract. */
+/** Cómo se escribe la prop en Vue cuando difiere del contrato. */
 function vueSpelling(status: string): string {
   if (status.startsWith('alias:')) return `v-model (${status.slice(6)})`;
-  if (status === 'exception') return 'native attribute or part prop';
-  return 'same';
+  if (status === 'exception') return 'atributo nativo o prop de la parte';
+  return 'igual';
 }
 ---
 
 <Base title={c.name} current={c.slug}>
   <h1>{c.name}</h1>
-  <p class="lead">{categoryLabel(c.category)} component.</p>
+  <p class="lead">Componente de {categoryLabel(c.category).toLowerCase()}.</p>
   <ul class="badges">
     <li>{c.tier}</li>
-    <li>{c.engine === 'zag' ? 'Zag.js engine' : 'Native'}</li>
+    <li>{c.engine === 'zag' ? 'Motor Zag.js' : 'Nativo'}</li>
     <li>Vue {c.frameworks.vue ? '✓' : '✗'}</li>
     <li>React {c.frameworks.react ? '✓' : '✗'}</li>
-    <li><a href={c.apgPattern}>WAI-ARIA pattern</a></li>
+    <li><a href={c.apgPattern}>Patrón WAI-ARIA</a></li>
     <li><a href={`/components/${c.slug}.json`}>JSON</a></li>
   </ul>
 
   {
     note && (
       <>
-        <h2>When to use it</h2>
+        <h2>Cuándo usarlo</h2>
         <p>{note.use}</p>
         {note.instead && (
           <ul>
             {note.instead.map(([slug, why]) => (
               <li>
-                Use <a href={`/components/${slug}/`}>{nameOf(slug)}</a> when: {why}
+                Usa <a href={`/components/${slug}/`}>{nameOf(slug)}</a> cuando: {why}
               </li>
             ))}
           </ul>
         )}
         {note.rules && (
           <>
-            <h3>Guidance</h3>
+            <h3>Recomendaciones</h3>
             <ul>
               {note.rules.map((r) => (
                 <li>{r}</li>
@@ -66,7 +66,7 @@ function vueSpelling(status: string): string {
   {
     examples.length > 0 && (
       <>
-        <h2>Examples</h2>
+        <h2>Ejemplos</h2>
         {examples.map((e) => (
           <section class="example" aria-label={e.id}>
             <h3>{e.id}</h3>
@@ -77,7 +77,7 @@ function vueSpelling(status: string): string {
                   <VueDemo client:visible slug={c.slug} id={e.id} />
                 </div>
                 <details>
-                  <summary>Code</summary>
+                  <summary>Código</summary>
                   <pre><code>{e.vue}</code></pre>
                 </details>
               </div>
@@ -87,7 +87,7 @@ function vueSpelling(status: string): string {
                   <ReactDemo client:visible slug={c.slug} id={e.id} />
                 </div>
                 <details>
-                  <summary>Code</summary>
+                  <summary>Código</summary>
                   <pre><code>{e.react}</code></pre>
                 </details>
               </div>
@@ -98,7 +98,7 @@ function vueSpelling(status: string): string {
     )
   }
 
-  <h2>Usage</h2>
+  <h2>Uso</h2>
   <div class="code-pair">
     <div data-fw="vue">
       <h3>Vue · <code>{c.names.vue}</code></h3>
@@ -110,7 +110,7 @@ function vueSpelling(status: string): string {
     </div>
   </div>
 
-  <h2>Anatomy</h2>
+  <h2>Anatomía</h2>
   <ul class="badges">
     {
       c.anatomy.map((p) => (
@@ -123,8 +123,8 @@ function vueSpelling(status: string): string {
   {
     c.parts.react.length > 0 && (
       <p>
-        Compound parts: {c.parts.react.map((p) => <code>{p} </code>)}. In Vue they carry the{' '}
-        <code>T</code> prefix.
+        Partes compuestas: {c.parts.react.map((p) => <code>{p} </code>)}. En Vue llevan el prefijo{' '}
+        <code>T</code>.
       </p>
     )
   }
@@ -133,7 +133,7 @@ function vueSpelling(status: string): string {
   <table class="api">
     <thead>
       <tr>
-        <th scope="col">Prop</th><th scope="col">Type</th><th scope="col">Default</th><th
+        <th scope="col">Prop</th><th scope="col">Tipo</th><th scope="col">Por defecto</th><th
           scope="col">Vue</th
         >
       </tr>
@@ -160,8 +160,8 @@ function vueSpelling(status: string): string {
     </tbody>
   </table>
 
-  <h2>Behaviour and accessibility</h2>
-  <p>Each line is a test that runs against both the Vue and the React component.</p>
+  <h2>Comportamiento y accesibilidad</h2>
+  <p>Cada línea es una prueba que se ejecuta contra el componente de Vue y el de React. Los enunciados de las pruebas se mantienen en inglés.</p>
   <ul>
     {c.behaviours.map((b) => <li>{b.describe}</li>)}
   </ul>

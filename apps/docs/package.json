@@ -7,7 +7,7 @@
   "scripts": {
     "generate": "pnpm --filter @tessen-ui/docs-gen run generate",
     "dev": "pnpm generate && astro dev",
-    "build": "pnpm generate && astro build",
+    "build": "pnpm generate && astro build && node scripts/copy-studio.mjs",
     "preview": "astro preview",
     "typecheck": "astro check"
   },
@@ -21,7 +21,8 @@
     "astro": "^7.4.13",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "vue": "catalog:"
+    "vue": "catalog:",
+    "@tessen-ui/theme": "workspace:*"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
@@ -29,6 +30,7 @@
     "@tessen-ui/tsconfig": "workspace:*",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "@tessen-ui/theme-studio": "workspace:*"
   }
 }

@@ -3,9 +3,9 @@ import Base from '../../layouts/Base.astro';
 import { byCategory, categoryLabel } from '../../lib/data';
 ---
 
-<Base title="Components" current="components">
-  <h1>Components</h1>
-  <p class="lead">Every component, grouped by category. Vue and React share one contract.</p>
+<Base title="Componentes" current="components">
+  <h1>Componentes</h1>
+  <p class="lead">Todos los componentes, agrupados por categoría. Vue y React comparten un mismo contrato.</p>
   {
     byCategory().map(([category, list]) => (
       <section>

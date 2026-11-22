@@ -1,216 +1,216 @@
-// Editorial copy that the contracts do not carry: when to use a component and what to use instead.
-// Keyed by slug. `docs:check` does not cover this file; a missing entry simply hides the section.
+// Texto editorial que los contratos no incluyen: cuándo usar un componente y qué usar en su lugar.
+// Indexado por slug. `docs:check` no cubre este archivo; si falta una entrada, la sección se oculta.
 
 export interface Editorial {
-  /** One sentence: the job the component does. */
+  /** Una frase: el trabajo que hace el componente. */
   use: string;
-  /** When another component is the better choice: `[slug, why]`. */
+  /** Cuándo otro componente es mejor opción: `[slug, motivo]`. */
   instead?: [string, string][];
-  /** Content and usage rules, each short enough to scan. */
+  /** Reglas de contenido y de uso, cortas para poder escanearlas. */
   rules?: string[];
 }
 
 export const editorial: Record<string, Editorial> = {
   accordion: {
-    use: 'Stack sections of related content so people can reveal only what they need.',
-    instead: [['tabs', 'Sections are peers and one should always be visible.']],
-    rules: ['Keep trigger labels short and distinct.', 'Do not hide content people need to compare.'],
+    use: 'Apila secciones de contenido relacionado para que cada persona despliegue solo lo que necesita.',
+    instead: [['tabs', 'las secciones son pares y una debe estar siempre visible.']],
+    rules: ['Mantén las etiquetas del disparador cortas y distintas.', 'No ocultes contenido que haya que comparar.'],
   },
   alert: {
-    use: 'Show a message that stays in the page flow and is tied to its surroundings.',
-    instead: [['toast', 'The message is temporary and not tied to a place on the page.']],
-    rules: ['Say what happened and what to do next.', 'Use the tone that matches severity, not colour taste.'],
+    use: 'Muestra un mensaje que permanece en el flujo de la página y está ligado a su entorno.',
+    instead: [['toast', 'el mensaje es temporal y no depende de un lugar de la página.']],
+    rules: ['Di qué ocurrió y qué hacer a continuación.', 'Usa el tono que corresponde a la gravedad, no al gusto cromático.'],
   },
   'alert-dialog': {
-    use: 'Interrupt to confirm a destructive or irreversible action.',
-    instead: [['dialog', 'There is no risky decision to confirm.']],
-    rules: ['Name the action on the confirm button ("Delete", not "OK").', 'Put the safe choice first for focus.'],
+    use: 'Interrumpe para confirmar una acción destructiva o irreversible.',
+    instead: [['dialog', 'no hay una decisión arriesgada que confirmar.']],
+    rules: ['Nombra la acción en el botón de confirmar («Eliminar», no «Aceptar»).', 'Pon la opción segura como primer foco.'],
   },
   'aspect-ratio': {
-    use: 'Reserve a box with a fixed proportion for media or previews.',
-    rules: ['Use it to avoid layout shift while images load.'],
+    use: 'Reserva una caja con proporción fija para medios o vistas previas.',
+    rules: ['Úsalo para evitar saltos de layout mientras cargan las imágenes.'],
   },
   avatar: {
-    use: 'Represent a person or entity with an image, or initials as a fallback.',
-    rules: ['Always provide a name so initials and the accessible name are correct.'],
+    use: 'Representa a una persona o entidad con una imagen, o con iniciales como alternativa.',
+    rules: ['Indica siempre un nombre para que las iniciales y el nombre accesible sean correctos.'],
   },
   badge: {
-    use: 'Label status or a count next to other content.',
-    instead: [['button', 'The element is interactive.']],
-    rules: ['One or two words. Do not rely on colour alone to carry meaning.'],
+    use: 'Etiqueta un estado o un recuento junto a otro contenido.',
+    instead: [['button', 'el elemento es interactivo.']],
+    rules: ['Una o dos palabras. No dependas solo del color para transmitir significado.'],
   },
   breadcrumbs: {
-    use: 'Show where the current page sits in a hierarchy and let people go up.',
-    instead: [['tabs', 'You are switching views at the same level.']],
-    rules: ['Mark the last item as current. Do not repeat the page title as a link.'],
+    use: 'Muestra dónde está la página actual dentro de una jerarquía y permite subir de nivel.',
+    instead: [['tabs', 'cambias de vista dentro del mismo nivel.']],
+    rules: ['Marca el último elemento como actual. No repitas el título de la página como enlace.'],
   },
   button: {
-    use: 'Trigger an action in the current context.',
+    use: 'Dispara una acción en el contexto actual.',
     instead: [
-      ['link', 'The action navigates to another page.'],
-      ['icon-button', 'The control is an icon without a visible label.'],
+      ['link', 'la acción navega a otra página.'],
+      ['icon-button', 'el control es un icono sin etiqueta visible.'],
     ],
-    rules: ['Start with a verb. One primary button per view.', 'Use `loading` instead of swapping the label.'],
+    rules: ['Empieza con un verbo. Un solo botón primario por vista.', 'Usa `loading` en lugar de cambiar la etiqueta.'],
   },
   'button-group': {
-    use: 'Group related buttons so they read and size as one control.',
-    rules: ['Give the group an accessible name when its buttons are toggles.'],
+    use: 'Agrupa botones relacionados para que se lean y dimensionen como un solo control.',
+    rules: ['Dale un nombre accesible al grupo cuando sus botones sean interruptores.'],
   },
   card: {
-    use: 'Contain a self-contained piece of related content and actions.',
-    rules: ['Do not nest cards. Keep one main action per card.'],
+    use: 'Contiene una pieza autónoma de contenido relacionado y sus acciones.',
+    rules: ['No anides tarjetas. Una acción principal por tarjeta.'],
   },
   checkbox: {
-    use: 'Let people turn one or several options on or off, or accept something.',
+    use: 'Permite activar o desactivar una o varias opciones, o aceptar algo.',
     instead: [
-      ['switch', 'The change takes effect immediately.'],
-      ['radio-group', 'Exactly one option may be chosen.'],
+      ['switch', 'el cambio surte efecto de inmediato.'],
+      ['radio-group', 'solo se puede elegir exactamente una opción.'],
     ],
-    rules: ['The label states the positive option. Use indeterminate only for parent selections.'],
+    rules: ['La etiqueta enuncia la opción en positivo. Usa el estado indeterminado solo en selecciones padre.'],
   },
   combobox: {
-    use: 'Pick from a long list while typing to filter it.',
-    instead: [['select', 'The list is short and filtering is not needed.']],
-    rules: ['Always set a label. Show a clear empty state when nothing matches.'],
+    use: 'Elige de una lista larga mientras se escribe para filtrarla.',
+    instead: [['select', 'la lista es corta y no hace falta filtrar.']],
+    rules: ['Define siempre una etiqueta. Muestra un estado vacío claro cuando nada coincide.'],
   },
   container: {
-    use: 'Constrain content width and add page gutters.',
-    rules: ['Use the narrowest size that keeps lines readable.'],
+    use: 'Limita el ancho del contenido y añade márgenes de página.',
+    rules: ['Usa el tamaño más estrecho que mantenga las líneas legibles.'],
   },
   dialog: {
-    use: 'Focus attention on a task or content that needs its own space.',
+    use: 'Centra la atención en una tarea o contenido que necesita su propio espacio.',
     instead: [
-      ['popover', 'The content is small and tied to its trigger.'],
-      ['alert-dialog', 'The user must confirm a risky action.'],
+      ['popover', 'el contenido es pequeño y depende de su disparador.'],
+      ['alert-dialog', 'la persona debe confirmar una acción arriesgada.'],
     ],
-    rules: ['Always include a title. Offer a visible way to close.'],
+    rules: ['Incluye siempre un título. Ofrece una forma visible de cerrar.'],
   },
   divider: {
-    use: 'Separate groups of content visually and semantically.',
-    rules: ['Prefer spacing first; add a divider only when grouping is unclear.'],
+    use: 'Separa grupos de contenido de forma visual y semántica.',
+    rules: ['Prefiere primero el espaciado; añade un divisor solo cuando la agrupación no sea clara.'],
   },
   'dropdown-menu': {
-    use: 'Offer a list of actions from a single trigger.',
-    instead: [['select', 'The choice sets a value in a form.']],
-    rules: ['Items are actions, not navigation. Put destructive items last.'],
+    use: 'Ofrece una lista de acciones desde un único disparador.',
+    instead: [['select', 'la elección fija un valor en un formulario.']],
+    rules: ['Los elementos son acciones, no navegación. Pon los destructivos al final.'],
   },
   'empty-state': {
-    use: 'Explain why there is nothing to show and what to do about it.',
-    rules: ['Say what is missing and offer the next step.'],
+    use: 'Explica por qué no hay nada que mostrar y qué hacer al respecto.',
+    rules: ['Di qué falta y ofrece el siguiente paso.'],
   },
   field: {
-    use: 'Connect a label, description and error to one form control.',
-    rules: ['Every control needs a label. Write errors as how to fix, not only what failed.'],
+    use: 'Conecta una etiqueta, una descripción y un error con un control de formulario.',
+    rules: ['Todo control necesita etiqueta. Redacta los errores como cómo corregirlos, no solo qué falló.'],
   },
   grid: {
-    use: 'Lay items out in equal columns.',
-    instead: [['stack', 'Items flow in a single row or column.']],
+    use: 'Distribuye elementos en columnas iguales.',
+    instead: [['stack', 'los elementos fluyen en una sola fila o columna.']],
   },
   'icon-button': {
-    use: 'Trigger an action with an icon when space is tight.',
-    instead: [['button', 'A text label fits and makes the action clearer.']],
-    rules: ['`label` is required: it is the accessible name.'],
+    use: 'Dispara una acción con un icono cuando falta espacio.',
+    instead: [['button', 'una etiqueta de texto cabe y aclara la acción.']],
+    rules: ['`label` es obligatorio: es el nombre accesible.'],
   },
   input: {
-    use: 'Collect a single line of free text.',
-    instead: [['textarea', 'The answer needs several lines.']],
-    rules: ['Pair it with a Field. A placeholder is not a label.'],
+    use: 'Recoge una línea de texto libre.',
+    instead: [['textarea', 'la respuesta necesita varias líneas.']],
+    rules: ['Combínalo con un Field. Un placeholder no es una etiqueta.'],
   },
   link: {
-    use: 'Navigate to another page or place.',
-    instead: [['button', 'The action changes something in place.']],
-    rules: ['Make the text describe the destination. Mark external links.'],
+    use: 'Navega a otra página o lugar.',
+    instead: [['button', 'la acción cambia algo en el mismo sitio.']],
+    rules: ['Haz que el texto describa el destino. Marca los enlaces externos.'],
   },
   list: {
-    use: 'Present a series of related items.',
-    instead: [['table', 'Each item has several attributes to compare.']],
+    use: 'Presenta una serie de elementos relacionados.',
+    instead: [['table', 'cada elemento tiene varios atributos que comparar.']],
   },
   'native-select': {
-    use: 'Pick one option using the platform control.',
-    instead: [['select', 'You need custom option rendering or search.']],
-    rules: ['Best on touch devices and for short, plain lists.'],
+    use: 'Elige una opción con el control de la plataforma.',
+    instead: [['select', 'necesitas un renderizado de opciones personalizado o búsqueda.']],
+    rules: ['Ideal en dispositivos táctiles y para listas cortas y sencillas.'],
   },
   pagination: {
-    use: 'Move through a large result set in pages.',
-    rules: ['Give it an accessible name. Keep page size predictable.'],
+    use: 'Recorre por páginas un conjunto grande de resultados.',
+    rules: ['Dale un nombre accesible. Mantén predecible el tamaño de página.'],
   },
   popover: {
-    use: 'Show non-modal content anchored to its trigger.',
+    use: 'Muestra contenido no modal anclado a su disparador.',
     instead: [
-      ['tooltip', 'The content is a short, non-interactive hint.'],
-      ['dialog', 'The task needs the whole screen focus.'],
+      ['tooltip', 'el contenido es una pista corta y no interactiva.'],
+      ['dialog', 'la tarea requiere todo el foco de la pantalla.'],
     ],
   },
   progress: {
-    use: 'Show how far a known or unknown operation has got.',
-    instead: [['spinner', 'You only need to say that something is loading.']],
-    rules: ['Always set an accessible label for what is progressing.'],
+    use: 'Muestra cuánto ha avanzado una operación de duración conocida o desconocida.',
+    instead: [['spinner', 'solo necesitas indicar que algo está cargando.']],
+    rules: ['Define siempre una etiqueta accesible de lo que avanza.'],
   },
   'radio-group': {
-    use: 'Choose exactly one option from a short list.',
+    use: 'Elige exactamente una opción de una lista corta.',
     instead: [
-      ['select', 'There are more than about six options.'],
-      ['checkbox', 'Several options may be chosen.'],
+      ['select', 'hay más de unas seis opciones.'],
+      ['checkbox', 'se pueden elegir varias opciones.'],
     ],
   },
   select: {
-    use: 'Choose one value from a list of options.',
+    use: 'Elige un valor de una lista de opciones.',
     instead: [
-      ['radio-group', 'There are few options and they should all be visible.'],
-      ['combobox', 'The list is long and people should be able to search.'],
+      ['radio-group', 'hay pocas opciones y conviene verlas todas.'],
+      ['combobox', 'la lista es larga y se debe poder buscar.'],
     ],
   },
   skeleton: {
-    use: 'Hold the shape of content that is still loading.',
-    rules: ['Match the size of the real content to avoid layout shift.'],
+    use: 'Mantiene la forma del contenido que todavía está cargando.',
+    rules: ['Iguala el tamaño del contenido real para evitar saltos de layout.'],
   },
   slider: {
-    use: 'Pick a number within a range by dragging.',
-    rules: ['Show the current value. Offer an input when precision matters.'],
+    use: 'Elige un número dentro de un rango arrastrando.',
+    rules: ['Muestra el valor actual. Ofrece un campo cuando importe la precisión.'],
   },
   spinner: {
-    use: 'Signal that something short is loading.',
-    instead: [['progress', 'The duration or amount is known.']],
+    use: 'Indica que algo breve está cargando.',
+    instead: [['progress', 'se conoce la duración o la cantidad.']],
   },
   stack: {
-    use: 'Space items evenly in a single row or column.',
-    instead: [['grid', 'You need a column structure.']],
+    use: 'Espacia elementos de forma uniforme en una sola fila o columna.',
+    instead: [['grid', 'necesitas una estructura de columnas.']],
   },
   switch: {
-    use: 'Turn a setting on or off with immediate effect.',
-    instead: [['checkbox', 'The change is applied later, on submit.']],
-    rules: ['The label names the setting, not the state.'],
+    use: 'Activa o desactiva un ajuste con efecto inmediato.',
+    instead: [['checkbox', 'el cambio se aplica después, al enviar.']],
+    rules: ['La etiqueta nombra el ajuste, no el estado.'],
   },
   table: {
-    use: 'Compare structured data across rows and columns.',
-    instead: [['list', 'Items have a single attribute.']],
-    rules: ['Always add a caption. Right-align numbers.'],
+    use: 'Compara datos estructurados entre filas y columnas.',
+    instead: [['list', 'los elementos tienen un único atributo.']],
+    rules: ['Añade siempre un título (caption). Alinea los números a la derecha.'],
   },
   tabs: {
-    use: 'Switch between peer views of the same context.',
-    instead: [['accordion', 'People may want several sections open at once.']],
-    rules: ['Keep labels to one or two words. Do not nest tabs.'],
+    use: 'Cambia entre vistas pares del mismo contexto.',
+    instead: [['accordion', 'puede interesar tener varias secciones abiertas a la vez.']],
+    rules: ['Etiquetas de una o dos palabras. No anides pestañas.'],
   },
   textarea: {
-    use: 'Collect multi-line free text.',
-    instead: [['input', 'A single line is enough.']],
+    use: 'Recoge texto libre de varias líneas.',
+    instead: [['input', 'basta con una sola línea.']],
   },
   toast: {
-    use: 'Confirm a result briefly without interrupting.',
-    instead: [['alert', 'The message must stay until acted on.']],
-    rules: ['Never put the only copy of important information in a toast.'],
+    use: 'Confirma un resultado brevemente sin interrumpir.',
+    instead: [['alert', 'el mensaje debe permanecer hasta que se actúe.']],
+    rules: ['No pongas en un toast la única copia de información importante.'],
   },
   'toggle-button': {
-    use: 'Switch a state on or off from a button, such as bold or mute.',
-    instead: [['switch', 'It is a setting in a form.']],
+    use: 'Activa o desactiva un estado desde un botón, como negrita o silenciar.',
+    instead: [['switch', 'es un ajuste de un formulario.']],
   },
   tooltip: {
-    use: 'Name or briefly describe a control on hover and focus.',
-    instead: [['popover', 'The content is interactive or longer.']],
-    rules: ['Never hide essential information in a tooltip.'],
+    use: 'Nombra o describe brevemente un control al pasar el cursor o enfocarlo.',
+    instead: [['popover', 'el contenido es interactivo o más largo.']],
+    rules: ['Nunca escondas información esencial en un tooltip.'],
   },
   'visually-hidden': {
-    use: 'Provide text for assistive technology without showing it.',
-    rules: ['Use it to name icon-only controls and add context to repeated links.'],
+    use: 'Aporta texto para tecnologías de apoyo sin mostrarlo.',
+    rules: ['Úsalo para nombrar controles solo con icono y dar contexto a enlaces repetidos.'],
   },
 };

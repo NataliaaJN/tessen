@@ -83,3 +83,60 @@ dialog.search small {
 .prose h3 {
   margin-block: var(--tessen-space-6) var(--tessen-space-2);
 }
+
+/* Appearance panel (reuses the search dialog look) */
+dialog.appearance {
+  margin-block-start: 8vh;
+}
+dialog.appearance h2,
+dialog.appearance h3 {
+  margin: 0 0 var(--tessen-space-2);
+}
+dialog.appearance h3 {
+  font-size: var(--tessen-typography-label-md-font-size);
+  margin-block-start: var(--tessen-space-3);
+}
+.swatch-row {
+  display: flex;
+  gap: var(--tessen-space-2);
+}
+.swatch-row .swatch {
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  border-radius: 50%;
+  border: 2px solid var(--tessen-color-surface-default);
+  box-shadow: 0 0 0 1px var(--tessen-color-border-strong);
+  cursor: pointer;
+}
+.swatch-row .swatch[aria-pressed='true'] {
+  box-shadow: 0 0 0 2px var(--tessen-color-text-primary);
+}
+.range-row,
+.density-row {
+  display: grid;
+  gap: var(--tessen-space-1);
+  margin-block-start: var(--tessen-space-3);
+  border: 0;
+  padding: 0;
+}
+.density-row {
+  display: flex;
+  gap: var(--tessen-space-3);
+  flex-wrap: wrap;
+}
+.appearance-actions {
+  display: flex;
+  gap: var(--tessen-space-3);
+  align-items: center;
+  flex-wrap: wrap;
+  margin-block-start: var(--tessen-space-4);
+}
+.appearance-actions button {
+  font: inherit;
+  padding: var(--tessen-space-1) var(--tessen-space-3);
+  border: 1px solid var(--tessen-color-border-default);
+  border-radius: var(--tessen-radius-md);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}

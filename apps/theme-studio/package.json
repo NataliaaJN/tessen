@@ -1,0 +1,30 @@
+{
+  "name": "@tessen-ui/theme-studio",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Tessen Theme Studio (Vite + Vue 3). Runs locally only: no hosting, no deploy (ADR 0014).",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5174 --strictPort",
+    "build": "vue-tsc --noEmit -p tsconfig.json && vite build",
+    "preview": "vite preview --port 5174 --strictPort",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@tessen-ui/styles": "workspace:*",
+    "@tessen-ui/theme": "workspace:*",
+    "@tessen-ui/tokens": "workspace:*",
+    "@tessen-ui/vue": "workspace:*",
+    "vue": "catalog:"
+  },
+  "devDependencies": {
+    "@tessen-ui/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

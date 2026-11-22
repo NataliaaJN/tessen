@@ -1,0 +1,29 @@
+{
+  "name": "@tessen-ui/theme",
+  "private": true,
+  "version": "0.0.0",
+  "description": "TESSEN theme engine: OKLCH scales, WCAG contrast, theme model, presets and CSS/DTCG/Tailwind/TS export. Framework-free; powers Theme Studio.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/js/index.d.ts",
+      "import": "./dist/js/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@tessen-ui/tokens": "workspace:*",
+    "@tessen-ui/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
