@@ -5,3 +5,4 @@ dist/
 .tarballs/
 integration/*/pnpm-workspace.yaml
 integration/*/pnpm-lock.yaml
+THIRD-PARTY-NOTICES.md

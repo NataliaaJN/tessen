@@ -42,8 +42,10 @@ jobs:
       - run: pnpm tokens:check
       - run: pnpm deps:check
       - run: pnpm scope:check
+      - run: pnpm licenses:check
       - run: pnpm test
       - run: pnpm build
+      - run: pnpm parity:api
 
       # Distribution as a consumer sees it (ADR 0016): pack, check the tarballs, install them
       # into integration/* and build those projects. Local files only, nothing is published.

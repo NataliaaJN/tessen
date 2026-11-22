@@ -1,6 +1,6 @@
 # F3 · Framework support y paridad: estado
 
-> **Estado:** F3 **iniciada, no cerrada** (2026-11-22). Se cerró primero la deuda del gate de F2 (paridad visual y navegador real) y se entregaron los componentes T2: el lote nativo (§2) y el lote sobre Zag (§2b). **El catálogo T2 queda completo.** Quedan SSR, `parity:api`, matriz de versiones, `size-limit`, lector de pantalla y aviso de terceros (§4).
+> **Estado:** F3 **iniciada, no cerrada** (2026-11-22). Se cerró primero la deuda del gate de F2 (paridad visual y navegador real) y se entregaron los componentes T2: el lote nativo (§2) y el lote sobre Zag (§2b). **El catálogo T2 queda completo.** `parity:api` y el aviso de terceros ya están (§3b). Quedan SSR, matriz de versiones, `size-limit` y lector de pantalla (§4).
 
 ## 1. Deuda de F2 cerrada
 
@@ -49,15 +49,19 @@ Decisiones:
 
 `pnpm verify`, empaquetado, `tarball:check`, instalación y build de `integration/*` desde tarballs y `pnpm e2e` (82 pruebas, con la paridad visual de las escenas nuevas) en verde en local; el CI de GitHub (`verify` y `e2e`) pasa en cada PR.
 
+## 3b. `parity:api` y licencias (C10)
+
+- **`pnpm parity:api`** (`tooling/scripts/parity-api.mjs`): carga los bundles **construidos** de `@tessen-ui/vue` y `@tessen-ui/react`, asigna `TButton` → `Button` (ADR 0011) y falla si un componente existe en un framework y no en el otro, o si un componente Vue pierde el prefijo `T`. Una asimetría deliberada debe listarse en `ALLOWED_ONLY_IN` con su motivo. Hoy: 82 exports compartidos, sin asimetrías. Corre en `pnpm verify` y en el job `verify` de CI, después del build. No compara las props (los nombres difieren por convención: `v-model` frente a `value`/`onValueChange`); eso lo cubren los contratos compartidos.
+- **`pnpm licenses:check`** (`tooling/scripts/licenses-check.mjs`): recorre las dependencias de producción de los paquetes, falla si una licencia no está en la lista blanca (MIT, ISC, Apache-2.0, BSD-2/3-Clause, 0BSD; en expresiones SPDX, `OR` pide una permitida y `AND` todas) y falla si `THIRD-PARTY-NOTICES.md` está desactualizado (`pnpm licenses:check --write` lo regenera). 34 paquetes de terceros, todos permitidos. Prettier ignora el archivo generado.
+
 ## 4. Pendiente de F3 (no hecho)
 
 | Pendiente | Nota |
 | --- | --- |
-| `parity:api` (paridad de API entre Vue y React) y compilación de snippets | Sin construir |
+| Compilación de snippets de la documentación | Sin construir |
 | Fixtures SSR de Nuxt y Next (hidratación) | Incluye el límite de `defaultOpen` de arriba |
 | Matriz Vue 3.5 / React 18.3–19 y `size-limit` | |
 | Checklist manual con lector de pantalla (NVDA, VoiceOver) de los compuestos | Antes de una alpha publicada (C9) |
-| Aviso de terceros de Zag y lista de licencias (C10) | |
 | Beta `0.5.0` en tarballs | Requiere ≥ 25 componentes **estables** y el gate de paridad obligatorio (hoy en CI, sin protección de rama por decisión del propietario) |
 
-**Gate de F3** («≥ 25 componentes estables; paridad obligatoria en CI; `0.5.0` beta»): **parcial**. 41 componentes (catálogo T2 completo) y paridad visual en CI; faltan SSR, `parity:api` y la beta.
+**Gate de F3** («≥ 25 componentes estables; paridad obligatoria en CI; `0.5.0` beta»): **parcial**. 41 componentes (catálogo T2 completo) y paridad visual en CI; faltan SSR y la beta.
