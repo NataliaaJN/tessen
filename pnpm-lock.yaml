@@ -248,6 +248,27 @@ importers:
         specifier: 'catalog:'
         version: 6.0.3
 
+  packages/motion:
+    devDependencies:
+      '@tessen-ui/tokens':
+        specifier: workspace:*
+        version: link:../tokens
+      '@tessen-ui/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.6
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+      vite:
+        specifier: 'catalog:'
+        version: 8.3.8(@types/node@26.6.6)
+      vitest:
+        specifier: 'catalog:'
+        version: 5.1.1(@types/node@26.6.6)(vite@8.3.8(@types/node@26.6.6))
+
   packages/styles:
     devDependencies:
       '@tessen-ui/tokens':

@@ -1,0 +1,33 @@
+{
+  "name": "@tessen-ui/motion",
+  "private": true,
+  "version": "0.0.0",
+  "description": "TESSEN motion, level 0: presets as data, generated CSS keyframes and the data-tessen-motion modes.",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/js/index.d.ts",
+      "import": "./dist/js/index.js"
+    },
+    "./motion.css": "./dist/css/motion.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node scripts/build-motion.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@tessen-ui/tokens": "workspace:*",
+    "@tessen-ui/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}
