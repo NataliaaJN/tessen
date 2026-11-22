@@ -1,0 +1,5 @@
+{
+  "extends": "@tessen-ui/tsconfig/scripts.json",
+  "include": ["tooling/**/*.mjs", "tooling/**/*.cjs", "*.mjs", "*.cjs"],
+  "exclude": ["node_modules", "**/node_modules"]
+}

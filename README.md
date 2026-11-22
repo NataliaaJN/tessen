@@ -8,4 +8,15 @@
 
 Design system and component library for **Vue** and **React**, plus a web platform (docs, Theme Studio, Playground).
 
-**Status:** Phase 0 (research and definition). No implementation yet. Start with [`docs/`](docs/README.md). Brand assets: [`docs/brand/`](docs/brand/README.md).
+**Status:** Phase 1 (foundations) in progress. The monorepo skeleton is in place; no component packages exist yet. Start with [`docs/`](docs/README.md). Brand assets: [`docs/brand/`](docs/brand/README.md).
+
+## Development
+
+Requires Node 26 (see `.nvmrc`) and pnpm 12 (`npm install -g pnpm@12.21.0`). Nothing is published: packages live in the `@tessen-ui/*` internal scope and share code through `workspace:*` ([ADR 0015](docs/planning/13-architecture-decisions/0015-npm-namespace-provisional-no-publication.md)).
+
+```sh
+pnpm install
+pnpm verify   # lint, format, types, dependency rules, scope check, tests, build
+```
+
+Branching: `main` is production, `develop` is pre-production; work happens in short-lived English-named branches merged into `develop` through auto-merging pull requests ([workflow](docs/architecture/development-workflow.md)).

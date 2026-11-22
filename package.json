@@ -1,0 +1,36 @@
+{
+  "name": "tessen",
+  "private": true,
+  "version": "0.0.0",
+  "description": "TESSEN monorepo root (workspace only, never published).",
+  "type": "module",
+  "packageManager": "pnpm@12.21.0",
+  "engines": {
+    "node": ">=22.19.0",
+    "pnpm": ">=12.21.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "deps:check": "depcruise --config .dependency-cruiser.cjs tooling",
+    "scope:check": "node tooling/scripts/scope-check.mjs",
+    "verify": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm deps:check && pnpm scope:check && pnpm test && pnpm build"
+  },
+  "devDependencies": {
+    "@eslint/js": "catalog:",
+    "@tessen-ui/eslint-config": "workspace:*",
+    "@tessen-ui/scripts": "workspace:*",
+    "@tessen-ui/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "dependency-cruiser": "catalog:",
+    "eslint": "catalog:",
+    "globals": "catalog:",
+    "prettier": "catalog:",
+    "turbo": "catalog:",
+    "typescript": "catalog:"
+  }
+}
