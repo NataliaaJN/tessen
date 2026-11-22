@@ -25,6 +25,7 @@
     "licenses:check": "node tooling/scripts/licenses-check.mjs",
     "e2e": "pnpm --filter @tessen-ui/e2e run e2e",
     "ssr:e2e": "node tooling/scripts/ssr-e2e.mjs",
+    "docs:smoke": "pnpm --filter @tessen-ui/e2e exec node docs-smoke.mjs",
     "new:component": "node tooling/scripts/new-component.mjs",
     "verify": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm tokens:check && pnpm deps:check && pnpm scope:check && pnpm licenses:check && pnpm test && pnpm build && pnpm parity:api && pnpm docs:check && pnpm size",
     "pack:all": "node tooling/scripts/pack-all.mjs",
