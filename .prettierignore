@@ -3,3 +3,5 @@ docs/
 dist/
 .turbo/
 .tarballs/
+integration/*/pnpm-workspace.yaml
+integration/*/pnpm-lock.yaml

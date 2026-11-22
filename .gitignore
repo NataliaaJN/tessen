@@ -15,3 +15,7 @@ coverage/
 # Local tooling
 .eslintcache
 *.tsbuildinfo
+
+# Consumer projects (ADR 0016): generated at install time
+integration/*/pnpm-workspace.yaml
+integration/*/pnpm-lock.yaml

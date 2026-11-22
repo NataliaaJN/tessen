@@ -4,7 +4,7 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { after, describe, it } from 'node:test';
-import { checkScope } from '../scope-check.mjs';
+import { checkIntegrationLockfile, checkScope } from '../scope-check.mjs';
 
 const config = {
   scope: '@tessen-ui',
@@ -105,5 +105,37 @@ describe('checkScope', () => {
     ].join('\n');
     const root = fixture(rootPkg, { core }, lock);
     assert.deepEqual(checkScope(root, config), []);
+  });
+});
+
+describe('checkIntegrationLockfile', () => {
+  /** @param {string[]} keys package keys to put under `packages:` */
+  function lockWith(keys) {
+    const root = fixture(rootPkg, { core });
+    const lines = ['packages:', ''];
+    for (const k of keys) lines.push(`  '${k}':`, '    resolution: {integrity: sha512-x}', '');
+    writeFileSync(join(root, 'pnpm-lock.yaml'), lines.join('\n'));
+    return join(root, 'pnpm-lock.yaml');
+  }
+
+  it('accepts internal packages resolved from local tarballs', () => {
+    const lock = lockWith([
+      '@tessen-ui/core@file:../../.tarballs/tessen-ui-core-0.0.0-local.x.1.tgz',
+      'left-pad@1.3.0',
+    ]);
+    assert.deepEqual(checkIntegrationLockfile(lock, config), []);
+  });
+
+  it('flags an internal package resolved from the registry', () => {
+    const lock = lockWith(['@tessen-ui/core@1.0.0']);
+    assert.match(
+      checkIntegrationLockfile(lock, config).join('\n'),
+      /not resolved from a local tarball/,
+    );
+  });
+
+  it('flags a lockfile without any internal package (overrides not applied)', () => {
+    const lock = lockWith(['left-pad@1.3.0']);
+    assert.match(checkIntegrationLockfile(lock, config).join('\n'), /no internal package found/);
   });
 });

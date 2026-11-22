@@ -44,3 +44,11 @@ jobs:
       - run: pnpm scope:check
       - run: pnpm test
       - run: pnpm build
+
+      # Distribution as a consumer sees it (ADR 0016): pack, check the tarballs, install them
+      # into integration/* and build those projects. Local files only, nothing is published.
+      - run: pnpm pack:all
+      - run: pnpm tarball:check
+      - run: pnpm integration:install
+      - run: pnpm integration:test
+      - run: pnpm scope:check
