@@ -1,0 +1,21 @@
+# Internal packages only. Nothing is published (ADR 0015): every package is
+# `private: true` and shares code through `workspace:*`.
+packages:
+  - packages/*
+  - apps/*
+  - tooling/*
+# `integration/*` is deliberately NOT a workspace member: it installs the
+# packed tarballs like an external consumer would (ADR 0016).
+
+# Single source of truth for third-party versions used by more than one package.
+catalog:
+  '@eslint/js': ^10.0.1
+  '@types/node': ^26.6.6
+  dependency-cruiser: ^18.8.0
+  eslint: ^10.15.0
+  globals: ^17.14.0
+  prettier: ^3.10.1
+  turbo: ^2.11.13
+  # Held on 6.0.x: typescript-eslint (<6.1) and dependency-cruiser (<7) do not support TS 7 yet.
+  typescript: ~6.0.3
+  typescript-eslint: ^8.73.0

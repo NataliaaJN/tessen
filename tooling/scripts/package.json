@@ -1,0 +1,10 @@
+{
+  "name": "@tessen-ui/scripts",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Repository maintenance scripts (scope check, etc.).",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/"
+  }
+}

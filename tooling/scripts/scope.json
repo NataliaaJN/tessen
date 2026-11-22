@@ -1,0 +1,6 @@
+{
+  "scope": "@tessen-ui",
+  "forbiddenScopes": ["@tessen"],
+  "forbiddenUnscopedNames": ["tessen"],
+  "workspaceRoots": ["packages", "apps", "tooling"]
+}
