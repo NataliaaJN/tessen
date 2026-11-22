@@ -11,6 +11,23 @@ import {
   DialogTitle,
   DialogTrigger,
   Divider,
+  EmptyState,
+  Avatar,
+  BreadcrumbItem,
+  Breadcrumbs,
+  ButtonGroup,
+  List,
+  ListItem,
+  Pagination,
+  Progress,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeaderCell,
+  TableRow,
+  ToggleButton,
   Field,
   FieldDescription,
   FieldError,
@@ -180,6 +197,79 @@ export const scenes: Record<SceneName, Scene> = {
           <span>Two</span>
         </Stack>
       </div>
+    ),
+  },
+
+  'data-display': {
+    vue: `<TStack gap="4">
+      <TProgress aria-label="Upload" :value="40" /><TProgress aria-label="Busy" tone="success" size="lg" /><TProgress aria-label="Danger" tone="danger" size="sm" :value="90" />
+      <TStack direction="horizontal" gap="3" align="center"><TAvatar name="Ada Lovelace" size="xs" /><TAvatar name="Grace Hopper" /><TAvatar name="Alan Turing" shape="square" size="lg" /><TAvatar name="Linus" size="xl" /></TStack>
+      <TBreadcrumbs><TBreadcrumbItem href="/">Home</TBreadcrumbItem><TBreadcrumbItem href="/docs">Docs</TBreadcrumbItem><TBreadcrumbItem current>Button</TBreadcrumbItem></TBreadcrumbs>
+      <TPagination aria-label="Results" :page-count="20" :default-page="10" />
+      <TStack direction="horizontal" gap="3"><TToggleButton>Off</TToggleButton><TToggleButton default-pressed>On</TToggleButton><TButtonGroup aria-label="Align" attached><TToggleButton>Left</TToggleButton><TToggleButton default-pressed>Center</TToggleButton><TToggleButton>Right</TToggleButton></TButtonGroup></TStack>
+      <TEmptyState title="No projects" description="Create one to start."><template #icon>★</template><TButton>Create</TButton></TEmptyState>
+      <TStack direction="horizontal" gap="6"><TList variant="divided" style="inline-size:200px"><TListItem>Apples</TListItem><TListItem>Pears</TListItem></TList><TList variant="bulleted" ordered><TListItem>One</TListItem><TListItem>Two</TListItem></TList></TStack>
+      <TTable striped><TTableCaption>Team</TTableCaption><TTableHead><TTableRow><TTableHeaderCell>Name</TTableHeaderCell><TTableHeaderCell numeric>Seats</TTableHeaderCell></TTableRow></TTableHead><TTableBody><TTableRow><TTableCell>Ada</TTableCell><TTableCell numeric>12</TTableCell></TTableRow><TTableRow><TTableCell>Grace</TTableCell><TTableCell numeric>3</TTableCell></TTableRow></TTableBody></TTable>
+    </TStack>`,
+    react: () => (
+      <Stack gap="4">
+        <Progress aria-label="Upload" value={40} />
+        <Progress aria-label="Busy" tone="success" size="lg" />
+        <Progress aria-label="Danger" tone="danger" size="sm" value={90} />
+        <Stack direction="horizontal" gap="3" align="center">
+          <Avatar name="Ada Lovelace" size="xs" />
+          <Avatar name="Grace Hopper" />
+          <Avatar name="Alan Turing" shape="square" size="lg" />
+          <Avatar name="Linus" size="xl" />
+        </Stack>
+        <Breadcrumbs>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/docs">Docs</BreadcrumbItem>
+          <BreadcrumbItem current>Button</BreadcrumbItem>
+        </Breadcrumbs>
+        <Pagination aria-label="Results" pageCount={20} defaultPage={10} />
+        <Stack direction="horizontal" gap="3">
+          <ToggleButton>Off</ToggleButton>
+          <ToggleButton defaultPressed>On</ToggleButton>
+          <ButtonGroup aria-label="Align" attached>
+            <ToggleButton>Left</ToggleButton>
+            <ToggleButton defaultPressed>Center</ToggleButton>
+            <ToggleButton>Right</ToggleButton>
+          </ButtonGroup>
+        </Stack>
+        <EmptyState title="No projects" description="Create one to start." icon="★">
+          <Button>Create</Button>
+        </EmptyState>
+        <Stack direction="horizontal" gap="6">
+          <List variant="divided" style={{ inlineSize: 200 }}>
+            <ListItem>Apples</ListItem>
+            <ListItem>Pears</ListItem>
+          </List>
+          <List variant="bulleted" ordered>
+            <ListItem>One</ListItem>
+            <ListItem>Two</ListItem>
+          </List>
+        </Stack>
+        <Table striped>
+          <TableCaption>Team</TableCaption>
+          <TableHead>
+            <TableRow>
+              <TableHeaderCell>Name</TableHeaderCell>
+              <TableHeaderCell numeric>Seats</TableHeaderCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>Ada</TableCell>
+              <TableCell numeric>12</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Grace</TableCell>
+              <TableCell numeric>3</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </Stack>
     ),
   },
 

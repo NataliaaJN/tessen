@@ -1,0 +1,133 @@
+/* Avatar, List, Table. Contracts: @tessen-ui/core avatarContract, listContract, tableContract. */
+@layer tessen.components {
+  /* ---- Avatar -------------------------------------------------------------------------- */
+  .t-avatar {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    overflow: hidden;
+    inline-size: var(--t-avatar-size, var(--_size));
+    block-size: var(--t-avatar-size, var(--_size));
+    border-radius: var(--_radius);
+    background: var(--t-avatar-bg, var(--tessen-color-action-primary-subtle));
+    color: var(--t-avatar-fg, var(--tessen-color-text-link));
+    font-family: var(--tessen-font-family-sans);
+    font-size: var(--_font-size);
+    font-weight: var(--tessen-font-weight-semibold);
+    line-height: 1;
+    user-select: none;
+
+    &[data-size='xs'] {
+      --_size: 1.5rem;
+      --_font-size: 0.625rem;
+    }
+    &[data-size='sm'] {
+      --_size: 2rem;
+      --_font-size: var(--tessen-font-size-xs);
+    }
+    &[data-size='md'] {
+      --_size: 2.5rem;
+      --_font-size: var(--tessen-font-size-sm);
+    }
+    &[data-size='lg'] {
+      --_size: 3.5rem;
+      --_font-size: var(--tessen-font-size-lg);
+    }
+    &[data-size='xl'] {
+      --_size: 5rem;
+      --_font-size: var(--tessen-font-size-xl);
+    }
+    &[data-shape='circle'] {
+      --_radius: var(--tessen-radius-full);
+    }
+    &[data-shape='square'] {
+      --_radius: var(--tessen-radius-md);
+    }
+  }
+
+  .t-avatar__image {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  /* ---- List ---------------------------------------------------------------------------- */
+  .t-list {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--tessen-font-family-sans);
+    font-size: var(--tessen-font-size-md);
+    color: var(--tessen-color-text-primary);
+
+    &[data-variant='divided'] > .t-list__item + .t-list__item {
+      border-block-start: 1px solid var(--tessen-color-border-subtle);
+    }
+    &[data-variant='divided'] > .t-list__item {
+      padding-block: var(--tessen-space-3);
+    }
+    &[data-variant='plain'] > .t-list__item {
+      padding-block: var(--tessen-space-1);
+    }
+    &[data-variant='bulleted'] {
+      padding-inline-start: var(--tessen-space-6);
+      list-style: disc;
+    }
+    &[data-variant='bulleted'][data-ordered] {
+      list-style: decimal;
+    }
+    &[data-variant='bulleted'] > .t-list__item {
+      padding-block: var(--tessen-space-1);
+    }
+  }
+
+  /* ---- Table --------------------------------------------------------------------------- */
+  .t-table {
+    box-sizing: border-box;
+    inline-size: 100%;
+    border-collapse: collapse;
+    font-family: var(--tessen-font-family-sans);
+    font-size: var(--tessen-font-size-sm);
+    color: var(--tessen-color-text-primary);
+
+    &[data-density='comfortable'] {
+      --_cell-y: var(--tessen-space-3);
+    }
+    &[data-density='compact'] {
+      --_cell-y: var(--tessen-space-1);
+    }
+  }
+
+  .t-table__caption {
+    padding-block-end: var(--tessen-space-2);
+    text-align: start;
+    font-weight: var(--tessen-font-weight-semibold);
+    color: var(--tessen-color-text-primary);
+  }
+
+  .t-table__header-cell,
+  .t-table__cell {
+    padding: var(--_cell-y) var(--tessen-space-4);
+    text-align: start;
+    border-block-end: 1px solid var(--tessen-color-border-subtle);
+
+    &[data-numeric] {
+      text-align: end;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  .t-table__header-cell {
+    font-weight: var(--tessen-font-weight-semibold);
+    color: var(--tessen-color-text-secondary);
+    border-block-end-color: var(--tessen-color-border-default);
+    white-space: nowrap;
+  }
+
+  .t-table[data-striped] .t-table__body .t-table__row:nth-child(even) {
+    background: var(--tessen-color-surface-sunken);
+  }
+}

@@ -1,0 +1,48 @@
+/* EmptyState. Contract: @tessen-ui/core emptyStateContract. */
+@layer tessen.components {
+  .t-empty-state {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--tessen-space-2);
+    padding: var(--_padding);
+    text-align: center;
+    font-family: var(--tessen-font-family-sans);
+    color: var(--tessen-color-text-secondary);
+
+    &[data-size='md'] {
+      --_padding: var(--tessen-space-10);
+    }
+    &[data-size='sm'] {
+      --_padding: var(--tessen-space-6);
+    }
+  }
+
+  .t-empty-state__icon {
+    display: inline-flex;
+    margin-block-end: var(--tessen-space-2);
+    font-size: var(--tessen-font-size-xl);
+  }
+
+  .t-empty-state__title {
+    margin: 0;
+    font-size: var(--tessen-font-size-lg);
+    font-weight: var(--tessen-font-weight-semibold);
+    color: var(--tessen-color-text-primary);
+  }
+
+  .t-empty-state__description {
+    margin: 0;
+    max-inline-size: 36ch;
+    font-size: var(--tessen-font-size-sm);
+  }
+
+  .t-empty-state__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--tessen-space-3);
+    margin-block-start: var(--tessen-space-4);
+  }
+}

@@ -42,7 +42,9 @@ export function vueAdapter(
       else if (labelAs === 'prop' && label !== undefined) own.label = label;
       if (leading) slots[leadingAs] = leading;
       if (trailing) slots[trailingAs] = trailing;
-      if (valueEvent) own[valueEvent] = (value: string | boolean) => emitted.push(value);
+      if (valueEvent)
+        own[valueEvent] = (value: string | number | boolean) =>
+          emitted.push(typeof value === 'number' ? String(value) : value);
       const wrapper = mount(component, {
         props: { ...own, ...props, ...extra, ...attrs, class: className, onClick: () => clicks++ },
         slots,

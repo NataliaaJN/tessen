@@ -1,0 +1,117 @@
+/* Breadcrumbs, Pagination. Contracts: @tessen-ui/core breadcrumbsContract, paginationContract. */
+@layer tessen.components {
+  /* ---- Breadcrumbs --------------------------------------------------------------------- */
+  .t-breadcrumbs {
+    box-sizing: border-box;
+    font-family: var(--tessen-font-family-sans);
+    font-size: var(--tessen-font-size-sm);
+  }
+
+  .t-breadcrumbs__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--tessen-space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .t-breadcrumbs__item + .t-breadcrumbs__item::before {
+    content: '/';
+    margin-inline-end: var(--tessen-space-2);
+    color: var(--tessen-color-text-secondary);
+  }
+
+  .t-breadcrumbs__link {
+    color: var(--tessen-color-text-link);
+    text-decoration: none;
+    border-radius: var(--tessen-radius-xs);
+
+    &:hover {
+      color: var(--tessen-color-text-link-hover);
+      text-decoration: underline;
+    }
+    &:focus-visible {
+      outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+      outline-offset: var(--tessen-focus-ring-offset);
+    }
+  }
+
+  .t-breadcrumbs__current {
+    color: var(--tessen-color-text-primary);
+    font-weight: var(--tessen-font-weight-medium);
+  }
+
+  /* ---- Pagination ---------------------------------------------------------------------- */
+  .t-pagination {
+    box-sizing: border-box;
+    font-family: var(--tessen-font-family-sans);
+
+    &[data-size='sm'] {
+      --_size: var(--tessen-size-control-sm);
+      --_font-size: var(--tessen-font-size-xs);
+    }
+    &[data-size='md'] {
+      --_size: var(--tessen-size-control-md);
+      --_font-size: var(--tessen-font-size-sm);
+    }
+  }
+
+  .t-pagination__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--tessen-space-1);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .t-pagination__page,
+  .t-pagination__control {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: var(--_size);
+    block-size: var(--_size);
+    padding-inline: var(--tessen-space-2);
+    border: 1px solid transparent;
+    border-radius: var(--tessen-radius-md);
+    background: transparent;
+    color: var(--tessen-color-text-primary);
+    font: inherit;
+    font-size: var(--_font-size);
+    font-variant-numeric: tabular-nums;
+    cursor: pointer;
+    transition: background-color var(--tessen-motion-duration-fast)
+      var(--tessen-motion-easing-standard);
+
+    &:hover:not(:disabled, [aria-current]) {
+      background: var(--tessen-color-action-neutral-hover);
+    }
+    &:focus-visible {
+      outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+      outline-offset: var(--tessen-focus-ring-offset);
+    }
+    &:disabled {
+      color: var(--tessen-color-text-disabled);
+      cursor: not-allowed;
+    }
+    &[aria-current='page'] {
+      background: var(--tessen-color-action-primary-default);
+      color: var(--tessen-color-action-primary-on);
+      font-weight: var(--tessen-font-weight-semibold);
+      cursor: default;
+    }
+  }
+
+  .t-pagination__ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: var(--_size);
+    color: var(--tessen-color-text-secondary);
+  }
+}

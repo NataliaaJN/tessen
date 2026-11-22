@@ -1,0 +1,98 @@
+/* ToggleButton, ButtonGroup. Contracts: @tessen-ui/core toggleButtonContract, buttonGroupContract. */
+@layer tessen.components {
+  .t-toggle-button {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--tessen-space-2);
+    block-size: var(--_height);
+    padding-inline: var(--_padding-x);
+    border: 1px solid var(--_border);
+    border-radius: var(--tessen-radius-md);
+    background: transparent;
+    color: var(--tessen-color-text-primary);
+    font-family: var(--tessen-font-family-sans);
+    font-size: var(--_font-size);
+    font-weight: var(--tessen-font-weight-medium);
+    cursor: pointer;
+    transition:
+      background-color var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard),
+      border-color var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard);
+
+    &[data-variant='outline'] {
+      --_border: var(--tessen-color-border-default);
+    }
+    &[data-variant='ghost'] {
+      --_border: transparent;
+    }
+    &[data-size='sm'] {
+      --_height: var(--tessen-size-control-sm);
+      --_padding-x: var(--tessen-space-3);
+      --_font-size: var(--tessen-font-size-xs);
+    }
+    &[data-size='md'] {
+      --_height: var(--tessen-size-control-md);
+      --_padding-x: var(--tessen-space-4);
+      --_font-size: var(--tessen-font-size-sm);
+    }
+    &[data-size='lg'] {
+      --_height: var(--tessen-size-control-lg);
+      --_padding-x: var(--tessen-space-5);
+      --_font-size: var(--tessen-font-size-md);
+    }
+
+    &:hover:not(:disabled) {
+      background: var(--tessen-color-action-neutral-hover);
+    }
+    &[data-state='on'] {
+      background: var(--tessen-color-action-primary-subtle);
+      border-color: var(--tessen-color-action-primary-default);
+      color: var(--tessen-color-text-link);
+    }
+    &:focus-visible {
+      outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+      outline-offset: var(--tessen-focus-ring-offset);
+    }
+    &:disabled {
+      color: var(--tessen-color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  .t-button-group {
+    display: inline-flex;
+    gap: var(--tessen-space-2);
+
+    &[data-orientation='vertical'] {
+      flex-direction: column;
+    }
+
+    /* Attached: neighbours share one border and only the outer corners stay round. */
+    &[data-attached] {
+      gap: 0;
+    }
+    &[data-attached][data-orientation='horizontal'] > :not(:first-child) {
+      margin-inline-start: -1px;
+      border-start-start-radius: 0;
+      border-end-start-radius: 0;
+    }
+    &[data-attached][data-orientation='horizontal'] > :not(:last-child) {
+      border-start-end-radius: 0;
+      border-end-end-radius: 0;
+    }
+    &[data-attached][data-orientation='vertical'] > :not(:first-child) {
+      margin-block-start: -1px;
+      border-start-start-radius: 0;
+      border-start-end-radius: 0;
+    }
+    &[data-attached][data-orientation='vertical'] > :not(:last-child) {
+      border-end-start-radius: 0;
+      border-end-end-radius: 0;
+    }
+    & > :is(:hover, :focus-visible, [data-state='on']) {
+      position: relative;
+      z-index: 1;
+    }
+  }
+}
