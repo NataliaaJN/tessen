@@ -20,7 +20,7 @@
 | D-14 | 🟡 | Idioma de la documentación pública e i18n | F4 |
 | D-15 | 🟢 | Estrategia Figma | F7 |
 | D-16 | 🟡 | Repositorio público en GitHub, protección de ramas y flujo de PR | F1-T01 |
-| D-17 | 🟡 | Formato del contrato (TS vs esquema JSON) | F1-T08 |
+| D-17 | ✅ | Formato del contrato (TS vs esquema JSON) | F1-T08 |
 | D-18 | 🟡 | Scope npm definitivo y momento de la distribución pública (requiere aprobación del propietario) | Publicación |
 | D-19 | 🟢 | Si algún día se despliega la plataforma (p. ej. GitHub Pages) | Aprobación explícita |
 
@@ -92,6 +92,7 @@
 - **Pendiente:** proteger `main` y `develop` con el check de CI obligatorio y activar Dependabot (ajustes del repositorio, gratis en repos públicos).
 
 ### D-17 — Formato del contrato
+- **Resuelto (F1-T08):** TypeScript con `defineContract`; el contrato es dato plano serializable a JSON (comprobado por test). Ver `packages/core/README.md`.
 - Alternativas: **TypeScript con `defineContract` (recomendado: tipado, autocompletado, serializable a JSON)** · JSON Schema/YAML (neutral pero sin tipos ricos).
 - Impacto: `core`, docs, Playground y agentes.
 
