@@ -1,0 +1,124 @@
+/* Dialog: modal surface over a backdrop. Contract: @tessen-ui/core dialogContract. Overrides: --t-dialog-radius. */
+@layer tessen.components {
+  .t-dialog__trigger {
+    font: inherit;
+    cursor: pointer;
+  }
+
+  /* The wrapper only stacks backdrop and positioner above the page. */
+  .t-dialog {
+    position: fixed;
+    inset: 0;
+    z-index: var(--tessen-layer-modal);
+
+    &[data-size='sm'] {
+      --_width: 24rem;
+    }
+    &[data-size='md'] {
+      --_width: 32rem;
+    }
+    &[data-size='lg'] {
+      --_width: 48rem;
+    }
+  }
+
+  .t-dialog__backdrop {
+    position: fixed;
+    inset: 0;
+    background: var(--tessen-color-overlay-scrim);
+    backdrop-filter: blur(var(--tessen-color-overlay-backdrop-blur, 0));
+    animation: t-dialog-fade-in var(--tessen-motion-duration-normal)
+      var(--tessen-motion-easing-decelerate);
+
+    &[data-state='closed'] {
+      animation: t-dialog-fade-out var(--tessen-motion-duration-fast)
+        var(--tessen-motion-easing-accelerate) forwards;
+    }
+  }
+
+  .t-dialog__positioner {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--tessen-space-4);
+    overflow-y: auto;
+  }
+
+  .t-dialog__content {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: var(--tessen-space-3);
+    inline-size: min(100%, var(--_width, 32rem));
+    max-block-size: 100%;
+    padding: var(--tessen-space-6);
+    border-radius: var(--t-dialog-radius, var(--tessen-radius-xl));
+    background: var(--tessen-color-surface-overlay);
+    box-shadow: var(--tessen-elevation-modal);
+    color: var(--tessen-color-text-primary);
+    font-family: var(--tessen-font-family-sans);
+    animation: t-dialog-in var(--tessen-motion-duration-normal)
+      var(--tessen-motion-easing-decelerate);
+
+    &[data-state='closed'] {
+      animation: t-dialog-out var(--tessen-motion-duration-fast)
+        var(--tessen-motion-easing-accelerate) forwards;
+    }
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  .t-dialog__title {
+    margin: 0;
+    font-size: var(--tessen-font-size-xl);
+    font-weight: var(--tessen-font-weight-semibold);
+    line-height: var(--tessen-font-line-height-tight);
+  }
+  .t-dialog__description {
+    margin: 0;
+    color: var(--tessen-color-text-secondary);
+    font-size: var(--tessen-font-size-md);
+    line-height: var(--tessen-font-line-height-normal);
+  }
+  .t-dialog__close {
+    align-self: flex-end;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  /* Reduced motion keeps only the fade (no scale or travel). */
+  @media (prefers-reduced-motion: reduce) {
+    .t-dialog__content {
+      animation-name: t-dialog-fade-in;
+      &[data-state='closed'] {
+        animation-name: t-dialog-fade-out;
+      }
+    }
+  }
+
+  @keyframes t-dialog-in {
+    from {
+      opacity: 0;
+      transform: translateY(var(--tessen-motion-distance-sm)) scale(0.98);
+    }
+  }
+  @keyframes t-dialog-out {
+    to {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+  }
+  @keyframes t-dialog-fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes t-dialog-fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+}

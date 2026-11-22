@@ -4,7 +4,7 @@
  * steps and expectations. Used from tests only (ADR 0009).
  */
 import type { Contract, ElementExpectation, NeutralProps, Step } from '@tessen-ui/core';
-import { getByRole } from '@testing-library/dom';
+import { getByRole, waitFor } from '@testing-library/dom';
 import { userEvent } from '@testing-library/user-event';
 import axe from 'axe-core';
 import { describe, expect, it } from 'vitest';
@@ -56,6 +56,15 @@ export function runContract(contract: Contract, adapter: Adapter) {
         const mounted = adapter.mount(testCase.props ?? {});
         try {
           const run = async (step: Step) => {
+            if (step.do === 'wait') {
+              await waitFor(() => {
+                const found = document.body.querySelector(step.selector) !== null;
+                expect(found, `${step.selector} ${step.absent ? 'gone' : 'present'}`).toBe(
+                  !step.absent,
+                );
+              });
+              return;
+            }
             const el = find(mounted.root, 'target' in step ? step.target : undefined);
             if (step.do === 'click') await user.click(el);
             else if (step.do === 'hover') await user.hover(el);
@@ -72,42 +81,49 @@ export function runContract(contract: Contract, adapter: Adapter) {
           };
           for (const step of testCase.steps ?? []) await run(step);
           const want = testCase.expect;
-          if (want.role) {
-            const found = getByRole(document.body, want.role, want.name ? { name: want.name } : {});
-            expect(found).toBe(mounted.root);
-          } else if (want.name) {
-            expect(mounted.root.getAttribute('aria-label')).toBe(want.name);
-          }
-          for (const [name, value] of Object.entries(want.attrs ?? {})) {
-            if (value === null)
-              expect(mounted.root.hasAttribute(name), `${name} absent`).toBe(false);
-            else expect(mounted.root.getAttribute(name), name).toBe(value);
-          }
-          for (const cls of want.classes ?? [])
-            expect(mounted.root.classList.contains(cls), cls).toBe(true);
-          for (const [selector, present] of Object.entries(want.parts ?? {})) {
-            expect(mounted.root.querySelector(selector) !== null, selector).toBe(present);
-          }
-          if (want.tag) expect(mounted.root.tagName.toLowerCase()).toBe(want.tag);
-          if (want.text !== undefined) expect(mounted.root.textContent?.trim()).toBe(want.text);
-          for (const [selector, el] of Object.entries(want.within ?? {}))
-            check(selector, document.body.querySelector(selector), el);
-          for (const query of want.queries ?? []) {
-            const el = getByRole(document.body, query.role, {
-              ...(query.name !== undefined && { name: query.name }),
-              ...(query.description !== undefined && { description: query.description }),
-            });
-            const label = `${query.role} ${query.name ?? ''}`;
-            check(label, el, { attrs: query.attrs, focused: query.focused });
-            for (const [prop, value] of Object.entries(query.props ?? {}))
-              expect((el as unknown as Record<string, unknown>)[prop], `${label} .${prop}`).toBe(
-                value,
+          // Behaviour that settles asynchronously (state machines, animation frames) is retried briefly.
+          await waitFor(() => {
+            if (want.role) {
+              const found = getByRole(
+                document.body,
+                want.role,
+                want.name ? { name: want.name } : {},
               );
-          }
-          if (want.clicks !== undefined) expect(mounted.clicks()).toBe(want.clicks);
-          if (want.emitted !== undefined) expect(mounted.emitted?.() ?? []).toEqual(want.emitted);
-          if (want.focused !== undefined)
-            expect(document.activeElement === mounted.root).toBe(want.focused);
+              expect(found).toBe(mounted.root);
+            } else if (want.name) {
+              expect(mounted.root.getAttribute('aria-label')).toBe(want.name);
+            }
+            for (const [name, value] of Object.entries(want.attrs ?? {})) {
+              if (value === null)
+                expect(mounted.root.hasAttribute(name), `${name} absent`).toBe(false);
+              else expect(mounted.root.getAttribute(name), name).toBe(value);
+            }
+            for (const cls of want.classes ?? [])
+              expect(mounted.root.classList.contains(cls), cls).toBe(true);
+            for (const [selector, present] of Object.entries(want.parts ?? {})) {
+              expect(mounted.root.querySelector(selector) !== null, selector).toBe(present);
+            }
+            if (want.tag) expect(mounted.root.tagName.toLowerCase()).toBe(want.tag);
+            if (want.text !== undefined) expect(mounted.root.textContent?.trim()).toBe(want.text);
+            for (const [selector, el] of Object.entries(want.within ?? {}))
+              check(selector, document.body.querySelector(selector), el);
+            for (const query of want.queries ?? []) {
+              const el = getByRole(document.body, query.role, {
+                ...(query.name !== undefined && { name: query.name }),
+                ...(query.description !== undefined && { description: query.description }),
+              });
+              const label = `${query.role} ${query.name ?? ''}`;
+              check(label, el, { attrs: query.attrs, focused: query.focused });
+              for (const [prop, value] of Object.entries(query.props ?? {}))
+                expect((el as unknown as Record<string, unknown>)[prop], `${label} .${prop}`).toBe(
+                  value,
+                );
+            }
+            if (want.clicks !== undefined) expect(mounted.clicks()).toBe(want.clicks);
+            if (want.emitted !== undefined) expect(mounted.emitted?.() ?? []).toEqual(want.emitted);
+            if (want.focused !== undefined)
+              expect(document.activeElement === mounted.root).toBe(want.focused);
+          });
         } finally {
           mounted.unmount();
         }
