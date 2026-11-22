@@ -20,6 +20,8 @@ Las nueve tareas F1-T01…T09 están hechas y fusionadas en `develop`. `pnpm ver
 
 ## 3. Decisiones que deben cerrarse antes de F2
 
+> **Actualización (2026-11-22):** D-03, D-06 y D-11 se cerraron con las propuestas de la tabla; ADR 0011 pasa a `Accepted`. Se conserva la tabla como registro.
+
 | ID | Tema | Por qué bloquea | Propuesta |
 | --- | --- | --- | --- |
 | D-03 | Nomenclatura pública (ADR 0011: Vue `T`-prefijo, React sin prefijo) | Los nombres de los primeros componentes quedan en el contrato (`names`) | Aceptar ADR 0011 tal cual |

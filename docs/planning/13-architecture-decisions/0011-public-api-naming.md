@@ -1,6 +1,6 @@
 # ADR 0011 — Nomenclatura de la API pública
 
-- **Estado:** Proposed (nombres ilustrativos en el encargo; esta ADR los fija salvo objeción del propietario — D-03)
+- **Estado:** **Accepted** (2026-11-22, propietario; D-03 resuelta con la recomendación)
 - **Fecha:** 2026-11-22
 
 ## Contexto
