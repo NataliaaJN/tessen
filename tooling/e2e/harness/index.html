@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TESSEN e2e harness</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 16px;
+        background: var(--tessen-color-surface-default);
+        color: var(--tessen-color-text-primary);
+        font-family: var(--tessen-font-family-sans);
+      }
+      /* Fixed width so both frameworks lay out the very same way. */
+      #root {
+        inline-size: 720px;
+        padding: 16px;
+        box-sizing: border-box;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        margin-block-end: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./main.tsx"></script>
+  </body>
+</html>

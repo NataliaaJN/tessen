@@ -1,11 +1,22 @@
 'use client';
 
-import { useEffect, useState, type ReactNode } from 'react';
+import { useSyncExternalStore, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
-/** Renders into `document.body`, but only after mounting: server and first client render agree. */
+const subscribe = () => () => {};
+
+/**
+ * Renders into `document.body`. The server and the hydration pass render nothing (they agree);
+ * a plain client render portals right away, so the content already exists in the commit where
+ * the behavior engine starts. With a `useEffect` mount instead, a component that starts open
+ * (`defaultOpen`) ran its focus trap and listeners before its content was in the DOM and they
+ * never attached (found by the real-browser tests).
+ */
 export function Portal({ children }: { children: ReactNode }) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useSyncExternalStore(
+    subscribe,
+    () => true,
+    () => false,
+  );
   return mounted ? createPortal(children, document.body) : null;
 }

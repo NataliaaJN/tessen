@@ -19,3 +19,6 @@ coverage/
 # Consumer projects (ADR 0016): generated at install time
 integration/*/pnpm-workspace.yaml
 integration/*/pnpm-lock.yaml
+
+# Playwright output (tooling/e2e)
+tooling/e2e/.out/
