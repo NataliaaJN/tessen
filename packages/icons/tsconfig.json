@@ -1,0 +1,5 @@
+{
+  "extends": "@tessen-ui/tsconfig/node.json",
+  "compilerOptions": { "types": ["node"], "jsx": "react-jsx" },
+  "include": ["scripts/**/*.ts", "test/**/*.ts"]
+}

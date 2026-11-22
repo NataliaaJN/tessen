@@ -23,7 +23,7 @@
 | F1-T01 ✅ | Esqueleto del monorepo (pnpm, Turborepo, tsconfig/eslint/vite compartidos en `tooling/`, **dependency-cruiser** con las reglas de `docs/architecture/dependency-rules.md`, CI básico en GitHub Actions, `packageManager`/`.nvmrc` y scope interno provisional `@tessen-ui` con `private: true`, ADR 0015). Solo los paquetes que se usen ya (sin carpetas vacías) | D-02 |
 | F1-T02 ✅ | `@tessen/tokens`: fuente DTCG, Style Dictionary, salidas CSS/TS/JSON, `tokens:check` (ciclos, huecos, contraste); escalas `brand` a partir de las semillas de `docs/brand/` | F1-T01 |
 | F1-T03 ✅ | `@tessen/styles`: capas, reset/base opcionales, importación de tokens, temas light/dark/densidad | T02 |
-| F1-T04 | `@tessen/icons`: pipeline SVG → Vue/React/sprite + set inicial | D-07 |
+| F1-T04 ✅ | `@tessen/icons`: pipeline SVG → Vue/React/sprite + set inicial | D-07 |
 | F1-T05 ✅ | `@tessen/motion` L0: tokens + keyframes CSS + `data-tessen-motion` (L1 en F2) | T02, T03 |
 | F1-T06 | **Spike S1**: `Dialog` + `Tabs` (+`Tooltip`) con Zag en Vue y React; medir criterios de `06` §6 → actualizar **ADR 0004** | T01–T03 |
 | F1-T07 | **Spike S2**: contrato de `Button` → codegen de snippets → runner de contrato en Vue/React → diff visual de paridad | T06 |
