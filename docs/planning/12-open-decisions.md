@@ -6,15 +6,15 @@
 |---|---|---|---|
 | D-01 | ✅ Resuelta | Asset del logotipo (propuesta 11) — incorporado en `docs/brand/` | — |
 | D-02 | ✅ Resuelta (interno) | Scope interno `@tessen-ui` aprobado tras evaluar 5 candidatos (ADR 0015); `tessen` y `@tessen` **ocupados**; el scope **público** sigue en D-18 | — |
-| D-03 | 🟡 | Nomenclatura pública (ADR 0011) | F2 |
+| D-03 | ✅ Resuelta | Nomenclatura pública: Vue `T`-prefijo, React sin prefijo (ADR 0011 `Accepted`) | — |
 | D-04 | 🟡 | Framework del *shell* de Theme Studio y Playground (ADR 0008) | F5 |
 | D-05 | ✅ Resuelta con condiciones | Motor de comportamiento: **Zag.js** (spike S1 5/6 y validación [S2](S2-zag-validation.md) *APPROVE WITH CONDITIONS*; ADR 0004 `Accepted` con condiciones C1–C10) | — |
-| D-06 | 🟡 | Tipografía por defecto (la marca ya usa Inter/Outfit/JetBrains Mono) | F1-T03 |
+| D-06 | ✅ Resuelta | Inter (interfaz), JetBrains Mono (código), Outfit (marca/titulares), con pila del sistema de respaldo | — |
 | D-07 | ✅ Resuelta (provisional) | Lucide (ISC) como set abierto, 35 iconos iniciales en `@tessen-ui/icons`; revisable cambiando `src/svg` | — |
 | D-08 | 🔴 | Licencia de Tessen | Primera publicación |
 | D-09 | 🟢 | Librería base de gráficos | F7 |
 | D-10 | 🟢 | Polimorfismo (`as`/`asChild`) | F3 |
-| D-11 | 🟡 | Rango de versiones soportadas (Vue/React) | F2 |
+| D-11 | ✅ Resuelta | Vue ≥ 3.5 y React ≥ 18.3 (CI en 18.3 y 19) | — |
 | D-12 | ✅ Resuelta | Hosting y dominio: **ninguno** (todo en local; ADR 0014) | — |
 | D-13 | 🟢 | Alcance de «superficies translúcidas» (estilo «Cristal» de rM) | F5 |
 | D-14 | 🟡 | Idioma de la documentación pública e i18n | F4 |
@@ -42,6 +42,7 @@
 - **Pendiente de tu aprobación:** el scope público definitivo, solo cuando decidas distribuir (D-18).
 
 ### D-03 — Nomenclatura pública
+- **Resolución (2026-11-22):** aprobada la recomendación: `T`-prefijo en Vue y sin prefijo en React. ADR 0011 pasa a `Accepted`.
 - Alternativas: `T`-prefijo en Vue y sin prefijo en React (**recomendado, ADR 0011**) · prefijo `T` en ambos · sin prefijo en ambos (colisiones en Vue).
 
 ### D-04 — Framework de las SPAs (Studio y Playground)
@@ -53,6 +54,7 @@
 - Impacto: coste de los componentes compuestos (≈ 40 % del catálogo) y paridad.
 
 ### D-06 — Tipografía
+- **Resolución (2026-11-22):** aprobada la recomendación. `@tessen-ui/styles` ya define `--tessen-font-family-sans/mono/display` con esa pila. Pendiente menor: verificar licencias OFL y estrategia de carga autoalojada al documentar fuentes.
 - La tarjeta del logotipo ya usa **Inter** (interfaz), **Outfit** (wordmark) y **JetBrains Mono** (técnico). Recomendación: adoptar Inter variable como fuente de interfaz y JetBrains Mono para código, ambas con pila del sistema de respaldo; Outfit solo para marca/titulares y opcional para consumidores. Verificar licencias (suelen ser OFL **[C]**) y estrategia de carga (autoalojada, `font-display: swap`) en F1. rM usa Manrope Variable **[V]**.
 - Impacto: percepción de marca y CLS; Theme Studio permite cambiarla.
 
@@ -70,6 +72,7 @@
 - Alternativas: sin polimorfismo (recomendado en v1) · `as`/`asChild`. Impacto: ergonomía con routers (`RouterLink`/`next/link`). Recomendación: documentar patrón de composición con `Link` y reevaluar.
 
 ### D-11 — Versiones soportadas
+- **Resolución (2026-11-22):** aprobada la recomendación: Vue ≥ 3.5 y React ≥ 18.3, con pruebas en React 18.3 y 19. Fija los peers de `@tessen-ui/vue` y `@tessen-ui/react`.
 - Alternativas: Vue ≥ 3.5 y React ≥ 18.3 (**recomendado**) · React 19 solo (más simple, menos alcance). Impacto: `ref` como prop vs `forwardRef`, `useId`.
 
 ### D-12 — Hosting (resuelta)
