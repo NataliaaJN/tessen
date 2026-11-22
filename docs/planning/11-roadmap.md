@@ -21,7 +21,7 @@
 | ID | Tarea | Depende de |
 |---|---|---|
 | F1-T01 | Esqueleto del monorepo (pnpm, Turborepo, tsconfig/eslint/vite compartidos en `tooling/`, **dependency-cruiser** con las reglas de `docs/architecture/dependency-rules.md`, CI básico). Solo los paquetes que se usen ya (sin carpetas vacías) | D-02 |
-| F1-T02 | `@tessen/tokens`: fuente DTCG, Style Dictionary, salidas CSS/TS/JSON, `tokens:check` (ciclos, huecos, contraste) | F1-T01, D-01 (acento) |
+| F1-T02 | `@tessen/tokens`: fuente DTCG, Style Dictionary, salidas CSS/TS/JSON, `tokens:check` (ciclos, huecos, contraste); escalas `brand` a partir de las semillas de `docs/brand/` | F1-T01 |
 | F1-T03 | `@tessen/styles`: capas, reset/base opcionales, importación de tokens, temas light/dark/densidad | T02 |
 | F1-T04 | `@tessen/icons`: pipeline SVG → Vue/React/sprite + set inicial | D-07 |
 | F1-T05 | `@tessen/motion` L0: tokens + keyframes CSS + `data-tessen-motion` (L1 en F2) | T02, T03 |
@@ -113,7 +113,7 @@ F7 se alimenta de F2/F3 (infra) y F5/F6 (para mostrarlos), puede intercalarse tr
 | R5 | a11y insuficiente en compuestos | Media | Alto | Contratos con APG, axe + manual, reportes públicos | F3 |
 | R6 | Nombre/marca/scope en uso | Baja-media | Alto | Verificar D-02 antes de F1 | F0→F1 |
 | R7 | Dependencia de herramientas pre-1.0 | Media | Medio | Evitarlas en v1 (tsdown) | F1 |
-| R8 | Logo/branding sin definir bloquea tema por defecto | Media | Bajo-medio | Acento provisional marcado; aportar asset (D-01) | F1 |
+| R8 | Las semillas de marca no cumplen contraste AA en algunos roles (`#2B7BE0`, `#38C6F4` con texto blanco) | Alta (medido) | Bajo | Derivar roles por contraste en `tokens:check`; el cian lleva texto oscuro (`04` §3.1) | F1 |
 | R9 | Fatiga de proyecto en solitario | Media | Alto | Entregas intermedias públicas (M2, M4), alcance recortable (Studio avanzado y Playground P2 son diferibles) | continuo |
 
 ## 7. Recortes seguros si el calendario aprieta

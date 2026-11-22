@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="256" height="256" role="img" aria-label="Tessen">
+  <defs>
+    <mask id="w-m"><rect width="64" height="64" fill="#fff"/>
+      <path d="M32,51 L-18.35,-11.17" stroke="#000" stroke-width="2.3"/>
+      <path d="M32,51 L14.00,-26.95" stroke="#000" stroke-width="2.3"/>
+      <path d="M32,51 L50.00,-26.95" stroke="#000" stroke-width="2.3"/>
+      <path d="M32,51 L82.35,-11.17" stroke="#000" stroke-width="2.3"/>
+      <circle cx="32" cy="51" r="6.2" fill="#000"/></mask></defs>
+  <g transform="matrix(0.84 0 0 0.84 5.12 5.28)">
+    <g mask="url(#w-m)"><path d="M27.47,48.89 L5.72,38.74 A29,29 0 0 1 13.75,28.46 L28.85,47.11Z" fill="#FFFFFF"/><path d="M28.85,47.11 L11.23,25.35 L11.40,8.76 L24.58,18.85 L30.88,46.13Z" fill="#FFFFFF"/><path d="M30.88,46.13 L25.03,20.79 A31,31 0 0 1 38.97,20.79 L33.12,46.13Z" fill="#FFFFFF"/><path d="M33.12,46.13 L39.42,18.85 L52.60,8.76 L52.77,25.35 L35.15,47.11Z" fill="#FFFFFF"/><path d="M35.15,47.11 L50.25,28.46 A29,29 0 0 1 58.28,38.74 L36.53,48.89Z" fill="#FFFFFF"/></g>
+    <path d="M32 52.5 C26.5 52.5 23.5 57.5 22.5 63.8 L41.5 63.8 C40.5 57.5 37.5 52.5 32 52.5Z" fill="#FFFFFF"/>
+    <path d="M38.5 60.6 C49 63 57.5 57.5 55 47.5" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+    <rect x="52.2" y="46.8" width="5.6" height="5.4" rx="1.4" fill="#FFFFFF"/>
+    <path d="M53.85 52.2 L50.40 61.0" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M54.42 52.2 L52.70 61.0" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M55.00 52.2 L55.00 61.0" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M55.58 52.2 L57.30 61.0" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M56.15 52.2 L59.60 61.0" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+</svg>

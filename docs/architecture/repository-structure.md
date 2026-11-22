@@ -54,7 +54,7 @@ tessen/
 ├── docs/
 │   ├── planning/                # Fase 0 (research, PRD, ADRs)
 │   ├── architecture/            # este conjunto de reglas
-│   └── brand/                   # (pendiente: logotipo, ver D-01)
+│   └── brand/                   # logotipo (propuesta 11), paleta y reglas de uso
 ├── .changeset/
 ├── .github/workflows/
 ├── .dependency-cruiser.cjs      # F1-T01

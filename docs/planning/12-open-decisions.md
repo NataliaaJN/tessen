@@ -4,12 +4,12 @@
 
 | ID | Prioridad | Decisión | Necesaria antes de |
 |---|---|---|---|
-| D-01 | 🔴 | Asset del logotipo (propuesta 11) | F1-T02 / F4 |
+| D-01 | ✅ Resuelta | Asset del logotipo (propuesta 11) — incorporado en `docs/brand/` | — |
 | D-02 | 🔴 | Disponibilidad de nombre, scope npm `@tessen`, dominio y marca | F1-T01 |
 | D-03 | 🟡 | Nomenclatura pública (ADR 0011) | F2 |
 | D-04 | 🟡 | Framework del *shell* de Theme Studio y Playground (ADR 0008) | F5 |
 | D-05 | 🔴 | Motor de comportamiento (ADR 0004, spike S1) | F2 |
-| D-06 | 🟡 | Tipografía por defecto | F1-T03 |
+| D-06 | 🟡 | Tipografía por defecto (la marca ya usa Inter/Outfit/JetBrains Mono) | F1-T03 |
 | D-07 | 🟡 | Fuente del set de iconos | F1-T04 |
 | D-08 | 🔴 | Licencia de Tessen | Primera publicación |
 | D-09 | 🟢 | Librería base de gráficos | F7 |
@@ -25,10 +25,8 @@
 ---
 
 ### D-01 — Logotipo (propuesta 11, chat «Propuestas de logotipo con gato»)
-- **Situación:** el encargo pide usar la propuesta 11, pero **ese chat no es accesible desde este entorno** (no aparece en las sesiones locales de Claude Code ni hay archivos con ese nombre en el equipo). No se ha inventado ni sustituido.
-- **Qué hace falta:** el archivo del logotipo (SVG preferible; PNG alta resolución como mínimo), variantes (monocromo, claro/oscuro) y, si existe, la paleta.
-- **Impacto:** acento de marca del tema por defecto (`04` §3.1), favicon, cabecera de la plataforma, README, `@tessen/icons` (marca).
-- **Recomendación:** colocar el asset en `docs/brand/logo/` y abrir una rama `feat/brand-logo`; hasta entonces el tema usa un acento **provisional** marcado en el JSON.
+- **Resolución (2026-11-22):** el propietario aportó la tarjeta de variantes de la propuesta 11 «Ears and Tassel». Se extrajeron la marca (color, sobre oscuro, mono negro y blanco) y un lockup a `docs/brand/logo/`, con paleta «Cobalt / Cyan», tipografías (Outfit, Inter, JetBrains Mono) y contrastes medidos en `docs/brand/README.md`.
+- **Pendientes derivados (menores):** convertir el texto «TESSEN» del lockup a contornos; generar favicons (16/24/40 px) y el icono de app a partir de la variante `on-dark`; fijar las escalas `brand` finales en Fase 1 (las semillas `#2B7BE0` y `#38C6F4` no cumplen AA con texto blanco, ver `04` §3.1).
 
 ### D-02 — Nombre, scope npm, dominio y marca
 - **Alternativas:** mantener `@tessen`; scope alternativo (`@tessen-ui`, `@tessenui`).
@@ -47,7 +45,7 @@
 - Impacto: coste de los componentes compuestos (≈ 40 % del catálogo) y paridad.
 
 ### D-06 — Tipografía
-- Alternativas: pila del sistema (rendimiento, sin licencias) · **Inter variable (recomendada, OFL)** **[C]** · fuente de marca (licencia a revisar). rM usa Manrope Variable **[V]**.
+- La tarjeta del logotipo ya usa **Inter** (interfaz), **Outfit** (wordmark) y **JetBrains Mono** (técnico). Recomendación: adoptar Inter variable como fuente de interfaz y JetBrains Mono para código, ambas con pila del sistema de respaldo; Outfit solo para marca/titulares y opcional para consumidores. Verificar licencias (suelen ser OFL **[C]**) y estrategia de carga (autoalojada, `font-display: swap`) en F1. rM usa Manrope Variable **[V]**.
 - Impacto: percepción de marca y CLS; Theme Studio permite cambiarla.
 
 ### D-07 — Iconos
