@@ -106,7 +106,7 @@ const cases: ContractCase[] = [
       { do: 'focus', target: trigger },
       { do: 'key', key: 'ArrowDown', target: trigger },
       { do: 'wait', selector: '[role="listbox"]:not([hidden])' },
-      { do: 'wait', selector: '[role="option"][data-highlighted]' },
+      { do: 'wait', selector: '[role="listbox"]:focus-within [role="option"][data-highlighted]' },
       { do: 'key', key: 'Enter' },
     ],
     expect: { emitted: ['apple'], within: { [trigger]: { text: 'Apple' } } },
