@@ -1,0 +1,113 @@
+/* Input and Textarea: text controls. Contracts: @tessen-ui/core inputContract / textareaContract. Overrides: --t-input-radius. */
+@layer tessen.components {
+  .t-input,
+  .t-textarea {
+    --_border: var(--tessen-color-input-border);
+
+    box-sizing: border-box;
+    border: 1px solid var(--_border);
+    border-radius: var(--t-input-radius, var(--tessen-radius-md));
+    background: var(--tessen-color-input-background);
+    color: var(--tessen-color-text-primary);
+    font-family: var(--tessen-font-family-sans);
+    font-size: var(--_font-size);
+    line-height: var(--tessen-font-line-height-normal);
+    transition: border-color var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard);
+
+    &[data-size='sm'] {
+      --_height: var(--tessen-size-control-sm);
+      --_font-size: var(--tessen-font-size-sm);
+    }
+    &[data-size='md'] {
+      --_height: var(--tessen-size-control-md);
+      --_font-size: var(--tessen-font-size-md);
+    }
+    &[data-size='lg'] {
+      --_height: var(--tessen-size-control-lg);
+      --_font-size: var(--tessen-font-size-lg);
+    }
+
+    @media (hover: hover) {
+      &:hover:not([data-invalid]) {
+        --_border: var(--tessen-color-input-border-hover);
+      }
+    }
+    &[data-invalid] {
+      --_border: var(--tessen-color-input-border-invalid);
+    }
+  }
+
+  .t-input {
+    display: flex;
+    align-items: center;
+    gap: var(--tessen-space-2);
+    block-size: var(--_height);
+    padding-inline: var(--tessen-space-3);
+
+    /* The wrapper carries the ring so icons and the control read as one field. */
+    &:focus-within {
+      --_border: var(--tessen-color-border-focus);
+      outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+      outline-offset: calc(var(--tessen-focus-ring-offset) * -1);
+    }
+    &:has(:disabled) {
+      background: var(--tessen-color-surface-sunken);
+      color: var(--tessen-color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+  .t-input__control {
+    flex: 1;
+    min-inline-size: 0;
+    block-size: 100%;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+
+    &::placeholder {
+      color: var(--tessen-color-input-placeholder);
+    }
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+  .t-input__leading,
+  .t-input__trailing {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    color: var(--tessen-color-text-secondary);
+  }
+
+  .t-textarea {
+    display: block;
+    inline-size: 100%;
+    min-block-size: calc(var(--_height) * 2);
+    padding: var(--tessen-space-2) var(--tessen-space-3);
+    resize: vertical;
+
+    &::placeholder {
+      color: var(--tessen-color-input-placeholder);
+    }
+    &:focus-visible {
+      --_border: var(--tessen-color-border-focus);
+      outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+      outline-offset: calc(var(--tessen-focus-ring-offset) * -1);
+    }
+    &:disabled {
+      background: var(--tessen-color-surface-sunken);
+      color: var(--tessen-color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .t-input,
+    .t-textarea {
+      transition: none;
+    }
+  }
+}

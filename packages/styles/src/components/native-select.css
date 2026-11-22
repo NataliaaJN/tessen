@@ -1,0 +1,73 @@
+/* NativeSelect: a styled native <select>. Contract: @tessen-ui/core nativeSelectContract. Overrides: --t-native-select-radius. */
+@layer tessen.components {
+  .t-native-select {
+    --_border: var(--tessen-color-input-border);
+
+    position: relative;
+    display: inline-flex;
+    inline-size: 100%;
+    color: var(--tessen-color-text-primary);
+    font-family: var(--tessen-font-family-sans);
+
+    &[data-size='sm'] {
+      --_height: var(--tessen-size-control-sm);
+      --_font-size: var(--tessen-font-size-sm);
+    }
+    &[data-size='md'] {
+      --_height: var(--tessen-size-control-md);
+      --_font-size: var(--tessen-font-size-md);
+    }
+    &[data-size='lg'] {
+      --_height: var(--tessen-size-control-lg);
+      --_font-size: var(--tessen-font-size-lg);
+    }
+    &[data-invalid] {
+      --_border: var(--tessen-color-input-border-invalid);
+    }
+
+    /* The chevron is drawn here so the native arrow can be hidden consistently. */
+    &::after {
+      content: '';
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-end: var(--tessen-space-3);
+      inline-size: 0.5rem;
+      block-size: 0.5rem;
+      border-inline-end: 2px solid currentColor;
+      border-block-end: 2px solid currentColor;
+      transform: translateY(-70%) rotate(45deg);
+      pointer-events: none;
+    }
+  }
+
+  .t-native-select__control {
+    box-sizing: border-box;
+    inline-size: 100%;
+    block-size: var(--_height);
+    padding-inline: var(--tessen-space-3) var(--tessen-space-8);
+    border: 1px solid var(--_border);
+    border-radius: var(--t-native-select-radius, var(--tessen-radius-md));
+    appearance: none;
+    background: var(--tessen-color-input-background);
+    color: inherit;
+    font: inherit;
+    font-size: var(--_font-size);
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover:not(:disabled) {
+        border-color: var(--tessen-color-input-border-hover);
+      }
+    }
+    &:focus-visible {
+      border-color: var(--tessen-color-border-focus);
+      outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+      outline-offset: calc(var(--tessen-focus-ring-offset) * -1);
+    }
+    &:disabled {
+      background: var(--tessen-color-surface-sunken);
+      color: var(--tessen-color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+}

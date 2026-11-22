@@ -1,0 +1,192 @@
+/* Checkbox, Radio and Switch: native inputs, visually hidden, drawn with CSS. Contracts: @tessen-ui/core checkbox / radio-group / switch. */
+@layer tessen.components {
+  .t-checkbox,
+  .t-radio,
+  .t-switch {
+    --_accent: var(--tessen-color-action-primary-default);
+    --_border: var(--tessen-color-input-border);
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--tessen-space-2);
+    color: var(--tessen-color-text-primary);
+    font-family: var(--tessen-font-family-sans);
+    font-size: var(--tessen-font-size-md);
+    line-height: var(--tessen-font-line-height-snug);
+    cursor: pointer;
+
+    &[data-size='sm'] {
+      --_box: 1rem;
+    }
+    &[data-size='md'] {
+      --_box: 1.25rem;
+    }
+    &[data-size='lg'] {
+      --_box: 1.5rem;
+    }
+    &[data-invalid] {
+      --_border: var(--tessen-color-input-border-invalid);
+    }
+    &:has(:disabled) {
+      color: var(--tessen-color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  /* The real input stays in the layout (focusable, in forms) but invisible. */
+  .t-checkbox__input,
+  .t-radio__input,
+  .t-switch__input {
+    position: absolute;
+    inline-size: var(--_box);
+    block-size: var(--_box);
+    margin: 0;
+    opacity: 0;
+    cursor: inherit;
+  }
+
+  .t-checkbox__box,
+  .t-radio__circle {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    inline-size: var(--_box);
+    block-size: var(--_box);
+    border: 1px solid var(--_border);
+    background: var(--tessen-color-input-background);
+    color: var(--tessen-color-action-primary-on);
+    transition:
+      background-color var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard),
+      border-color var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard);
+  }
+  .t-checkbox__box {
+    border-radius: var(--tessen-radius-sm);
+  }
+  .t-radio__circle {
+    border-radius: var(--tessen-radius-full);
+  }
+
+  .t-checkbox__mark {
+    inline-size: 75%;
+    block-size: 75%;
+    opacity: 0;
+  }
+  .t-checkbox__mark--minus {
+    position: absolute;
+  }
+
+  .t-checkbox[data-state='checked'] .t-checkbox__box,
+  .t-checkbox[data-state='indeterminate'] .t-checkbox__box,
+  .t-radio[data-state='checked'] .t-radio__circle {
+    border-color: var(--_accent);
+    background: var(--_accent);
+  }
+  .t-checkbox[data-state='checked'] .t-checkbox__mark--check,
+  .t-checkbox[data-state='indeterminate'] .t-checkbox__mark--minus {
+    opacity: 1;
+  }
+
+  .t-radio__dot {
+    inline-size: 40%;
+    block-size: 40%;
+    border-radius: var(--tessen-radius-full);
+    background: var(--tessen-color-action-primary-on);
+    transform: scale(0);
+    transition: transform var(--tessen-motion-duration-fast) var(--tessen-motion-easing-decelerate);
+  }
+  .t-radio[data-state='checked'] .t-radio__dot {
+    transform: scale(1);
+  }
+
+  /* Switch: track + thumb; the thumb slides with transform. */
+  .t-switch {
+    &[data-size='sm'] {
+      --_track-w: 1.75rem;
+      --_track-h: 1rem;
+    }
+    &[data-size='md'] {
+      --_track-w: 2.25rem;
+      --_track-h: 1.25rem;
+    }
+    &[data-size='lg'] {
+      --_track-w: 2.75rem;
+      --_track-h: 1.5rem;
+    }
+    .t-switch__input {
+      inline-size: var(--_track-w);
+      block-size: var(--_track-h);
+    }
+  }
+  .t-switch__track {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    box-sizing: border-box;
+    inline-size: var(--_track-w);
+    block-size: var(--_track-h);
+    padding: 2px;
+    border: 1px solid var(--_border);
+    border-radius: var(--tessen-radius-full);
+    background: var(--tessen-color-action-neutral-active);
+    transition: background-color var(--tessen-motion-duration-normal)
+      var(--tessen-motion-easing-standard);
+  }
+  .t-switch__thumb {
+    inline-size: calc(var(--_track-h) - 6px);
+    block-size: calc(var(--_track-h) - 6px);
+    border-radius: var(--tessen-radius-full);
+    background: var(--tessen-color-white);
+    box-shadow: var(--tessen-elevation-raised);
+    transition: transform var(--tessen-motion-duration-normal) var(--tessen-motion-easing-standard);
+  }
+  .t-switch[data-state='checked'] {
+    .t-switch__track {
+      border-color: var(--_accent);
+      background: var(--_accent);
+    }
+    .t-switch__thumb {
+      transform: translateX(calc(var(--_track-w) - var(--_track-h)));
+    }
+  }
+
+  /* Focus ring on the visible shape, driven by the hidden input. */
+  .t-checkbox:has(.t-checkbox__input:focus-visible) .t-checkbox__box,
+  .t-radio:has(.t-radio__input:focus-visible) .t-radio__circle,
+  .t-switch:has(.t-switch__input:focus-visible) .t-switch__track {
+    outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+    outline-offset: var(--tessen-focus-ring-offset);
+  }
+
+  .t-checkbox:has(:disabled) .t-checkbox__box,
+  .t-radio:has(:disabled) .t-radio__circle,
+  .t-switch:has(:disabled) .t-switch__track {
+    border-color: var(--tessen-color-border-disabled);
+    opacity: 0.6;
+  }
+
+  .t-radio-group {
+    display: flex;
+    gap: var(--tessen-space-3);
+
+    &[data-orientation='vertical'] {
+      flex-direction: column;
+    }
+    &[data-orientation='horizontal'] {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .t-checkbox__box,
+    .t-radio__circle,
+    .t-radio__dot,
+    .t-switch__track,
+    .t-switch__thumb {
+      transition: none;
+    }
+  }
+}

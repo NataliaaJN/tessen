@@ -1,0 +1,36 @@
+/* Field: label + control + description + error. Contract: @tessen-ui/core fieldContract. */
+@layer tessen.components {
+  .t-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tessen-space-1);
+    font-family: var(--tessen-font-family-sans);
+  }
+
+  .t-field__label {
+    color: var(--tessen-color-text-primary);
+    font-size: var(--tessen-font-size-sm);
+    font-weight: var(--tessen-font-weight-medium);
+    line-height: var(--tessen-font-line-height-snug);
+  }
+  .t-field[data-disabled] .t-field__label {
+    color: var(--tessen-color-text-disabled);
+  }
+  .t-field__required {
+    margin-inline-start: var(--tessen-space-0-5);
+    color: var(--tessen-color-feedback-danger-text);
+  }
+
+  .t-field__description,
+  .t-field__error {
+    margin: 0;
+    font-size: var(--tessen-font-size-sm);
+    line-height: var(--tessen-font-line-height-snug);
+  }
+  .t-field__description {
+    color: var(--tessen-color-text-secondary);
+  }
+  .t-field__error {
+    color: var(--tessen-color-feedback-danger-text);
+  }
+}
