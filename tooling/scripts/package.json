@@ -6,5 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "node --test test/"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "0.18.5",
+    "publint": "0.3.25"
   }
 }

@@ -28,7 +28,7 @@
 | F1-T06 ✅ | **Spike S1**: `Dialog` + `Tabs` (+`Tooltip`) con Zag en Vue y React; medir criterios de `06` §6 → actualizar **ADR 0004**. Segunda validación (Select, Combobox, Menu, DatePicker, portales, SSR real): [`S2-zag-validation.md`](S2-zag-validation.md) → ADR 0004 `Accepted` con condiciones | T01–T03 |
 | F1-T07 ✅ | **Spike S2**: contrato de `Button` → codegen de snippets → runner de contrato en Vue/React → diff visual de paridad. Resultados: [`T07-button-parity.md`](T07-button-parity.md) | T06 |
 | F1-T08 ✅ | `@tessen/core` mínimo: `defineContract`, `defineVariants`, tipos | T07 |
-| F1-T09 | **Validación por tarballs** (ADR 0016): `pack:all`, proyectos `integration/vite-vue` y `vite-react` instalados desde `.tgz` con `overrides`, checklist de `npm-publication-strategy` §4 sobre `tokens`/`styles`/`core`, comprobación de lockfile `scope:check` | T01–T03, T08 |
+| F1-T09 ✅ | **Validación por tarballs** (ADR 0016): `pack:all`, proyectos `integration/vite-vue` y `vite-react` instalados desde `.tgz` con `overrides`, checklist de `npm-publication-strategy` §4 sobre `tokens`/`styles`/`core`, comprobación de lockfile `scope:check`. Resultados: [`T09-tarball-validation.md`](T09-tarball-validation.md) | T01–T03, T08 |
 **Salida (gate):** tokens empaquetables y validados como tarball; ADR 0004 `Accepted` o reemplazado por plan D; pipeline de paridad demostrado con `Button`.
 
 ### Fase 2 — Core components (8–10 sem)

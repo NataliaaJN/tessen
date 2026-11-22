@@ -22,6 +22,6 @@ Cada ADR documenta **una** decisión arquitectónica: contexto, decisión, alter
 | [0013](0013-dependency-boundary-enforcement.md) | Reglas de dependencias aplicadas con dependency-cruiser | Proposed |
 | [0014](0014-zero-cost-github-first-infrastructure.md) | Desarrollo sin coste y GitHub como única plataforma externa | **Accepted** (decisión del propietario) |
 | [0015](0015-npm-namespace-provisional-no-publication.md) | Espacio de nombres npm provisional y sin publicación | **Accepted** (+ mapeo de nombres internos Proposed) |
-| [0016](0016-package-distribution-validation-with-pnpm-pack.md) | Validación de la distribución con `pnpm pack` | **Accepted** el mecanismo; procedimiento Proposed |
+| [0016](0016-package-distribution-validation-with-pnpm-pack.md) | Validación de la distribución con `pnpm pack` | **Accepted** (procedimiento validado en F1-T09; SSR/peers/size-limit en F2) |
 
 Plantilla: [`_template.md`](_template.md).

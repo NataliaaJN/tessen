@@ -1,6 +1,6 @@
 # ADR 0016 — Validación de la distribución con `pnpm pack`
 
-- **Estado:** **Accepted** el mecanismo (`pnpm pack`, decisión del propietario); el procedimiento detallado está `Proposed` y se valida en `F1-T09`.
+- **Estado:** **Accepted** (mecanismo `pnpm pack`, decisión del propietario; procedimiento validado en `F1-T09`, ver [`T09-tarball-validation.md`](../T09-tarball-validation.md)). Alcance validado: `tokens`, `styles`, `core`, `icons`, `motion` con proyectos `vite-vue` y `vite-react`; SSR Nuxt/Next, matriz de peers y `size-limit` se activan en F2.
 - **Fecha:** 2026-11-22
 
 ## Contexto

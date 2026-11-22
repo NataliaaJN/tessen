@@ -27,6 +27,6 @@ Light, dark (`data-tessen-theme`, `prefers-color-scheme`) and density (`data-tes
 
 ## Source layout
 
-`src/layers.css`, `reset.css`, `base.css`, and later `components/*.css`. `pnpm build` assembles `dist/`; the build fails if the layer order differs from the one in tokens. Tests check that every rule is layered and every `var(--tessen-*)` exists in the tokens.
+`src/layers.css`, `reset.css`, `base.css`, and later `components/*.css` (its `./components/*.css` export is added together with the first component stylesheet: a glob export that matches no file fails publint). `pnpm build` assembles `dist/`; the build fails if the layer order differs from the one in tokens. Tests check that every rule is layered and every `var(--tessen-*)` exists in the tokens.
 
 Not built yet: `data-tessen-motion` and reduced-motion handling (F1-T05), component CSS (F2).

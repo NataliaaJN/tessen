@@ -120,8 +120,50 @@ export function checkScope(rootDir, config) {
   return errors;
 }
 
+/**
+ * Lockfile of an `integration/*` project (ADR 0016): every internal package must be
+ * resolved from a local tarball (`@scope/name@file:...`), never from the registry.
+ *
+ * @param {string} lockPath absolute path of the project's `pnpm-lock.yaml`
+ * @param {ScopeConfig} [config]
+ * @returns {string[]} violations (empty when fine)
+ */
+export function checkIntegrationLockfile(lockPath, config) {
+  const cfg = config ?? /** @type {ScopeConfig} */ (readJson(join(here, 'scope.json')));
+  if (!existsSync(lockPath)) return [`${lockPath}: lockfile not found`];
+  const scopes = [cfg.scope, ...cfg.forbiddenScopes].map(escapeRegExp).join('|');
+  const names = cfg.forbiddenUnscopedNames.map(escapeRegExp).join('|');
+  const internalKey = new RegExp(`^ {2}'?(?:(?:${scopes})/|(?:${names})@)`);
+  /** @type {string[]} */
+  const errors = [];
+  let section = '';
+  let internalEntries = 0;
+  for (const line of readFileSync(lockPath, 'utf8').split(/\r?\n/)) {
+    if (/^\S/.test(line)) section = line.replace(/:.*$/, '');
+    if ((section === 'packages' || section === 'snapshots') && internalKey.test(line)) {
+      if (section === 'packages') internalEntries++;
+      if (!/@file:/.test(line)) {
+        errors.push(`pnpm-lock.yaml: "${line.trim()}" is not resolved from a local tarball`);
+      }
+    }
+  }
+  if (internalEntries === 0)
+    errors.push('pnpm-lock.yaml: no internal package found (overrides not applied?)');
+  return errors;
+}
+
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const errors = checkScope(resolve(here, '..', '..'));
+  const repoRoot = resolve(here, '..', '..');
+  const errors = checkScope(repoRoot);
+  const integrationDir = join(repoRoot, 'integration');
+  if (existsSync(integrationDir)) {
+    for (const entry of readdirSync(integrationDir)) {
+      const lock = join(integrationDir, entry, 'pnpm-lock.yaml');
+      if (existsSync(lock)) {
+        for (const e of checkIntegrationLockfile(lock)) errors.push(`integration/${entry}: ${e}`);
+      }
+    }
+  }
   if (errors.length > 0) {
     console.error(`scope:check failed (${errors.length}):`);
     for (const e of errors) console.error(`  - ${e}`);

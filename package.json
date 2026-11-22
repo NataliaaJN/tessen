@@ -19,7 +19,12 @@
     "tokens:check": "turbo run tokens:check",
     "deps:check": "depcruise --config .dependency-cruiser.cjs tooling packages",
     "scope:check": "node tooling/scripts/scope-check.mjs",
-    "verify": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm tokens:check && pnpm deps:check && pnpm scope:check && pnpm test && pnpm build"
+    "verify": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm tokens:check && pnpm deps:check && pnpm scope:check && pnpm test && pnpm build",
+    "pack:all": "node tooling/scripts/pack-all.mjs",
+    "tarball:check": "node tooling/scripts/tarball-check.mjs",
+    "integration:install": "node tooling/scripts/integration-install.mjs",
+    "integration:test": "node tooling/scripts/integration-test.mjs",
+    "dist:verify": "pnpm build && pnpm pack:all && pnpm tarball:check && pnpm integration:install && pnpm integration:test && pnpm scope:check"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",

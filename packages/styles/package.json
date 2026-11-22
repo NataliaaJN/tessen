@@ -9,11 +9,11 @@
   ],
   "exports": {
     ".": "./dist/index.css",
+    "./index.css": "./dist/index.css",
     "./layers.css": "./dist/layers.css",
     "./tokens.css": "./dist/tokens.css",
     "./reset.css": "./dist/reset.css",
-    "./base.css": "./dist/base.css",
-    "./components/*.css": "./dist/components/*.css"
+    "./base.css": "./dist/base.css"
   },
   "files": [
     "dist"
