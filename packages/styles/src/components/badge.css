@@ -1,0 +1,87 @@
+/* Badge: small status label. Contract: @tessen-ui/core badgeContract. Overrides: --t-badge-bg, --t-badge-fg, --t-badge-radius. */
+@layer tessen.components {
+  .t-badge {
+    --_bg: var(--tessen-color-action-neutral-default);
+    --_fg: var(--tessen-color-text-primary);
+    --_border: transparent;
+
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--tessen-space-1);
+    padding-inline: var(--_padding-x);
+    block-size: var(--_height);
+    border: 1px solid var(--_border);
+    border-radius: var(--t-badge-radius, var(--tessen-radius-full));
+    background: var(--t-badge-bg, var(--_bg));
+    color: var(--t-badge-fg, var(--_fg));
+    font-family: var(--tessen-font-family-sans);
+    font-size: var(--_font-size);
+    font-weight: var(--tessen-font-weight-medium);
+    line-height: 1;
+    white-space: nowrap;
+
+    &[data-size='sm'] {
+      --_height: 1.25rem;
+      --_padding-x: var(--tessen-space-2);
+      --_font-size: var(--tessen-font-size-xs);
+    }
+    &[data-size='md'] {
+      --_height: 1.5rem;
+      --_padding-x: var(--tessen-space-3);
+      --_font-size: var(--tessen-font-size-sm);
+    }
+
+    /* Tones set the semantic pair; the variant decides how it is painted. */
+    &[data-tone='brand'] {
+      --_solid: var(--tessen-color-action-primary-default);
+      --_on-solid: var(--tessen-color-action-primary-on);
+      --_soft: var(--tessen-color-action-primary-subtle);
+      --_on-soft: var(--tessen-color-text-link);
+    }
+    &[data-tone='success'] {
+      --_solid: var(--tessen-color-feedback-success-solid);
+      --_on-solid: var(--tessen-color-text-on-feedback);
+      --_soft: var(--tessen-color-feedback-success-background);
+      --_on-soft: var(--tessen-color-feedback-success-text);
+    }
+    &[data-tone='warning'] {
+      --_solid: var(--tessen-color-feedback-warning-solid);
+      --_on-solid: var(--tessen-color-text-on-feedback);
+      --_soft: var(--tessen-color-feedback-warning-background);
+      --_on-soft: var(--tessen-color-feedback-warning-text);
+    }
+    &[data-tone='danger'] {
+      --_solid: var(--tessen-color-feedback-danger-solid);
+      --_on-solid: var(--tessen-color-text-on-feedback);
+      --_soft: var(--tessen-color-feedback-danger-background);
+      --_on-soft: var(--tessen-color-feedback-danger-text);
+    }
+    &[data-tone='info'] {
+      --_solid: var(--tessen-color-feedback-info-solid);
+      --_on-solid: var(--tessen-color-text-on-feedback);
+      --_soft: var(--tessen-color-feedback-info-background);
+      --_on-soft: var(--tessen-color-feedback-info-text);
+    }
+    &[data-tone='neutral'] {
+      --_solid: var(--tessen-color-surface-inverse);
+      --_on-solid: var(--tessen-color-text-inverse);
+      --_soft: var(--tessen-color-action-neutral-default);
+      --_on-soft: var(--tessen-color-text-primary);
+    }
+
+    &[data-variant='subtle'] {
+      --_bg: var(--_soft);
+      --_fg: var(--_on-soft);
+    }
+    &[data-variant='solid'] {
+      --_bg: var(--_solid);
+      --_fg: var(--_on-solid);
+    }
+    &[data-variant='outline'] {
+      --_bg: transparent;
+      --_fg: var(--_on-soft);
+      --_border: currentColor;
+    }
+  }
+}
