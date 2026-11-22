@@ -51,3 +51,9 @@ export { radioGroupContract, radioGroupVariants, radioVariants } from './radio-g
 export type { RadioGroupVariantProps, RadioVariantProps } from './radio-group.contract.ts';
 export { nativeSelectContract, nativeSelectVariants } from './native-select.contract.ts';
 export type { NativeSelectVariantProps } from './native-select.contract.ts';
+export { tabsActivationModes, tabsContract, tabsVariants } from './tabs.contract.ts';
+export type { TabsVariantProps } from './tabs.contract.ts';
+export { tooltipContract, tooltipVariants } from './tooltip.contract.ts';
+export type { TooltipVariantProps } from './tooltip.contract.ts';
+export { dialogContract, dialogRoles, dialogVariants } from './dialog.contract.ts';
+export type { DialogVariantProps } from './dialog.contract.ts';

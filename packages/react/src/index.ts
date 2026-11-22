@@ -19,3 +19,6 @@ export * from './components/checkbox/index.ts';
 export * from './components/switch/index.ts';
 export * from './components/radio-group/index.ts';
 export * from './components/native-select/index.ts';
+export * from './components/tabs/index.ts';
+export * from './components/tooltip/index.ts';
+export * from './components/dialog/index.ts';

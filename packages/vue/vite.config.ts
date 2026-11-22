@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [vue()],
   build: {
     lib: { entry: 'src/index.ts', formats: ['es'], fileName: 'index' },
-    rollupOptions: { external: ['vue', /^@tessen-ui\//] },
+    rollupOptions: { external: ['vue', /^@tessen-ui\//, /^@zag-js\//] },
     sourcemap: false,
     emptyOutDir: true,
   },

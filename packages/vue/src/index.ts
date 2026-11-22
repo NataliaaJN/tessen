@@ -19,3 +19,6 @@ export * from './components/checkbox/index.js';
 export * from './components/switch/index.js';
 export * from './components/radio-group/index.js';
 export * from './components/native-select/index.js';
+export * from './components/tabs/index.js';
+export * from './components/tooltip/index.js';
+export * from './components/dialog/index.js';

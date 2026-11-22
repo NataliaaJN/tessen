@@ -367,6 +367,21 @@ importers:
       '@tessen-ui/core':
         specifier: workspace:*
         version: link:../core
+      '@zag-js/dialog':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/presence':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/react':
+        specifier: 1.48.0
+        version: 1.48.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      '@zag-js/tabs':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/tooltip':
+        specifier: 1.48.0
+        version: 1.48.0
     devDependencies:
       '@tessen-ui/contract-runner':
         specifier: workspace:*
@@ -380,6 +395,9 @@ importers:
       '@testing-library/react':
         specifier: 'catalog:'
         version: 16.3.3(@testing-library/dom@10.4.2)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      '@testing-library/user-event':
+        specifier: 'catalog:'
+        version: 14.6.13(@testing-library/dom@10.4.2)
       '@types/node':
         specifier: 'catalog:'
         version: 26.6.6
@@ -455,6 +473,21 @@ importers:
       '@tessen-ui/core':
         specifier: workspace:*
         version: link:../core
+      '@zag-js/dialog':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/presence':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/tabs':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/tooltip':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/vue':
+        specifier: 1.48.0
+        version: 1.48.0(vue@3.5.46(typescript@6.0.3))
     devDependencies:
       '@tessen-ui/contract-runner':
         specifier: workspace:*
@@ -465,6 +498,9 @@ importers:
       '@tessen-ui/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/tsconfig
+      '@testing-library/user-event':
+        specifier: 'catalog:'
+        version: 14.6.13(@testing-library/dom@10.4.2)
       '@types/node':
         specifier: 'catalog:'
         version: 26.6.6

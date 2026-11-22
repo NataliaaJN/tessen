@@ -1,0 +1,76 @@
+/* Tooltip: complementary text on hover/focus. Contract: @tessen-ui/core tooltipContract. */
+@layer tessen.components {
+  .t-tooltip__trigger {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: inherit;
+
+    &:focus-visible {
+      outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+      outline-offset: var(--tessen-focus-ring-offset);
+      border-radius: var(--tessen-radius-xs);
+    }
+  }
+
+  /* Zag positions this wrapper (it sets position and transform) above everything else. */
+  .t-tooltip__positioner {
+    z-index: var(--tessen-layer-tooltip);
+  }
+
+  .t-tooltip {
+    box-sizing: border-box;
+    max-inline-size: 18rem;
+    padding: var(--tessen-space-1) var(--tessen-space-2);
+    border-radius: var(--tessen-radius-sm);
+    background: var(--tessen-color-surface-inverse);
+    color: var(--tessen-color-text-inverse);
+    font-family: var(--tessen-font-family-sans);
+    font-size: var(--tessen-font-size-sm);
+    line-height: var(--tessen-font-line-height-snug);
+    pointer-events: auto;
+    animation: t-tooltip-in var(--tessen-motion-duration-fast)
+      var(--tessen-motion-easing-decelerate);
+
+    &[data-state='closed'] {
+      animation: t-tooltip-out var(--tessen-motion-duration-fast)
+        var(--tessen-motion-easing-accelerate) forwards;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .t-tooltip,
+    .t-tooltip[data-state='closed'] {
+      animation-name: t-tooltip-fade-in;
+    }
+    .t-tooltip[data-state='closed'] {
+      animation-name: t-tooltip-fade-out;
+    }
+  }
+
+  @keyframes t-tooltip-in {
+    from {
+      opacity: 0;
+      transform: translateY(var(--tessen-motion-distance-xs));
+    }
+  }
+  @keyframes t-tooltip-out {
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes t-tooltip-fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes t-tooltip-fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+}
