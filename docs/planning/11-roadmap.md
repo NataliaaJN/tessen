@@ -34,7 +34,7 @@
 ### Fase 2 — Core components (8–10 sem)
 Tier **T1** (~22 incl. infra: Button, IconButton, Link, Field/Label/Input/Textarea, Checkbox, Radio, Switch, NativeSelect, Tabs, Tooltip, Dialog, Alert, Badge, Spinner, Skeleton, Card, layout (`Stack/Container/Grid/Divider/AspectRatio`), `VisuallyHidden/Portal/FocusScope/Presence`).
 Por componente: contrato → CSS → Vue → React → tests (componente, contrato, axe) → story → ejemplos.
-- **Progreso:** F2-T01 ✅ `Button` ([`F2-T01-button.md`](F2-T01-button.md)); nacen `@tessen-ui/vue` y `@tessen-ui/react`.
+- **Progreso:** F2-T01..T06 ✅ (24 componentes T1, motion L1, generador, alpha por tarballs). Cierre, medición y deuda: [`F2-closing.md`](F2-closing.md). **Falta** la paridad visual y las pruebas en navegador real para cumplir el gate.
 - `@tessen/motion` L1 (presets, `animate`, `presence`, control global).
 - Tras los 5 primeros: **generador de esqueletos** (`pnpm new:component`) y medición del coste real.
 **Salida:** T1 completo en ambos frameworks con contrato/axe/paridad visual verdes; alpha `0.1.0` **empaquetada y validada como tarballs** (sin publicar).

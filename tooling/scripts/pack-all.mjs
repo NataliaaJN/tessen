@@ -58,7 +58,11 @@ export function packAll() {
   const dirs = readdirSync(packagesDir).filter((d) =>
     existsSync(join(packagesDir, d, 'package.json')),
   );
-  const version = `0.0.0-local.${shortSha()}.${Math.floor(Date.now() / 1000)}`;
+  // `--base 0.1.0-alpha` stamps the alpha line (0.1.0-alpha.local.<sha>.<time>); packages stay at 0.0.0.
+  const baseFlag = process.argv.indexOf('--base');
+  const base = baseFlag >= 0 ? (process.argv[baseFlag + 1] ?? '0.0.0') : '0.0.0';
+  const joiner = base.includes('-') ? '.' : '-';
+  const version = `${base}${joiner}local.${shortSha()}.${Math.floor(Date.now() / 1000)}`;
 
   rmSync(tarballs, { recursive: true, force: true });
   mkdirSync(tarballs, { recursive: true });

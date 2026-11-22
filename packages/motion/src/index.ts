@@ -1,10 +1,19 @@
 export { presets } from './presets.ts';
 export type { DurationToken, EasingToken, Preset, PresetName, ReducedBehavior } from './presets.ts';
 
-/** Values of `data-tessen-motion`. Without the attribute, `prefers-reduced-motion` decides. */
-export const motionModes = ['off', 'reduced', 'full'] as const;
-export type MotionMode = (typeof motionModes)[number];
+export { motionModes } from './modes.ts';
+export type { MotionMode } from './modes.ts';
 
 /** CSS custom property holding the `animation` shorthand of a preset. */
 export const presetVariable = (name: string): `--tessen-motion-preset-${string}` =>
   `--tessen-motion-preset-${name}`;
+
+export {
+  animate,
+  parseDuration,
+  presence,
+  resolveMotionMode,
+  setMotionMode,
+  stagger,
+} from './runtime.ts';
+export type { AnimateOptions } from './runtime.ts';

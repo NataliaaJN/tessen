@@ -2,7 +2,7 @@
 
 Motion level 0 (CSS, zero JavaScript at runtime): presets as data, generated `@keyframes`, and the `data-tessen-motion` modes. Internal package (`private`, never published, see [ADR 0015](../../docs/planning/13-architecture-decisions/0015-npm-namespace-provisional-no-publication.md)); docs call it `@tessen/motion`. Spec: [`docs/planning/07-motion-system.md`](../../docs/planning/07-motion-system.md).
 
-Level 1 (Web Animations runtime: `animate`, `presence`, `stagger`, `inView`, `resolveMotionMode`) arrives in F2.
+Level 1 is a small Web Animations runtime over the same presets: `animate(el, preset)`, `presence(el)` (resolves when running animations end), `resolveMotionMode`, `setMotionMode` (global control) and `stagger`. It honours `data-tessen-motion` and `prefers-reduced-motion`, and returns `null` (no animation) when the mode, the preset or the browser say so. `inView` and scroll reveals are not built.
 
 ## Use
 

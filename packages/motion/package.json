@@ -26,6 +26,7 @@
     "@tessen-ui/tokens": "workspace:*",
     "@tessen-ui/tsconfig": "workspace:*",
     "@types/node": "catalog:",
+    "jsdom": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
