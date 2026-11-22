@@ -27,6 +27,7 @@ export type Step =
   | { do: 'focus'; target?: string }
   | { do: 'key'; key: string; target?: string }
   | { do: 'type'; text: string; target?: string }
+  | { do: 'select'; value: string; target?: string }
   | { do: 'hover'; target?: string }
   | { do: 'unhover'; target?: string };
 
@@ -37,6 +38,20 @@ export interface ElementExpectation {
   text?: string;
   focused?: boolean;
   role?: string;
+}
+
+/** Finds one element the way assistive technology would (role + accessible name/description). */
+export interface ElementQuery {
+  role: string;
+  /** Accessible name (exact). */
+  name?: string;
+  /** Accessible description (exact). */
+  description?: string;
+  /** Attribute values (null = absent). */
+  attrs?: Record<string, string | null>;
+  /** DOM properties (checked, indeterminate, value...). */
+  props?: Record<string, string | boolean>;
+  focused?: boolean;
 }
 
 export interface Expectation {
@@ -60,6 +75,8 @@ export interface Expectation {
   text?: string;
   /** Checks on other elements, by selector (document-wide, so portals are reachable). */
   within?: Record<string, ElementExpectation>;
+  /** Elements found by role/name/description, with attribute and property checks. */
+  queries?: ElementQuery[];
   /** Values the component reported through its value-change event, in order. */
   emitted?: (string | boolean)[];
 }

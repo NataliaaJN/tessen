@@ -61,6 +61,7 @@ export function runContract(contract: Contract, adapter: Adapter) {
             else if (step.do === 'hover') await user.hover(el);
             else if (step.do === 'unhover') await user.unhover(el);
             else if (step.do === 'focus') el.focus();
+            else if (step.do === 'select') await user.selectOptions(el, step.value);
             else if (step.do === 'type') {
               el.focus();
               await user.keyboard(step.text);
@@ -91,6 +92,18 @@ export function runContract(contract: Contract, adapter: Adapter) {
           if (want.text !== undefined) expect(mounted.root.textContent?.trim()).toBe(want.text);
           for (const [selector, el] of Object.entries(want.within ?? {}))
             check(selector, document.body.querySelector(selector), el);
+          for (const query of want.queries ?? []) {
+            const el = getByRole(document.body, query.role, {
+              ...(query.name !== undefined && { name: query.name }),
+              ...(query.description !== undefined && { description: query.description }),
+            });
+            const label = `${query.role} ${query.name ?? ''}`;
+            check(label, el, { attrs: query.attrs, focused: query.focused });
+            for (const [prop, value] of Object.entries(query.props ?? {}))
+              expect((el as unknown as Record<string, unknown>)[prop], `${label} .${prop}`).toBe(
+                value,
+              );
+          }
           if (want.clicks !== undefined) expect(mounted.clicks()).toBe(want.clicks);
           if (want.emitted !== undefined) expect(mounted.emitted?.() ?? []).toEqual(want.emitted);
           if (want.focused !== undefined)
