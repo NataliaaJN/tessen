@@ -184,7 +184,7 @@ La documentación centralizada enlaza cada componente con todas estas ubicacione
 | `develop` | Integración |
 | `feat/<tema>`, `fix/<tema>`, `docs/<tema>`, `chore/<tema>`, `refactor/<tema>` | Trabajo. **Nombres en inglés**, kebab-case, desde `develop` |
 
-Cada fase/spec se desarrolla en su rama, se **fusiona a `develop` con `--no-ff`** y la rama se **elimina** al terminar. Commits en inglés con *Conventional Commits*. Cuando exista CI, el merge será vía PR.
+`main` es **producción** y `develop` **preproducción**. Cada fase/spec se desarrolla en su rama, se integra en `develop` mediante **PR con auto-merge** (commit de merge, sin squash) y la rama se **elimina** al fusionarse. Commits en inglés con *Conventional Commits*. Detalle en [`development-workflow` §6](development-workflow.md).
 
 ## 8. Distribución y consumo (resumen)
 
