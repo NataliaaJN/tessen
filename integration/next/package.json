@@ -1,0 +1,30 @@
+{
+  "name": "tessen-integration-next",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Consumer project (ADR 0016): installs the packed @tessen-ui tarballs like an external Next.js (App Router, SSR) app. Not part of the workspace.",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "next build",
+    "check": "node scripts/check.mjs",
+    "test": "pnpm typecheck && pnpm build && pnpm check"
+  },
+  "dependencies": {
+    "@tessen-ui/core": "*",
+    "@tessen-ui/icons": "*",
+    "@tessen-ui/motion": "*",
+    "@tessen-ui/styles": "*",
+    "@tessen-ui/tokens": "*",
+    "@tessen-ui/react": "*",
+    "next": "^16.4.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "~6.0.3"
+  }
+}

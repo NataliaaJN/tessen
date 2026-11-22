@@ -22,6 +22,7 @@
     "parity:api": "node tooling/scripts/parity-api.mjs",
     "licenses:check": "node tooling/scripts/licenses-check.mjs",
     "e2e": "pnpm --filter @tessen-ui/e2e run e2e",
+    "ssr:e2e": "node tooling/scripts/ssr-e2e.mjs",
     "new:component": "node tooling/scripts/new-component.mjs",
     "verify": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm tokens:check && pnpm deps:check && pnpm scope:check && pnpm licenses:check && pnpm test && pnpm build && pnpm parity:api",
     "pack:all": "node tooling/scripts/pack-all.mjs",

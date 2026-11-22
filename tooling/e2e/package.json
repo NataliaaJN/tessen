@@ -8,7 +8,8 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "e2e": "playwright test",
     "e2e:behavior": "playwright test behavior",
-    "e2e:parity": "playwright test parity"
+    "e2e:parity": "playwright test parity",
+    "ssr": "playwright test -c playwright.ssr.config.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.65.1",

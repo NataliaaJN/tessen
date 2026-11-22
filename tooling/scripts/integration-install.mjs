@@ -16,13 +16,14 @@ import { fileURLToPath } from 'node:url';
 import { readPacked, root } from './pack-all.mjs';
 import { checkIntegrationLockfile } from './scope-check.mjs';
 
-/** @returns {string[]} absolute project dirs */
+/** @returns {string[]} absolute project dirs (`INTEGRATION_ONLY=next` limits it to one project) */
 export function integrationProjects() {
   const base = join(root, 'integration');
   if (!existsSync(base)) return [];
   return readdirSync(base)
     .map((d) => join(base, d))
-    .filter((d) => statSync(d).isDirectory() && existsSync(join(d, 'package.json')));
+    .filter((d) => statSync(d).isDirectory() && existsSync(join(d, 'package.json')))
+    .filter((d) => !process.env['INTEGRATION_ONLY'] || d.endsWith(process.env['INTEGRATION_ONLY']));
 }
 
 /**

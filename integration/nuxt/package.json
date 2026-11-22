@@ -1,0 +1,28 @@
+{
+  "name": "tessen-integration-nuxt",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Consumer project (ADR 0016): installs the packed @tessen-ui tarballs like an external Nuxt (SSR) app. Not part of the workspace.",
+  "type": "module",
+  "scripts": {
+    "typecheck": "nuxt prepare && nuxt typecheck",
+    "build": "nuxt build",
+    "check": "node scripts/check.mjs",
+    "test": "pnpm typecheck && pnpm build && pnpm check"
+  },
+  "dependencies": {
+    "@tessen-ui/core": "*",
+    "@tessen-ui/icons": "*",
+    "@tessen-ui/motion": "*",
+    "@tessen-ui/styles": "*",
+    "@tessen-ui/tokens": "*",
+    "@tessen-ui/vue": "*",
+    "nuxt": "^4.6.4",
+    "vue": "^3.5.46",
+    "vue-router": "^5.0.0"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.3",
+    "vue-tsc": "^3.3.14"
+  }
+}
