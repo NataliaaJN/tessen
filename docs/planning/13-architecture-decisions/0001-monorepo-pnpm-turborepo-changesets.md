@@ -9,7 +9,7 @@ Tessen tendrá ~8 paquetes publicables, 3 apps y fixtures de integración. Neces
 ## Decisión
 - **pnpm workspaces** (con *catalogs* para versiones únicas de dependencias compartidas).
 - **Turborepo** para el grafo de tareas y caché.
-- **Changesets** con versiones **enlazadas** entre paquetes que deben evolucionar juntos (`vue`/`react`; `tokens`/`theme`/`styles`).
+- **Changesets** con versiones **enlazadas** entre paquetes que deben evolucionar juntos (`vue`/`react`; `tokens`/`theme`/`styles`), **solo para versionado y changelogs**: la **publicación a npm está deshabilitada** hasta aprobación explícita (ADR 0014, 0015). La caché de Turborepo es **local** (sin caché remota de pago). Las actualizaciones de dependencias usan Dependabot (integrado en GitHub).
 
 ## Alternativas consideradas
 | Alternativa | A favor | En contra | Por qué no |

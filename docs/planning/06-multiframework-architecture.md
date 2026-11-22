@@ -142,7 +142,7 @@ import '@tessen/styles'                     // CSS (una vez)
 |---|---|---|
 | **P1 · Paridad de API**: script lee tipos de Vue (`vue-component-meta` **[C]**) y React (TS compiler API/`react-docgen-typescript` **[C]**) y compara con el contrato (props, valores permitidos, eventos) | Props que faltan o difieren | CI (`pnpm parity:api`) |
 | **P2 · Suite de contrato**: casos del contrato (teclado, ARIA, estados) ejecutados en VTU y RTL | Divergencia de comportamiento | Vitest, por framework |
-| **P3 · Paridad visual**: la misma historia renderizada en ambos frameworks se captura con Playwright y se compara entre sí y contra baseline | Divergencia de apariencia | CI con Docker (render estable) |
+| **P3 · Paridad visual**: la misma historia renderizada en ambos frameworks se captura con Playwright y se compara entre sí y contra baseline | Divergencia de apariencia | CI en runner Linux (render estable) |
 | **P4 · Compilación de snippets**: los snippets generados por `core/codegen` se compilan en una app Vue y una app React | Código generado inválido | CI (`integration/`) |
 | **P5 · Definition of Done** de `cross-framework-component` (skill del repo) | Procesos saltados | PR template |
 

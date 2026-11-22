@@ -193,7 +193,7 @@ Resumen (detalle completo en `07-motion-system.md`):
 
 ```json
 {
-  "$schema": "https://tessen.dev/schemas/theme-1.json",
+  "$schema": "./schemas/theme-1.json",
   "name": "acme",
   "extends": "tessen",
   "modes": {

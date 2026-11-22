@@ -5,7 +5,7 @@
 | ID | Prioridad | Decisión | Necesaria antes de |
 |---|---|---|---|
 | D-01 | ✅ Resuelta | Asset del logotipo (propuesta 11) — incorporado en `docs/brand/` | — |
-| D-02 | 🔴 | Disponibilidad de nombre, scope npm `@tessen`, dominio y marca | F1-T01 |
+| D-02 | 🟡 Parcial | Nombre y scope npm: `tessen` y `@tessen` **ocupados**; `@tessen-ui`/`@tessenui` sin propietario visible; scope final **sin aprobar** (ADR 0015) | Publicación |
 | D-03 | 🟡 | Nomenclatura pública (ADR 0011) | F2 |
 | D-04 | 🟡 | Framework del *shell* de Theme Studio y Playground (ADR 0008) | F5 |
 | D-05 | 🔴 | Motor de comportamiento (ADR 0004, spike S1) | F2 |
@@ -15,12 +15,14 @@
 | D-09 | 🟢 | Librería base de gráficos | F7 |
 | D-10 | 🟢 | Polimorfismo (`as`/`asChild`) | F3 |
 | D-11 | 🟡 | Rango de versiones soportadas (Vue/React) | F2 |
-| D-12 | 🟡 | Hosting de la plataforma y dominio | F4 |
+| D-12 | ✅ Resuelta | Hosting y dominio: **ninguno** (todo en local; ADR 0014) | — |
 | D-13 | 🟢 | Alcance de «superficies translúcidas» (estilo «Cristal» de rM) | F5 |
 | D-14 | 🟡 | Idioma de la documentación pública e i18n | F4 |
 | D-15 | 🟢 | Estrategia Figma | F7 |
-| D-16 | 🟡 | Remoto GitHub, protección de ramas y flujo de PR | F1-T01 |
+| D-16 | 🟡 | Repositorio público en GitHub, protección de ramas y flujo de PR | F1-T01 |
 | D-17 | 🟡 | Formato del contrato (TS vs esquema JSON) | F1-T08 |
+| D-18 | 🟡 | Scope npm definitivo y momento de la distribución pública (requiere aprobación del propietario) | Publicación |
+| D-19 | 🟢 | Si algún día se despliega la plataforma (p. ej. GitHub Pages) | Aprobación explícita |
 
 ---
 
@@ -28,10 +30,15 @@
 - **Resolución (2026-11-22):** el propietario aportó la tarjeta de variantes de la propuesta 11 «Ears and Tassel». Se extrajeron la marca (color, sobre oscuro, mono negro y blanco) y un lockup a `docs/brand/logo/`, con paleta «Cobalt / Cyan», tipografías (Outfit, Inter, JetBrains Mono) y contrastes medidos en `docs/brand/README.md`.
 - **Pendientes derivados (menores):** convertir el texto «TESSEN» del lockup a contornos; generar favicons (16/24/40 px) y el icono de app a partir de la variante `on-dark`; fijar las escalas `brand` finales en Fase 1 (las semillas `#2B7BE0` y `#38C6F4` no cumplen AA con texto blanco, ver `04` §3.1).
 
-### D-02 — Nombre, scope npm, dominio y marca
-- **Alternativas:** mantener `@tessen`; scope alternativo (`@tessen-ui`, `@tessenui`).
-- **Impacto:** todos los `package.json`, imports de los usuarios, URLs.
-- **Recomendación:** comprobar **antes de F1** `npm view @tessen/core`, la organización npm, el dominio candidato (`tessen.dev`/`tessen.design`) y conflictos de marca. No se ha verificado en esta sesión.
+### D-02 — Nombre y scope npm (resuelta parcialmente; 2026-11-22)
+- **Hallazgos verificados (solo lecturas):**
+  - `tessen` (sin scope): **ocupado** (v0.0.5, deprecado, LGPL-3.0-or-later, terceros). **No se usa.**
+  - **`@tessen`: ocupado** — existe la organización/usuario `tessen` con 2 paquetes de terceros (`tessen`, `@tessen/type-gen`). `npm view @tessen/core` da 404 y aun así el scope no es nuestro: un `E404` no prueba disponibilidad. *(Corrige la premisa de las versiones anteriores de este documento, que asumía `@tessen`.)*
+  - `tessen-ui` (sin scope): `E404`.
+  - `@tessen-ui` y `@tessenui`: «Scope not found» en `npmjs.com/org/<n>` y `/~<n>`; los 8 nombres candidatos (`vue`, `react`, `core`, `tokens`, `styles`, `icons`, `motion`, `theme`) → 404.
+- **Sin resolver:** que esos scopes se puedan **crear** (solo se sabe intentándolo, prohibido ahora), que sigan libres al publicar, conflictos de marca. Detalle y método: [ADR 0015](13-architecture-decisions/0015-npm-namespace-provisional-no-publication.md).
+- **Decisión vigente:** no usar `tessen` sin scope; no publicar; no crear organización; no comprar plan; **namespace provisional**. Interno provisional propuesto: `@tessen-ui/*` con `private: true` (mapeo ilustrativo `@tessen/x` ⇄ `@tessen-ui/x`).
+- **Necesita tu aprobación:** (a) usar `@tessen-ui` como scope interno provisional; (b) más adelante, el scope público definitivo (D-18).
 
 ### D-03 — Nomenclatura pública
 - Alternativas: `T`-prefijo en Vue y sin prefijo en React (**recomendado, ADR 0011**) · prefijo `T` en ambos · sin prefijo en ambos (colisiones en Vue).
@@ -64,8 +71,8 @@
 ### D-11 — Versiones soportadas
 - Alternativas: Vue ≥ 3.5 y React ≥ 18.3 (**recomendado**) · React 19 solo (más simple, menos alcance). Impacto: `ref` como prop vs `forwardRef`, `useId`.
 
-### D-12 — Hosting
-- Alternativas: Cloudflare Pages / Vercel / GitHub Pages. Recomendación: Cloudflare Pages o Vercel por previews por PR y despliegue estático rápido; decidir con D-02 (dominio).
+### D-12 — Hosting (resuelta)
+- **Decisión (ADR 0014):** no hay hosting ni dominio; documentación, Theme Studio y Playground **se ejecutan en local**. No se configura Cloudflare Pages, Vercel, Netlify ni GitHub Pages. GitHub Pages queda como opción futura **solo con aprobación explícita** (D-19; ver [`deployment-strategy`](../architecture/deployment-strategy.md)).
 
 ### D-13 — Superficies translúcidas
 - Alternativas: fuera de v1 · opción experimental en Studio. Riesgo: rendimiento (`backdrop-filter`), contraste y alto contraste. Recomendación: experimental y desactivada por defecto.
@@ -77,10 +84,19 @@
 ### D-15 — Figma
 - Alternativas: kit manual · variables importadas desde DTCG (recomendado) · plugin propio bidireccional (posponer).
 
-### D-16 — Remoto y flujo
-- **Estado observado:** el repositorio local tiene `origin = git@github.com:NataliaaJN/tessen.git`; la rama inicial era `master` (sin commits) y se ha renombrado a `main`. No se ha hecho `push`.
-- **Recomendación:** `main` protegida (releases) y `develop` integración; PRs de ramas de trabajo en inglés (`feat/…`, `fix/…`, `docs/…`, `chore/…`), merge `--no-ff` a `develop` y borrado de la rama. Habilitar GitHub Actions al configurar CI.
+### D-16 — Repositorio y flujo en GitHub
+- **Estado observado (2026-11-22):** `origin = git@github.com:NataliaaJN/tessen.git`; la API pública de GitHub devuelve **404** para `github.com/NataliaaJN/tessen` → no existe o es privado. La rama inicial `master` (sin commits) se renombró a `main`. **No se ha hecho `push`.**
+- **Decisión (ADR 0014):** repositorio **público** como fuente de verdad; CI con GitHub Actions (gratis en públicos); Issues cuando aporten; sin servicios externos de gestión.
+- **Acción del propietario:** crear/publicar el repositorio (no lo hace el asistente) y decidir cuándo hacer el primer `push`. Después: proteger `main` y `develop` (gratis en repos públicos), activar Dependabot.
+- Flujo: ramas en inglés (`feat/…`, `fix/…`, `docs/…`, `chore/…`), PR a `develop`, merge `--no-ff` y borrado de la rama. Detalle en [`development-workflow`](../architecture/development-workflow.md).
 
 ### D-17 — Formato del contrato
 - Alternativas: **TypeScript con `defineContract` (recomendado: tipado, autocompletado, serializable a JSON)** · JSON Schema/YAML (neutral pero sin tipos ricos).
 - Impacto: `core`, docs, Playground y agentes.
+
+### D-18 — Scope npm definitivo y publicación pública
+- **No se decide ahora.** Cuando el propietario apruebe la distribución pública: elegir scope (`@tessen-ui`, `@tessenui` u otro), **volver a comprobar** disponibilidad, crear entonces la organización gratuita (solo paquetes públicos), reservar nombres y seguir [`npm-publication-strategy` §5](../architecture/npm-publication-strategy.md).
+- **Costes:** publicar paquetes públicos es gratis; los privados requieren plan de pago (no se usan).
+
+### D-19 — Despliegue futuro de la plataforma
+- **No se decide ahora.** Opción documentada: GitHub Pages (gratis en repos públicos, con límites). Requiere aprobación explícita y la lista de comprobación de [`deployment-strategy` §4](../architecture/deployment-strategy.md).
