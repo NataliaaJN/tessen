@@ -1,7 +1,7 @@
 import * as dialog from '@zag-js/dialog';
 import { normalizeProps, useMachine } from '@zag-js/vue';
 import { computed, inject, provide, useId, type ComputedRef, type InjectionKey } from 'vue';
-import { usePresence } from '../../internal/presence.zag.js';
+import { usePresence } from './presence.zag.js';
 
 /** Behavior adapter of Dialog: the only file of the component that talks to Zag (ADR 0004). */
 type DialogApi = ReturnType<typeof dialog.connect>;

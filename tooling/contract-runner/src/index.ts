@@ -57,12 +57,15 @@ export function runContract(contract: Contract, adapter: Adapter) {
         try {
           const run = async (step: Step) => {
             if (step.do === 'wait') {
-              await waitFor(() => {
-                const found = document.body.querySelector(step.selector) !== null;
-                expect(found, `${step.selector} ${step.absent ? 'gone' : 'present'}`).toBe(
-                  !step.absent,
-                );
-              });
+              await waitFor(
+                () => {
+                  const found = document.body.querySelector(step.selector) !== null;
+                  expect(found, `${step.selector} ${step.absent ? 'gone' : 'present'}`).toBe(
+                    !step.absent,
+                  );
+                },
+                step.timeout ? { timeout: step.timeout } : undefined,
+              );
               return;
             }
             const el = find(mounted.root, 'target' in step ? step.target : undefined);

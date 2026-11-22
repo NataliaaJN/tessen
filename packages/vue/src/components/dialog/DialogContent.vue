@@ -2,7 +2,7 @@
 import { dialogVariants } from '@tessen-ui/core/contracts/dialog';
 import { computed } from 'vue';
 import Portal from '../../internal/Portal.vue';
-import { useDialog } from './dialog.zag.js';
+import { useDialog } from '../../internal/dialog.zag.js';
 
 defineOptions({ name: 'TDialogContent' });
 

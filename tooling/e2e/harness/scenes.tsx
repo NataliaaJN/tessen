@@ -1,9 +1,21 @@
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
   Alert,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogTitle,
+  AlertDialogTrigger,
   Badge,
   Button,
   Card,
   Checkbox,
+  Combobox,
   Dialog,
   DialogClose,
   DialogContent,
@@ -11,6 +23,11 @@ import {
   DialogTitle,
   DialogTrigger,
   Divider,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
   EmptyState,
   Avatar,
   BreadcrumbItem,
@@ -19,6 +36,12 @@ import {
   List,
   ListItem,
   Pagination,
+  Popover,
+  PopoverClose,
+  PopoverContent,
+  PopoverDescription,
+  PopoverTitle,
+  PopoverTrigger,
   Progress,
   Table,
   TableBody,
@@ -39,7 +62,9 @@ import {
   NativeSelect,
   Radio,
   RadioGroup,
+  Select,
   Skeleton,
+  Slider,
   Spinner,
   Stack,
   Switch,
@@ -48,18 +73,29 @@ import {
   TabPanel,
   Tabs,
   Textarea,
+  Toaster,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
+  createToaster,
 } from '@tessen-ui/react';
-import type { ReactNode } from 'react';
+import { createToaster as createVueToaster } from '@tessen-ui/vue';
+import { useState, type ReactNode } from 'react';
 import type { SceneName } from './scene-names.ts';
 
 interface Scene {
   /** Vue template: components are registered globally under their `T*` names. */
   vue: string;
+  /** Vue state the template needs (there is no script block in a template string). */
+  vueSetup?: () => Record<string, unknown>;
   react: () => ReactNode;
 }
+
+const fruit = [
+  { value: 'apple', label: 'Apple' },
+  { value: 'banana', label: 'Banana', disabled: true },
+  { value: 'cherry', label: 'Cherry' },
+];
 
 const variants = ['primary', 'secondary', 'outline', 'ghost', 'link'] as const;
 const tones = ['neutral', 'brand', 'success', 'warning', 'danger', 'info'] as const;
@@ -386,4 +422,166 @@ export const scenes: Record<SceneName, Scene> = {
       </div>
     ),
   },
+
+  controls: {
+    vueSetup: () => ({ items: fruit }),
+    vue: `<TStack gap="6" style="max-inline-size:24rem">
+      <TSelect label="Fruit" :items="items" default-value="cherry" />
+      <TCombobox label="Search fruit" :items="items" placeholder="Type to filter" />
+      <TSlider label="Volume" :default-value="40" />
+      <TAccordion :default-value="['one']" variant="bordered">
+        <TAccordionItem value="one"><TAccordionTrigger>First</TAccordionTrigger><TAccordionContent>First content</TAccordionContent></TAccordionItem>
+        <TAccordionItem value="two"><TAccordionTrigger>Second</TAccordionTrigger><TAccordionContent>Second content</TAccordionContent></TAccordionItem>
+      </TAccordion>
+    </TStack>`,
+    react: () => (
+      <Stack gap="6" style={{ maxInlineSize: '24rem' }}>
+        <Select label="Fruit" items={fruit} defaultValue="cherry" />
+        <Combobox label="Search fruit" items={fruit} placeholder="Type to filter" />
+        <Slider label="Volume" defaultValue={40} />
+        <Accordion defaultValue={['one']} variant="bordered">
+          <AccordionItem value="one">
+            <AccordionTrigger>First</AccordionTrigger>
+            <AccordionContent>First content</AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="two">
+            <AccordionTrigger>Second</AccordionTrigger>
+            <AccordionContent>Second content</AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </Stack>
+    ),
+  },
+
+  'select-open': {
+    vueSetup: () => ({ items: fruit }),
+    vue: `<TSelect label="Fruit" :items="items" default-value="apple" default-open />`,
+    react: () => <Select label="Fruit" items={fruit} defaultValue="apple" defaultOpen />,
+  },
+
+  'menu-open': {
+    vue: `<TDropdownMenu default-open>
+      <TDropdownMenuTrigger>Actions</TDropdownMenuTrigger>
+      <TDropdownMenuContent>
+        <TDropdownMenuItem value="edit">Edit</TDropdownMenuItem>
+        <TDropdownMenuItem value="duplicate" disabled>Duplicate</TDropdownMenuItem>
+        <TDropdownMenuSeparator />
+        <TDropdownMenuItem value="delete">Delete</TDropdownMenuItem>
+      </TDropdownMenuContent>
+    </TDropdownMenu>`,
+    react: () => (
+      <DropdownMenu defaultOpen>
+        <DropdownMenuTrigger>Actions</DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem value="edit">Edit</DropdownMenuItem>
+          <DropdownMenuItem value="duplicate" disabled>
+            Duplicate
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem value="delete">Delete</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ),
+  },
+
+  'popover-open': {
+    vue: `<div style="padding:8px 0">
+      <TPopover default-open>
+        <TPopoverTrigger>Details</TPopoverTrigger>
+        <TPopoverContent><TPopoverTitle>Shipping</TPopoverTitle><TPopoverDescription>Arrives in two days.</TPopoverDescription><TPopoverClose>Close</TPopoverClose></TPopoverContent>
+      </TPopover>
+      <button id="after" type="button">After</button>
+    </div>`,
+    react: () => (
+      <div style={{ padding: '8px 0' }}>
+        <Popover defaultOpen>
+          <PopoverTrigger>Details</PopoverTrigger>
+          <PopoverContent>
+            <PopoverTitle>Shipping</PopoverTitle>
+            <PopoverDescription>Arrives in two days.</PopoverDescription>
+            <PopoverClose>Close</PopoverClose>
+          </PopoverContent>
+        </Popover>
+        <button id="after" type="button">
+          After
+        </button>
+      </div>
+    ),
+  },
+
+  'alert-dialog-open': {
+    vue: `<TAlertDialog default-open>
+      <TAlertDialogTrigger>Delete</TAlertDialogTrigger>
+      <TAlertDialogContent>
+        <TAlertDialogTitle>Delete item?</TAlertDialogTitle>
+        <TAlertDialogDescription>This cannot be undone.</TAlertDialogDescription>
+        <TAlertDialogCancel>Keep</TAlertDialogCancel>
+        <TAlertDialogAction tone="danger">Remove</TAlertDialogAction>
+      </TAlertDialogContent>
+    </TAlertDialog>`,
+    react: () => (
+      <AlertDialog defaultOpen>
+        <AlertDialogTrigger>Delete</AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogTitle>Delete item?</AlertDialogTitle>
+          <AlertDialogDescription>This cannot be undone.</AlertDialogDescription>
+          <AlertDialogCancel>Keep</AlertDialogCancel>
+          <AlertDialogAction tone="danger">Remove</AlertDialogAction>
+        </AlertDialogContent>
+      </AlertDialog>
+    ),
+  },
+
+  // A list opened inside a modal must stack above it (layer.popover over layer.modal).
+  'dialog-select': {
+    vueSetup: () => ({ items: fruit }),
+    vue: `<TDialog default-open>
+      <TDialogTrigger>Preferences</TDialogTrigger>
+      <TDialogContent><TDialogTitle>Preferences</TDialogTitle><TSelect label="Fruit" :items="items" /><TDialogClose>Done</TDialogClose></TDialogContent>
+    </TDialog>`,
+    react: () => (
+      <Dialog defaultOpen>
+        <DialogTrigger>Preferences</DialogTrigger>
+        <DialogContent>
+          <DialogTitle>Preferences</DialogTitle>
+          <Select label="Fruit" items={fruit} />
+          <DialogClose>Done</DialogClose>
+        </DialogContent>
+      </Dialog>
+    ),
+  },
+
+  toast: {
+    vueSetup: () => {
+      const toaster = createVueToaster();
+      return {
+        toaster,
+        notify: () =>
+          toaster.create({ title: 'Saved', description: 'Changes stored', duration: 400 }),
+        pin: () => toaster.create({ title: 'Pinned', duration: Infinity }),
+      };
+    },
+    vue: `<div><button type="button" @click="notify">Notify</button><button type="button" @click="pin">Pin</button><TToaster :toaster="toaster" /></div>`,
+    react: () => <ToastScene />,
+  },
 };
+
+function ToastScene() {
+  const [toaster] = useState(() => createToaster());
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() =>
+          toaster.create({ title: 'Saved', description: 'Changes stored', duration: 400 })
+        }
+      >
+        Notify
+      </button>
+      <button type="button" onClick={() => toaster.create({ title: 'Pinned', duration: Infinity })}>
+        Pin
+      </button>
+      <Toaster toaster={toaster} />
+    </div>
+  );
+}

@@ -7,6 +7,8 @@ class ResizeObserverStub {
   disconnect() {}
 }
 globalThis.ResizeObserver ??= ResizeObserverStub;
+Element.prototype.scrollTo ??= function scrollTo() {};
+Element.prototype.scrollIntoView ??= function scrollIntoView() {};
 globalThis.matchMedia ??= ((query: string) => ({
   matches: false,
   media: query,

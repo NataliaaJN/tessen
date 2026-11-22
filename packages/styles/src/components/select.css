@@ -1,0 +1,220 @@
+/* Select and Combobox: a field that opens a list. Contracts: @tessen-ui/core selectContract / comboboxContract. Overrides: --t-select-radius. */
+@layer tessen.components {
+  .t-select,
+  .t-combobox {
+    --_border: var(--tessen-color-input-border);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--tessen-space-1);
+    font-family: var(--tessen-font-family-sans);
+    color: var(--tessen-color-text-primary);
+
+    &[data-size='sm'] {
+      --_height: var(--tessen-size-control-sm);
+      --_font-size: var(--tessen-font-size-sm);
+    }
+    &[data-size='md'] {
+      --_height: var(--tessen-size-control-md);
+      --_font-size: var(--tessen-font-size-md);
+    }
+    &[data-size='lg'] {
+      --_height: var(--tessen-size-control-lg);
+      --_font-size: var(--tessen-font-size-lg);
+    }
+  }
+
+  .t-select__label,
+  .t-combobox__label {
+    font-size: var(--tessen-font-size-sm);
+    font-weight: var(--tessen-font-weight-medium);
+  }
+
+  .t-select__control,
+  .t-combobox__control {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .t-select__trigger,
+  .t-combobox__input {
+    box-sizing: border-box;
+    inline-size: 100%;
+    block-size: var(--_height);
+    padding-inline: var(--tessen-space-3);
+    border: 1px solid var(--_border);
+    border-radius: var(--t-select-radius, var(--tessen-radius-md));
+    background: var(--tessen-color-input-background);
+    color: var(--tessen-color-text-primary);
+    font: inherit;
+    font-size: var(--_font-size);
+    transition: border-color var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard);
+
+    @media (hover: hover) {
+      &:hover:not(:disabled, [data-invalid]) {
+        --_border: var(--tessen-color-input-border-hover);
+      }
+    }
+    &:focus-visible {
+      --_border: var(--tessen-color-border-focus);
+      outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+      outline-offset: calc(var(--tessen-focus-ring-offset) * -1);
+    }
+    &[data-invalid] {
+      --_border: var(--tessen-color-input-border-invalid);
+    }
+    &:disabled {
+      background: var(--tessen-color-surface-sunken);
+      color: var(--tessen-color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  .t-select__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--tessen-space-2);
+    text-align: start;
+    cursor: pointer;
+  }
+  .t-select__value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &[data-placeholder] {
+      color: var(--tessen-color-input-placeholder);
+    }
+  }
+
+  .t-combobox__input {
+    padding-inline-end: calc(var(--_height) + var(--tessen-space-1));
+
+    &::placeholder {
+      color: var(--tessen-color-input-placeholder);
+    }
+  }
+  .t-combobox__trigger {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    display: grid;
+    place-items: center;
+    inline-size: var(--_height);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--tessen-color-text-secondary);
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+      outline-offset: calc(var(--tessen-focus-ring-offset) * -1);
+      border-radius: var(--tessen-radius-md);
+    }
+    &:disabled {
+      color: var(--tessen-color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  /* The arrow is drawn, not typed, so it never lands in the accessible name. */
+  .t-select__chevron,
+  .t-combobox__chevron {
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    margin-block-end: 0.25rem;
+    border-inline-end: 2px solid currentColor;
+    border-block-end: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard);
+  }
+  .t-select__trigger[data-state='open'] .t-select__chevron {
+    transform: rotate(-135deg);
+    margin-block: 0.25rem 0;
+  }
+
+  /* Above a modal too: a list opened inside a Dialog must not hide behind it (layer.popover). */
+  .t-select__positioner,
+  .t-combobox__positioner {
+    z-index: var(--tessen-layer-popover);
+  }
+
+  .t-select__content,
+  .t-combobox__content {
+    box-sizing: border-box;
+    max-block-size: 18rem;
+    margin: 0;
+    padding: var(--tessen-space-1);
+    overflow-y: auto;
+    border: 1px solid var(--tessen-color-border-subtle);
+    border-radius: var(--tessen-radius-md);
+    background: var(--tessen-color-surface-overlay);
+    box-shadow: var(--tessen-elevation-overlay);
+    font-family: var(--tessen-font-family-sans);
+    font-size: var(--tessen-font-size-md);
+    list-style: none;
+    outline: none;
+
+    &[data-state='open'] {
+      animation: t-select-in var(--tessen-motion-duration-fast)
+        var(--tessen-motion-easing-decelerate);
+    }
+  }
+
+  .t-select__item,
+  .t-combobox__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--tessen-space-2);
+    padding: var(--tessen-space-2) var(--tessen-space-3);
+    border-radius: var(--tessen-radius-sm);
+    color: var(--tessen-color-text-primary);
+    cursor: pointer;
+    user-select: none;
+
+    &[data-highlighted] {
+      background: var(--tessen-color-action-primary-subtle);
+    }
+    &[data-disabled] {
+      color: var(--tessen-color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  .t-select__indicator,
+  .t-combobox__indicator {
+    inline-size: 0.625rem;
+    block-size: 0.3125rem;
+    margin-block-end: 0.25rem;
+    border-inline-start: 2px solid var(--tessen-color-action-primary-default);
+    border-block-end: 2px solid var(--tessen-color-action-primary-default);
+    transform: rotate(-45deg);
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  .t-combobox__empty {
+    padding: var(--tessen-space-2) var(--tessen-space-3);
+    color: var(--tessen-color-text-secondary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .t-select__content[data-state='open'],
+    .t-combobox__content[data-state='open'] {
+      animation: none;
+    }
+  }
+
+  @keyframes t-select-in {
+    from {
+      opacity: 0;
+      transform: translateY(calc(var(--tessen-motion-distance-xs) * -1));
+    }
+  }
+}

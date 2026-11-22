@@ -1,0 +1,108 @@
+/* Accordion: stacked disclosure items. Contract: @tessen-ui/core accordionContract. Overrides: --t-accordion-radius. */
+@layer tessen.components {
+  .t-accordion {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--tessen-font-family-sans);
+    color: var(--tessen-color-text-primary);
+
+    &[data-variant='bordered'] {
+      border: 1px solid var(--tessen-color-border-default);
+      border-radius: var(--t-accordion-radius, var(--tessen-radius-lg));
+      overflow: hidden;
+    }
+  }
+
+  .t-accordion__item {
+    border-block-end: 1px solid var(--tessen-color-border-subtle);
+
+    &:last-child {
+      border-block-end: 0;
+    }
+  }
+
+  .t-accordion__heading {
+    margin: 0;
+    font: inherit;
+  }
+
+  .t-accordion__trigger {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--tessen-space-3);
+    inline-size: 100%;
+    min-block-size: var(--tessen-size-control-lg);
+    padding: var(--tessen-space-3) var(--tessen-space-4);
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--tessen-font-size-md);
+    font-weight: var(--tessen-font-weight-medium);
+    text-align: start;
+    cursor: pointer;
+    transition: background-color var(--tessen-motion-duration-fast)
+      var(--tessen-motion-easing-standard);
+
+    @media (hover: hover) {
+      &:hover:not([data-disabled]) {
+        background: var(--tessen-color-surface-sunken);
+      }
+    }
+    &:focus-visible {
+      outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+      outline-offset: calc(var(--tessen-focus-ring-offset) * -1);
+    }
+    &[data-disabled] {
+      color: var(--tessen-color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  /* The arrow is drawn, so it is not part of the accessible name. */
+  .t-accordion__indicator {
+    flex: none;
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    margin-block-end: 0.25rem;
+    border-inline-end: 2px solid currentColor;
+    border-block-end: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard);
+
+    &[data-state='open'] {
+      transform: rotate(-135deg);
+      margin-block: 0.25rem 0;
+    }
+  }
+
+  .t-accordion__content {
+    padding: 0 var(--tessen-space-4) var(--tessen-space-4);
+    color: var(--tessen-color-text-secondary);
+    font-size: var(--tessen-font-size-md);
+    line-height: var(--tessen-font-line-height-normal);
+
+    &[data-state='open'] {
+      animation: t-accordion-in var(--tessen-motion-duration-normal)
+        var(--tessen-motion-easing-decelerate);
+    }
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .t-accordion__content[data-state='open'] {
+      animation: none;
+    }
+  }
+
+  @keyframes t-accordion-in {
+    from {
+      opacity: 0;
+      transform: translateY(calc(var(--tessen-motion-distance-xs) * -1));
+    }
+  }
+}
