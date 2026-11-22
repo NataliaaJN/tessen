@@ -1,0 +1,81 @@
+---
+import '@tessen-ui/styles';
+import '../styles/docs.css';
+import { byCategory, categoryLabel } from '../lib/data';
+
+interface Props {
+  title: string;
+  description?: string;
+  current?: string;
+}
+const { title, description = 'Tessen design system for Vue and React.', current } = Astro.props;
+const groups = byCategory();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title} · Tessen</title>
+    <link rel="icon" href="data:," />
+    <script is:inline>
+      // Theme: follow the system unless the person chose one (kept in this browser only).
+      try {
+        const t = localStorage.getItem('tessen:docs:theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.tessenTheme = t;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="top">
+      <a class="brand" href="/">Tessen</a>
+      <nav aria-label="Main">
+        <a href="/components/" aria-current={current === 'components' ? 'page' : undefined}
+          >Components</a
+        >
+        <a href="/llms.txt">llms.txt</a>
+      </nav>
+      <button type="button" class="theme" id="theme" aria-label="Toggle colour theme">◐</button>
+    </header>
+    <div class="shell">
+      <nav class="side" aria-label="Components">
+        {
+          groups.map(([category, list]) => (
+            <section>
+              <h2>{categoryLabel(category)}</h2>
+              <ul>
+                {list.map((c) => (
+                  <li>
+                    <a
+                      href={`/components/${c.slug}/`}
+                      aria-current={current === c.slug ? 'page' : undefined}
+                    >
+                      {c.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))
+        }
+      </nav>
+      <main id="main"><slot /></main>
+    </div>
+    <script is:inline>
+      document.getElementById('theme')?.addEventListener('click', () => {
+        const root = document.documentElement;
+        const dark =
+          root.dataset.tessenTheme === 'dark' ||
+          (!root.dataset.tessenTheme && matchMedia('(prefers-color-scheme: dark)').matches);
+        const next = dark ? 'light' : 'dark';
+        root.dataset.tessenTheme = next;
+        try {
+          localStorage.setItem('tessen:docs:theme', next);
+        } catch {}
+      });
+    </script>
+  </body>
+</html>

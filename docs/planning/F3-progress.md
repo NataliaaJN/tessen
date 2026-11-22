@@ -1,5 +1,7 @@
 # F3 · Framework support y paridad: estado
 
+> **Siguiente fase en curso:** [F4](F4-progress.md) (2026-11-22; el propietario dejó para más adelante el lector de pantalla y el gate de paridad obligatorio).
+>
 > **Estado:** F3 **iniciada, no cerrada** (2026-11-22). Se cerró primero la deuda del gate de F2 (paridad visual y navegador real) y se entregaron los componentes T2: el lote nativo (§2) y el lote sobre Zag (§2b). **El catálogo T2 queda completo.** `parity:api` y el aviso de terceros ya están (§3b). SSR (§3c), matriz de versiones y presupuesto de tamaño (§3d) también. Queda el lector de pantalla (§4).
 
 ## 1. Deuda de F2 cerrada

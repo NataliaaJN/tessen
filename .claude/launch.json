@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "docs-preview",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@tessen-ui/docs", "exec", "astro", "preview", "--port", "4321"],
+      "port": 4321
+    }
+  ]
+}

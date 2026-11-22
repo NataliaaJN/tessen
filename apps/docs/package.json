@@ -1,0 +1,24 @@
+{
+  "name": "@tessen-ui/docs",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Tessen documentation site (Astro). Runs locally only: no hosting, no deploy (ADR 0014).",
+  "type": "module",
+  "scripts": {
+    "generate": "pnpm --filter @tessen-ui/docs-gen run generate",
+    "dev": "pnpm generate && astro dev",
+    "build": "pnpm generate && astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check"
+  },
+  "dependencies": {
+    "@tessen-ui/styles": "workspace:*",
+    "astro": "^7.4.13"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@tessen-ui/docs-gen": "workspace:*",
+    "@tessen-ui/tsconfig": "workspace:*",
+    "typescript": "catalog:"
+  }
+}
