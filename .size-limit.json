@@ -1,0 +1,61 @@
+[
+  {
+    "name": "react: Button",
+    "path": "packages/react/dist/index.js",
+    "import": "{ Button }",
+    "ignore": ["react", "react-dom"],
+    "limit": "2 kB"
+  },
+  {
+    "name": "react: Dialog",
+    "path": "packages/react/dist/index.js",
+    "import": "{ Dialog, DialogContent, DialogTitle, DialogTrigger }",
+    "ignore": ["react", "react-dom"],
+    "limit": "22 kB"
+  },
+  {
+    "name": "react: Select",
+    "path": "packages/react/dist/index.js",
+    "import": "{ Select }",
+    "ignore": ["react", "react-dom"],
+    "limit": "34 kB"
+  },
+  {
+    "name": "react: everything",
+    "path": "packages/react/dist/index.js",
+    "ignore": ["react", "react-dom"],
+    "limit": "97 kB"
+  },
+  {
+    "name": "vue: TButton",
+    "path": "packages/vue/dist/index.js",
+    "import": "{ TButton }",
+    "ignore": ["vue"],
+    "limit": "2.2 kB"
+  },
+  {
+    "name": "vue: TDialog",
+    "path": "packages/vue/dist/index.js",
+    "import": "{ TDialog, TDialogContent, TDialogTitle, TDialogTrigger }",
+    "ignore": ["vue"],
+    "limit": "22 kB"
+  },
+  {
+    "name": "vue: TSelect",
+    "path": "packages/vue/dist/index.js",
+    "import": "{ TSelect }",
+    "ignore": ["vue"],
+    "limit": "34 kB"
+  },
+  {
+    "name": "vue: everything",
+    "path": "packages/vue/dist/index.js",
+    "ignore": ["vue"],
+    "limit": "98 kB"
+  },
+  {
+    "name": "styles: index.css",
+    "path": "packages/styles/dist/index.css",
+    "limit": "10.5 kB"
+  }
+]

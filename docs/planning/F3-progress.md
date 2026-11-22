@@ -1,6 +1,6 @@
 # F3 · Framework support y paridad: estado
 
-> **Estado:** F3 **iniciada, no cerrada** (2026-11-22). Se cerró primero la deuda del gate de F2 (paridad visual y navegador real) y se entregaron los componentes T2: el lote nativo (§2) y el lote sobre Zag (§2b). **El catálogo T2 queda completo.** `parity:api` y el aviso de terceros ya están (§3b). Quedan matriz de versiones, `size-limit` y lector de pantalla (§4).
+> **Estado:** F3 **iniciada, no cerrada** (2026-11-22). Se cerró primero la deuda del gate de F2 (paridad visual y navegador real) y se entregaron los componentes T2: el lote nativo (§2) y el lote sobre Zag (§2b). **El catálogo T2 queda completo.** `parity:api` y el aviso de terceros ya están (§3b). SSR (§3c), matriz de versiones y presupuesto de tamaño (§3d) también. Queda el lector de pantalla (§4).
 
 ## 1. Deuda de F2 cerrada
 
@@ -61,13 +61,18 @@ Decisiones:
 - **`pnpm ssr:e2e`** (`tooling/e2e/ssr`) arranca ambos servidores y, en un navegador real, comprueba la hidratación: sin errores ni avisos de desajuste ni respuestas ≥ 400; el `Dialog` `defaultOpen` queda abierto, modal, con el foco dentro y se cierra con Escape (**el límite de §1 queda cubierto y no reaparece**); `Tabs`, `Select` y `Accordion` renderizados en servidor responden tras hidratar. Mismas aserciones para Vue y React. Corre en el job `verify` de CI (instala Chromium).
 - `INTEGRATION_ONLY=next pnpm integration:install` limita la instalación a un proyecto.
 
+## 3d. Matriz de versiones y presupuesto de tamaño
+
+- **Extremos bajos de los rangos de peer**, como consumidores instalados desde tarballs (ADR 0016): `integration/vite-react18` (React **18.3.1** y `@types/react` 18) e `integration/vite-vue352` (Vue **3.5.2**). Cada uno hace typecheck estricto (`skipLibCheck: false`), build y comprobaciones de consumidor, y `pnpm ssr:e2e` ejecuta en Chromium real `tooling/e2e/ssr/matrix.spec.ts` (Tabs, Checkbox, Dialog con trampa de foco y devolución del foco). Los extremos altos ya los cubren el workspace y los demás consumidores (React 19.3, Vue 3.5.46).
+- **Hallazgo:** nuestros `.d.ts` de Vue no tipan con Vue 3.5.0–3.5.1 (`DefineComponent` ganó un parámetro de tipo en 3.5.2). El peer de `@tessen-ui/vue` y `@tessen-ui/icons` pasa de `^3.5.0` a **`^3.5.2`**. Sin la matriz, el rango declarado era falso.
+- **`pnpm size`** (`size-limit`, `.size-limit.json`): presupuestos en brotli con todas las dependencias (Zag incluido), sin React/Vue: `Button` ≤ 2 kB, `Dialog` ≤ 22 kB, `Select` ≤ 34 kB, el paquete completo ≤ 97 kB (React) / 98 kB (Vue) y `index.css` ≤ 10,5 kB, con ~15 % de margen sobre el tamaño medido. Que `Button` pese 1,4 kB comprueba que el tree-shaking funciona. Corre en `pnpm verify` y en CI.
+
 ## 4. Pendiente de F3 (no hecho)
 
 | Pendiente | Nota |
 | --- | --- |
 | Compilación de snippets de la documentación | Sin construir |
-| Matriz Vue 3.5 / React 18.3–19 y `size-limit` | |
 | Checklist manual con lector de pantalla (NVDA, VoiceOver) de los compuestos | Antes de una alpha publicada (C9) |
 | Beta `0.5.0` en tarballs | Requiere ≥ 25 componentes **estables** y el gate de paridad obligatorio (hoy en CI, sin protección de rama por decisión del propietario) |
 
-**Gate de F3** («≥ 25 componentes estables; paridad obligatoria en CI; `0.5.0` beta»): **parcial**. 41 componentes (catálogo T2 completo) y paridad visual en CI; SSR cubierto (§3c); falta la beta (matriz, `size-limit`, lector de pantalla).
+**Gate de F3** («≥ 25 componentes estables; paridad obligatoria en CI; `0.5.0` beta»): **parcial**. 41 componentes (catálogo T2 completo) y paridad visual en CI; SSR cubierto (§3c); falta la beta (lector de pantalla y gate de paridad obligatorio).

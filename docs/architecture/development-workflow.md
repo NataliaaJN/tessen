@@ -32,7 +32,7 @@ Instalación: `pnpm install` en la raíz (resuelve todos los `workspace:*` sin r
   "private": true,
   "type": "module",
   "dependencies": { "@tessen-ui/core": "workspace:*" },
-  "peerDependencies": { "vue": "^3.5.0", "@tessen-ui/styles": "workspace:*" }
+  "peerDependencies": { "vue": "^3.5.2", "@tessen-ui/styles": "workspace:*" }
 }
 ```
 
