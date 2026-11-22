@@ -766,7 +766,7 @@ importers:
         version: link:../zag-s2
       next:
         specifier: 16.4.6
-        version: 16.4.6(@babel/core@7.29.13(supports-color@7.2.0))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        version: 16.4.6(@babel/core@7.29.13(supports-color@7.2.0))(@playwright/test@1.65.1)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       react:
         specifier: 'catalog:'
         version: 19.3.1
@@ -823,6 +823,60 @@ importers:
       vitest:
         specifier: 'catalog:'
         version: 5.1.1(@types/node@26.6.6)(@vitest/browser-preview@5.1.1)(@vitest/ui@5.1.1)(jsdom@31.0.1)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.4))
+
+  tooling/e2e:
+    devDependencies:
+      '@playwright/test':
+        specifier: ^1.65.1
+        version: 1.65.1
+      '@tessen-ui/react':
+        specifier: workspace:*
+        version: link:../../packages/react
+      '@tessen-ui/styles':
+        specifier: workspace:*
+        version: link:../../packages/styles
+      '@tessen-ui/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@tessen-ui/vue':
+        specifier: workspace:*
+        version: link:../../packages/vue
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.6
+      '@types/pngjs':
+        specifier: ^6.0.5
+        version: 6.0.5
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.3.0
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.3.0(@types/react@19.3.0)
+      '@vitejs/plugin-vue':
+        specifier: 'catalog:'
+        version: 6.0.11(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.4))(vue@3.5.46(typescript@6.0.3))
+      pixelmatch:
+        specifier: ^8.0.0
+        version: 8.0.0
+      pngjs:
+        specifier: ^7.0.0
+        version: 7.0.0
+      react:
+        specifier: 'catalog:'
+        version: 19.3.1
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.3.1(react@19.3.1)
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+      vite:
+        specifier: 'catalog:'
+        version: 8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.4)
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.46(typescript@6.0.3)
 
   tooling/eslint-config:
     dependencies:
@@ -1847,6 +1901,11 @@ packages:
     engines: {node: '>= 10.0.0'}
     bundledDependencies:
       - napi-wasm
+
+  '@playwright/test@1.65.1':
+    resolution: {integrity: sha512-y+NCIRm2LvY4slUVWvGh1nujJ8RF/hEisIsq2mtUPgdQC4L701bq5hZGMhrpeXjACvwvO9tj5dJqhvM6TP9lbw==}
+    engines: {node: '>=20'}
+    hasBin: true
 
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
@@ -4435,6 +4494,11 @@ packages:
     engines: {node: '>=20'}
     hasBin: true
 
+  playwright@1.65.1:
+    resolution: {integrity: sha512-vJ1FuoOrNwOKHUIVEvSt3jT1L+wjjDpwhwIstKtfvTh8XIG4FG4bIFuvNdMxi81LGfAhUgUZleVFaOLY4RIUUw==}
+    engines: {node: '>=20'}
+    hasBin: true
+
   pngjs@7.0.0:
     resolution: {integrity: sha512-LKWqWJRhstyYo9pGvgor/ivk2w94eSjE3RGVuzLGlr3NmD8bf7RcYGze1mNdEHRP6TRP6rMuDHk5t44hnTRyow==}
     engines: {node: '>=14.19.0'}
@@ -6827,6 +6891,10 @@ snapshots:
       is-glob: 4.0.3
       picomatch: 4.0.7
 
+  '@playwright/test@1.65.1':
+    dependencies:
+      playwright: 1.65.1
+
   '@polka/url@1.0.0-next.29': {}
 
   '@poppinss/colors@4.1.6':
@@ -9171,7 +9239,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  next@16.4.6(@babel/core@7.29.13(supports-color@7.2.0))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
+  next@16.4.6(@babel/core@7.29.13(supports-color@7.2.0))(@playwright/test@1.65.1)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
     dependencies:
       '@next/env': 16.4.6
       '@swc/helpers': 0.5.23
@@ -9190,6 +9258,7 @@ snapshots:
       '@next/swc-linux-x64-musl': 16.4.6
       '@next/swc-win32-arm64-msvc': 16.4.6
       '@next/swc-win32-x64-msvc': 16.4.6
+      '@playwright/test': 1.65.1
       sharp: 0.35.5(@types/node@26.6.6)
     transitivePeerDependencies:
       - '@babel/core'
@@ -9657,6 +9726,10 @@ snapshots:
       pathe: 2.0.3
 
   playwright-core@1.65.1: {}
+
+  playwright@1.65.1:
+    dependencies:
+      playwright-core: 1.65.1
 
   pngjs@7.0.0: {}
 

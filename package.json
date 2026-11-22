@@ -19,6 +19,7 @@
     "tokens:check": "turbo run tokens:check",
     "deps:check": "depcruise --config .dependency-cruiser.cjs tooling packages",
     "scope:check": "node tooling/scripts/scope-check.mjs",
+    "e2e": "pnpm --filter @tessen-ui/e2e run e2e",
     "new:component": "node tooling/scripts/new-component.mjs",
     "verify": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm tokens:check && pnpm deps:check && pnpm scope:check && pnpm test && pnpm build",
     "pack:all": "node tooling/scripts/pack-all.mjs",

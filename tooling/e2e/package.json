@@ -1,0 +1,32 @@
+{
+  "name": "@tessen-ui/e2e",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Real-browser tests (Playwright, ADR 0004 C3) and Vue <-> React visual parity over the built packages. Never published, never imported by library code.",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "e2e": "playwright test",
+    "e2e:behavior": "playwright test behavior",
+    "e2e:parity": "playwright test parity"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "@tessen-ui/react": "workspace:*",
+    "@tessen-ui/styles": "workspace:*",
+    "@tessen-ui/tsconfig": "workspace:*",
+    "@tessen-ui/vue": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/pngjs": "^6.0.5",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "pixelmatch": "^8.0.0",
+    "pngjs": "^7.0.0",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vue": "catalog:"
+  }
+}

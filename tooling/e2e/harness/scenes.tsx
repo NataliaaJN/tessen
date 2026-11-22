@@ -1,0 +1,299 @@
+import {
+  Alert,
+  Badge,
+  Button,
+  Card,
+  Checkbox,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+  Divider,
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+  Grid,
+  IconButton,
+  Input,
+  Link,
+  NativeSelect,
+  Radio,
+  RadioGroup,
+  Skeleton,
+  Spinner,
+  Stack,
+  Switch,
+  Tab,
+  TabList,
+  TabPanel,
+  Tabs,
+  Textarea,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@tessen-ui/react';
+import type { ReactNode } from 'react';
+import type { SceneName } from './scene-names.ts';
+
+interface Scene {
+  /** Vue template: components are registered globally under their `T*` names. */
+  vue: string;
+  react: () => ReactNode;
+}
+
+const variants = ['primary', 'secondary', 'outline', 'ghost', 'link'] as const;
+const tones = ['neutral', 'brand', 'success', 'warning', 'danger', 'info'] as const;
+const alertTones = ['info', 'success', 'warning', 'danger'] as const;
+const badgeVariants = ['subtle', 'solid', 'outline'] as const;
+
+const buttonRowsVue = variants
+  .map(
+    (v) =>
+      `<div class="row">${(['sm', 'md', 'lg'] as const)
+        .map((s) => `<TButton variant="${v}" size="${s}">${v} ${s}</TButton>`)
+        .join('')}<TButton variant="${v}" tone="danger">${v} danger</TButton></div>`,
+  )
+  .join('');
+
+const badgesVue = badgeVariants
+  .flatMap((v) => tones.map((t) => `<TBadge variant="${v}" tone="${t}">${t}</TBadge>`))
+  .join('');
+
+const alertsVue = alertTones
+  .map(
+    (t) =>
+      `<div style="margin-block-end:8px"><TAlert tone="${t}" title="${t} title">Body text for ${t}.</TAlert></div>`,
+  )
+  .join('');
+
+export const scenes: Record<SceneName, Scene> = {
+  buttons: {
+    vue: `<div>${buttonRowsVue}
+      <div class="row"><TButton disabled>Disabled</TButton><TButton loading>Loading</TButton><TButton variant="outline" loading>Loading</TButton></div>
+      <div class="row"><TIconButton label="Close">×</TIconButton><TIconButton label="Close" variant="ghost" size="sm">×</TIconButton><TLink href="#docs">Docs link</TLink><TLink href="#out" external>External</TLink></div>
+    </div>`,
+    react: () => (
+      <div>
+        {variants.map((v) => (
+          <div className="row" key={v}>
+            {(['sm', 'md', 'lg'] as const).map((s) => (
+              <Button key={s} variant={v} size={s}>
+                {v} {s}
+              </Button>
+            ))}
+            <Button variant={v} tone="danger">
+              {v} danger
+            </Button>
+          </div>
+        ))}
+        <div className="row">
+          <Button disabled>Disabled</Button>
+          <Button loading>Loading</Button>
+          <Button variant="outline" loading>
+            Loading
+          </Button>
+        </div>
+        <div className="row">
+          <IconButton label="Close">×</IconButton>
+          <IconButton label="Close" variant="ghost" size="sm">
+            ×
+          </IconButton>
+          <Link href="#docs">Docs link</Link>
+          <Link href="#out" external>
+            External
+          </Link>
+        </div>
+      </div>
+    ),
+  },
+
+  feedback: {
+    vue: `<div>
+      <div class="row">${badgesVue}</div>
+      ${alertsVue}
+      <div class="row" style="margin-block-start:12px"><TSpinner size="sm" /><TSpinner /><TSpinner size="lg" label="Saving" /></div>
+      <TStack gap="2"><TSkeleton :animated="false" style="inline-size:240px;block-size:16px" /><TSkeleton :animated="false" shape="circle" style="inline-size:40px;block-size:40px" /></TStack>
+    </div>`,
+    react: () => (
+      <div>
+        <div className="row">
+          {badgeVariants.flatMap((v) =>
+            tones.map((t) => (
+              <Badge key={`${v}${t}`} variant={v} tone={t}>
+                {t}
+              </Badge>
+            )),
+          )}
+        </div>
+        {alertTones.map((t) => (
+          <div key={t} style={{ marginBlockEnd: 8 }}>
+            <Alert tone={t} title={`${t} title`}>
+              Body text for {t}.
+            </Alert>
+          </div>
+        ))}
+        <div className="row" style={{ marginBlockStart: 12 }}>
+          <Spinner size="sm" />
+          <Spinner />
+          <Spinner size="lg" label="Saving" />
+        </div>
+        <Stack gap="2">
+          <Skeleton animated={false} style={{ inlineSize: 240, blockSize: 16 }} />
+          <Skeleton animated={false} shape="circle" style={{ inlineSize: 40, blockSize: 40 }} />
+        </Stack>
+      </div>
+    ),
+  },
+
+  surfaces: {
+    vue: `<div>
+      <TGrid columns="2" gap="4">
+        <TCard variant="outlined"><template #header>Outlined</template>Body<template #footer>Footer</template></TCard>
+        <TCard variant="elevated" padding="lg">Elevated large</TCard>
+        <TCard variant="filled" padding="sm">Filled small</TCard>
+        <TCard padding="none">No padding</TCard>
+      </TGrid>
+      <TDivider />
+      <TStack direction="horizontal" gap="3" align="center"><span>One</span><TDivider orientation="vertical" style="block-size:24px" /><span>Two</span></TStack>
+    </div>`,
+    react: () => (
+      <div>
+        <Grid columns="2" gap="4">
+          <Card variant="outlined" header="Outlined" footer="Footer">
+            Body
+          </Card>
+          <Card variant="elevated" padding="lg">
+            Elevated large
+          </Card>
+          <Card variant="filled" padding="sm">
+            Filled small
+          </Card>
+          <Card padding="none">No padding</Card>
+        </Grid>
+        <Divider />
+        <Stack direction="horizontal" gap="3" align="center">
+          <span>One</span>
+          <Divider orientation="vertical" style={{ blockSize: 24 }} />
+          <span>Two</span>
+        </Stack>
+      </div>
+    ),
+  },
+
+  forms: {
+    vue: `<TStack gap="4">
+      <TField required><TFieldLabel>Email</TFieldLabel><TInput type="email" placeholder="you@example.com" /><TFieldDescription>We never share it.</TFieldDescription></TField>
+      <TField invalid><TFieldLabel>Name</TFieldLabel><TInput default-value="x" /><TFieldError>Too short</TFieldError></TField>
+      <TField disabled><TFieldLabel>Locked</TFieldLabel><TInput default-value="read only here" /></TField>
+      <TField><TFieldLabel>Notes</TFieldLabel><TTextarea placeholder="Notes" /></TField>
+      <TField><TFieldLabel>Country</TFieldLabel><TNativeSelect default-value="fr"><option value="es">Spain</option><option value="fr">France</option></TNativeSelect></TField>
+      <TStack direction="horizontal" gap="4"><TCheckbox>Plain</TCheckbox><TCheckbox default-checked>Checked</TCheckbox><TCheckbox indeterminate>Mixed</TCheckbox><TCheckbox disabled>Disabled</TCheckbox><TCheckbox invalid>Invalid</TCheckbox></TStack>
+      <TStack direction="horizontal" gap="4"><TSwitch>Off</TSwitch><TSwitch default-checked>On</TSwitch><TSwitch disabled>Disabled</TSwitch></TStack>
+      <TRadioGroup aria-label="Plan" default-value="pro" orientation="horizontal"><TRadio value="free">Free</TRadio><TRadio value="pro">Pro</TRadio><TRadio value="team">Team</TRadio></TRadioGroup>
+    </TStack>`,
+    react: () => (
+      <Stack gap="4">
+        <Field required>
+          <FieldLabel>Email</FieldLabel>
+          <Input type="email" placeholder="you@example.com" />
+          <FieldDescription>We never share it.</FieldDescription>
+        </Field>
+        <Field invalid>
+          <FieldLabel>Name</FieldLabel>
+          <Input defaultValue="x" />
+          <FieldError>Too short</FieldError>
+        </Field>
+        <Field disabled>
+          <FieldLabel>Locked</FieldLabel>
+          <Input defaultValue="read only here" />
+        </Field>
+        <Field>
+          <FieldLabel>Notes</FieldLabel>
+          <Textarea placeholder="Notes" />
+        </Field>
+        <Field>
+          <FieldLabel>Country</FieldLabel>
+          <NativeSelect defaultValue="fr">
+            <option value="es">Spain</option>
+            <option value="fr">France</option>
+          </NativeSelect>
+        </Field>
+        <Stack direction="horizontal" gap="4">
+          <Checkbox>Plain</Checkbox>
+          <Checkbox defaultChecked>Checked</Checkbox>
+          <Checkbox indeterminate>Mixed</Checkbox>
+          <Checkbox disabled>Disabled</Checkbox>
+          <Checkbox invalid>Invalid</Checkbox>
+        </Stack>
+        <Stack direction="horizontal" gap="4">
+          <Switch>Off</Switch>
+          <Switch defaultChecked>On</Switch>
+          <Switch disabled>Disabled</Switch>
+        </Stack>
+        <RadioGroup aria-label="Plan" defaultValue="pro" orientation="horizontal">
+          <Radio value="free">Free</Radio>
+          <Radio value="pro">Pro</Radio>
+          <Radio value="team">Team</Radio>
+        </RadioGroup>
+      </Stack>
+    ),
+  },
+
+  tabs: {
+    vue: `<TTabs default-value="b">
+      <TTabList aria-label="Sections"><TTab value="a">Account</TTab><TTab value="b">Billing</TTab><TTab value="c">Team</TTab></TTabList>
+      <TTabPanel value="a">Account panel</TTabPanel><TTabPanel value="b">Billing panel</TTabPanel><TTabPanel value="c">Team panel</TTabPanel>
+    </TTabs>`,
+    react: () => (
+      <Tabs defaultValue="b">
+        <TabList aria-label="Sections">
+          <Tab value="a">Account</Tab>
+          <Tab value="b">Billing</Tab>
+          <Tab value="c">Team</Tab>
+        </TabList>
+        <TabPanel value="a">Account panel</TabPanel>
+        <TabPanel value="b">Billing panel</TabPanel>
+        <TabPanel value="c">Team panel</TabPanel>
+      </Tabs>
+    ),
+  },
+
+  // Open on load so the parity diff covers the portal, backdrop and content layout.
+  'dialog-open': {
+    vue: `<TDialog default-open>
+      <TDialogTrigger>Delete account</TDialogTrigger>
+      <TDialogContent><TDialogTitle>Delete account?</TDialogTitle><TDialogDescription>This cannot be undone.</TDialogDescription><TDialogClose>Cancel</TDialogClose></TDialogContent>
+    </TDialog>`,
+    react: () => (
+      <Dialog defaultOpen>
+        <DialogTrigger>Delete account</DialogTrigger>
+        <DialogContent>
+          <DialogTitle>Delete account?</DialogTitle>
+          <DialogDescription>This cannot be undone.</DialogDescription>
+          <DialogClose>Cancel</DialogClose>
+        </DialogContent>
+      </Dialog>
+    ),
+  },
+
+  tooltip: {
+    vue: `<div style="padding:48px 0 0">
+      <TTooltip :open-delay="0" :close-delay="0"><TTooltipTrigger>Save</TTooltipTrigger><TTooltipContent>Save the file</TTooltipContent></TTooltip>
+      <button id="after" type="button">After</button>
+    </div>`,
+    react: () => (
+      <div style={{ padding: '48px 0 0' }}>
+        <Tooltip openDelay={0} closeDelay={0}>
+          <TooltipTrigger>Save</TooltipTrigger>
+          <TooltipContent>Save the file</TooltipContent>
+        </Tooltip>
+        <button id="after" type="button">
+          After
+        </button>
+      </div>
+    ),
+  },
+};
