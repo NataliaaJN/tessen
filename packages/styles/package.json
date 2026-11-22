@@ -1,0 +1,34 @@
+{
+  "name": "@tessen-ui/styles",
+  "private": true,
+  "version": "0.0.0",
+  "description": "TESSEN styles: layered CSS (layers, optional reset and base, component CSS) built on the design tokens.",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": "./dist/index.css",
+    "./layers.css": "./dist/layers.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./reset.css": "./dist/reset.css",
+    "./base.css": "./dist/base.css",
+    "./components/*.css": "./dist/components/*.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node scripts/build-styles.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@tessen-ui/tokens": "workspace:*",
+    "@tessen-ui/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}
