@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spike S1 harness</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 24px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+      [role='tab'][aria-selected='true'] {
+        font-weight: 700;
+        text-decoration: underline;
+      }
+      [role='tab']:focus-visible,
+      button:focus-visible {
+        outline: 2px solid #2b7be0;
+      }
+      .t-dialog__backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgb(0 0 0 / 40%);
+      }
+      .t-dialog__positioner {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+      }
+      .t-dialog__content {
+        background: white;
+        border: 1px solid #888;
+        padding: 16px;
+        min-width: 260px;
+      }
+      @keyframes exit {
+        to {
+          opacity: 0;
+          transform: scale(0.98);
+        }
+      }
+      @keyframes enter {
+        from {
+          opacity: 0;
+          transform: scale(0.98);
+        }
+      }
+      .t-dialog__content[data-state='open'] {
+        animation: enter 300ms both;
+      }
+      .t-dialog__content[data-state='closed'] {
+        animation: exit 300ms both;
+      }
+      .t-tooltip__content {
+        background: #0a1a3e;
+        color: white;
+        padding: 4px 8px;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h1>Vue</h1>
+      <div id="vue"></div>
+    </section>
+    <section>
+      <h1>React</h1>
+      <div id="react"></div>
+    </section>
+    <script type="module" src="./main.tsx"></script>
+  </body>
+</html>
