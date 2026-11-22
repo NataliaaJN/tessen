@@ -26,3 +26,12 @@ Se necesita una única fuente de verdad para tokens que alimente CSS, TypeScript
 
 ## Disparadores de revisión
 Nueva versión de DTCG con *breaking changes*; Style Dictionary abandonado; necesidad de modos nativos en la spec (hoy los temas se resuelven por archivos/overrides).
+
+## Notas de implementación (F1-T02, 2026-11-22)
+Detalle en [`packages/tokens/README.md`](../../../packages/tokens/README.md). Lo que la implementación fijó o corrigió respecto al texto de arriba:
+- **Style Dictionary 5.8** parsea DTCG, hereda `$type` y resuelve alias; los ficheros se ensamblan en `scripts/lib/emit.ts` porque una hoja combina light, dark y densidad (un formato de Style Dictionary solo ve un diccionario).
+- **DTCG 2025.10 no admite `em` ni claves con punto**: `letterSpacing` es `number` con `$extensions.tessen.unit = "em"` y `space.0.5` se llama `space.0-5`.
+- Extensiones propias en uso: `deriveFrom`, `factor` (número o razón `"n/d"`), `unit`, `provisional`. Cualquier otra se rechaza en `tokens:check`.
+- Se añadió la escala `accent` (cian) a las seis de la especificación: en temas oscuros es el color de acción y enlace.
+- Pendiente (llega con su consumidor): puente Tailwind v4, `data-tessen-contrast`, tokens de grid y de componente.
+- Estado del ADR: sigue `Proposed`; pasarlo a `Accepted` es decisión del propietario.

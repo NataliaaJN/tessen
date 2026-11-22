@@ -15,10 +15,11 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
-    "deps:check": "depcruise --config .dependency-cruiser.cjs tooling",
+    "typecheck": "tsc --noEmit -p tsconfig.json && turbo run typecheck",
+    "tokens:check": "turbo run tokens:check",
+    "deps:check": "depcruise --config .dependency-cruiser.cjs tooling packages",
     "scope:check": "node tooling/scripts/scope-check.mjs",
-    "verify": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm deps:check && pnpm scope:check && pnpm test && pnpm build"
+    "verify": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm tokens:check && pnpm deps:check && pnpm scope:check && pnpm test && pnpm build"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",

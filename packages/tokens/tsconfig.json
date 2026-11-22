@@ -1,0 +1,4 @@
+{
+  "extends": "@tessen-ui/tsconfig/node.json",
+  "include": ["scripts/**/*.ts", "test/**/*.ts"]
+}

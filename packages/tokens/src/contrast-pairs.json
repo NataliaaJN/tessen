@@ -1,0 +1,193 @@
+{
+  "$description": "Foreground/background pairs that tokens:check verifies in every theme. kind: text >= 4.5:1 (WCAG 1.4.3), large-text >= 3:1, ui >= 3:1 (WCAG 1.4.11). Disabled states are exempt.",
+  "pairs": [
+    {
+      "foreground": "color.text.primary",
+      "backgrounds": [
+        "color.surface.canvas",
+        "color.surface.default",
+        "color.surface.raised",
+        "color.surface.sunken",
+        "color.surface.overlay"
+      ],
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "foreground": "color.text.secondary",
+      "backgrounds": [
+        "color.surface.canvas",
+        "color.surface.default",
+        "color.surface.raised",
+        "color.surface.sunken",
+        "color.surface.overlay"
+      ],
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "foreground": "color.text.tertiary",
+      "backgrounds": ["color.surface.canvas", "color.surface.default", "color.surface.raised"],
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "foreground": "color.text.link",
+      "backgrounds": ["color.surface.canvas", "color.surface.default", "color.surface.raised"],
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "foreground": "color.text.link-hover",
+      "backgrounds": ["color.surface.canvas", "color.surface.default", "color.surface.raised"],
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "foreground": "color.text.inverse",
+      "backgrounds": ["color.surface.inverse"],
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "foreground": "color.text.on-action",
+      "backgrounds": [
+        "color.action.primary.default",
+        "color.action.primary.hover",
+        "color.action.primary.active",
+        "color.action.danger.default",
+        "color.action.danger.hover",
+        "color.action.danger.active"
+      ],
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "foreground": "color.text.primary",
+      "backgrounds": [
+        "color.action.neutral.default",
+        "color.action.neutral.hover",
+        "color.action.neutral.active",
+        "color.action.primary.subtle",
+        "color.action.danger.subtle",
+        "color.selected.background",
+        "color.input.background"
+      ],
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "foreground": "color.text.on-feedback",
+      "backgrounds": [
+        "color.feedback.success.solid",
+        "color.feedback.warning.solid",
+        "color.feedback.danger.solid",
+        "color.feedback.info.solid"
+      ],
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "foreground": "color.feedback.success.text",
+      "backgrounds": ["color.feedback.success.background"],
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "foreground": "color.feedback.success.icon",
+      "backgrounds": ["color.feedback.success.background"],
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "foreground": "color.feedback.warning.text",
+      "backgrounds": ["color.feedback.warning.background"],
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "foreground": "color.feedback.warning.icon",
+      "backgrounds": ["color.feedback.warning.background"],
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "foreground": "color.feedback.danger.text",
+      "backgrounds": ["color.feedback.danger.background"],
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "foreground": "color.feedback.danger.icon",
+      "backgrounds": ["color.feedback.danger.background"],
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "foreground": "color.feedback.info.text",
+      "backgrounds": ["color.feedback.info.background"],
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "foreground": "color.feedback.info.icon",
+      "backgrounds": ["color.feedback.info.background"],
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "foreground": "color.selected.text",
+      "backgrounds": ["color.selected.background"],
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "foreground": "color.selected.border",
+      "backgrounds": ["color.selected.background"],
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "foreground": "color.border.focus",
+      "backgrounds": ["color.surface.canvas", "color.surface.default", "color.surface.raised"],
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "foreground": "color.focus.ring",
+      "backgrounds": ["color.surface.canvas", "color.surface.default", "color.surface.raised"],
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "foreground": "color.border.strong",
+      "backgrounds": ["color.surface.canvas", "color.surface.default", "color.surface.raised"],
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "foreground": "color.input.border",
+      "backgrounds": ["color.input.background"],
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "foreground": "color.input.border-hover",
+      "backgrounds": ["color.input.background"],
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "foreground": "color.input.border-invalid",
+      "backgrounds": ["color.input.background"],
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "foreground": "color.input.placeholder",
+      "backgrounds": ["color.input.background"],
+      "min": 4.5,
+      "kind": "text"
+    }
+  ]
+}

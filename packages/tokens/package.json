@@ -1,0 +1,38 @@
+{
+  "name": "@tessen-ui/tokens",
+  "private": true,
+  "version": "0.0.0",
+  "description": "TESSEN design tokens: DTCG source and generated CSS, TypeScript and JSON.",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/js/index.d.ts",
+      "import": "./dist/js/index.js"
+    },
+    "./tokens.css": "./dist/css/tokens.css",
+    "./tokens.json": "./dist/json/tokens.json"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "node scripts/build-tokens.ts",
+    "tokens:check": "node scripts/check-tokens.ts",
+    "tokens:scales": "node scripts/generate-scales.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@tessen-ui/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "prettier": "catalog:",
+    "style-dictionary": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}

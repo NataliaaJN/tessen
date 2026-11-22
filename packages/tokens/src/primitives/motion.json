@@ -1,0 +1,41 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "instant": { "$value": { "value": 0, "unit": "ms" } },
+      "fast": { "$value": { "value": 100, "unit": "ms" } },
+      "normal": { "$value": { "value": 200, "unit": "ms" } },
+      "slow": { "$value": { "value": 300, "unit": "ms" } },
+      "slower": { "$value": { "value": 500, "unit": "ms" } }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "standard": {
+        "$value": [0.2, 0, 0, 1],
+        "$description": "Default for movement within the screen."
+      },
+      "decelerate": { "$value": [0, 0, 0, 1], "$description": "Entrances." },
+      "accelerate": { "$value": [0.3, 0, 1, 1], "$description": "Exits." },
+      "emphasized": {
+        "$value": [0.2, 0, 0, 1],
+        "$description": "Reserved for expressive transitions; the overshoot variant is decided with the motion system (F1-T05).",
+        "$extensions": { "tessen": { "provisional": true } }
+      }
+    },
+    "distance": {
+      "$type": "dimension",
+      "xs": { "$value": { "value": 4, "unit": "px" } },
+      "sm": { "$value": { "value": 8, "unit": "px" } },
+      "md": { "$value": { "value": 16, "unit": "px" } }
+    },
+    "stagger": {
+      "step": { "$type": "duration", "$value": { "value": 40, "unit": "ms" } },
+      "max": {
+        "$type": "number",
+        "$value": 8,
+        "$description": "Maximum number of staggered steps."
+      }
+    }
+  }
+}
