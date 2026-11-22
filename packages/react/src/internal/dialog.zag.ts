@@ -1,7 +1,7 @@
 import * as dialog from '@zag-js/dialog';
 import { normalizeProps, useMachine } from '@zag-js/react';
 import { createContext, useContext, useId } from 'react';
-import { usePresence } from '../../internal/presence.zag.ts';
+import { usePresence } from './presence.zag.ts';
 
 /** Behavior adapter of Dialog: the only file of the component that talks to Zag (ADR 0004). */
 type DialogApi = ReturnType<typeof dialog.connect>;

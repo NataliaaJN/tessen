@@ -1,0 +1,94 @@
+/* Slider: one thumb on a track. Contract: @tessen-ui/core sliderContract. Overrides: --t-slider-accent. */
+@layer tessen.components {
+  .t-slider {
+    --_accent: var(--t-slider-accent, var(--tessen-color-action-primary-default));
+    --_thumb: 1.25rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--tessen-space-2);
+    font-family: var(--tessen-font-family-sans);
+    color: var(--tessen-color-text-primary);
+
+    &[data-orientation='vertical'] {
+      align-items: center;
+      block-size: 12rem;
+    }
+  }
+
+  .t-slider__header {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--tessen-space-2);
+    font-size: var(--tessen-font-size-sm);
+  }
+  .t-slider__label {
+    font-weight: var(--tessen-font-weight-medium);
+  }
+  .t-slider__value {
+    color: var(--tessen-color-text-secondary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .t-slider__control {
+    position: relative;
+    display: flex;
+    align-items: center;
+    inline-size: 100%;
+    block-size: var(--_thumb);
+    touch-action: none;
+
+    .t-slider[data-orientation='vertical'] & {
+      flex: 1;
+      inline-size: var(--_thumb);
+      block-size: auto;
+      justify-content: center;
+    }
+  }
+
+  .t-slider__track {
+    position: relative;
+    flex: 1;
+    block-size: 0.25rem;
+    border-radius: var(--tessen-radius-full);
+    background: var(--tessen-color-border-default);
+
+    .t-slider[data-orientation='vertical'] & {
+      inline-size: 0.25rem;
+      block-size: 100%;
+    }
+  }
+  .t-slider__range {
+    border-radius: inherit;
+    background: var(--_accent);
+  }
+
+  .t-slider__thumb {
+    box-sizing: border-box;
+    inline-size: var(--_thumb);
+    block-size: var(--_thumb);
+    border: 2px solid var(--_accent);
+    border-radius: var(--tessen-radius-full);
+    background: var(--tessen-color-white);
+    box-shadow: var(--tessen-elevation-raised);
+    cursor: grab;
+    transition: box-shadow var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard);
+    outline: none;
+
+    &:focus-visible {
+      outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+      outline-offset: var(--tessen-focus-ring-offset);
+    }
+    &[data-dragging] {
+      cursor: grabbing;
+    }
+    &[data-disabled] {
+      border-color: var(--tessen-color-border-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  .t-slider [data-part='range'][data-disabled] {
+    background: var(--tessen-color-border-disabled);
+  }
+}

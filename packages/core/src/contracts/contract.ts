@@ -30,8 +30,11 @@ export type Step =
   | { do: 'select'; value: string; target?: string }
   | { do: 'hover'; target?: string }
   | { do: 'unhover'; target?: string }
-  /** Waits until a selector is present (or gone, with `absent`): for behaviour that settles asynchronously. */
-  | { do: 'wait'; selector: string; absent?: boolean };
+  /**
+   * Waits until a selector is present (or gone, with `absent`): for behaviour that settles
+   * asynchronously. `timeout` (ms, default 1000) is for slow timers such as toast removal.
+   */
+  | { do: 'wait'; selector: string; absent?: boolean; timeout?: number };
 
 /** What to check on one element found with a CSS selector (searched in the whole document). */
 export interface ElementExpectation {

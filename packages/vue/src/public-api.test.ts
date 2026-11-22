@@ -6,8 +6,8 @@ import * as publicApi from './index.js';
 describe('public API (@tessen-ui/vue)', () => {
   const names = Object.keys(publicApi);
 
-  it('exports only T-prefixed components (ADR 0011)', () => {
-    expect(names.filter((name) => !/^T[A-Z]/.test(name))).toEqual([]);
+  it('exports only T-prefixed components (ADR 0011) and createToaster', () => {
+    expect(names.filter((name) => !/^T[A-Z]/.test(name))).toEqual(['createToaster']);
   });
 
   it('has no duplicate or engine-shaped exports', () => {
@@ -62,6 +62,34 @@ describe('public API (@tessen-ui/vue)', () => {
       'TTableCell',
       'TTableHeaderCell',
       'TPagination',
+    ]) {
+      expect(names, name).toContain(name);
+    }
+  });
+
+  it('exports the Zag-based T2 components', () => {
+    for (const name of [
+      'TSelect',
+      'TCombobox',
+      'TSlider',
+      'TToaster',
+      'TPopover',
+      'TPopoverTrigger',
+      'TPopoverContent',
+      'TDropdownMenu',
+      'TDropdownMenuTrigger',
+      'TDropdownMenuContent',
+      'TDropdownMenuItem',
+      'TDropdownMenuSeparator',
+      'TAlertDialog',
+      'TAlertDialogTrigger',
+      'TAlertDialogContent',
+      'TAlertDialogCancel',
+      'TAlertDialogAction',
+      'TAccordion',
+      'TAccordionItem',
+      'TAccordionTrigger',
+      'TAccordionContent',
     ]) {
       expect(names, name).toContain(name);
     }

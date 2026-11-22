@@ -1,0 +1,120 @@
+/* Popover and DropdownMenu: floating surfaces anchored to a trigger. Contracts: @tessen-ui/core popoverContract / dropdownMenuContract. Overrides: --t-popover-radius. */
+@layer tessen.components {
+  .t-popover__trigger,
+  .t-menu__trigger {
+    font: inherit;
+    cursor: pointer;
+  }
+
+  /* Zag positions this wrapper. Above a modal too (layer.popover): a popover can open inside a Dialog. */
+  .t-popover__positioner,
+  .t-menu__positioner {
+    z-index: var(--tessen-layer-popover);
+  }
+
+  .t-popover,
+  .t-menu {
+    box-sizing: border-box;
+    border: 1px solid var(--tessen-color-border-subtle);
+    border-radius: var(--t-popover-radius, var(--tessen-radius-lg));
+    background: var(--tessen-color-surface-overlay);
+    box-shadow: var(--tessen-elevation-overlay);
+    color: var(--tessen-color-text-primary);
+    font-family: var(--tessen-font-family-sans);
+    outline: none;
+    animation: t-popover-in var(--tessen-motion-duration-fast)
+      var(--tessen-motion-easing-decelerate);
+
+    &[data-state='closed'] {
+      animation: t-popover-out var(--tessen-motion-duration-fast)
+        var(--tessen-motion-easing-accelerate) forwards;
+    }
+  }
+
+  .t-popover {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tessen-space-2);
+    max-inline-size: 22rem;
+    padding: var(--tessen-space-4);
+  }
+  .t-popover__title {
+    margin: 0;
+    font-size: var(--tessen-font-size-md);
+    font-weight: var(--tessen-font-weight-semibold);
+  }
+  .t-popover__description {
+    margin: 0;
+    color: var(--tessen-color-text-secondary);
+    font-size: var(--tessen-font-size-sm);
+    line-height: var(--tessen-font-line-height-normal);
+  }
+  .t-popover__close {
+    align-self: flex-end;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .t-menu {
+    min-inline-size: 10rem;
+    padding: var(--tessen-space-1);
+  }
+  .t-menu__item {
+    display: flex;
+    align-items: center;
+    gap: var(--tessen-space-2);
+    padding: var(--tessen-space-2) var(--tessen-space-3);
+    border-radius: var(--tessen-radius-sm);
+    font-size: var(--tessen-font-size-md);
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+
+    &[data-highlighted] {
+      background: var(--tessen-color-action-primary-subtle);
+    }
+    &[data-disabled] {
+      color: var(--tessen-color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+  .t-menu__separator {
+    block-size: 1px;
+    margin-block: var(--tessen-space-1);
+    background: var(--tessen-color-border-subtle);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .t-popover,
+    .t-menu {
+      animation-name: t-popover-fade-in;
+
+      &[data-state='closed'] {
+        animation-name: t-popover-fade-out;
+      }
+    }
+  }
+
+  @keyframes t-popover-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+  }
+  @keyframes t-popover-out {
+    to {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+  }
+  @keyframes t-popover-fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes t-popover-fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+}

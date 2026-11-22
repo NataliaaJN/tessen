@@ -370,7 +370,22 @@ importers:
       '@tessen-ui/core':
         specifier: workspace:*
         version: link:../core
+      '@zag-js/accordion':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/collection':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/combobox':
+        specifier: 1.48.0
+        version: 1.48.0
       '@zag-js/dialog':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/menu':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/popover':
         specifier: 1.48.0
         version: 1.48.0
       '@zag-js/presence':
@@ -379,7 +394,16 @@ importers:
       '@zag-js/react':
         specifier: 1.48.0
         version: 1.48.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      '@zag-js/select':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/slider':
+        specifier: 1.48.0
+        version: 1.48.0
       '@zag-js/tabs':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/toast':
         specifier: 1.48.0
         version: 1.48.0
       '@zag-js/tooltip':
@@ -476,13 +500,37 @@ importers:
       '@tessen-ui/core':
         specifier: workspace:*
         version: link:../core
+      '@zag-js/accordion':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/collection':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/combobox':
+        specifier: 1.48.0
+        version: 1.48.0
       '@zag-js/dialog':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/menu':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/popover':
         specifier: 1.48.0
         version: 1.48.0
       '@zag-js/presence':
         specifier: 1.48.0
         version: 1.48.0
+      '@zag-js/select':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/slider':
+        specifier: 1.48.0
+        version: 1.48.0
       '@zag-js/tabs':
+        specifier: 1.48.0
+        version: 1.48.0
+      '@zag-js/toast':
         specifier: 1.48.0
         version: 1.48.0
       '@zag-js/tooltip':
@@ -2620,6 +2668,9 @@ packages:
       '@vue/server-renderer':
         optional: true
 
+  '@zag-js/accordion@1.48.0':
+    resolution: {integrity: sha512-VVQrvRC1/+Dd3ZU5otObwoocPcJYko8HYpjayvaD3vDXXwSDENevYCJCAISYIvaVD3FrvOX0IXJghFUxDcmGaQ==}
+
   '@zag-js/anatomy@1.48.0':
     resolution: {integrity: sha512-gbv1f5f/lgkrtkbcfwnBsIiJfOlDLkKqPfF4Ro7s8ksugLHbM8b+ztJMxCjsgANvUqJstmGxlm434X0mDqM0eA==}
 
@@ -2693,11 +2744,17 @@ packages:
   '@zag-js/select@1.48.0':
     resolution: {integrity: sha512-Us7j/HGQXfrZp8/BIh5F3DaDtMqPcRCCp5i+svfidd/k8zNa0Fi+fpOtzvdMXGzZhvLDdPCpNUa6R6IUrPLxUQ==}
 
+  '@zag-js/slider@1.48.0':
+    resolution: {integrity: sha512-EsHTWBQR9vwakIUh1OeGlb2Ua8syYH2cgJJi/BY6EZUuIrC2Mm/kiNaifdgKh09ojgx5OoG6jcxByeT5ulw94g==}
+
   '@zag-js/store@1.48.0':
     resolution: {integrity: sha512-B//W9xhxdomu4fYMuw31Fltu3zaeAy88oSj9LmlsojIiKxgRE5n2ttcYvtmUGJ/etI2lHxGl4WPyhneqRinvdQ==}
 
   '@zag-js/tabs@1.48.0':
     resolution: {integrity: sha512-6sEwTZFu+mh59bqcdb6Re3WH/xDDi+lAW/xr3rIBKD85jTTIxHQO+wnjEf2qb730IdSt75W26ZboMYfumh2q7A==}
+
+  '@zag-js/toast@1.48.0':
+    resolution: {integrity: sha512-UFgWG1KdeB9zm8bfBdGii0ItM7GGVUWh4RD5hZuva1wo/lpgB/3AiFCu8WBR23uQo/4yRwSmQQ9x8tDAc63BGQ==}
 
   '@zag-js/tooltip@1.48.0':
     resolution: {integrity: sha512-W5N09aBHO0CW27XZ62fCOtXxcAqZZOB1BIply/Nd6dt+8pZwe45peYP6BQ0PZ7cIkY1av7b/8iewjgq2dmRAGw==}
@@ -7604,6 +7661,14 @@ snapshots:
     optionalDependencies:
       '@vue/server-renderer': 3.5.46
 
+  '@zag-js/accordion@1.48.0':
+    dependencies:
+      '@zag-js/anatomy': 1.48.0
+      '@zag-js/core': 1.48.0
+      '@zag-js/dom-query': 1.48.0
+      '@zag-js/types': 1.48.0
+      '@zag-js/utils': 1.48.0
+
   '@zag-js/anatomy@1.48.0': {}
 
   '@zag-js/aria-hidden@1.48.0':
@@ -7750,6 +7815,14 @@ snapshots:
       '@zag-js/types': 1.48.0
       '@zag-js/utils': 1.48.0
 
+  '@zag-js/slider@1.48.0':
+    dependencies:
+      '@zag-js/anatomy': 1.48.0
+      '@zag-js/core': 1.48.0
+      '@zag-js/dom-query': 1.48.0
+      '@zag-js/types': 1.48.0
+      '@zag-js/utils': 1.48.0
+
   '@zag-js/store@1.48.0':
     dependencies:
       proxy-compare: 3.0.1
@@ -7758,6 +7831,15 @@ snapshots:
     dependencies:
       '@zag-js/anatomy': 1.48.0
       '@zag-js/core': 1.48.0
+      '@zag-js/dom-query': 1.48.0
+      '@zag-js/types': 1.48.0
+      '@zag-js/utils': 1.48.0
+
+  '@zag-js/toast@1.48.0':
+    dependencies:
+      '@zag-js/anatomy': 1.48.0
+      '@zag-js/core': 1.48.0
+      '@zag-js/dismissable': 1.48.0
       '@zag-js/dom-query': 1.48.0
       '@zag-js/types': 1.48.0
       '@zag-js/utils': 1.48.0

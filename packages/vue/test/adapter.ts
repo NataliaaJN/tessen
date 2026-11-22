@@ -12,6 +12,8 @@ export interface VueAdapterOptions {
   trailingAs?: string;
   /** Prop listener that reports value changes, e.g. `onUpdate:modelValue`. */
   valueEvent?: string;
+  /** Neutral `extra` names that are called differently in Vue, e.g. `{ value: 'modelValue' }`. */
+  rename?: Record<string, string>;
   /** Static props added to every mount. */
   props?: Record<string, unknown>;
   /** Extra slots (name -> html) added to every mount. */
@@ -45,8 +47,18 @@ export function vueAdapter(
       if (valueEvent)
         own[valueEvent] = (value: string | number | boolean) =>
           emitted.push(typeof value === 'number' ? String(value) : value);
+      const renamed = Object.fromEntries(
+        Object.entries(extra ?? {}).map(([name, value]) => [options.rename?.[name] ?? name, value]),
+      );
       const wrapper = mount(component, {
-        props: { ...own, ...props, ...extra, ...attrs, class: className, onClick: () => clicks++ },
+        props: {
+          ...own,
+          ...props,
+          ...renamed,
+          ...attrs,
+          class: className,
+          onClick: () => clicks++,
+        },
         slots,
         attachTo: document.body,
       } as never);

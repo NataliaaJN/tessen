@@ -8,5 +8,12 @@ export const sceneNames = [
   'tabs',
   'dialog-open',
   'tooltip',
+  'controls',
+  'select-open',
+  'menu-open',
+  'popover-open',
+  'alert-dialog-open',
+  'dialog-select',
+  'toast',
 ] as const;
 export type SceneName = (typeof sceneNames)[number];

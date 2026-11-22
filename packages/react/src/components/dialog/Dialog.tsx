@@ -5,7 +5,7 @@ import { forwardRef, type ButtonHTMLAttributes, type HTMLAttributes, type ReactN
 import { cx } from '../../internal/cx.ts';
 import { Portal } from '../../internal/portal.tsx';
 import { useMergedRef } from '../../internal/use-controllable.ts';
-import { DialogContext, useDialog, useDialogRoot } from './dialog.zag.ts';
+import { DialogContext, useDialog, useDialogRoot } from '../../internal/dialog.zag.ts';
 
 export interface DialogProps {
   open?: boolean;

@@ -15,7 +15,7 @@ document.documentElement.setAttribute('data-tessen-theme', params.get('theme') ?
 if (!sceneNames.includes(name)) throw new Error(`unknown scene ${String(name)}`);
 
 if (framework === 'vue') {
-  const app = createApp({ template: scenes[name].vue });
+  const app = createApp({ template: scenes[name].vue, setup: scenes[name].vueSetup });
   for (const [key, component] of Object.entries(tessenVue)) {
     if (/^T[A-Z]/.test(key)) app.component(key, component as never);
   }

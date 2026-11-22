@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDialog } from './dialog.zag.js';
+import { useDialog } from '../../internal/dialog.zag.js';
 
 defineOptions({ name: 'TDialogDescription' });
 defineSlots<{ default?(): unknown }>();

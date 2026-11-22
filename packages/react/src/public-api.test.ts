@@ -6,8 +6,8 @@ import * as publicApi from './index.ts';
 describe('public API (@tessen-ui/react)', () => {
   const names = Object.keys(publicApi);
 
-  it('exports only components (PascalCase, no prefix: ADR 0011)', () => {
-    expect(names.filter((name) => !/^[A-Z]/.test(name))).toEqual([]);
+  it('exports only components (PascalCase, no prefix: ADR 0011) and createToaster', () => {
+    expect(names.filter((name) => !/^[A-Z]/.test(name))).toEqual(['createToaster']);
   });
 
   it('has no duplicate or engine-shaped exports', () => {
@@ -62,6 +62,34 @@ describe('public API (@tessen-ui/react)', () => {
       'TableCell',
       'TableHeaderCell',
       'Pagination',
+    ]) {
+      expect(names, name).toContain(name);
+    }
+  });
+
+  it('exports the Zag-based T2 components', () => {
+    for (const name of [
+      'Select',
+      'Combobox',
+      'Slider',
+      'Toaster',
+      'Popover',
+      'PopoverTrigger',
+      'PopoverContent',
+      'DropdownMenu',
+      'DropdownMenuTrigger',
+      'DropdownMenuContent',
+      'DropdownMenuItem',
+      'DropdownMenuSeparator',
+      'AlertDialog',
+      'AlertDialogTrigger',
+      'AlertDialogContent',
+      'AlertDialogCancel',
+      'AlertDialogAction',
+      'Accordion',
+      'AccordionItem',
+      'AccordionTrigger',
+      'AccordionContent',
     ]) {
       expect(names, name).toContain(name);
     }

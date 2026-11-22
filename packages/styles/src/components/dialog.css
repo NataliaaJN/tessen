@@ -89,6 +89,16 @@
     cursor: pointer;
   }
 
+  /* AlertDialog reuses the dialog surface; its two choices sit at the end, safe one first. */
+  .t-dialog__content > .t-alert-dialog__cancel {
+    align-self: flex-end;
+    margin-block-start: var(--tessen-space-2);
+  }
+  .t-dialog__content > .t-alert-dialog__action {
+    align-self: flex-end;
+    margin-block-start: calc(var(--tessen-space-2) * -1);
+  }
+
   /* Reduced motion keeps only the fade (no scale or travel). */
   @media (prefers-reduced-motion: reduce) {
     .t-dialog__content {

@@ -1,0 +1,97 @@
+/* Toast: transient messages in a live region. Contract: @tessen-ui/core toastContract. Overrides: --t-toast-radius. */
+@layer tessen.components {
+  /* Zag positions the region (fixed, per placement). It never blocks the page between toasts. */
+  .t-toaster {
+    z-index: var(--tessen-layer-toast);
+    outline: none;
+  }
+
+  .t-toast {
+    --_accent: var(--tessen-color-feedback-info-solid);
+
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--tessen-space-3);
+    inline-size: min(24rem, calc(100vw - var(--tessen-space-8)));
+    padding: var(--tessen-space-3) var(--tessen-space-4);
+    border: 1px solid var(--tessen-color-border-subtle);
+    border-inline-start: 4px solid var(--_accent);
+    border-radius: var(--t-toast-radius, var(--tessen-radius-lg));
+    background: var(--tessen-color-surface-overlay);
+    box-shadow: var(--tessen-elevation-overlay);
+    color: var(--tessen-color-text-primary);
+    font-family: var(--tessen-font-family-sans);
+    translate: var(--x) var(--y);
+    scale: var(--scale);
+    opacity: var(--opacity);
+    height: var(--height);
+    z-index: var(--z-index);
+    transition:
+      translate var(--tessen-motion-duration-normal) var(--tessen-motion-easing-standard),
+      scale var(--tessen-motion-duration-normal) var(--tessen-motion-easing-standard),
+      opacity var(--tessen-motion-duration-normal) var(--tessen-motion-easing-standard);
+
+    &[data-type='success'] {
+      --_accent: var(--tessen-color-feedback-success-solid);
+    }
+    &[data-type='warning'] {
+      --_accent: var(--tessen-color-feedback-warning-solid);
+    }
+    &[data-type='error'] {
+      --_accent: var(--tessen-color-feedback-danger-solid);
+    }
+    &[data-type='loading'] {
+      --_accent: var(--tessen-color-border-strong);
+    }
+  }
+
+  .t-toast__body {
+    flex: 1;
+    min-inline-size: 0;
+  }
+  .t-toast__title {
+    font-size: var(--tessen-font-size-md);
+    font-weight: var(--tessen-font-weight-semibold);
+  }
+  .t-toast__description {
+    margin-block-start: var(--tessen-space-0-5);
+    color: var(--tessen-color-text-secondary);
+    font-size: var(--tessen-font-size-sm);
+    line-height: var(--tessen-font-line-height-normal);
+  }
+
+  .t-toast__action,
+  .t-toast__close {
+    flex: none;
+    border: 0;
+    border-radius: var(--tessen-radius-sm);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+      outline-offset: var(--tessen-focus-ring-offset);
+    }
+  }
+  .t-toast__action {
+    padding: var(--tessen-space-1) var(--tessen-space-2);
+    color: var(--tessen-color-text-link);
+    font-size: var(--tessen-font-size-sm);
+    font-weight: var(--tessen-font-weight-medium);
+  }
+  .t-toast__close {
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    line-height: 1;
+    color: var(--tessen-color-text-secondary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .t-toast {
+      transition: opacity var(--tessen-motion-duration-fast) linear;
+    }
+  }
+}

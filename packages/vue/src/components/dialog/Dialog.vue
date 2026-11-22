@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provideDialog } from './dialog.zag.js';
+import { provideDialog } from '../../internal/dialog.zag.js';
 
 defineOptions({ name: 'TDialog' });
 
