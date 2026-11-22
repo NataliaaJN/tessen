@@ -1,0 +1,107 @@
+/* IconButton: square button. Contract: @tessen-ui/core iconButtonContract. Only semantic tokens and --t-icon-button-* overrides. */
+@layer tessen.components {
+  .t-icon-button {
+    --_accent: var(--tessen-color-action-primary-default);
+    --_accent-subtle: var(--tessen-color-action-primary-subtle);
+    --_on-accent: var(--tessen-color-action-primary-on);
+    --_bg: var(--t-icon-button-bg, transparent);
+    --_bg-hover: var(--_accent-subtle);
+    --_bg-active: var(--_accent-subtle);
+    --_fg: var(--t-icon-button-fg, var(--_accent));
+    --_border: transparent;
+
+    box-sizing: border-box;
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--_size);
+    block-size: var(--_size);
+    padding: 0;
+    border: 1px solid var(--_border);
+    border-radius: var(--t-icon-button-radius, var(--tessen-radius-md));
+    background: var(--_bg);
+    color: var(--_fg);
+    cursor: pointer;
+    transition:
+      background-color var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard),
+      transform var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard);
+
+    &[data-size='sm'] {
+      --_size: var(--tessen-size-control-sm);
+      --_icon: 1rem;
+    }
+    &[data-size='md'] {
+      --_size: var(--tessen-size-control-md);
+      --_icon: 1.25rem;
+    }
+    &[data-size='lg'] {
+      --_size: var(--tessen-size-control-lg);
+      --_icon: 1.5rem;
+    }
+
+    &[data-tone='danger'] {
+      --_accent: var(--tessen-color-action-danger-default);
+      --_accent-subtle: var(--tessen-color-action-danger-subtle);
+      --_on-accent: var(--tessen-color-text-on-action);
+    }
+
+    &[data-variant='primary'] {
+      --_bg: var(--t-icon-button-bg, var(--_accent));
+      --_bg-hover: var(--tessen-color-action-primary-hover);
+      --_bg-active: var(--tessen-color-action-primary-active);
+      --_fg: var(--t-icon-button-fg, var(--_on-accent));
+    }
+    &[data-variant='primary'][data-tone='danger'] {
+      --_bg-hover: var(--tessen-color-action-danger-hover);
+      --_bg-active: var(--tessen-color-action-danger-active);
+    }
+    &[data-variant='secondary'] {
+      --_bg: var(--t-icon-button-bg, var(--tessen-color-action-neutral-default));
+      --_bg-hover: var(--tessen-color-action-neutral-hover);
+      --_bg-active: var(--tessen-color-action-neutral-active);
+      --_fg: var(--t-icon-button-fg, var(--tessen-color-text-primary));
+    }
+    &[data-variant='outline'] {
+      --_border: var(--tessen-color-border-strong);
+    }
+
+    @media (hover: hover) {
+      &:hover:not(:disabled) {
+        background: var(--_bg-hover);
+      }
+    }
+    &:active:not(:disabled) {
+      background: var(--_bg-active);
+      transform: scale(var(--tessen-motion-scale-press));
+    }
+    &:focus-visible {
+      outline: var(--tessen-focus-ring-width) solid var(--tessen-color-focus-ring);
+      outline-offset: var(--tessen-focus-ring-offset);
+    }
+    &:disabled {
+      cursor: not-allowed;
+      color: var(--tessen-color-text-disabled);
+      background: transparent;
+    }
+  }
+
+  .t-icon-button__icon {
+    display: inline-flex;
+    inline-size: var(--_icon);
+    block-size: var(--_icon);
+    > * {
+      inline-size: 100%;
+      block-size: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .t-icon-button {
+      transition: none;
+      &:active:not(:disabled) {
+        transform: none;
+      }
+    }
+  }
+}

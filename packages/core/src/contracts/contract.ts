@@ -18,9 +18,26 @@ export interface NeutralProps {
   class?: string;
   /** Native attributes the consumer adds (`aria-*`, `data-*`); they reach the root. */
   attrs?: Record<string, string>;
+  /** Component-specific props (value, checked, invalid, ...); adapters forward them as props. */
+  extra?: Record<string, string | number | boolean>;
 }
 
-export type Step = { do: 'click' } | { do: 'focus' } | { do: 'key'; key: 'Enter' | 'Space' };
+export type Step =
+  | { do: 'click'; target?: string }
+  | { do: 'focus'; target?: string }
+  | { do: 'key'; key: string; target?: string }
+  | { do: 'type'; text: string; target?: string }
+  | { do: 'hover'; target?: string }
+  | { do: 'unhover'; target?: string };
+
+/** What to check on one element found with a CSS selector (searched in the whole document). */
+export interface ElementExpectation {
+  present?: boolean;
+  attrs?: Record<string, string | null>;
+  text?: string;
+  focused?: boolean;
+  role?: string;
+}
 
 export interface Expectation {
   /** Accessible role of the root. */
@@ -37,6 +54,14 @@ export interface Expectation {
   classes?: string[];
   /** Selectors that must exist (or not, with `false`) inside the root. */
   parts?: Record<string, boolean>;
+  /** Tag name of the root (lower case). */
+  tag?: string;
+  /** Text content of the root. */
+  text?: string;
+  /** Checks on other elements, by selector (document-wide, so portals are reachable). */
+  within?: Record<string, ElementExpectation>;
+  /** Values the component reported through its value-change event, in order. */
+  emitted?: (string | boolean)[];
 }
 
 export interface ContractCase {

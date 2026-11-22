@@ -22,9 +22,9 @@
       "types": "./dist/js/contracts/index.d.ts",
       "import": "./dist/js/contracts/index.js"
     },
-    "./contracts/button": {
-      "types": "./dist/js/contracts/button.contract.d.ts",
-      "import": "./dist/js/contracts/button.contract.js"
+    "./contracts/*": {
+      "types": "./dist/js/contracts/*.contract.d.ts",
+      "import": "./dist/js/contracts/*.contract.js"
     }
   },
   "files": [
