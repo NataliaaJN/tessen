@@ -70,6 +70,21 @@ export function partsOf(name, exportNames, allRoots) {
  */
 
 /**
+ * The part of a contract that the docs need (structurally what defineContract returns). Declared
+ * here, not imported, so the root typecheck does not need the packages to be built first.
+ * @typedef {object} Contract
+ * @property {string} name
+ * @property {{ vue: string, react: string }} names
+ * @property {string} category
+ * @property {string} tier
+ * @property {string} engine
+ * @property {string} apgPattern
+ * @property {readonly string[]} anatomy
+ * @property {readonly { name: string, type: string, values?: readonly string[], default?: string | boolean, required?: boolean }[]} props
+ * @property {readonly { id: string, describe: string, [key: string]: unknown }[]} cases
+ */
+
+/**
  * @typedef {object} PropDoc
  * @property {string} name
  * @property {string} type
@@ -97,7 +112,7 @@ export function partsOf(name, exportNames, allRoots) {
  */
 
 /**
- * @param {import('@tessen-ui/core').Contract} contract
+ * @param {Contract} contract
  * @param {{ vue: FrameworkApi, react: FrameworkApi, roots: string[], snippets: { vue: string, react: string } }} ctx
  * @returns {ComponentDoc}
  */

@@ -24,7 +24,7 @@ async function writeJson(path, value) {
 
 async function main() {
   const command = process.argv[2];
-  const docs = loadDocs();
+  const docs = await loadDocs();
   const problems = checkDocs(docs);
 
   if (command === 'check') {

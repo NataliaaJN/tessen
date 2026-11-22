@@ -1,2 +1,2 @@
 export * from './model.mjs';
-export { loadDocs, loadContracts } from './load.mjs';
+export { loadDocs } from './load.mjs';

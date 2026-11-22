@@ -10,7 +10,7 @@ import {
   vuePropStatus,
 } from '../src/model.mjs';
 
-/** @type {import('@tessen-ui/core').Contract} */
+/** @type {import('../src/model.mjs').Contract} */
 const contract = {
   name: 'Button',
   names: { vue: 'TButton', react: 'Button' },
@@ -85,7 +85,7 @@ test('checkDocs reports a missing framework export and a drifted prop', () => {
 });
 
 test('checkDocs flags a stale KNOWN_EXCEPTIONS entry', () => {
-  /** @type {import('@tessen-ui/core').Contract} */
+  /** @type {import('../src/model.mjs').Contract} */
   const input = {
     ...contract,
     name: 'Input',
