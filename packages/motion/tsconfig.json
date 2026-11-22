@@ -1,4 +1,5 @@
 {
   "extends": "@tessen-ui/tsconfig/node.json",
+  "compilerOptions": { "lib": ["ES2023", "DOM", "DOM.Iterable"] },
   "include": ["src/**/*.ts", "scripts/**/*.ts", "test/**/*.ts"]
 }
