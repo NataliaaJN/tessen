@@ -12,14 +12,23 @@
     "typecheck": "astro check"
   },
   "dependencies": {
+    "@astrojs/react": "7.1.9",
+    "@astrojs/vue": "7.1.6",
+    "@tessen-ui/react": "workspace:*",
     "@tessen-ui/styles": "workspace:*",
     "@tessen-ui/tokens": "workspace:*",
-    "astro": "^7.4.13"
+    "@tessen-ui/vue": "workspace:*",
+    "astro": "^7.4.13",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "vue": "catalog:"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@tessen-ui/docs-gen": "workspace:*",
     "@tessen-ui/tsconfig": "workspace:*",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "typescript": "catalog:"
   }
 }

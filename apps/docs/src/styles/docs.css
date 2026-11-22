@@ -301,3 +301,20 @@ pre {
     transition: none;
   }
 }
+
+/* Live examples */
+.example .fw {
+  margin: 0 0 var(--tessen-space-1);
+  color: var(--tessen-color-text-tertiary);
+  font-size: 0.85em;
+}
+.demo {
+  min-height: 4rem;
+  padding: var(--tessen-space-4);
+  border: 1px solid var(--tessen-color-border-default);
+  border-radius: var(--tessen-radius-md);
+  background: var(--tessen-color-surface-default);
+}
+.example details {
+  margin-top: var(--tessen-space-2);
+}
