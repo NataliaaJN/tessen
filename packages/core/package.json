@@ -1,0 +1,44 @@
+{
+  "name": "@tessen-ui/core",
+  "private": true,
+  "version": "0.0.0",
+  "description": "TESSEN core: framework-free variants, component contracts (as data) and snippet codegen. Shared by Vue, React, docs and Playground.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/js/index.d.ts",
+      "import": "./dist/js/index.js"
+    },
+    "./variants": {
+      "types": "./dist/js/variants.d.ts",
+      "import": "./dist/js/variants.js"
+    },
+    "./codegen": {
+      "types": "./dist/js/codegen.d.ts",
+      "import": "./dist/js/codegen.js"
+    },
+    "./contracts": {
+      "types": "./dist/js/contracts/index.d.ts",
+      "import": "./dist/js/contracts/index.js"
+    },
+    "./contracts/button": {
+      "types": "./dist/js/contracts/button.contract.d.ts",
+      "import": "./dist/js/contracts/button.contract.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@tessen-ui/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
