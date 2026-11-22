@@ -17,7 +17,7 @@
 **Entregables:** `docs/planning/01–13`, `docs/architecture/*`. **Salida:** documentos fusionados en `develop`; decisiones D-01…D-05 resueltas o con responsable.
 **Esfuerzo:** completado en esta sesión (revisión por el propietario: ~0.5 sem).
 
-### Fase 1 — Foundations (4–6 sem)
+### Fase 1 — Foundations ✅ (4–6 sem; gate revisado: [`F1-gate-review.md`](F1-gate-review.md))
 | ID | Tarea | Depende de |
 |---|---|---|
 | F1-T01 ✅ | Esqueleto del monorepo (pnpm, Turborepo, tsconfig/eslint/vite compartidos en `tooling/`, **dependency-cruiser** con las reglas de `docs/architecture/dependency-rules.md`, CI básico en GitHub Actions, `packageManager`/`.nvmrc` y scope interno provisional `@tessen-ui` con `private: true`, ADR 0015). Solo los paquetes que se usen ya (sin carpetas vacías) | D-02 |
