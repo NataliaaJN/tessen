@@ -58,7 +58,7 @@ apps/docs/.../examples/*.vue|*.tsx  ──(?raw)──► código mostrado == c�
 /search                        Ctrl/⌘ K (paleta)
 ```
 
-**Cabecera:** logo (propuesta 11, pendiente de asset), buscador `⌘K`, selector Vue/React (persistente), conmutador claro/oscuro y botón de **Apariencia** (mini-panel de tema, patrón rM [V]), enlace a GitHub. **Lateral:** árbol por sección con búsqueda local. **Derecha:** tabla de contenidos de la página (anclas, patrón Fluent [V]).
+**Cabecera:** logo (propuesta 11, ver `docs/brand/`), buscador `⌘K`, selector Vue/React (persistente), conmutador claro/oscuro y botón de **Apariencia** (mini-panel de tema, patrón rM [V]), enlace a GitHub. **Lateral:** árbol por sección con búsqueda local. **Derecha:** tabla de contenidos de la página (anclas, patrón Fluent [V]).
 
 ### 3.1 Preferencia de framework
 Selector global `Vue | React` que cambia todos los ejemplos del sitio y el valor por defecto del Playground; persistido y reflejado en URL (`?fw=vue`). Los bloques de código muestran pestañas locales.
@@ -154,7 +154,7 @@ Presets (≥ 8: 4 claros / 4 oscuros, **propios de Tessen**, no copiados de rM) 
 
 ## 8. Recursos (PLT-09)
 
-Iconos (explorador, copiar SVG/componente Vue/React) · Tokens descargables (CSS, JSON, Tailwind) · Snippets (plantillas de formularios, layouts) · Plantillas de aplicación (*Templates*, Fase 7: panel, auth, ajustes, landing; patrón de rM Spaces/Templates [V]) · **Kit Figma** (variables importadas desde DTCG; el plugin bidireccional se pospone) · Logo y marca (cuando se aporte el asset).
+Iconos (explorador, copiar SVG/componente Vue/React) · Tokens descargables (CSS, JSON, Tailwind) · Snippets (plantillas de formularios, layouts) · Plantillas de aplicación (*Templates*, Fase 7: panel, auth, ajustes, landing; patrón de rM Spaces/Templates [V]) · **Kit Figma** (variables importadas desde DTCG; el plugin bidireccional se pospone) · Logo y marca (`docs/brand/`: marca, variantes y paleta).
 
 ## 9. Otras secciones que aportan valor [R]
 

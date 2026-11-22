@@ -74,7 +74,16 @@ Los valores derivables en runtime (p. ej. radios a partir de un radio base, para
 
 **Primitivos** (escalas de 11 pasos `50, 100 … 900, 950`): `neutral`, `brand`, `success`, `warning`, `danger`, `info`. **[R]** Se generan en **OKLCH** con pasos de luminosidad fijos y croma limitado por gamut sRGB, y se *validan* (no se aceptan a ojo). Los valores hex concretos se fijan en Fase 1.
 
-> **Acento de marca:** se deriva del logotipo (propuesta 11) cuando se aporte el asset (`12` D-01). Hasta entonces el tema por defecto usa un acento provisional neutro-frío marcado `provisional` en el JSON.
+> **Semillas de marca** (de la paleta del logotipo, ver [`docs/brand/`](../brand/README.md)): `brand.primary #12306E`, `brand.secondary #2B7BE0`, `brand.accent #38C6F4`, `surface.dark #060E24`, `surface.light #F1F7FE`, `text #0A1A3E`. Las escalas `brand` de 11 pasos se generan en OKLCH **a partir de estas semillas** y los roles semánticos se eligen por contraste, no por nombre:
+>
+> | Hecho medido | Consecuencia |
+> |---|---|
+> | Blanco sobre `#12306E` = 12.55:1 | `color.action.primary` en tema claro puede apoyarse en la semilla primaria (o un paso cercano) con `on-action` blanco |
+> | Blanco sobre `#2B7BE0` = 4.19:1 (< 4.5) y `#2B7BE0` sobre `#F1F7FE` = 3.89:1 | La semilla secundaria **no** sirve tal cual como fondo con texto blanco ni como texto de enlace en claro: se usa un paso más oscuro; sí vale para bordes/iconos (≥ 3:1) |
+> | Blanco sobre `#38C6F4` = 1.99:1; `#0A1A3E` sobre `#38C6F4` = 8.58:1 | El acento cian lleva texto oscuro; nunca texto blanco |
+> | `#38C6F4` sobre `#060E24` = 9.63:1 | En tema oscuro el cian funciona como color de acción/enlace |
+>
+> Los valores finales por token se fijan en Fase 1 con `tokens:check`.
 
 **Semánticos (conjunto mínimo obligatorio, cada uno en light y dark):**
 
@@ -100,9 +109,9 @@ Los valores derivables en runtime (p. ej. radios a partir de un radio base, para
 
 | Token | Valores |
 |---|---|
-| `font.family.sans` | pila del sistema + `Inter`/variable como recomendada (fuente final: decisión D-06) |
-| `font.family.mono` | `ui-monospace, SFMono-Regular, Menlo, monospace` |
-| `font.family.display` | opcional, para marca |
+| `font.family.sans` | `Inter` (variable) con pila del sistema como respaldo — es la tipografía de interfaz de la marca (D-06) |
+| `font.family.mono` | `JetBrains Mono` con `ui-monospace, SFMono-Regular, Menlo, monospace` como respaldo |
+| `font.family.display` | `Outfit` (wordmark y titulares de marca); opcional, no se exige a los consumidores |
 | `font.size` | `2xs 11` `xs 12` `sm 14` `md 16` `lg 18` `xl 20` `2xl 24` `3xl 30` `4xl 36` `5xl 48` `6xl 60` (px → `rem`) |
 | `font.weight` | `regular 400`, `medium 500`, `semibold 600`, `bold 700` |
 | `font.lineHeight` | `tight 1.2`, `snug 1.35`, `normal 1.5`, `relaxed 1.65` |

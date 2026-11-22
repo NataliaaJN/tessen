@@ -118,9 +118,9 @@ Descartadas por añadir complejidad sin valor claro: IA generativa de temas en v
 ## 8. Identidad de marca
 
 - Nombre: **Tessen** (鉄扇, abanico de hierro/guerra).
-- Logotipo: **propuesta 11** del chat «Propuestas de logotipo con gato».
-  - **Estado:** el asset **no está accesible desde este repositorio ni desde las sesiones de Claude Code** de esta máquina. Hay que aportar el archivo (SVG preferible). Hasta entonces se reserva la ruta `docs/brand/` y se referencia en `12-open-decisions.md` (D-01).
-  - Una vez aportado: derivar de él la paleta de acento (ver `04` §3.1) y el favicon/mark para la plataforma web.
+- Logotipo: **propuesta 11 «Ears and Tassel»** (chat «Propuestas de logotipo con gato»): cinco varillas de abanico, la 2.ª y la 4.ª forman orejas; la empuñadura es un gato de espaldas cuya cola termina en el borlón con flecos.
+  - **Estado:** incorporado. Archivos y reglas en [`docs/brand/`](../brand/README.md) (marca a color, sobre oscuro, monocromos y lockup).
+  - Paleta de marca «Cobalt / Cyan»: `#12306E`, `#2B7BE0`, `#38C6F4`, fondos `#060E24` / `#F1F7FE`, texto `#0A1A3E`. Tipografías de marca: Outfit (wordmark), Inter, JetBrains Mono. Se usan como **semillas** del tema por defecto (ver `04` §3.1).
 
 ## 9. Riesgos de producto (resumen; roadmap completo en `11`)
 
