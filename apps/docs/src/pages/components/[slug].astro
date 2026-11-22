@@ -2,11 +2,15 @@
 import type { GetStaticPaths } from 'astro';
 import Base from '../../layouts/Base.astro';
 import { components, categoryLabel } from '../../lib/data';
+import { examplesFor } from '../../lib/examples';
+import ReactDemo from '../../components/ReactDemo';
+import VueDemo from '../../components/VueDemo.vue';
 
 export const getStaticPaths = (() =>
   components.map((c) => ({ params: { slug: c.slug }, props: { c } }))) satisfies GetStaticPaths;
 
 const { c } = Astro.props;
+const examples = examplesFor(c.slug);
 
 /** How the prop is spelled in Vue, when it differs from the contract. */
 function vueSpelling(status: string): string {
@@ -27,6 +31,41 @@ function vueSpelling(status: string): string {
     <li><a href={c.apgPattern}>WAI-ARIA pattern</a></li>
     <li><a href={`/components/${c.slug}.json`}>JSON</a></li>
   </ul>
+
+  {
+    examples.length > 0 && (
+      <>
+        <h2>Examples</h2>
+        {examples.map((e) => (
+          <section class="example" aria-label={e.id}>
+            <h3>{e.id}</h3>
+            <div class="code-pair">
+              <div>
+                <p class="fw">Vue</p>
+                <div class="demo">
+                  <VueDemo client:visible slug={c.slug} id={e.id} />
+                </div>
+                <details>
+                  <summary>Code</summary>
+                  <pre><code>{e.vue}</code></pre>
+                </details>
+              </div>
+              <div>
+                <p class="fw">React</p>
+                <div class="demo">
+                  <ReactDemo client:visible slug={c.slug} id={e.id} />
+                </div>
+                <details>
+                  <summary>Code</summary>
+                  <pre><code>{e.react}</code></pre>
+                </details>
+              </div>
+            </div>
+          </section>
+        ))}
+      </>
+    )
+  }
 
   <h2>Usage</h2>
   <div class="code-pair">

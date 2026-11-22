@@ -16,7 +16,7 @@
 
 | Pendiente | Nota |
 | --- | --- |
-| Demos vivas (islas Vue/React) y ejemplos `*.vue`/`*.tsx` con el mismo id, mostrados con `?raw` | Hoy el uso es un snippet generado, no un ejemplo ejecutado |
+| Demos vivas: cobertura | Infraestructura hecha (F4-T03): islas Vue/React `client:visible`, ejemplos en `apps/docs/src/examples/<slug>/<id>.{vue,tsx}` (el build falla si falta uno de los dos). Hay ejemplos para 9 componentes (button, checkbox, switch, tabs, dialog, tooltip, accordion, alert, field); faltan los otros 32 |
 | Búsqueda `⌘K` (Pagefind) | Sin construir |
 | ~~Explorador de tokens~~ | Hecho (F4-T02, `/tokens/`). Faltan las páginas de fundamentos editoriales (principios, accesibilidad) |
 | Getting started (Vue, React, Nuxt, Next, Tailwind) y guidelines | Sin construir |
