@@ -15,13 +15,13 @@ La plataforma es el «centro de operaciones» de Tessen: **no** una landing come
 
 Tres aplicaciones independientes (ADR 0002, 0008), todas **feature-first**, que consumen los paquetes públicos de Tessen:
 
-| App | Rol | Tecnología | URL prevista |
+| App | Rol | Tecnología | Ejecución (local) |
 |---|---|---|---|
-| `apps/docs` | Home, Components, Documentation, Guidelines, Resources, Motion, Changelog | Astro + MDX + islas Vue/React | `tessen.dev/` |
-| `apps/theme-studio` | Editor visual de temas/tokens | Vite + Vue 3 | `tessen.dev/studio` o subdominio |
-| `apps/playground` | Laboratorio de componentes + codegen | Vite + Vue 3 | `tessen.dev/playground` |
+| `apps/docs` | Home, Components, Documentation, Guidelines, Resources, Motion, Changelog | Astro + MDX + islas Vue/React | `localhost:4321` |
+| `apps/theme-studio` | Editor visual de temas/tokens | Vite + Vue 3 | `localhost:5173` |
+| `apps/playground` | Laboratorio de componentes + codegen | Vite + Vue 3 | `localhost:5174` |
 
-Navegación cruzada: cabecera común (**Components · Docs · Studio · Playground · Guidelines · Resources**), tema compartido entre apps vía `localStorage` + parámetro URL, y enlaces profundos («Abrir en Playground», «Personalizar en Studio») que transportan estado en la URL.
+Navegación cruzada: cabecera común (**Components · Docs · Studio · Playground · Guidelines · Resources**), tema compartido entre apps mediante parámetro de URL (en local cada app tiene su propio origen/puerto, así que `localStorage` **no** se comparte), y enlaces profundos («Abrir en Playground», «Personalizar en Studio») que transportan estado en la URL.
 
 ### 2.1 Flujo de datos (único origen)
 

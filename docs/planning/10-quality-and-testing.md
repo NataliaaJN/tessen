@@ -26,7 +26,7 @@
 | **Componente** | DOM, interacción, foco, eventos/callbacks, slots/children, ciclo de vida | Vitest + VTU (Vue) / RTL + user-event (React); `jsdom`/`happy-dom` para simples, **Browser Mode + Playwright** para overlays y posicionamiento | junto al componente (`button.test.ts`, `button.a11y.test.ts`) | cada PR |
 | **Contrato** | Los mismos casos de comportamiento del contrato contra Vue y React | Vitest (ambos harness) | casos en `core/contracts`; *runners* en cada paquete | cada PR |
 | **Accesibilidad** | Reglas axe en cada estado/variante; teclado/foco | axe-core (vitest + Storybook a11y + Playwright) | junto al componente + stories | cada PR |
-| **Visual** | Estados, temas, densidades, responsive | Playwright `toHaveScreenshot` sobre Storybook (Docker) | `packages/*/.storybook` + specs | PR (afectados) / nightly (todo) |
+| **Visual** | Estados, temas, densidades, responsive | Playwright `toHaveScreenshot` sobre Storybook (runner Linux de CI) | `packages/*/.storybook` + specs | PR (afectados) / nightly (todo) |
 | **Paridad visual** | Misma historia en Vue vs React | Playwright (diff entre capturas) | `integration/parity` | cada PR |
 | **Integración** | Consumo real (Vite Vue, Vite React, Nuxt, Next): build, hidratación, snippets compilados | Playwright + apps de `integration/` | `integration/*` | PR / nightly |
 | **E2E de apps** | Flujos de docs, Studio y Playground | Playwright | `apps/*/e2e` | PR / main |
@@ -61,10 +61,10 @@ Cada paquete (`vue`/`react`) incluye un *runner* de ~100 líneas que traduce `gi
 ## 5. Regresión visual y paridad
 
 - **Fuente de verdad visual**: historias Storybook por componente y tema (`default`, `dark`, `compact`, `rtl`, `forced-colors`, `reduced-motion`).
-- **Captura**: Playwright dentro de contenedor Docker (mismas fuentes y *rendering*) para evitar ruido entre máquinas; baselines versionadas en el repo (si crecen demasiado → Git LFS o artefactos de CI).
+- **Captura**: Playwright en el **runner Linux de GitHub Actions** (mismas fuentes y *rendering*) para evitar ruido entre máquinas; en local es informativo o se usa un contenedor opcional (Podman/Docker). Baselines versionadas en el repo **sin Git LFS** (puede acarrear cargos); si crecen demasiado, reducir capturas o usar artefactos de CI con retención corta.
 - **Animaciones**: `animations: 'disabled'` y fecha/valores simulados.
 - **Paridad**: el mismo *story* se captura en Vue y React → `pixelmatch`/`toHaveScreenshot` entre ambas; umbral inicial ≤ 0.1 % *(a calibrar)*; diferencias aceptadas se registran en el contrato (`knownDifferences`).
-- **Opcional**: Chromatic como complemento (no requisito).
+- Chromatic **descartado** (servicio externo con cuenta y planes de pago; ADR 0014).
 
 ## 6. Compatibilidad
 
@@ -91,7 +91,7 @@ Cobertura de contrato por componente (% de casos implementados en ambos) · viol
 
 | Riesgo | Mitigación |
 |---|---|
-| Baselines visuales ruidosas | Docker, animaciones off, umbrales, revisión en PR |
+| Baselines visuales ruidosas | Runner Linux fijo, animaciones off, umbrales, revisión en PR |
 | Coste de mantener el runner de contrato | Mantenerlo mínimo; cubrir solo comportamiento observable |
 | Falsa seguridad de axe | Checklist manual + informes visibles |
 | Tests en jsdom que no detectan problemas de layout/foco reales | Browser Mode para overlays/posicionamiento |

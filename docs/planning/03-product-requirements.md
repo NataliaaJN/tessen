@@ -88,9 +88,11 @@
 
 | ID | Requisito | Prio | Fase |
 |---|---|---|---|
-| DST-01 | Publicación npm de `@tessen/*` con Changesets y provenance | P0 | 8 |
+| DST-01 | Versionado y changelog con Changesets; **publicación npm solo con aprobación explícita del propietario** (hoy: paquetes `private`, distribuibles como tarballs validados) | P0 versionado · P2 publicación | 8 |
 | DST-02 | Validación de `exports`/tipos (publint + arethetypeswrong) en CI | P0 | 3 |
 | DST-03 | Reglas de dependencias entre capas aplicadas por herramienta (ADR 0013) | P0 | 1 |
+| DST-04 | Cada paquete se valida como **tarball** (`pnpm pack`) en proyectos de integración independientes, sin publicar (ADR 0016) | P0 | 1–3 |
+| DST-05 | Todo el ciclo (build, tests, docs, Theme Studio, Playground) funciona en local sin servicios de pago; GitHub es la única plataforma externa (ADR 0014) | P0 | 1 |
 | QA-01 | Suite de **contrato** ejecutada contra Vue y React | P0 | 3 |
 | QA-02 | axe-core automatizado + checklist manual de teclado/lector de pantalla | P0 | 2 |
 | QA-03 | Regresión visual por componente/tema y **diff de paridad Vue↔React** | P0/P1 | 3 |
@@ -111,7 +113,7 @@
 | NFR-09 | Movimiento | `prefers-reduced-motion` respetado en CSS y JS; el modo `off` produce DOM final sin transiciones | tests unitarios + visual |
 | NFR-10 | Mantenibilidad | Añadir un componente = contrato + 2 implementaciones + docs, siguiendo plantilla; arquitectura sin dependencias circulares | dependency-cruiser |
 | NFR-11 | Documentación | Cero drift de API entre docs y código | `docs:check` en CI |
-| NFR-12 | Seguridad de cadena de suministro | `pnpm` con lockfile, `provenance`, revisión de licencias de dependencias | CI |
+| NFR-12 | Seguridad de cadena de suministro | `pnpm` con lockfile, comprobación del scope interno (`scope:check`), `provenance` solo si se publica en el futuro, revisión de licencias de dependencias | CI |
 | NFR-13 | Internacionalización | Sin cadenas hardcodeadas en componentes (props/slots para etiquetas); soporte `dir="rtl"` desde el diseño (verificación completa P1) | tests RTL |
 
 ## 3. Historias de usuario y criterios de aceptación
@@ -162,7 +164,7 @@ Formato: *Como* [persona] *quiero* … *para* …  ·  Criterios en Dado/Cuando/
 | Release | Contenido |
 |---|---|
 | **v0.x (Fases 1–3)** | FND completo P0, componentes T1 (Button…Tooltip, ~15) con contrato + Vue + React, QA-01/02/03, DST-02/03 |
-| **v1.0 (Fases 4–6, 8)** | Plataforma (PLT P0), Theme Studio modo rápido (THS P0), Playground (PLG P0), publicación (DST-01), ≥ 25 componentes |
+| **v1.0 (Fases 4–6, 8)** | Plataforma (PLT P0), Theme Studio modo rápido (THS P0), Playground (PLG P0), empaquetado validado (DST-01/04), ≥ 25 componentes |
 | **v1.x (P1)** | Theme Studio avanzado, motion JS (`@tessen/motion`), densidad/alto contraste, recursos Figma, `llms.txt`, SSR fixtures, versionado de docs |
 | **v2 (P2)** | Componentes creativos, motion avanzado con Motion/GSAP, edición de código en Playground, i18n de la plataforma, interop Tokens Studio |
 

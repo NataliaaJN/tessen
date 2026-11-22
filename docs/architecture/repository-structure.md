@@ -29,7 +29,7 @@ La arquitectura es coherente con [`06-multiframework-architecture`](../planning/
 | **Paquetes de componentes** | `packages/vue`, `packages/react` | **Component-oriented** | Sí |
 | **Paquetes de fundamentos** | `packages/tokens`, `theme`, `styles`, `icons`, `core`, `motion` | **Por responsabilidad / dominio técnico** | Sí |
 | **Aplicaciones** | `apps/docs`, `apps/theme-studio`, `apps/playground` | **Feature-first** (`app/ pages/ features/ shared/`) | No (se despliegan) |
-| **Integración** (privado) | `integration/*` | Una app consumidora mínima por caso (vite-vue, vite-react, nuxt, next) | No |
+| **Integración** (privado) | `integration/*` | Una app consumidora mínima por caso (vite-vue, vite-react, nuxt, next), **instalada desde tarballs** (`pnpm pack`), fuera del grafo del workspace | No |
 | **Tooling** (privado) | `tooling/*` | Por herramienta (`tsconfig`, `eslint`, `vite-config`, `docs-gen`, `scripts`) | No |
 
 ## 3. Estructura definitiva
@@ -55,8 +55,11 @@ tessen/
 │   ├── planning/                # Fase 0 (research, PRD, ADRs)
 │   ├── architecture/            # este conjunto de reglas
 │   └── brand/                   # logotipo (propuesta 11), paleta y reglas de uso
-├── .changeset/
-├── .github/workflows/
+├── .changeset/                  # versionado y changelog (sin publicación)
+├── .github/
+│   ├── workflows/ci.yml         # F1-T01; sin workflows de release ni de deploy
+│   └── dependabot.yml
+├── .tarballs/                   # salida de `pnpm pack:all` (ignorada por git)
 ├── .dependency-cruiser.cjs      # F1-T01
 ├── pnpm-workspace.yaml
 ├── turbo.json
@@ -183,7 +186,13 @@ La documentación centralizada enlaza cada componente con todas estas ubicacione
 
 Cada fase/spec se desarrolla en su rama, se **fusiona a `develop` con `--no-ff`** y la rama se **elimina** al terminar. Commits en inglés con *Conventional Commits*. Cuando exista CI, el merge será vía PR.
 
-## 8. Criterios de aceptación (estado)
+## 8. Distribución y consumo (resumen)
+
+- Los paquetes son `private` y se comparten con **pnpm workspaces** (`workspace:*`); **no hay publicación** ni se requiere npm para desarrollar.
+- El scope npm es **provisional**: en los `package.json` se usa `@tessen-ui/*`; los documentos conservan el marcador `@tessen/*` ([ADR 0015](../planning/13-architecture-decisions/0015-npm-namespace-provisional-no-publication.md); `@tessen` pertenece a un tercero).
+- La distribución se valida con **`pnpm pack`** y proyectos de integración independientes ([`npm-publication-strategy`](npm-publication-strategy.md)); el flujo diario está en [`development-workflow`](development-workflow.md) y la política de hosting en [`deployment-strategy`](deployment-strategy.md).
+
+## 9. Criterios de aceptación (estado)
 
 | Criterio | Estado |
 |---|---|
@@ -194,4 +203,4 @@ Cada fase/spec se desarrolla en su rama, se **fusiona a `develop` con `--no-ff`*
 | Sin componentes de Tessen duplicados en apps | Regla + comprobación ([dependency-rules §4](dependency-rules.md)) |
 | Dependencias respetan límites | Reglas ejecutables definidas; se activan en F1-T01 |
 | Sin capas/archivos/carpetas innecesarios | Decisiones §4 y §5 |
-| Decisiones documentadas | Este documento + ADR 0002 y 0013 |
+| Decisiones documentadas | Este documento + ADR 0002, 0013, 0014, 0015 y 0016 |

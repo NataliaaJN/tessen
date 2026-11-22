@@ -130,4 +130,4 @@ Descartadas por añadir complejidad sin valor claro: IA generativa de temas en v
 | La paridad Vue/React se degrada con el tiempo | Contratos + suite compartida + gate de paridad en CI desde la primera fase de componentes |
 | Dependencia de un motor headless externo (Zag.js) | Spike de validación obligatorio en Fase 1; fallback documentado en ADR 0004 |
 | Coste de mantener dos implementaciones | Compartir tokens, CSS, variantes, contratos y tests de datos; solo duplicar el «pegamento» de framework |
-| Conflicto de nombre/marca «Tessen» en npm/dominio | Verificar disponibilidad de scope `@tessen` y dominio **antes** de la Fase 1 (D-02) |
+| Conflicto de nombre/marca «Tessen» en npm/dominio | Verificado: el nombre `tessen` y el scope `@tessen` en npm están ocupados por terceros. Scope interno provisional `@tessen-ui`, sin publicar ni comprar dominio (D-02, ADR 0015) |

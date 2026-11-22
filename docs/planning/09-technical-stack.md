@@ -1,7 +1,7 @@
 # 09 — Stack técnico
 
 > Leyenda: **[V]** verificado · **[C]** conocimiento previo · **[H]** hipótesis · **[R]** recomendación.
-> **Política de versiones [R]:** no se fijan números de versión en este documento salvo los verificados. Al inicio de la Fase 1 se **audita** la última versión estable de cada herramienta, se registran en el catálogo de pnpm (`pnpm-workspace.yaml` → `catalog:`) y se actualizan con Renovate en PRs agrupados. Esto sigue la indicación del pack de skills del repositorio («auditar y confirmar versiones exactas antes de implementar»).
+> **Política de versiones [R]:** no se fijan números de versión en este documento salvo los verificados. Al inicio de la Fase 1 se **audita** la última versión estable de cada herramienta, se registran en el catálogo de pnpm (`pnpm-workspace.yaml` → `catalog:`) y se actualizan con Dependabot (integrado en GitHub) en PRs agrupados. Esto sigue la indicación del pack de skills del repositorio («auditar y confirmar versiones exactas antes de implementar»).
 > Principio rector: **un stack coherente y pequeño**. Cada herramienta debe justificar su existencia; no se eligen «todas por defecto».
 
 ## 1. Resumen del stack propuesto
@@ -11,7 +11,7 @@
 | Runtime de desarrollo | Node LTS ≥ 22 (Storybook 10 exige 20.16+/22.19+/24+ **[V]**) | — |
 | Gestor de paquetes / workspaces | **pnpm workspaces** (+ catalogs) | npm/yarn workspaces |
 | Orquestación y caché | **Turborepo** | Nx, solo pnpm, Lerna |
-| Versionado y publicación | **Changesets** (versiones enlazadas) + provenance | semantic-release, Lerna publish |
+| Versionado y changelogs | **Changesets** (versiones enlazadas). **Publicación deshabilitada** (ADR 0014, 0015) | semantic-release, Lerna publish |
 | Lenguaje | **TypeScript `strict`** | JS+JSDoc |
 | Build de librerías | **Vite library mode** (todos los paquetes publicables) + `tsc`/`vue-tsc` para `.d.ts` | tsup, tsdown, unbuild, Rollup puro |
 | Estilos | **CSS autorado** + `@layer` + variables CSS; Lightning CSS vía Vite | Tailwind, CSS-in-JS (Griffel, vanilla-extract, Panda), CSS Modules |
@@ -28,8 +28,8 @@
 | Lint/format | **ESLint (flat) + typescript-eslint + plugins Vue/React/a11y**, **Prettier** | Biome, oxlint |
 | Límites arquitectónicos | **dependency-cruiser** | eslint-plugin-boundaries, Nx module boundaries |
 | QA de paquetes | **publint**, **@arethetypeswrong/cli**, **size-limit**, **knip** | — |
-| CI/CD | **GitHub Actions** (el remoto es GitHub) | otros |
-| Hosting docs | Pendiente (D-12): Cloudflare Pages / Vercel / GitHub Pages | — |
+| CI | **GitHub Actions** (runners estándar, gratuitos en repos públicos). **Sin CD** | otros |
+| Hosting | **Ninguno**: docs, Theme Studio y Playground se ejecutan en local (ADR 0014); GitHub Pages solo como opción futura con aprobación | Cloudflare Pages, Vercel, Netlify, GitHub Pages |
 
 ## 2. Decisiones con alternativas y justificación
 
@@ -92,7 +92,9 @@ Navegadores objetivo: *evergreen* (`@layer`, nesting, `color-mix`, container que
 
 ## 3. Dependencias previstas
 
-### 3.1 Paquetes publicados
+### 3.1 Paquetes (hoy `private`; publicables en el futuro)
+
+> `@tessen/*` es un marcador ilustrativo; el scope real es provisional (`@tessen-ui/*`, ADR 0015). Ningún paquete se publica.
 
 | Paquete | `dependencies` | `peerDependencies` | Notas |
 |---|---|---|---|
@@ -119,12 +121,12 @@ Astro + `@astrojs/mdx`, `@astrojs/vue`, `@astrojs/react`, Pagefind · Vue 3.5, V
 | `test-unit` | Vitest (matriz `core/vue/react/theme/motion`) | PR |
 | `test-browser` | Vitest Browser Mode + axe | PR (componentes con overlays) |
 | `build` | `turbo build`, `publint`, `attw`, `size-limit` | PR |
-| `parity` | `parity:api`, visual vue↔react (Playwright en contenedor) | PR |
+| `parity` | `parity:api`, visual vue↔react (Playwright en runner Linux de CI) | PR |
 | `docs-check` | API generada vs contrato, compilación de snippets | PR |
-| `integration` | apps `integration/*`, SSR Nuxt/Next | PR (nightly si lento) |
+| `pack-integration` | `pnpm pack:all` + apps `integration/*` instaladas desde **tarballs** (ADR 0016), SSR Nuxt/Next | PR (subconjunto) / nightly (completo) |
 | `e2e-apps` | Playwright sobre docs, studio, playground | PR / main |
-| `release` | Changesets (PR de versión + publicación con *provenance*) | main |
-| `deploy-docs` | previews por PR + producción | PR / main |
+| ~~`release`~~ | **Deshabilitado**: no se publica en npm (ADR 0015). Changesets solo versiona y genera changelog | — |
+| ~~`deploy-docs`~~ | **No existe**: sin despliegue (ADR 0014) | — |
 
 Flujo de ramas: `main` (releases) ← `develop` (integración) ← ramas de trabajo con nomenclatura en inglés (`feat/…`, `fix/…`, `docs/…`, `chore/…`), merge a `develop` y borrado de la rama al terminar (`docs/architecture/repository-structure.md` §Git).
 
