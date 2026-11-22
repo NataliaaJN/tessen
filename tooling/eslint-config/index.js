@@ -15,6 +15,9 @@ export const base = tseslint.config(
       // Output of the Next/Nuxt fixtures in spikes/.
       '**/.next/**',
       '**/.nuxt/**',
+      // Astro's generated types and the docs data generated from the contracts.
+      '**/.astro/**',
+      'apps/docs/src/generated/**',
       '**/.output/**',
       '**/next-env.d.ts',
       '.tarballs/**',

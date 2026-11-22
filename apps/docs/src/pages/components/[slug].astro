@@ -1,0 +1,98 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../layouts/Base.astro';
+import { components, categoryLabel } from '../../lib/data';
+
+export const getStaticPaths = (() =>
+  components.map((c) => ({ params: { slug: c.slug }, props: { c } }))) satisfies GetStaticPaths;
+
+const { c } = Astro.props;
+
+/** How the prop is spelled in Vue, when it differs from the contract. */
+function vueSpelling(status: string): string {
+  if (status.startsWith('alias:')) return `v-model (${status.slice(6)})`;
+  if (status === 'exception') return 'native attribute or part prop';
+  return 'same';
+}
+---
+
+<Base title={c.name} current={c.slug}>
+  <h1>{c.name}</h1>
+  <p class="lead">{categoryLabel(c.category)} component.</p>
+  <ul class="badges">
+    <li>{c.tier}</li>
+    <li>{c.engine === 'zag' ? 'Zag.js engine' : 'Native'}</li>
+    <li>Vue {c.frameworks.vue ? '✓' : '✗'}</li>
+    <li>React {c.frameworks.react ? '✓' : '✗'}</li>
+    <li><a href={c.apgPattern}>WAI-ARIA pattern</a></li>
+    <li><a href={`/components/${c.slug}.json`}>JSON</a></li>
+  </ul>
+
+  <h2>Usage</h2>
+  <div class="code-pair">
+    <div>
+      <h3>Vue · <code>{c.names.vue}</code></h3>
+      <pre><code>{c.example.vue}</code></pre>
+    </div>
+    <div>
+      <h3>React · <code>{c.names.react}</code></h3>
+      <pre><code>{c.example.react}</code></pre>
+    </div>
+  </div>
+
+  <h2>Anatomy</h2>
+  <ul class="badges">
+    {
+      c.anatomy.map((p) => (
+        <li>
+          <code>{p}</code>
+        </li>
+      ))
+    }
+  </ul>
+  {
+    c.parts.react.length > 0 && (
+      <p>
+        Compound parts: {c.parts.react.map((p) => <code>{p} </code>)}. In Vue they carry the{' '}
+        <code>T</code> prefix.
+      </p>
+    )
+  }
+
+  <h2>Props</h2>
+  <table class="api">
+    <thead>
+      <tr>
+        <th scope="col">Prop</th><th scope="col">Type</th><th scope="col">Default</th><th
+          scope="col">Vue</th
+        >
+      </tr>
+    </thead>
+    <tbody>
+      {
+        c.props.map((p) => (
+          <tr>
+            <th scope="row">
+              <code>{p.name}</code>
+            </th>
+            <td>
+              {p.type === 'enum' ? (
+                p.values!.map((v) => <code>{v} </code>)
+              ) : (
+                <code>{p.type}</code>
+              )}
+            </td>
+            <td>{p.default === undefined ? '—' : <code>{String(p.default)}</code>}</td>
+            <td>{vueSpelling(p.vue)}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+
+  <h2>Behaviour and accessibility</h2>
+  <p>Each line is a test that runs against both the Vue and the React component.</p>
+  <ul>
+    {c.behaviours.map((b) => <li>{b.describe}</li>)}
+  </ul>
+</Base>
