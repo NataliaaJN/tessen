@@ -1,4 +1,4 @@
-/* Spike F1-T07: shared Button CSS. Only semantic tokens and --t-button-* overrides, one layer. */
+/* Button: one layer, only semantic tokens and --t-button-* overrides. Contract: @tessen-ui/core buttonContract. */
 @layer tessen.components {
   .t-button {
     /* Tone -> accent colours (primary tone = brand, danger tone = danger). */
@@ -155,10 +155,10 @@
       animation-duration: 2s;
     }
   }
-}
 
-@keyframes t-button-spin {
-  to {
-    transform: rotate(360deg);
+  @keyframes t-button-spin {
+    to {
+      transform: rotate(360deg);
+    }
   }
 }

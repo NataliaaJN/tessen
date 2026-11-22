@@ -29,6 +29,7 @@ export const FILE_ENTRIES = [
   '@tessen-ui/styles/tokens.css',
   '@tessen-ui/styles/reset.css',
   '@tessen-ui/styles/base.css',
+  '@tessen-ui/styles/components/button.css',
   '@tessen-ui/motion/motion.css',
   '@tessen-ui/icons/sprite.svg',
   '@tessen-ui/icons/manifest.json',
@@ -128,8 +129,8 @@ export function checkBuildOutput(cwd) {
   if (!css.includes('@keyframes'))
     errors.push('built CSS has no motion keyframes (motion.css missing)');
 
-  // Tree-shaking: the app imports `buttonVariants` only.
-  for (const marker of ['role-name-defaults', 'defineContract', 'leadingIcon']) {
+  // Tree-shaking: the app uses the Button component, never the contract cases.
+  for (const marker of ['role-name-defaults', 'loading-keeps-focus', 'defineContract']) {
     if (js.includes(marker))
       errors.push(`bundle contains "${marker}": unused core exports were not tree-shaken`);
   }

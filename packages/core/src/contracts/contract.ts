@@ -14,6 +14,10 @@ export interface NeutralProps {
   /** Leading and trailing icon content (plain text in cases). */
   leading?: string;
   trailing?: string;
+  /** Consumer class, merged with the component's own (never replaces it). */
+  class?: string;
+  /** Native attributes the consumer adds (`aria-*`, `data-*`); they reach the root. */
+  attrs?: Record<string, string>;
 }
 
 export type Step = { do: 'click' } | { do: 'focus' } | { do: 'key'; key: 'Enter' | 'Space' };

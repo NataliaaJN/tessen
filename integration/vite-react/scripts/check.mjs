@@ -5,6 +5,6 @@ import { checkBuildOutput, checkResolution, report } from '../../shared/consumer
 
 const cwd = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 report('vite-react consumer checks', [
-  ...checkResolution(cwd, ['@tessen-ui/icons/react']),
+  ...checkResolution(cwd, ['@tessen-ui/icons/react', '@tessen-ui/react']),
   ...checkBuildOutput(cwd),
 ]);

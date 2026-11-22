@@ -1,0 +1,42 @@
+{
+  "name": "@tessen-ui/vue",
+  "private": true,
+  "version": "0.0.0",
+  "description": "TESSEN for Vue 3: accessible components (TButton, ...) on the shared contracts, styles and tokens.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@tessen-ui/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "scripts": {
+    "build": "vite build && vue-tsc -p tsconfig.build.json && node scripts/fix-declarations.ts",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@tessen-ui/contract-runner": "workspace:*",
+    "@tessen-ui/styles": "workspace:*",
+    "@tessen-ui/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vue/test-utils": "catalog:",
+    "jsdom": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:",
+    "vue": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}
