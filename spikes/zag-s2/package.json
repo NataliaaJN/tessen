@@ -1,0 +1,51 @@
+{
+  "name": "@tessen-ui/spike-zag-s2",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Spike S2 (second Zag.js validation): Select, Combobox, Menu, Popover, DatePicker, portals and real SSR. Throwaway; findings go to docs/planning/S2-zag-validation.md.",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test:browser": "vitest run --config vitest.browser.config.ts",
+    "test": "vitest run",
+    "measure": "node scripts/measure.ts"
+  },
+  "dependencies": {
+    "@internationalized/date": "3.12.4",
+    "@zag-js/collection": "1.48.0",
+    "@zag-js/combobox": "1.48.0",
+    "@zag-js/date-picker": "1.48.0",
+    "@zag-js/dialog": "1.48.0",
+    "@zag-js/menu": "1.48.0",
+    "@zag-js/popover": "1.48.0",
+    "@zag-js/presence": "1.48.0",
+    "@zag-js/react": "1.48.0",
+    "@zag-js/select": "1.48.0",
+    "@zag-js/tabs": "1.48.0",
+    "@zag-js/tooltip": "1.48.0",
+    "@zag-js/vue": "1.48.0"
+  },
+  "devDependencies": {
+    "@tessen-ui/tsconfig": "workspace:*",
+    "@testing-library/dom": "catalog:",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/user-event": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitest/browser": "5.1.1",
+    "@vitest/browser-preview": "5.1.1",
+    "axe-core": "4.14.1",
+    "jsdom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:",
+    "vue": "catalog:"
+  },
+  "exports": {
+    "./vue": "./src/vue/index.ts",
+    "./react": "./src/react/index.ts"
+  }
+}

@@ -46,6 +46,15 @@ module.exports = {
       to: { path: 'node_modules/(vue|@vue|react|react-dom|@zag-js)/' },
     },
 
+    // ADR 0004: Zag stays behind TESSEN. Only files named `*.zag.ts(x)` (the behavior adapter of
+    // a component) may import `@zag-js/*`; components, public exports and everything else may not.
+    {
+      name: 'zag-only-in-adapter-files',
+      severity: 'error',
+      from: { path: '^packages/(vue|react)/src', pathNot: '[.]zag[.]tsx?$' },
+      to: { path: 'node_modules/@zag-js/' },
+    },
+
     // Sibling components are reached through their index only.
     {
       name: 'components-sibling-index-only',
