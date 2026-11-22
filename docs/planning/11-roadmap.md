@@ -25,7 +25,7 @@
 | F1-T03 ✅ | `@tessen/styles`: capas, reset/base opcionales, importación de tokens, temas light/dark/densidad | T02 |
 | F1-T04 ✅ | `@tessen/icons`: pipeline SVG → Vue/React/sprite + set inicial | D-07 |
 | F1-T05 ✅ | `@tessen/motion` L0: tokens + keyframes CSS + `data-tessen-motion` (L1 en F2) | T02, T03 |
-| F1-T06 | **Spike S1**: `Dialog` + `Tabs` (+`Tooltip`) con Zag en Vue y React; medir criterios de `06` §6 → actualizar **ADR 0004** | T01–T03 |
+| F1-T06 ✅ | **Spike S1**: `Dialog` + `Tabs` (+`Tooltip`) con Zag en Vue y React; medir criterios de `06` §6 → actualizar **ADR 0004** | T01–T03 |
 | F1-T07 | **Spike S2**: contrato de `Button` → codegen de snippets → runner de contrato en Vue/React → diff visual de paridad | T06 |
 | F1-T08 | `@tessen/core` mínimo: `defineContract`, `defineVariants`, tipos | T07 |
 | F1-T09 | **Validación por tarballs** (ADR 0016): `pack:all`, proyectos `integration/vite-vue` y `vite-react` instalados desde `.tgz` con `overrides`, checklist de `npm-publication-strategy` §4 sobre `tokens`/`styles`/`core`, comprobación de lockfile `scope:check` | T01–T03, T08 |

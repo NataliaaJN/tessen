@@ -8,7 +8,7 @@
 | D-02 | ✅ Resuelta (interno) | Scope interno `@tessen-ui` aprobado tras evaluar 5 candidatos (ADR 0015); `tessen` y `@tessen` **ocupados**; el scope **público** sigue en D-18 | — |
 | D-03 | 🟡 | Nomenclatura pública (ADR 0011) | F2 |
 | D-04 | 🟡 | Framework del *shell* de Theme Studio y Playground (ADR 0008) | F5 |
-| D-05 | 🔴 | Motor de comportamiento (ADR 0004, spike S1) | F2 |
+| D-05 | 🔴 Pendiente de confirmar | Motor de comportamiento: spike S1 superado 5/6 con Zag (ADR 0004 `Accepted` provisional); requiere confirmación del propietario | F2 |
 | D-06 | 🟡 | Tipografía por defecto (la marca ya usa Inter/Outfit/JetBrains Mono) | F1-T03 |
 | D-07 | ✅ Resuelta (provisional) | Lucide (ISC) como set abierto, 35 iconos iniciales en `@tessen-ui/icons`; revisable cambiando `src/svg` | — |
 | D-08 | 🔴 | Licencia de Tessen | Primera publicación |

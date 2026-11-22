@@ -1,0 +1,37 @@
+{
+  "name": "@tessen-ui/spike-zag-s1",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Spike S1 (F1-T06): Dialog, Tabs and Tooltip on Zag.js in Vue and React. Throwaway; findings go to ADR 0004.",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "measure": "node scripts/measure.ts"
+  },
+  "dependencies": {
+    "@zag-js/dialog": "1.48.0",
+    "@zag-js/presence": "1.48.0",
+    "@zag-js/react": "1.48.0",
+    "@zag-js/tabs": "1.48.0",
+    "@zag-js/tooltip": "1.48.0",
+    "@zag-js/vue": "1.48.0"
+  },
+  "devDependencies": {
+    "@tessen-ui/tsconfig": "workspace:*",
+    "@testing-library/dom": "catalog:",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/user-event": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "axe-core": "4.14.1",
+    "jsdom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:",
+    "vue": "catalog:"
+  }
+}

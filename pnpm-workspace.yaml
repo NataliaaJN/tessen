@@ -4,18 +4,22 @@ packages:
   - packages/*
   - apps/*
   - tooling/*
+  - spikes/*
 # `integration/*` is deliberately NOT a workspace member: it installs the
 # packed tarballs like an external consumer would (ADR 0016).
 
 # Single source of truth for third-party versions used by more than one package.
 catalog:
   '@eslint/js': ^10.0.1
+  '@testing-library/dom': ^10.4.2
+  '@testing-library/user-event': ^14.6.13
   '@types/node': ^26.6.6
   '@types/react': ^19.3.0
   '@types/react-dom': ^19.3.0
   dependency-cruiser: ^18.8.0
   eslint: ^10.15.0
   globals: ^17.14.0
+  jsdom: ^31.0.1
   prettier: ^3.10.1
   react: ^19.3.1
   react-dom: ^19.3.1
