@@ -5,7 +5,7 @@
 | ID | Prioridad | Decisión | Necesaria antes de |
 |---|---|---|---|
 | D-01 | ✅ Resuelta | Asset del logotipo (propuesta 11) — incorporado en `docs/brand/` | — |
-| D-02 | 🟡 Parcial | Nombre y scope npm: `tessen` y `@tessen` **ocupados**; `@tessen-ui`/`@tessenui` sin propietario visible; scope final **sin aprobar** (ADR 0015) | Publicación |
+| D-02 | ✅ Resuelta (interno) | Scope interno `@tessen-ui` aprobado tras evaluar 5 candidatos (ADR 0015); `tessen` y `@tessen` **ocupados**; el scope **público** sigue en D-18 | — |
 | D-03 | 🟡 | Nomenclatura pública (ADR 0011) | F2 |
 | D-04 | 🟡 | Framework del *shell* de Theme Studio y Playground (ADR 0008) | F5 |
 | D-05 | 🔴 | Motor de comportamiento (ADR 0004, spike S1) | F2 |
@@ -38,7 +38,8 @@
   - `@tessen-ui` y `@tessenui`: «Scope not found» en `npmjs.com/org/<n>` y `/~<n>`; los 8 nombres candidatos (`vue`, `react`, `core`, `tokens`, `styles`, `icons`, `motion`, `theme`) → 404.
 - **Sin resolver:** que esos scopes se puedan **crear** (solo se sabe intentándolo, prohibido ahora), que sigan libres al publicar, conflictos de marca. Detalle y método: [ADR 0015](13-architecture-decisions/0015-npm-namespace-provisional-no-publication.md).
 - **Decisión vigente:** no usar `tessen` sin scope; no publicar; no crear organización; no comprar plan; **namespace provisional**. Interno provisional propuesto: `@tessen-ui/*` con `private: true` (mapeo ilustrativo `@tessen/x` ⇄ `@tessen-ui/x`).
-- **Necesita tu aprobación:** (a) usar `@tessen-ui` como scope interno provisional; (b) más adelante, el scope público definitivo (D-18).
+- **Evaluación de candidatos (2026-11-22):** `@tessen-ui` (40/45), `@tessen-design` (39), `@tessenui` (32), `@tessen-labs` (29), `@tessenjs` (25). Los cinco aparecen como «Scope not found» en npm (la disponibilidad no desempata). **Resuelto: `@tessen-ui` es el scope interno** (`private: true`, `workspace:*`); `@tessen-design` queda como plan B. Detalle en [ADR 0015](13-architecture-decisions/0015-npm-namespace-provisional-no-publication.md).
+- **Pendiente de tu aprobación:** el scope público definitivo, solo cuando decidas distribuir (D-18).
 
 ### D-03 — Nomenclatura pública
 - Alternativas: `T`-prefijo en Vue y sin prefijo en React (**recomendado, ADR 0011**) · prefijo `T` en ambos · sin prefijo en ambos (colisiones en Vue).
@@ -85,10 +86,10 @@
 - Alternativas: kit manual · variables importadas desde DTCG (recomendado) · plugin propio bidireccional (posponer).
 
 ### D-16 — Repositorio y flujo en GitHub
-- **Estado observado (2026-11-22):** `origin = git@github.com:NataliaaJN/tessen.git`; la API pública de GitHub devuelve **404** para `github.com/NataliaaJN/tessen` → no existe o es privado. La rama inicial `master` (sin commits) se renombró a `main`. **No se ha hecho `push`.**
+- **Estado (2026-11-22):** el propietario hizo público `github.com/NataliaaJN/tessen` (antes privado). `origin` accesible por SSH y vacío al empezar F1.
 - **Decisión (ADR 0014):** repositorio **público** como fuente de verdad; CI con GitHub Actions (gratis en públicos); Issues cuando aporten; sin servicios externos de gestión.
-- **Acción del propietario:** crear/publicar el repositorio (no lo hace el asistente) y decidir cuándo hacer el primer `push`. Después: proteger `main` y `develop` (gratis en repos públicos), activar Dependabot.
-- Flujo: ramas en inglés (`feat/…`, `fix/…`, `docs/…`, `chore/…`), PR a `develop`, merge `--no-ff` y borrado de la rama. Detalle en [`development-workflow`](../architecture/development-workflow.md).
+- **Flujo (decidido por el propietario):** `main` = producción, `develop` = preproducción; ramas de trabajo en inglés (`feat/…`, `fix/…`, `docs/…`, `chore/…`) desde `develop`; **PR a `develop` con auto-merge** y borrado de la rama al fusionarse. Detalle en [`development-workflow`](../architecture/development-workflow.md).
+- **Pendiente:** proteger `main` y `develop` con el check de CI obligatorio y activar Dependabot (ajustes del repositorio, gratis en repos públicos).
 
 ### D-17 — Formato del contrato
 - Alternativas: **TypeScript con `defineContract` (recomendado: tipado, autocompletado, serializable a JSON)** · JSON Schema/YAML (neutral pero sin tipos ricos).

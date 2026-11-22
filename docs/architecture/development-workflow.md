@@ -14,8 +14,8 @@
 
 | Requisito | Notas |
 |---|---|
-| Node | Recomendado **LTS** (22 o 24) con `engines` y `.nvmrc`. Storybook 10 exige 20.16+/22.19+/24+ **[V]**. *En la máquina actual está activo Node 26 (no LTS); fijar una LTS al empezar F1.* |
-| pnpm | Versión fijada con `packageManager` en el `package.json` raíz. *Hoy `pnpm` no está instalado para el Node activo*; instalarlo en F1-T01 (gratuito) |
+| Node | **26 (LTS «Lithium» desde oct-2026 [V: `nodejs.org/dist/index.json`])**, fijado en `.nvmrc`; `engines` exige `>=22.19.0` (suelo compatible con Storybook 10 **[V]**). en esta instalación de Node 26 no hay Corepack, por eso pnpm se instala con `npm i -g` |
+| pnpm | Versión fijada con `packageManager` en el `package.json` raíz (hoy **12.21.0**). Instalación única y gratuita: `npm install -g pnpm@12.21.0` |
 | Git | Ramas y merges según [`repository-structure` §7](repository-structure.md) |
 | Navegadores para tests | Playwright descarga Chromium/Firefox/WebKit (herramienta libre; no es un servicio) |
 | Docker/Podman | **Opcional**: solo para reproducir en local el *rendering* de los baselines visuales. Docker Desktop tiene condiciones de licencia propias; Podman es libre |
@@ -83,9 +83,9 @@ Procedimiento y checklist completos en [`npm-publication-strategy` §4](npm-publ
 | Aspecto | Decisión |
 |---|---|
 | Repositorio | **Público**: `github.com/NataliaaJN/tessen` (fuente de verdad: código, docs, ADRs, planificación, tests, configuración de build, workflows CI, changelogs y notas de versión) |
-| Estado observado | `git remote` apunta a `git@github.com:NataliaaJN/tessen.git`, pero la API pública de GitHub devuelve **404** para ese repositorio (no existe o es privado). Hay que crearlo/publicarlo por el propietario. **No se ha hecho `push`** |
-| Ramas | `main` (estable), `develop` (integración), ramas de trabajo en inglés (`feat/…`, `fix/…`, `docs/…`, `chore/…`) con merge `--no-ff` a `develop` y borrado de la rama |
-| PRs | Cuando el repo sea público: PR de cada rama a `develop` con CI verde. Hasta entonces, merges locales |
+| Estado observado | `origin = git@github.com:NataliaaJN/tessen.git` existe y es accesible por SSH; al empezar F1 estaba **vacío** (el propietario lo había pasado de privado a público) |
+| Ramas | `main` = **producción**, `develop` = **preproducción** (integración), ramas de trabajo en inglés (`feat/…`, `fix/…`, `docs/…`, `chore/…`) creadas desde `develop` |
+| PRs | Cada rama se integra en `develop` mediante **PR con auto-merge** (`gh pr merge --auto --merge`): GitHub la fusiona al pasar los checks requeridos y **borra la rama remota** (`delete_branch_on_merge`); después se borra la local. Los commits de merge se conservan (sin squash) para mantener el historial por fase. `main` solo recibe PRs desde `develop` (release) |
 | Issues | Para tareas cuando aporten (etiquetas: `phase:*`, `type:*`, `area:*`, `good-first-task`); sin herramientas externas de gestión |
 | Protección de ramas | `main` y `develop` con CI obligatorio y sin *force push*; disponible gratis en repos públicos |
 | Changelogs / notas | Changesets genera `CHANGELOG.md` por paquete; **GitHub Releases** (gratis) para notas cuando se publique una versión etiquetada |
@@ -113,7 +113,7 @@ Buenas prácticas: usar solo acciones oficiales (`actions/*`) y `pnpm/action-set
 2. Cambiar código con `pnpm dev`/Storybook; añadir tests y, si procede, un **changeset**.
 3. `pnpm verify` en local (incluye `deps:check`).
 4. Si cambia el empaquetado o los exports: `pnpm pack:all && pnpm integration:test`.
-5. Commit (Conventional Commits en inglés) → merge `--no-ff` a `develop` → borrar la rama.
+5. Commit (Conventional Commits en inglés) → `git push -u origin <rama>` → `gh pr create --base develop` → `gh pr merge --auto --merge` → al fusionarse, `git checkout develop && git pull && git branch -d <rama>`.
 
 ## 9. Registro de servicios externos
 
