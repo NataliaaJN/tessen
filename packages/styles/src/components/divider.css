@@ -1,0 +1,19 @@
+/* Divider: horizontal rule or vertical separator. Contract: @tessen-ui/core dividerContract. */
+@layer tessen.components {
+  .t-divider {
+    flex: none;
+    margin: 0;
+    border: 0;
+    background: var(--t-divider-color, var(--tessen-color-border-default));
+
+    &[data-orientation='horizontal'] {
+      inline-size: 100%;
+      block-size: 1px;
+    }
+    &[data-orientation='vertical'] {
+      inline-size: 1px;
+      align-self: stretch;
+      min-block-size: 1em;
+    }
+  }
+}

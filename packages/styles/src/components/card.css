@@ -1,0 +1,49 @@
+/* Card: surface that groups content. Contract: @tessen-ui/core cardContract. Overrides: --t-card-bg, --t-card-radius. */
+@layer tessen.components {
+  .t-card {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid transparent;
+    border-radius: var(--t-card-radius, var(--tessen-radius-lg));
+    background: var(--t-card-bg, var(--tessen-color-surface-raised));
+    color: var(--tessen-color-text-primary);
+    font-family: var(--tessen-font-family-sans);
+
+    &[data-variant='outlined'] {
+      border-color: var(--tessen-color-border-default);
+    }
+    &[data-variant='elevated'] {
+      box-shadow: var(--tessen-elevation-raised);
+    }
+    &[data-variant='filled'] {
+      background: var(--t-card-bg, var(--tessen-color-surface-sunken));
+    }
+
+    &[data-padding='none'] {
+      --_padding: 0;
+    }
+    &[data-padding='sm'] {
+      --_padding: var(--tessen-space-3);
+    }
+    &[data-padding='md'] {
+      --_padding: var(--tessen-space-5);
+    }
+    &[data-padding='lg'] {
+      --_padding: var(--tessen-space-8);
+    }
+  }
+
+  .t-card__header,
+  .t-card__body,
+  .t-card__footer {
+    padding: var(--_padding);
+  }
+  .t-card__header {
+    border-block-end: 1px solid var(--tessen-color-border-subtle);
+    font-weight: var(--tessen-font-weight-semibold);
+  }
+  .t-card__footer {
+    border-block-start: 1px solid var(--tessen-color-border-subtle);
+  }
+}

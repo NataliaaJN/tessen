@@ -6,8 +6,10 @@ import { createElement, type ComponentType } from 'react';
 export interface ReactAdapterOptions {
   /** Where the neutral `label` goes: `children` (default), the `label` prop, or nowhere. */
   labelAs?: 'children' | 'prop' | 'none';
-  /** Where the neutral `leading` goes: the `leadingIcon` prop (default) or `children`. */
-  leadingAs?: 'leadingIcon' | 'children';
+  /** Prop that receives the neutral `leading` (default `leadingIcon`; `children` for children). */
+  leadingAs?: string;
+  /** Prop that receives the neutral `trailing` (default `trailingIcon`). */
+  trailingAs?: string;
   /** Prop that reports value changes, e.g. `onValueChange`. */
   valueEvent?: string;
   /** Static props added to every render. */
@@ -22,7 +24,12 @@ export function reactAdapter(
   component: ComponentType<never>,
   options: ReactAdapterOptions = {},
 ): Adapter {
-  const { labelAs = 'children', leadingAs = 'leadingIcon', valueEvent } = options;
+  const {
+    labelAs = 'children',
+    leadingAs = 'leadingIcon',
+    trailingAs = 'trailingIcon',
+    valueEvent,
+  } = options;
   return {
     name,
     mount(neutral: NeutralProps) {
@@ -39,8 +46,8 @@ export function reactAdapter(
       };
       if (labelAs === 'children') all.children = label ?? '';
       else if (labelAs === 'prop' && label !== undefined) all.label = label;
-      if (leading) all[leadingAs === 'children' ? 'children' : 'leadingIcon'] = leading;
-      if (trailing) all.trailingIcon = trailing;
+      if (leading) all[leadingAs] = leading;
+      if (trailing) all[trailingAs] = trailing;
       if (valueEvent) all[valueEvent] = (value: string | boolean) => emitted.push(value);
       const result = render(
         createElement(component as unknown as ComponentType<Record<string, unknown>>, all),

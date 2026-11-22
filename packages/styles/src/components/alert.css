@@ -1,0 +1,55 @@
+/* Alert: inline message with a tone. Contract: @tessen-ui/core alertContract. Overrides: --t-alert-radius. */
+@layer tessen.components {
+  .t-alert {
+    --_bg: var(--tessen-color-feedback-info-background);
+    --_border: var(--tessen-color-feedback-info-border);
+    --_icon: var(--tessen-color-feedback-info-icon);
+    --_fg: var(--tessen-color-feedback-info-text);
+
+    box-sizing: border-box;
+    display: flex;
+    gap: var(--tessen-space-3);
+    padding: var(--tessen-space-3) var(--tessen-space-4);
+    border: 1px solid var(--_border);
+    border-radius: var(--t-alert-radius, var(--tessen-radius-md));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--tessen-font-family-sans);
+    font-size: var(--tessen-font-size-md);
+    line-height: var(--tessen-font-line-height-normal);
+
+    &[data-tone='success'] {
+      --_bg: var(--tessen-color-feedback-success-background);
+      --_border: var(--tessen-color-feedback-success-border);
+      --_icon: var(--tessen-color-feedback-success-icon);
+      --_fg: var(--tessen-color-feedback-success-text);
+    }
+    &[data-tone='warning'] {
+      --_bg: var(--tessen-color-feedback-warning-background);
+      --_border: var(--tessen-color-feedback-warning-border);
+      --_icon: var(--tessen-color-feedback-warning-icon);
+      --_fg: var(--tessen-color-feedback-warning-text);
+    }
+    &[data-tone='danger'] {
+      --_bg: var(--tessen-color-feedback-danger-background);
+      --_border: var(--tessen-color-feedback-danger-border);
+      --_icon: var(--tessen-color-feedback-danger-icon);
+      --_fg: var(--tessen-color-feedback-danger-text);
+    }
+  }
+
+  .t-alert__icon {
+    display: inline-flex;
+    flex: none;
+    block-size: 1lh;
+    align-items: center;
+    color: var(--_icon);
+  }
+  .t-alert__content {
+    flex: 1;
+    min-inline-size: 0;
+  }
+  .t-alert__title {
+    font-weight: var(--tessen-font-weight-semibold);
+  }
+}

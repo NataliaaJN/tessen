@@ -1,0 +1,38 @@
+/* Skeleton: loading placeholder. Size it with CSS (width/height). Contract: @tessen-ui/core skeletonContract. */
+@layer tessen.components {
+  .t-skeleton {
+    display: block;
+    background: var(--t-skeleton-bg, var(--tessen-color-action-neutral-default));
+    border-radius: var(--tessen-radius-sm);
+
+    &[data-shape='text'] {
+      block-size: 1em;
+      inline-size: 100%;
+    }
+    &[data-shape='rect'] {
+      block-size: 100%;
+      inline-size: 100%;
+    }
+    &[data-shape='circle'] {
+      aspect-ratio: 1;
+      inline-size: 2.5rem;
+      border-radius: var(--tessen-radius-full);
+    }
+    &[data-animated] {
+      animation: t-skeleton-pulse 1.5s var(--tessen-motion-easing-standard) infinite;
+    }
+  }
+
+  /* Reduced motion keeps the placeholder but drops the pulse. */
+  @media (prefers-reduced-motion: reduce) {
+    .t-skeleton[data-animated] {
+      animation: none;
+    }
+  }
+
+  @keyframes t-skeleton-pulse {
+    50% {
+      opacity: 0.5;
+    }
+  }
+}

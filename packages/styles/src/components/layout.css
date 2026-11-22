@@ -1,0 +1,159 @@
+/* Layout primitives: Stack, Grid, Container, AspectRatio. Spacing comes from --tessen-space-*. Contracts: @tessen-ui/core stack/grid/container/aspect-ratio. */
+@layer tessen.components {
+  .t-stack {
+    display: flex;
+    gap: var(--_gap);
+
+    &[data-direction='vertical'] {
+      flex-direction: column;
+    }
+    &[data-direction='horizontal'] {
+      flex-direction: row;
+    }
+    &[data-wrap] {
+      flex-wrap: wrap;
+    }
+    &[data-align='stretch'] {
+      align-items: stretch;
+    }
+    &[data-align='start'] {
+      align-items: flex-start;
+    }
+    &[data-align='center'] {
+      align-items: center;
+    }
+    &[data-align='end'] {
+      align-items: flex-end;
+    }
+    &[data-justify='start'] {
+      justify-content: flex-start;
+    }
+    &[data-justify='center'] {
+      justify-content: center;
+    }
+    &[data-justify='end'] {
+      justify-content: flex-end;
+    }
+    &[data-justify='between'] {
+      justify-content: space-between;
+    }
+  }
+
+  .t-grid {
+    display: grid;
+    gap: var(--_gap);
+    grid-template-columns: repeat(var(--_columns, 1), minmax(0, 1fr));
+
+    &[data-columns='1'] {
+      --_columns: 1;
+    }
+    &[data-columns='2'] {
+      --_columns: 2;
+    }
+    &[data-columns='3'] {
+      --_columns: 3;
+    }
+    &[data-columns='4'] {
+      --_columns: 4;
+    }
+    &[data-columns='6'] {
+      --_columns: 6;
+    }
+    &[data-columns='12'] {
+      --_columns: 12;
+    }
+    &[data-columns='auto'] {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--t-grid-min, 16rem)), 1fr));
+    }
+  }
+
+  .t-stack,
+  .t-grid {
+    &[data-gap='0'] {
+      --_gap: var(--tessen-space-0);
+    }
+    &[data-gap='1'] {
+      --_gap: var(--tessen-space-1);
+    }
+    &[data-gap='2'] {
+      --_gap: var(--tessen-space-2);
+    }
+    &[data-gap='3'] {
+      --_gap: var(--tessen-space-3);
+    }
+    &[data-gap='4'] {
+      --_gap: var(--tessen-space-4);
+    }
+    &[data-gap='5'] {
+      --_gap: var(--tessen-space-5);
+    }
+    &[data-gap='6'] {
+      --_gap: var(--tessen-space-6);
+    }
+    &[data-gap='8'] {
+      --_gap: var(--tessen-space-8);
+    }
+    &[data-gap='10'] {
+      --_gap: var(--tessen-space-10);
+    }
+    &[data-gap='12'] {
+      --_gap: var(--tessen-space-12);
+    }
+  }
+
+  .t-container {
+    box-sizing: border-box;
+    inline-size: 100%;
+    margin-inline: auto;
+    max-inline-size: var(--_max);
+
+    &[data-size='sm'] {
+      --_max: 40rem;
+    }
+    &[data-size='md'] {
+      --_max: 48rem;
+    }
+    &[data-size='lg'] {
+      --_max: 64rem;
+    }
+    &[data-size='xl'] {
+      --_max: 80rem;
+    }
+    &[data-size='full'] {
+      --_max: none;
+    }
+    &[data-gutters] {
+      padding-inline: var(--tessen-space-4);
+    }
+  }
+
+  .t-aspect-ratio {
+    position: relative;
+    inline-size: 100%;
+    overflow: hidden;
+    aspect-ratio: var(--_ratio);
+
+    &[data-ratio='1/1'] {
+      --_ratio: 1 / 1;
+    }
+    &[data-ratio='4/3'] {
+      --_ratio: 4 / 3;
+    }
+    &[data-ratio='3/2'] {
+      --_ratio: 3 / 2;
+    }
+    &[data-ratio='16/9'] {
+      --_ratio: 16 / 9;
+    }
+    &[data-ratio='21/9'] {
+      --_ratio: 21 / 9;
+    }
+    > * {
+      position: absolute;
+      inset: 0;
+      inline-size: 100%;
+      block-size: 100%;
+      object-fit: cover;
+    }
+  }
+}

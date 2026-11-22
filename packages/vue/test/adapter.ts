@@ -6,8 +6,10 @@ import type { Component } from 'vue';
 export interface VueAdapterOptions {
   /** Where the neutral `label` goes: the default slot (default), the `label` prop, or nowhere. */
   labelAs?: 'slot' | 'prop' | 'none';
-  /** Where the neutral `leading` goes: the `leading` slot (default) or the default slot. */
-  leadingAs?: 'leading' | 'default';
+  /** Slot that receives the neutral `leading` (default `leading`; `default` for the default slot). */
+  leadingAs?: string;
+  /** Slot that receives the neutral `trailing` (default `trailing`). */
+  trailingAs?: string;
   /** Prop listener that reports value changes, e.g. `onUpdate:modelValue`. */
   valueEvent?: string;
   /** Static props added to every mount. */
@@ -27,7 +29,7 @@ export function vueAdapter(
   component: Component,
   options: VueAdapterOptions = {},
 ): Adapter {
-  const { labelAs = 'slot', leadingAs = 'leading', valueEvent } = options;
+  const { labelAs = 'slot', leadingAs = 'leading', trailingAs = 'trailing', valueEvent } = options;
   return {
     name,
     mount(neutral: NeutralProps) {
@@ -38,8 +40,8 @@ export function vueAdapter(
       const own: Record<string, unknown> = { ...options.props };
       if (labelAs === 'slot') slots.default = label ?? '';
       else if (labelAs === 'prop' && label !== undefined) own.label = label;
-      if (leading) slots[leadingAs === 'default' ? 'default' : 'leading'] = leading;
-      if (trailing) slots.trailing = trailing;
+      if (leading) slots[leadingAs] = leading;
+      if (trailing) slots[trailingAs] = trailing;
       if (valueEvent) own[valueEvent] = (value: string | boolean) => emitted.push(value);
       const wrapper = mount(component, {
         props: { ...own, ...props, ...extra, ...attrs, class: className, onClick: () => clicks++ },
