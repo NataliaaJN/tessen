@@ -18,7 +18,7 @@
 | --- | --- |
 | Demos vivas (islas Vue/React) y ejemplos `*.vue`/`*.tsx` con el mismo id, mostrados con `?raw` | Hoy el uso es un snippet generado, no un ejemplo ejecutado |
 | Búsqueda `⌘K` (Pagefind) | Sin construir |
-| Fundamentos y explorador de tokens (desde `tokens.json`) | Sin construir |
+| ~~Explorador de tokens~~ | Hecho (F4-T02, `/tokens/`). Faltan las páginas de fundamentos editoriales (principios, accesibilidad) |
 | Getting started (Vue, React, Nuxt, Next, Tailwind) y guidelines | Sin construir |
 | Selector global Vue / React persistente | Hoy se ven los dos lado a lado |
 | Descripciones editoriales («cuándo usarlo», contenido) y *Do/Don't* | El contrato no tiene prosa todavía: hace falta un lugar para ella |

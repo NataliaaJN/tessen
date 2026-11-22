@@ -196,3 +196,108 @@ pre {
     padding: var(--tessen-space-6) var(--tessen-space-4);
   }
 }
+
+/* Foundations: token explorer */
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tessen-space-3);
+  margin-block: var(--tessen-space-4);
+}
+.swatches,
+.scale,
+.plain {
+  list-style: none;
+  margin: 0 0 var(--tessen-space-6);
+  padding: 0;
+}
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: var(--tessen-space-3);
+}
+.swatches li,
+.scale li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tessen-space-1);
+}
+.scale {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(4.5rem, 1fr));
+  gap: var(--tessen-space-2);
+}
+.chip {
+  display: block;
+  height: 2.5rem;
+  border: 1px solid var(--tessen-color-border-subtle);
+  border-radius: var(--tessen-radius-sm);
+}
+.chip.box {
+  height: 4rem;
+  background: var(--tessen-color-surface-default);
+}
+.copy {
+  all: unset;
+  cursor: pointer;
+  font: inherit;
+  font-family: var(--tessen-font-family-mono);
+  font-size: 0.85em;
+  color: var(--tessen-color-text-link);
+  text-decoration: underline dotted;
+}
+.copy:focus-visible {
+  outline: 2px solid var(--tessen-color-focus-ring);
+  outline-offset: 2px;
+}
+.swatches small,
+.type-row small {
+  color: var(--tessen-color-text-tertiary);
+}
+.plain li {
+  padding-block: var(--tessen-space-2);
+  border-bottom: 1px solid var(--tessen-color-border-subtle);
+}
+.type-row {
+  display: grid;
+  gap: var(--tessen-space-1);
+}
+.bar-row {
+  display: grid;
+  grid-template-columns: 5rem 5rem 1fr;
+  align-items: center;
+  gap: var(--tessen-space-3);
+}
+.bar {
+  height: 0.75rem;
+  background: var(--tessen-color-brand-600, var(--tessen-color-text-link));
+  border-radius: var(--tessen-radius-xs);
+}
+.ease-row {
+  display: grid;
+  grid-template-columns: 7rem 16rem 1fr;
+  align-items: center;
+  gap: var(--tessen-space-3);
+}
+.track {
+  position: relative;
+  height: 0.75rem;
+}
+.dot {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 0.75rem;
+  border-radius: 50%;
+  background: var(--tessen-color-text-link);
+  transition: left 600ms var(--ease);
+}
+.ease-row:hover .dot,
+.ease-row:focus-visible .dot {
+  left: calc(100% - 0.75rem);
+}
+@media (prefers-reduced-motion: reduce) {
+  .dot {
+    transition: none;
+  }
+}
