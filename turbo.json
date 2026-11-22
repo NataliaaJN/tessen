@@ -7,7 +7,9 @@
     "test": {
       "dependsOn": ["^build"]
     },
-    "typecheck": {},
+    "typecheck": {
+      "dependsOn": ["^build"]
+    },
     "tokens:check": {
       "inputs": ["src/**", "scripts/**"]
     }
