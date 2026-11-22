@@ -29,6 +29,10 @@
       "sm": { "$value": { "value": 8, "unit": "px" } },
       "md": { "$value": { "value": 16, "unit": "px" } }
     },
+    "scale": {
+      "$type": "number",
+      "press": { "$value": 0.98, "$description": "Feedback scale while a control is pressed." }
+    },
     "stagger": {
       "step": { "$type": "duration", "$value": { "value": 40, "unit": "ms" } },
       "max": {
