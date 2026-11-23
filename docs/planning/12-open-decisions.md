@@ -7,7 +7,7 @@
 | D-01 | ✅ Resuelta | Asset del logotipo (propuesta 11) — incorporado en `docs/brand/` | — |
 | D-02 | ✅ Resuelta (interno) | Scope interno `@tessen-ui` aprobado tras evaluar 5 candidatos (ADR 0015); `tessen` y `@tessen` **ocupados**; el scope **público** sigue en D-18 | — |
 | D-03 | ✅ Resuelta | Nomenclatura pública: Vue `T`-prefijo, React sin prefijo (ADR 0011 `Accepted`) | — |
-| D-04 | ✅ Resuelta (Studio) | Framework del *shell*: **Vue 3 + Vite** para Theme Studio ([ADR 0017](13-architecture-decisions/0017-theme-engine-and-studio.md)); el Playground (F6) usará el mismo | — |
+| D-04 | ✅ Resuelta (Studio) | Framework del *shell*: **Vue 3 + Vite** para Theme Studio ([ADR 0017](13-architecture-decisions/0017-theme-engine-and-studio.md)); el Playground (F6) lo usa también ([ADR 0018](13-architecture-decisions/0018-playground-scenes-and-codegen.md)) | — |
 | D-05 | ✅ Resuelta con condiciones | Motor de comportamiento: **Zag.js** (spike S1 5/6 y validación [S2](S2-zag-validation.md) *APPROVE WITH CONDITIONS*; ADR 0004 `Accepted` con condiciones C1–C10) | — |
 | D-06 | ✅ Resuelta | Inter (interfaz), JetBrains Mono (código), Outfit (marca/titulares), con pila del sistema de respaldo | — |
 | D-07 | ✅ Resuelta (provisional) | Lucide (ISC) como set abierto, 35 iconos iniciales en `@tessen-ui/icons`; revisable cambiando `src/svg` | — |

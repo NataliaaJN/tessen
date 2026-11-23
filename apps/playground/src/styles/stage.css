@@ -1,0 +1,28 @@
+/* Preview-only page defaults. Everything else comes from @tessen-ui/styles. */
+@layer tessen.utilities {
+  body {
+    margin: 0;
+    background: var(--tessen-color-surface-canvas);
+    color: var(--tessen-color-text-primary);
+    font-family: var(--tessen-font-family-sans);
+    font-size: var(--tessen-typography-body-md-font-size);
+    line-height: var(--tessen-typography-body-md-line-height);
+  }
+
+  .stage {
+    box-sizing: border-box;
+    min-block-size: 100vh;
+    padding: var(--tessen-space-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stage-inner {
+    max-inline-size: 100%;
+  }
+
+  p {
+    margin: 0;
+  }
+}

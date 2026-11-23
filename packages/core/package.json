@@ -18,6 +18,10 @@
       "types": "./dist/js/codegen.d.ts",
       "import": "./dist/js/codegen.js"
     },
+    "./scene": {
+      "types": "./dist/js/scene.d.ts",
+      "import": "./dist/js/scene.js"
+    },
     "./contracts": {
       "types": "./dist/js/contracts/index.d.ts",
       "import": "./dist/js/contracts/index.js"

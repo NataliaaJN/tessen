@@ -54,7 +54,7 @@ Tier **T2** (~16: Select, Combobox, Slider, Toast, Popover, DropdownMenu, AlertD
 `apps/theme-studio`: modo rápido (presets, acento OKLCH, radio, densidad, motion, tipografía), vista previa real, contraste, exportación CSS/DTCG/Tailwind/TS, importar, guardar, URL compartible, deshacer/rehacer; luego **modo avanzado** (árbol de tokens, alias, diff). Mini-panel de apariencia en docs.
 **Salida:** un tema exportado desde Studio aplicado a una app de `integration/` cambia el aspecto sin tocar la librería (US-02).
 
-### Fase 6 — Playground (4–6 sem)
+### Fase 6 — Playground ✅ (4–6 sem; estado: [`F6-progress.md`](F6-progress.md))
 `apps/playground`: controles desde contratos, previews Vue/React en `iframe`, estados forzados, responsive, `core/codegen` para ambos frameworks, copiar/descargar, estado en URL, «Abrir en Playground» desde docs.
 **Salida:** US-03 cumplida; snippets generados compilan en CI.
 

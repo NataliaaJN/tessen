@@ -341,6 +341,9 @@ importers:
       '@tessen-ui/docs-gen':
         specifier: workspace:*
         version: link:../../tooling/docs-gen
+      '@tessen-ui/playground':
+        specifier: workspace:*
+        version: link:../playground
       '@tessen-ui/theme-studio':
         specifier: workspace:*
         version: link:../theme-studio
@@ -356,6 +359,61 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
+
+  apps/playground:
+    dependencies:
+      '@tessen-ui/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@tessen-ui/react':
+        specifier: workspace:*
+        version: link:../../packages/react
+      '@tessen-ui/styles':
+        specifier: workspace:*
+        version: link:../../packages/styles
+      '@tessen-ui/theme':
+        specifier: workspace:*
+        version: link:../../packages/theme
+      '@tessen-ui/vue':
+        specifier: workspace:*
+        version: link:../../packages/vue
+      react:
+        specifier: 'catalog:'
+        version: 19.3.1
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.3.1(react@19.3.1)
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.46(typescript@6.0.3)
+    devDependencies:
+      '@tessen-ui/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.6
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.3.0
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.3.0(@types/react@19.3.0)
+      '@vitejs/plugin-vue':
+        specifier: 'catalog:'
+        version: 6.0.11(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.4)(yaml@2.9.1))(vue@3.5.46(typescript@6.0.3))
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+      vite:
+        specifier: 'catalog:'
+        version: 8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.4)(yaml@2.9.1)
+      vitest:
+        specifier: 'catalog:'
+        version: 5.1.1(@types/node@26.6.6)(@vitest/browser-preview@5.1.1)(@vitest/ui@5.1.1)(jsdom@31.0.1)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.4)(yaml@2.9.1))
+      vue-tsc:
+        specifier: 'catalog:'
+        version: 3.3.14(typescript@6.0.3)
 
   apps/theme-studio:
     dependencies:

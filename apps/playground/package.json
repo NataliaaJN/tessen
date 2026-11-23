@@ -1,0 +1,36 @@
+{
+  "name": "@tessen-ui/playground",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Tessen Playground (Vite + Vue 3): controls from the contracts, live Vue and React previews, generated code. Runs locally only: no hosting, no deploy (ADR 0014).",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5175 --strictPort",
+    "build": "vue-tsc --noEmit -p tsconfig.json && vite build",
+    "preview": "vite preview --port 5175 --strictPort",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "snippets:check": "node scripts/snippets-check.mjs"
+  },
+  "dependencies": {
+    "@tessen-ui/core": "workspace:*",
+    "@tessen-ui/react": "workspace:*",
+    "@tessen-ui/styles": "workspace:*",
+    "@tessen-ui/theme": "workspace:*",
+    "@tessen-ui/vue": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "vue": "catalog:"
+  },
+  "devDependencies": {
+    "@tessen-ui/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

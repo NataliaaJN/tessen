@@ -20,6 +20,20 @@
         "--strictPort"
       ],
       "port": 5174
+    },
+    {
+      "name": "playground",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--filter",
+        "@tessen-ui/playground",
+        "exec",
+        "vite",
+        "--port",
+        "5175",
+        "--strictPort"
+      ],
+      "port": 5175
     }
   ]
 }
