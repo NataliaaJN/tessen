@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "generate": "pnpm --filter @tessen-ui/docs-gen run generate",
-    "dev": "pnpm generate && astro dev",
+    "dev": "pnpm generate && pnpm --filter @tessen-ui/theme-studio --filter @tessen-ui/playground run build && astro dev",
     "build": "pnpm generate && astro build && node scripts/copy-apps.mjs",
     "preview": "astro preview",
     "typecheck": "astro check"
