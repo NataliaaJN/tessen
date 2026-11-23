@@ -47,6 +47,8 @@ jobs:
       - run: pnpm build
       - run: pnpm parity:api
       - run: pnpm docs:check
+      # The code the Playground generates must compile in both frameworks (US-03).
+      - run: pnpm snippets:check
       - run: pnpm size
 
       # Distribution as a consumer sees it (ADR 0016): pack, check the tarballs, install them

@@ -1,0 +1,10 @@
+{
+  "extends": "@tessen-ui/tsconfig/node.json",
+  "compilerOptions": {
+    "types": ["node", "vite/client"],
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler"
+  },
+  "include": ["src/**/*.ts", "src/**/*.vue", "test/**/*.ts", "vite.config.ts"]
+}

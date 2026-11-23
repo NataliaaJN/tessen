@@ -33,6 +33,7 @@ function vueSpelling(status: string): string {
     <li>React {c.frameworks.react ? '✓' : '✗'}</li>
     <li><a href={c.apgPattern}>Patrón WAI-ARIA</a></li>
     <li><a href={`/components/${c.slug}.json`}>JSON</a></li>
+    <li><a href={`/playground/#c=${c.slug}`} data-playground>Abrir en Playground</a></li>
   </ul>
 
   {
@@ -166,3 +167,13 @@ function vueSpelling(status: string): string {
     {c.behaviours.map((b) => <li>{b.describe}</li>)}
   </ul>
 </Base>
+
+<script>
+  // El enlace lleva el framework que el lector eligió arriba: abre la pestaña de código correcta.
+  const link = document.querySelector<HTMLAnchorElement>('[data-playground]');
+  link?.addEventListener('click', () => {
+    const fw = document.documentElement.dataset.fw;
+    const base = (link.getAttribute('href') ?? '').split('&')[0] ?? '';
+    link.href = fw === 'vue' || fw === 'react' ? `${base}&fw=${fw}` : base;
+  });
+</script>

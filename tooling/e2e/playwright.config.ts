@@ -32,5 +32,12 @@ export default defineConfig({
       reuseExistingServer: !process.env['CI'],
       timeout: 60_000,
     },
+    {
+      // Playground (apps/playground) for tests/playground.spec.ts.
+      command: 'pnpm --filter @tessen-ui/playground exec vite --port 5175 --strictPort',
+      url: 'http://localhost:5175/',
+      reuseExistingServer: !process.env['CI'],
+      timeout: 60_000,
+    },
   ],
 });
