@@ -12,7 +12,10 @@
     font-family: var(--tessen-font-family-sans);
     font-size: var(--_font-size);
     line-height: var(--tessen-font-line-height-normal);
-    transition: border-color var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard);
+    transition:
+      border-color var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard),
+      box-shadow var(--tessen-motion-duration-fast) var(--tessen-motion-easing-standard);
+    box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.08);
 
     &[data-size='sm'] {
       --_height: var(--tessen-size-control-sm);

@@ -1,4 +1,8 @@
+import '@fontsource-variable/manrope';
+import '@fontsource-variable/outfit';
+import '@fontsource-variable/jetbrains-mono';
 import '@tessen-ui/styles';
+import '../../shared/surfaces.css';
 import './styles/playground.css';
 import { createApp } from 'vue';
 import App from './App.vue';

@@ -40,7 +40,7 @@ test.afterEach(({ page }) => {
 
 test('renders the real components in the preview iframe with the base theme', async ({ page }) => {
   await expect(page).toHaveTitle(/Theme Studio/);
-  expect(await previewVar(page, '--tessen-radius-base')).toBe('6px');
+  expect(await previewVar(page, '--tessen-radius-base')).toBe('9px');
   await expect(page.getByText(/120 pares correctos/)).toBeVisible();
 });
 
@@ -60,19 +60,19 @@ test('undo and redo walk back through edits (button and keyboard)', async ({ pag
   await page.locator('.preset', { hasText: 'Ámbar' }).click();
   await expect.poll(() => previewVar(page, '--tessen-radius-base')).toBe('14px');
   await page.getByRole('button', { name: 'Deshacer' }).click();
-  await expect.poll(() => previewVar(page, '--tessen-radius-base')).toBe('6px');
+  await expect.poll(() => previewVar(page, '--tessen-radius-base')).toBe('9px');
   await page.getByRole('button', { name: 'Rehacer' }).click();
   await expect.poll(() => previewVar(page, '--tessen-radius-base')).toBe('14px');
   await page.locator('body').click({ position: { x: 5, y: 5 } });
   await page.keyboard.press('Control+z');
-  await expect.poll(() => previewVar(page, '--tessen-radius-base')).toBe('6px');
+  await expect.poll(() => previewVar(page, '--tessen-radius-base')).toBe('9px');
 });
 
 test('the compare switch shows the base theme and back', async ({ page }) => {
   await page.locator('.preset', { hasText: 'Ámbar' }).click();
   await expect.poll(() => previewVar(page, '--tessen-radius-base')).toBe('14px');
   await page.getByText('Comparar con la base').click();
-  await expect.poll(() => previewVar(page, '--tessen-radius-base')).toBe('6px');
+  await expect.poll(() => previewVar(page, '--tessen-radius-base')).toBe('9px');
   await page.getByText('Comparar con la base').click();
   await expect.poll(() => previewVar(page, '--tessen-radius-base')).toBe('14px');
 });

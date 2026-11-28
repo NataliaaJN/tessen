@@ -174,7 +174,7 @@ describe('derive', () => {
       at(f['primitives/radius.json']!, 'radius', 'lg').$value = { value: 10, unit: 'px' };
     });
     expect(messages(issues, 'derive').join('\n')).toMatch(
-      /radius\.lg: radius\.base \(6px\) x 4\/3 gives 8px, but the literal value is 10px/,
+      /radius\.lg: radius\.base \(9px\) x 4\/3 gives 12px, but the literal value is 10px/,
     );
   });
 

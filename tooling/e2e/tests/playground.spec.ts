@@ -114,7 +114,7 @@ test('theme and mode reach the previews', async ({ page }) => {
           .getPropertyValue('--tessen-radius-base')
           .trim(),
       );
-  expect(await radius('Vue')).toBe('6px');
+  expect(await radius('Vue')).toBe('9px');
   await page.getByTestId('theme').selectOption('ambar');
   await expect.poll(() => radius('Vue')).toBe('14px');
   await expect.poll(() => radius('React')).toBe('14px');

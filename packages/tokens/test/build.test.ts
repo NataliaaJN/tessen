@@ -73,13 +73,13 @@ describe('css', () => {
   });
 
   it('emits aliases as var() so overriding a primitive reaches the semantic layer', () => {
-    expect(css).toContain('--tessen-color-action-primary-default: var(--tessen-color-brand-800);');
+    expect(css).toContain('--tessen-color-action-primary-default: var(--tessen-color-brand-700);');
     expect(css).toContain('--tessen-color-action-primary-on: var(--tessen-color-text-on-action);');
     expect(css).toContain('--tessen-elevation-raised: var(--tessen-elevation-1);');
   });
 
   it('derives radii from radius.base with calc()', () => {
-    expect(css).toContain('--tessen-radius-base: 6px;');
+    expect(css).toContain('--tessen-radius-base: 9px;');
     expect(css).toContain('--tessen-radius-md: calc(var(--tessen-radius-base) * 1);');
     expect(css).toContain('--tessen-radius-lg: calc(var(--tessen-radius-base) * 4 / 3);');
     expect(css).toContain('--tessen-radius-full: 9999px;');
@@ -95,7 +95,7 @@ describe('css', () => {
   it('writes letter spacing in em and quotes font names with spaces', () => {
     expect(css).toContain('--tessen-font-letter-spacing-wide: 0.02em;');
     expect(css).toMatch(/--tessen-font-family-mono: "JetBrains Mono", ui-monospace/);
-    expect(css).toMatch(/--tessen-font-family-sans: Inter, .*"Segoe UI"/);
+    expect(css).toMatch(/--tessen-font-family-sans: "Manrope Variable", .*"Segoe UI"/);
   });
 
   it('expands composite typography into one variable per property', () => {
@@ -147,8 +147,8 @@ describe('resolved variables', () => {
     const light = resolvedVariables(model, 'light');
     const dark = resolvedVariables(model, 'dark');
     expect(Object.keys(light)).toEqual(Object.keys(dark));
-    expect(light['--tessen-color-text-primary']).toBe('#0A1A3E');
-    expect(dark['--tessen-color-text-primary']).toBe('#F1F7FE');
+    expect(light['--tessen-color-text-primary']).toBe('#16191F');
+    expect(dark['--tessen-color-text-primary']).toBe('#F6F7F9');
     expect(light['--tessen-color-brand-600']).toBe(dark['--tessen-color-brand-600']);
     // Resolved values are literal: no var() or calc().
     for (const value of Object.values(light)) expect(value).not.toMatch(/var\(|calc\(/);
@@ -178,11 +178,11 @@ describe('json', () => {
 
     const action = byPath.get('color.action.primary.default')!;
     expect(action.layer).toBe('semantic');
-    expect(action.alias).toBe('color.brand.800');
+    expect(action.alias).toBe('color.brand.700');
     expect(Object.keys(action.values!)).toEqual(['light', 'dark']);
     // Per-mode alias targets: Theme Studio re-resolves semantic colors after a palette change.
     expect((action as { aliases?: unknown }).aliases).toEqual({
-      light: 'color.brand.800',
+      light: 'color.brand.700',
       dark: 'color.accent.400',
     });
 
@@ -213,7 +213,7 @@ describe('typescript', () => {
     );
     expect(mod.breakpoints).toEqual({ sm: 640, md: 768, lg: 1024, xl: 1280, '2xl': 1536 });
     expect(mod.themes).toEqual(['light', 'dark']);
-    expect(mod.cssVariables.dark!['--tessen-color-surface-canvas']).toBe('#060E24');
+    expect(mod.cssVariables.dark!['--tessen-color-surface-canvas']).toBe('#0D0F13');
   });
 
   it('declares literal types and every css variable name', () => {

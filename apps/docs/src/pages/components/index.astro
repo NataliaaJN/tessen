@@ -1,28 +1,59 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { byCategory, categoryLabel } from '../../lib/data';
+import ComponentPreview from '../../components/ComponentPreview';
+import Icon from '../../components/Icon.astro';
+import { byCategory, categoryLabel, components } from '../../lib/data';
+import { editorial } from '../../lib/editorial';
+
+const groups = byCategory();
 ---
 
-<Base title="Componentes" current="components">
-  <h1>Componentes</h1>
-  <p class="lead">Todos los componentes, agrupados por categoría. Vue y React comparten un mismo contrato.</p>
-  {
-    byCategory().map(([category, list]) => (
-      <section>
-        <h2>{categoryLabel(category)}</h2>
-        <ul class="cards">
-          {list.map((c) => (
-            <li>
-              <a href={`/components/${c.slug}/`}>
-                {c.name}
-                <small>
-                  {c.tier} · {c.engine} · {c.props.length} props
-                </small>
+<Base title="Componentes" current="components" wide>
+  <h1>Biblioteca de componentes</h1>
+  <p class="lead">Cada muestra es el componente real. Tócala, cambia la apariencia y mira cómo responde.</p>
+
+  <div data-catalog>
+    <div class="filters">
+      <div class="chips" role="group" aria-label="Categoría">
+        <button type="button" data-filter="all" aria-pressed="true">Todos</button>
+        {
+          groups.map(([category]) => (
+            <button type="button" data-filter={category} aria-pressed="false">
+              {categoryLabel(category)}
+            </button>
+          ))
+        }
+      </div>
+      <label class="filter-search">
+        <Icon name="search" size={16} />
+        <input type="search" placeholder="Filtrar por nombre" aria-label="Filtrar por nombre" data-catalog-search />
+      </label>
+    </div>
+    <p class="catalog-count" data-catalog-count aria-live="polite">{components.length} componentes</p>
+    <ul class="catalog">
+      {
+        components.map((c) => (
+          <li class="piece" data-item data-category={c.category} data-name={c.name.toLowerCase()}>
+            <div class="piece-top">
+              <span>{categoryLabel(c.category)}</span>
+              <a href={`/components/${c.slug}/#uso`} aria-label={`Código de ${c.name}`} title="Ver código">
+                <Icon name="code" size={16} />
               </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))
-  }
+            </div>
+            <div class="piece-stage">
+              <ComponentPreview slug={c.slug} client:visible />
+            </div>
+            <a class="piece-name" href={`/components/${c.slug}/`}>
+              {c.name}
+              <Icon name="arrow" size={15} />
+            </a>
+            <p>{editorial[c.slug]?.use ?? `Componente de ${categoryLabel(c.category).toLowerCase()}.`}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="catalog-empty" data-catalog-empty hidden>
+      Ningún componente coincide. Prueba otro nombre o elige «Todos».
+    </p>
+  </div>
 </Base>

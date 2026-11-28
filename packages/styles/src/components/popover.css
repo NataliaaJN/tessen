@@ -15,9 +15,10 @@
   .t-popover,
   .t-menu {
     box-sizing: border-box;
-    border: 1px solid var(--tessen-color-border-subtle);
+    border: 1px solid color-mix(in srgb, var(--tessen-color-text-primary) 12%, transparent);
     border-radius: var(--t-popover-radius, var(--tessen-radius-lg));
-    background: var(--tessen-color-surface-overlay);
+    background: color-mix(in srgb, var(--tessen-color-surface-overlay) 88%, transparent);
+    backdrop-filter: blur(18px) saturate(1.5);
     box-shadow: var(--tessen-elevation-overlay);
     color: var(--tessen-color-text-primary);
     font-family: var(--tessen-font-family-sans);

@@ -33,7 +33,11 @@ export interface Theme {
   overrides: ThemeOverrides;
 }
 
-export const DEFAULT_FONTS = { sans: 'Inter', display: 'Outfit', mono: 'JetBrains Mono' } as const;
+export const DEFAULT_FONTS = {
+  sans: 'Manrope',
+  display: 'Manrope',
+  mono: 'JetBrains Mono',
+} as const;
 /** Fallback stacks, identical to the tokens package. */
 export const FONT_FALLBACKS = {
   sans: 'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
@@ -52,7 +56,7 @@ export function defaultTheme(): Theme {
     version: 1,
     name: 'tessen',
     accent: BASE_ACCENT,
-    radius: 6,
+    radius: 9,
     density: 'default',
     motion: 'full',
     fonts: { ...DEFAULT_FONTS },

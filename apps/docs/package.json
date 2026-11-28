@@ -14,24 +14,27 @@
   "dependencies": {
     "@astrojs/react": "7.1.9",
     "@astrojs/vue": "7.1.6",
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@fontsource-variable/outfit": "^5.3.0",
     "@tessen-ui/react": "workspace:*",
     "@tessen-ui/styles": "workspace:*",
+    "@tessen-ui/theme": "workspace:*",
     "@tessen-ui/tokens": "workspace:*",
     "@tessen-ui/vue": "workspace:*",
     "astro": "^7.4.13",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "vue": "catalog:",
-    "@tessen-ui/theme": "workspace:*"
+    "vue": "catalog:"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@tessen-ui/docs-gen": "workspace:*",
+    "@tessen-ui/playground": "workspace:*",
+    "@tessen-ui/theme-studio": "workspace:*",
     "@tessen-ui/tsconfig": "workspace:*",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "typescript": "catalog:",
-    "@tessen-ui/theme-studio": "workspace:*",
-    "@tessen-ui/playground": "workspace:*"
+    "typescript": "catalog:"
   }
 }

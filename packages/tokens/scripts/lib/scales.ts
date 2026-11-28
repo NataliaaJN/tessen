@@ -34,16 +34,16 @@ export const SEEDS = {
   primary: '#12306E',
   secondary: '#2B7BE0',
   accent: '#38C6F4',
-  surfaceDark: '#060E24',
-  surfaceLight: '#F1F7FE',
-  text: '#0A1A3E',
+  surfaceDark: '#0D0F13',
+  surfaceLight: '#F6F7F9',
+  text: '#16191F',
 } as const;
 
 export const SCALES: Record<string, ScaleSpec> = {
   neutral: {
     description:
-      'Navy-tinted neutral. Anchored on the brand surface and text seeds (50 light surface, 900 text, 950 dark surface).',
-    anchors: { 50: SEEDS.surfaceLight, 900: SEEDS.text, 950: SEEDS.surfaceDark },
+      'Graphite neutral: a nearly colorless cool gray, so surfaces stay quiet and any accent reads true.',
+    anchors: { 50: SEEDS.surfaceLight, 500: '#6F7787', 900: SEEDS.text, 950: SEEDS.surfaceDark },
   },
   brand: {
     description: 'Brand blue. 600 is the secondary seed, 900 the primary seed.',

@@ -149,9 +149,10 @@
     margin: 0;
     padding: var(--tessen-space-1);
     overflow-y: auto;
-    border: 1px solid var(--tessen-color-border-subtle);
-    border-radius: var(--tessen-radius-md);
-    background: var(--tessen-color-surface-overlay);
+    border: 1px solid color-mix(in srgb, var(--tessen-color-text-primary) 12%, transparent);
+    border-radius: var(--tessen-radius-lg);
+    background: color-mix(in srgb, var(--tessen-color-surface-overlay) 88%, transparent);
+    backdrop-filter: blur(18px) saturate(1.5);
     box-shadow: var(--tessen-elevation-overlay);
     font-family: var(--tessen-font-family-sans);
     font-size: var(--tessen-font-size-md);

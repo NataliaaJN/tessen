@@ -20,6 +20,8 @@ La tarjeta original también define la variante de **icono de app / favicon 16 p
 
 ## Paleta («Cobalt / Cyan»)
 
+> Rediseño de noviembre de 2026: los neutros del sistema (superficies y texto) pasan a una rampa grafito (`#F6F7F9`, `#16191F`, `#0D0F13`). Los azules de esta tabla siguen siendo los del logotipo y los de las rampas `brand` y `accent`.
+
 | Rol | Color | Uso |
 |---|---|---|
 | Primary | `#12306E` | Gato, texto de marca, acción en tema claro |

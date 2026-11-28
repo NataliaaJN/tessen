@@ -16,6 +16,7 @@ import {
   undo,
 } from '../state';
 
+const base = import.meta.env.BASE_URL;
 const file = ref<HTMLInputElement | null>(null);
 
 async function onFile(event: Event): Promise<void> {
@@ -38,7 +39,17 @@ async function share(): Promise<void> {
 
 <template>
   <header class="bar">
-    <a class="bar__brand" href="../">Tessen <span>Theme Studio</span></a>
+    <a class="bar__brand" href="../" aria-label="Tessen, inicio">
+      <img class="mark mark-light" :src="`${base}tessen-mark.svg`" alt="" width="32" height="32" />
+      <img
+        class="mark mark-dark"
+        :src="`${base}tessen-mark-on-dark.svg`"
+        alt=""
+        width="32"
+        height="32"
+      />
+      tessen <span>studio</span>
+    </a>
 
     <label class="bar__name">
       <span class="sr-only">Nombre del tema</span>
