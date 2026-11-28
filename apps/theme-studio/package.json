@@ -12,6 +12,9 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@fontsource-variable/outfit": "^5.3.0",
     "@tessen-ui/styles": "workspace:*",
     "@tessen-ui/theme": "workspace:*",
     "@tessen-ui/tokens": "workspace:*",

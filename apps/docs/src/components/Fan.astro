@@ -1,0 +1,68 @@
+---
+// El abanico (tessen) de la portada: varillas generadas, material teñido con el acento activo.
+// Se abre al cargar, sigue el puntero y un control cambia su apertura.
+const count = 13;
+const cx = 300;
+const cy = 372;
+const polar = (r: number, deg: number) => {
+  const a = ((deg - 90) * Math.PI) / 180;
+  return `${(cx + r * Math.cos(a)).toFixed(2)} ${(cy + r * Math.sin(a)).toFixed(2)}`;
+};
+const half = 6.4;
+const inner = 74;
+const outer = 312;
+const blade = `M ${polar(inner, -half * 0.55)} L ${polar(outer - 12, -half)} Q ${polar(outer + 16, 0)} ${polar(outer - 12, half)} L ${polar(inner, half * 0.55)} Z`;
+const spine = `M ${polar(34, 0)} L ${polar(outer - 20, 0)}`;
+const ribs = [-3.6, -1.8, 1.8, 3.6];
+const blades = Array.from({ length: count }, (_, i) => i - (count - 1) / 2);
+---
+
+<div class="fan" data-fan>
+  <svg viewBox="0 0 600 420" role="img" aria-label="Abanico Tessen abierto">
+    <defs>
+      <linearGradient id="fan-skin" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" class="fan-hi"></stop>
+        <stop offset="0.55" class="fan-mid"></stop>
+        <stop offset="1" class="fan-lo"></stop>
+      </linearGradient>
+    </defs>
+    {
+      blades.map((k) => (
+        <g class="blade" style={`--k:${k};--d:${Math.abs(k)}`}>
+          <path d={blade} fill="url(#fan-skin)" class="blade-body" />
+          {ribs.map((r) => (
+            <path d={`M ${polar(inner + 14, r * 0.62)} L ${polar(outer - 18, r)}`} class="blade-rib" />
+          ))}
+          <path d={spine} class="blade-spine" />
+        </g>
+      ))
+    }
+    <circle cx={cx} cy={cy} r="30" class="hub"></circle>
+    <circle cx={cx} cy={cy} r="9" class="pin"></circle>
+  </svg>
+</div>
+
+<script>
+  const fan = document.querySelector<HTMLElement>('[data-fan]');
+  const range = document.querySelector<HTMLInputElement>('[data-fan-spread]');
+  const out = document.querySelector('[data-fan-out]');
+  const stage = fan?.closest<HTMLElement>('.fan-panel');
+  range?.addEventListener('input', () => {
+    // 0 % = closed, 100 % = fully open (12.6 degrees between blades).
+    fan?.style.setProperty('--spread', `${(Number(range.value) / 100) * 12.6}deg`);
+    if (out) out.textContent = `${range.value} %`;
+  });
+  if (fan && stage && matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)').matches) {
+    stage.addEventListener('pointermove', (e) => {
+      const box = stage.getBoundingClientRect();
+      const x = (e.clientX - box.left) / box.width - 0.5;
+      const y = (e.clientY - box.top) / box.height - 0.5;
+      fan.style.setProperty('--ry', `${x * 22}deg`);
+      fan.style.setProperty('--rx', `${-y * 16}deg`);
+    });
+    stage.addEventListener('pointerleave', () => {
+      fan.style.removeProperty('--ry');
+      fan.style.removeProperty('--rx');
+    });
+  }
+</script>

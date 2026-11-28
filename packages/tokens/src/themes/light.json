@@ -91,15 +91,15 @@
     "action": {
       "primary": {
         "default": {
-          "$value": "{color.brand.800}",
+          "$value": "{color.brand.700}",
           "$description": "Primary action fill."
         },
         "hover": {
-          "$value": "{color.brand.900}",
+          "$value": "{color.brand.800}",
           "$description": "Primary action on hover."
         },
         "active": {
-          "$value": "{color.brand.950}",
+          "$value": "{color.brand.900}",
           "$description": "Primary action while pressed."
         },
         "disabled": {

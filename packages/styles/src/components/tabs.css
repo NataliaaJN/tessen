@@ -93,10 +93,13 @@
       padding: var(--tessen-space-1);
       border-radius: var(--tessen-radius-lg);
       background: var(--tessen-color-surface-sunken);
+      border: 1px solid color-mix(in srgb, var(--tessen-color-text-primary) 12%, transparent);
     }
     .t-tabs__tab[data-selected] {
       background: var(--tessen-color-surface-raised);
-      box-shadow: var(--tessen-elevation-raised);
+      box-shadow:
+        0 0 0 1px color-mix(in srgb, var(--tessen-color-text-primary) 12%, transparent),
+        0 2px 6px rgb(0 0 0 / 0.18);
     }
   }
 

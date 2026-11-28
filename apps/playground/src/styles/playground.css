@@ -1,4 +1,6 @@
-/* Playground chrome. It always uses the default Tessen theme: only the preview iframes are themed. */
+/* Playground shell: a flat, full-height workbench. Colours come from apps/shared/surfaces.css
+ * (--x-*), so the surface and accent chosen in the docs apply here too. Only the preview iframes
+ * take the playground's own theme preset. */
 @layer tessen.utilities {
   *,
   *::before,
@@ -13,11 +15,12 @@
   }
 
   body {
-    background: var(--tessen-color-surface-canvas);
-    color: var(--tessen-color-text-primary);
+    background: var(--x-bg);
+    color: var(--x-ink);
     font-family: var(--tessen-font-family-sans);
     font-size: var(--tessen-typography-body-sm-font-size);
     line-height: var(--tessen-typography-body-sm-line-height);
+    -webkit-font-smoothing: antialiased;
   }
 
   h1,
@@ -27,7 +30,8 @@
   }
 
   a {
-    color: var(--tessen-color-text-link);
+    color: var(--x-accent-ink);
+    text-underline-offset: 0.2em;
   }
 
   .sr-only {
@@ -42,15 +46,17 @@
 
   .skip {
     position: absolute;
-    inset-inline-start: var(--tessen-space-2);
+    inset-inline-start: var(--tessen-space-3);
     inset-block-start: -4rem;
     z-index: 20;
-    background: var(--tessen-color-surface-default);
-    padding: var(--tessen-space-2) var(--tessen-space-3);
-    border-radius: var(--tessen-radius-md);
+    padding: var(--tessen-space-2) var(--tessen-space-4);
+    border: 1px solid var(--x-line-2);
+    border-radius: 10px;
+    background: var(--x-raised);
+    color: var(--x-ink);
   }
   .skip:focus {
-    inset-block-start: var(--tessen-space-2);
+    inset-block-start: var(--tessen-space-3);
   }
 
   .spacer {
@@ -60,8 +66,8 @@
   /* ---- Layout ------------------------------------------------------------------------------ */
   .app {
     display: grid;
-    grid-template-columns: 18rem minmax(0, 1fr);
-    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-columns: 19rem minmax(0, 1fr);
+    grid-template-rows: 4rem minmax(0, 1fr);
     grid-template-areas:
       'bar bar'
       'side main';
@@ -73,54 +79,89 @@
     display: flex;
     align-items: center;
     gap: var(--tessen-space-4);
-    padding: var(--tessen-space-2) var(--tessen-space-4);
-    background: var(--tessen-color-surface-default);
-    border-block-end: 1px solid var(--tessen-color-border-subtle);
+    padding-inline: 1.25rem;
+    border-block-end: 1px solid var(--x-line);
+    background: var(--x-side);
   }
 
   .brand {
-    font-family: var(--tessen-font-family-display);
-    font-weight: 700;
-    font-size: var(--tessen-typography-heading-sm-font-size);
-    color: var(--tessen-color-text-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    inline-size: 16.75rem;
+    color: var(--x-ink);
+    font-family: 'Outfit Variable', var(--tessen-font-family-display);
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
     text-decoration: none;
+    white-space: nowrap;
+  }
+  .brand .mark {
+    inline-size: 2.2rem;
+    block-size: 2.2rem;
+    transition: rotate 500ms var(--x-ease);
+  }
+  .brand:hover .mark {
+    rotate: -10deg;
   }
   .brand span {
-    color: var(--tessen-color-text-secondary);
-    font-weight: 500;
+    margin-inline-start: auto;
+    padding: 0.15rem 0.55rem;
+    border: 1px solid var(--x-line-2);
+    border-radius: 6px;
+    color: var(--x-faint);
+    font-family: var(--tessen-font-family-mono);
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0;
   }
 
   .bar-field {
-    min-inline-size: 14rem;
+    min-inline-size: 15rem;
   }
 
   .bar-links {
     display: flex;
-    gap: var(--tessen-space-4);
+    gap: 0.15rem;
+  }
+  .bar-links a {
+    padding: 0.45rem 0.8rem;
+    border-radius: 10px;
+    color: var(--x-muted);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .bar-links a:hover {
+    background: var(--x-hover);
+    color: var(--x-ink);
   }
 
   .side {
     grid-area: side;
-    overflow-y: auto;
-    background: var(--tessen-color-surface-default);
-    border-inline-end: 1px solid var(--tessen-color-border-subtle);
-    padding: var(--tessen-space-4);
     display: flex;
     flex-direction: column;
-    gap: var(--tessen-space-5);
+    gap: var(--tessen-space-6);
+    overflow-y: auto;
+    padding: 1.25rem;
+    border-inline-end: 1px solid var(--x-line);
+    background: var(--x-side);
+    scrollbar-width: thin;
   }
 
   .main {
     grid-area: main;
     display: flex;
     flex-direction: column;
+    gap: 0.9rem;
     min-inline-size: 0;
     min-block-size: 0;
+    padding: 1rem 1.25rem 1.25rem;
   }
 
   h2 {
     font-size: var(--tessen-typography-label-md-font-size);
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .panel,
@@ -128,6 +169,11 @@
     display: flex;
     flex-direction: column;
     gap: var(--tessen-space-3);
+  }
+  .panel + .panel,
+  .controls + .panel {
+    padding-block-start: var(--tessen-space-5);
+    border-block-start: 1px solid var(--x-line);
   }
 
   .panel-head {
@@ -143,13 +189,14 @@
   }
 
   .control-label {
-    color: var(--tessen-color-text-secondary);
+    color: var(--x-muted);
     font-size: var(--tessen-typography-label-sm-font-size);
+    font-weight: 600;
   }
 
   .muted,
   .hint {
-    color: var(--tessen-color-text-secondary);
+    color: var(--x-faint);
   }
   .hint {
     font-size: var(--tessen-typography-label-sm-font-size);
@@ -159,31 +206,49 @@
   .segments,
   .code-tabs {
     display: inline-flex;
-    border: 1px solid var(--tessen-color-border-default);
-    border-radius: var(--tessen-radius-md);
-    overflow: hidden;
     align-self: flex-start;
+    gap: 2px;
+    padding: 3px;
+    border: 1px solid var(--x-line);
+    border-radius: 11px;
+    background: var(--x-sunken);
+  }
+  .side .segments {
+    display: flex;
+    align-self: stretch;
   }
 
   .seg {
     appearance: none;
+    padding: 0.3rem 0.85rem;
     border: 0;
-    background: var(--tessen-color-surface-default);
-    color: var(--tessen-color-text-primary);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--x-muted);
     font: inherit;
-    padding: var(--tessen-space-1) var(--tessen-space-3);
+    font-weight: 600;
     cursor: pointer;
+    transition:
+      background-color 200ms var(--x-ease),
+      color 200ms var(--x-ease);
   }
-  .seg + .seg {
-    border-inline-start: 1px solid var(--tessen-color-border-default);
+  .side .seg {
+    flex: 1 1 auto;
+    padding-inline: 0.4rem;
+  }
+  .seg:hover {
+    color: var(--x-ink);
   }
   .seg[aria-pressed='true'] {
-    background: var(--tessen-color-interactive-primary-default);
-    color: var(--tessen-color-text-on-primary);
+    background: var(--x-raised);
+    box-shadow:
+      0 0 0 1px var(--x-line-2),
+      0 2px 6px rgb(0 0 0 / 0.18);
+    color: var(--x-ink);
   }
   .seg:focus-visible {
     outline: 2px solid var(--tessen-color-focus-ring);
-    outline-offset: -2px;
+    outline-offset: 1px;
   }
 
   /* ---- Main: toolbar, previews, code ------------------------------------------------------- */
@@ -191,19 +256,17 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--tessen-space-4);
-    padding: var(--tessen-space-2) var(--tessen-space-4);
-    border-block-end: 1px solid var(--tessen-color-border-subtle);
+    justify-content: space-between;
+    gap: var(--tessen-space-3);
   }
 
   .previews {
     flex: 1 1 55%;
-    min-block-size: 0;
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: minmax(0, 1fr);
-    gap: 1px;
-    background: var(--tessen-color-border-subtle);
+    gap: 0.9rem;
+    min-block-size: 0;
   }
 
   .pane {
@@ -211,60 +274,88 @@
     flex-direction: column;
     min-inline-size: 0;
     min-block-size: 0;
-    background: var(--tessen-color-surface-subtle);
+    padding: 6px;
+    border: 1px solid var(--x-line);
+    border-radius: 20px;
+    background: var(--x-hover);
   }
 
   .pane-title {
-    padding: var(--tessen-space-1) var(--tessen-space-3);
-    color: var(--tessen-color-text-secondary);
-    font-weight: 600;
-    background: var(--tessen-color-surface-default);
+    order: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.55rem 0.6rem 0.2rem;
+    color: var(--x-muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  .pane-title::before {
+    content: '';
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    border-radius: 2px;
+    rotate: 45deg;
+    background: #38c6f4;
+  }
+  .pane:first-child:not(:only-child) .pane-title::before {
+    background: #42d392;
   }
 
   .frame-wrap {
     flex: 1;
-    min-block-size: 0;
     display: flex;
     justify-content: center;
+    min-block-size: 0;
     overflow: auto;
+    border: 1px solid var(--x-line);
+    border-radius: 14px;
+    background:
+      radial-gradient(color-mix(in srgb, var(--x-ink) 12%, transparent) 1px, transparent 1.2px) 0
+        0 / 18px 18px,
+      var(--x-panel);
   }
 
   .frame {
-    border: 0;
     max-inline-size: 100%;
     block-size: 100%;
-    background: var(--tessen-color-surface-canvas);
+    border: 0;
+    background: transparent;
   }
 
   .code {
     flex: 0 0 auto;
-    max-block-size: 42%;
     display: flex;
     flex-direction: column;
-    border-block-start: 1px solid var(--tessen-color-border-subtle);
-    background: var(--tessen-color-surface-default);
+    max-block-size: 42%;
+    overflow: hidden;
+    border: 1px solid var(--x-line);
+    border-radius: 18px;
+    background: var(--x-sunken);
   }
 
   .code-bar {
     display: flex;
     align-items: center;
     gap: var(--tessen-space-3);
-    padding: var(--tessen-space-2) var(--tessen-space-4);
+    padding: var(--tessen-space-2) var(--tessen-space-3);
+    border-block-end: 1px solid var(--x-line);
   }
 
   .code-file {
-    color: var(--tessen-color-text-secondary);
+    color: var(--x-faint);
     font-family: var(--tessen-font-family-mono);
+    font-size: 0.76rem;
   }
 
   .code-pre {
     margin: 0;
-    padding: var(--tessen-space-3) var(--tessen-space-4);
+    padding: var(--tessen-space-4) var(--tessen-space-5);
     overflow: auto;
+    color: var(--x-ink);
     font-family: var(--tessen-font-family-mono);
     font-size: var(--tessen-typography-code-md-font-size, 0.8125rem);
-    line-height: 1.5;
-    background: var(--tessen-color-surface-subtle);
+    line-height: 1.7;
   }
 
   @media (max-width: 60rem) {
@@ -277,16 +368,32 @@
         'main';
       block-size: auto;
     }
+    .bar {
+      flex-wrap: wrap;
+      padding-block: 0.75rem;
+    }
+    .brand {
+      inline-size: auto;
+    }
+    .brand span {
+      margin-inline-start: 0.25rem;
+    }
     .side {
       border-inline-end: 0;
-      border-block-end: 1px solid var(--tessen-color-border-subtle);
+      border-block-end: 1px solid var(--x-line);
     }
     .main {
       min-block-size: 70dvh;
     }
     .previews {
       grid-auto-flow: row;
-      min-block-size: 24rem;
+      min-block-size: 28rem;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .brand .mark,
+    .seg {
+      transition: none;
     }
   }
 }

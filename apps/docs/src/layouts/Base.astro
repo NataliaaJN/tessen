@@ -1,32 +1,82 @@
 ---
+import '@fontsource-variable/manrope';
+import '@fontsource-variable/outfit';
+import '@fontsource-variable/jetbrains-mono';
 import '@tessen-ui/styles';
-import '../styles/docs.css';
+import '../../../shared/surfaces.css';
 import '../styles/chrome.css';
-import { byCategory, categoryLabel } from '../lib/data';
+import '../styles/docs.css';
+import Icon from '../components/Icon.astro';
+import type { IconName } from '../components/Icon.astro';
+import { byCategory, categoryLabel, components } from '../lib/data';
 
 interface Props {
   title: string;
   description?: string;
+  /** Sección o slug activos. */
   current?: string;
+  /** Migas de pan tras «Tessen». */
+  crumbs?: { label: string; href?: string }[];
+  /** Despliega la lista de componentes en la barra lateral. */
+  side?: boolean;
+  /** Sin contenedor de lectura: la página compone su propio ancho. */
+  bare?: boolean;
+  /** Ancho amplio para tablas y exploradores. */
+  wide?: boolean;
+  /** Índice «En esta página». */
+  toc?: { id: string; label: string }[];
 }
-const { title, description = 'Sistema de diseño Tessen para Vue y React.', current } = Astro.props;
+const {
+  title,
+  description = 'Sistema de diseño Tessen para Vue y React.',
+  current,
+  crumbs,
+  side = false,
+  bare = false,
+  wide = false,
+  toc,
+} = Astro.props;
 const groups = byCategory();
+
+const sections: { id: string; label: string; href: string; icon: IconName; count?: number }[] = [
+  { id: 'home', label: 'Inicio', href: '/', icon: 'home' },
+  {
+    id: 'components',
+    label: 'Componentes',
+    href: '/components/',
+    icon: 'grid',
+    count: components.length,
+  },
+  { id: 'get-started', label: 'Empezar', href: '/get-started/', icon: 'bolt' },
+  { id: 'tokens', label: 'Tokens', href: '/tokens/', icon: 'layers' },
+  { id: 'guidelines', label: 'Guías', href: '/guidelines/', icon: 'book' },
+];
+const tools: { label: string; href: string; icon: IconName }[] = [
+  { label: 'Playground', href: '/playground/', icon: 'play' },
+  { label: 'Theme Studio', href: '/studio/', icon: 'palette' },
+];
+const isActive = (id: string) => current === id || (id === 'components' && side);
+const trail = crumbs ?? [{ label: title }];
+const surfaces = [
+  ['grafito', 'Grafito'],
+  ['pizarra', 'Pizarra'],
+  ['medianoche', 'Medianoche'],
+  ['porcelana', 'Porcelana'],
+  ['bruma', 'Bruma'],
+] as const;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" data-surface="grafito" data-tessen-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <title>{title} · Tessen</title>
-    <link rel="icon" href="data:," />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0f1115" />
+    <script is:inline src="/appearance-boot.js"></script>
     <script is:inline>
-      // Tema: sigue al sistema salvo que la persona elija uno (solo en este navegador).
-      try {
-        const t = localStorage.getItem('tessen:docs:theme');
-        if (t === 'light' || t === 'dark') document.documentElement.dataset.tessenTheme = t;
-      } catch {}
       // Framework: gana ?fw=vue|react, luego la elección guardada; si no, ambos a la vez.
       try {
         const q = new URLSearchParams(location.search).get('fw');
@@ -37,63 +87,156 @@ const groups = byCategory();
   </head>
   <body>
     <a class="skip" href="#main">Saltar al contenido</a>
-    <header class="top">
-      <a class="brand" href="/">Tessen</a>
-      <nav aria-label="Principal">
-        <a href="/components/" aria-current={current === 'components' ? 'page' : undefined}
-          >Componentes</a
-        >
-        <a href="/get-started/" aria-current={current === 'get-started' ? 'page' : undefined}
-          >Empezar</a
-        >
-        <a href="/tokens/" aria-current={current === 'tokens' ? 'page' : undefined}>Tokens</a>
-        <a href="/guidelines/" aria-current={current === 'guidelines' ? 'page' : undefined}
-          >Guías</a
-        >
-        <a href="/llms.txt">llms.txt</a>
-      </nav>
-      <button
-        type="button"
-        class="search-open"
-        id="search-open"
-        aria-keyshortcuts="Control+K Meta+K"
-      >
-        Buscar <kbd>⌘K</kbd>
-      </button>
-      <div class="fw-switch" role="group" aria-label="Framework">
-        <button type="button" data-set-fw="both" aria-pressed="true">Ambos</button>
-        <button type="button" data-set-fw="vue" aria-pressed="false">Vue</button>
-        <button type="button" data-set-fw="react" aria-pressed="false">React</button>
-      </div>
-      <button type="button" class="search-open" id="appearance-open" aria-haspopup="dialog">Apariencia</button>
-      <a class="search-open" href="/playground/">Playground</a>
-      <a class="search-open" href="/studio/">Theme Studio</a>
-      <button type="button" class="theme" id="theme" aria-label="Cambiar tema de color">◐</button>
-    </header>
-    <div class="shell">
-      <nav class="side" aria-label="Componentes">
-        {
-          groups.map(([category, list]) => (
-            <section>
-              <h2>{categoryLabel(category)}</h2>
-              <ul>
-                {list.map((c) => (
-                  <li>
-                    <a
-                      href={`/components/${c.slug}/`}
-                      aria-current={current === c.slug ? 'page' : undefined}
-                    >
-                      {c.name}
-                    </a>
-                  </li>
+    <div class="app">
+      <aside class="rail" id="rail">
+        <a class="brand" href="/" aria-label="Tessen, inicio">
+          <img class="mark mark-light" src="/tessen-mark.svg" alt="" width="36" height="36" />
+          <img class="mark mark-dark" src="/tessen-mark-on-dark.svg" alt="" width="36" height="36" />
+          <span>tessen</span>
+          <small>alpha</small>
+        </a>
+        <button type="button" class="look" id="appearance-open" aria-haspopup="dialog">
+          <span class="look-dot" aria-hidden="true"></span>
+          <span class="look-text">
+            <strong>Apariencia</strong>
+            <small data-surface-name>Grafito</small>
+          </span>
+          <Icon name="sliders" />
+        </button>
+        <div class="rail-scroll">
+          <nav class="rail-nav" aria-label="Principal">
+            {
+              sections.map((s) => (
+                <a href={s.href} aria-current={isActive(s.id) ? 'page' : undefined}>
+                  <Icon name={s.icon} />
+                  <span>{s.label}</span>
+                  {s.count && <em>{s.count}</em>}
+                </a>
+              ))
+            }
+          </nav>
+          {
+            side ? (
+              <nav class="rail-tree" aria-label="Componentes">
+                {groups.map(([category, list]) => (
+                  <section>
+                    <h2>{categoryLabel(category)}</h2>
+                    <ul>
+                      {list.map((c) => (
+                        <li>
+                          <a
+                            href={`/components/${c.slug}/`}
+                            aria-current={current === c.slug ? 'page' : undefined}
+                          >
+                            {c.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
                 ))}
-              </ul>
-            </section>
-          ))
-        }
-      </nav>
-      <main id="main"><slot /></main>
+              </nav>
+            ) : (
+              <nav class="rail-nav" aria-label="Herramientas">
+                <p>Herramientas</p>
+                {tools.map((t) => (
+                  <a href={t.href}>
+                    <Icon name={t.icon} />
+                    <span>{t.label}</span>
+                    <Icon name="arrow" size={14} />
+                  </a>
+                ))}
+              </nav>
+            )
+          }
+        </div>
+        <div class="rail-foot">
+          {
+            side &&
+              tools.map((t) => (
+                <a href={t.href} title={t.label} aria-label={t.label}>
+                  <Icon name={t.icon} />
+                </a>
+              ))
+          }
+          <a href="/llms.txt">llms.txt</a>
+        </div>
+      </aside>
+      <button type="button" class="scrim" data-rail-close aria-label="Cerrar menú" tabindex="-1"
+      ></button>
+
+      <div class="stage-col">
+        <header class="topbar">
+          <button
+            type="button"
+            class="icon-btn menu-btn"
+            data-rail-toggle
+            aria-controls="rail"
+            aria-expanded="false"
+            aria-label="Menú"
+          >
+            <Icon name="menu" />
+          </button>
+          <nav class="crumbs" aria-label="Ruta">
+            <a href="/">Tessen</a>
+            {
+              trail.map((c) => (
+                <>
+                  <Icon name="chevron" size={13} />
+                  {c.href ? <a href={c.href}>{c.label}</a> : <span aria-current="page">{c.label}</span>}
+                </>
+              ))
+            }
+          </nav>
+          <button
+            type="button"
+            class="search-open"
+            id="search-open"
+            aria-keyshortcuts="Control+K Meta+K"
+            aria-label="Buscar"
+          >
+            <Icon name="search" size={16} />
+            <span class="search-text">Buscar componentes</span>
+            <kbd>Ctrl K</kbd>
+          </button>
+          <div class="fw-switch" role="group" aria-label="Framework">
+            <button type="button" data-set-fw="both" aria-pressed="true">Ambos</button>
+            <button type="button" data-set-fw="vue" aria-pressed="false">Vue</button>
+            <button type="button" data-set-fw="react" aria-pressed="false">React</button>
+          </div>
+          <button type="button" class="icon-btn" id="theme" aria-label="Cambiar tema de color">
+            <Icon name="mode" />
+          </button>
+        </header>
+        <div
+          class="page"
+          data-bare={bare ? '' : undefined}
+          data-wide={wide ? '' : undefined}
+          data-toc={toc ? '' : undefined}
+        >
+          <main id="main" class="doc"><slot /></main>
+          {
+            toc && (
+              <nav class="on-page" aria-label="En esta página">
+                <p>En esta página</p>
+                <ul>
+                  {toc.map((t) => (
+                    <li>
+                      <a href={`#${t.id}`}>{t.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )
+          }
+        </div>
+        <footer class="status">
+          <span>Un contrato, Vue y React</span>
+          <span class="status-theme">Tessen / <b data-surface-name>Grafito</b></span>
+        </footer>
+      </div>
     </div>
+
     <dialog id="search" class="search" aria-label="Buscar">
       <input
         id="search-input"
@@ -104,43 +247,65 @@ const groups = byCategory();
       />
       <ul id="search-results" role="listbox" aria-label="Resultados"></ul>
     </dialog>
-    <dialog id="appearance" class="search appearance" aria-labelledby="appearance-title">
-      <h2 id="appearance-title">Apariencia</h2>
-      <p>Prueba otro acento, radio o densidad sobre esta documentación. Se guarda solo en este navegador.</p>
-      <h3>Acento</h3>
+
+    <dialog id="appearance" class="drawer" aria-labelledby="appearance-title">
+      <div class="drawer-head">
+        <span>Apariencia</span>
+        <button type="button" class="icon-btn" data-appearance-close aria-label="Cerrar">
+          <Icon name="close" />
+        </button>
+      </div>
+      <h2 id="appearance-title">Un sistema. Tu carácter.</h2>
+      <p>Cada cambio repinta los componentes en las tres apps. Se guarda solo en este navegador.</p>
+
+      <h3>Superficie</h3>
+      <div class="surface-grid">
+        {
+          surfaces.map(([id, label]) => (
+            <button type="button" class="surface" data-set-surface={id} aria-pressed="false">
+              <span class="thumb" data-thumb={id} aria-hidden="true">
+                <i />
+                <b />
+                <b />
+              </span>
+              {label}
+            </button>
+          ))
+        }
+      </div>
+
+      <h3>Acento <output data-appearance-accent-out></output></h3>
       <div class="swatch-row" data-appearance-swatches></div>
+
       <label class="range-row">
         <span>Radio de esquina <output data-appearance-radius-out></output></span>
-        <input type="range" min="0" max="16" step="1" data-appearance-radius />
+        <input type="range" min="0" max="18" step="1" data-appearance-radius />
       </label>
+
       <fieldset class="density-row">
         <legend>Densidad</legend>
-        <label><input type="radio" name="appearance-density" value="compact" /> Compacta</label>
-        <label><input type="radio" name="appearance-density" value="default" /> Normal</label>
-        <label><input type="radio" name="appearance-density" value="comfortable" /> Cómoda</label>
+        <label><input type="radio" name="appearance-density" value="compact" /><span>Compacta</span></label>
+        <label><input type="radio" name="appearance-density" value="default" /><span>Normal</span></label>
+        <label><input type="radio" name="appearance-density" value="comfortable" /><span>Cómoda</span></label>
       </fieldset>
-      <div class="appearance-actions">
-        <button type="button" data-appearance-reset>Restablecer</button>
-        <a data-appearance-studio href="/studio/">Abrir en Theme Studio →</a>
-        <button type="button" data-appearance-close>Cerrar</button>
+
+      <div class="drawer-foot">
+        <button type="button" class="t-button" data-variant="primary" data-size="md" data-appearance-copy>
+          Copiar CSS del tema
+        </button>
+        <a class="t-button" data-variant="outline" data-size="md" data-appearance-studio href="/studio/">
+          Abrir en Theme Studio
+        </a>
+        <button type="button" class="t-button" data-variant="ghost" data-size="md" data-appearance-reset>
+          Restablecer
+        </button>
       </div>
     </dialog>
+
     <script is:inline src="/docs-ui.js"></script>
     <script>
       import '../lib/appearance';
-    </script>
-    <script is:inline>
-      document.getElementById('theme')?.addEventListener('click', () => {
-        const root = document.documentElement;
-        const dark =
-          root.dataset.tessenTheme === 'dark' ||
-          (!root.dataset.tessenTheme && matchMedia('(prefers-color-scheme: dark)').matches);
-        const next = dark ? 'light' : 'dark';
-        root.dataset.tessenTheme = next;
-        try {
-          localStorage.setItem('tessen:docs:theme', next);
-        } catch {}
-      });
+      import '../lib/shell';
     </script>
   </body>
 </html>

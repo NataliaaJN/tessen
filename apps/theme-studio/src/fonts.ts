@@ -1,6 +1,7 @@
 /** Font names offered by the quick mode. Studio does not download or bundle fonts: the app does. */
 export const FONT_CHOICES = {
   sans: [
+    'Manrope',
     'Inter',
     'IBM Plex Sans',
     'Source Sans 3',
@@ -14,6 +15,7 @@ export const FONT_CHOICES = {
     'Arial',
   ],
   display: [
+    'Manrope',
     'Outfit',
     'Inter',
     'Fraunces',

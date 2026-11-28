@@ -15,6 +15,16 @@ const examples = examplesFor(c.slug);
 const note = editorial[c.slug];
 const nameOf = (slug: string) => components.find((x) => x.slug === slug)?.name ?? slug;
 
+const hasGuidance = Boolean(note && (note.instead || note.rules));
+const toc = [
+  ...(hasGuidance ? [{ id: 'guia', label: 'Cuándo usarlo' }] : []),
+  ...(examples.length > 0 ? [{ id: 'ejemplos', label: 'Ejemplos' }] : []),
+  { id: 'uso', label: 'Uso' },
+  { id: 'anatomia', label: 'Anatomía' },
+  { id: 'props', label: 'Props' },
+  { id: 'accesibilidad', label: 'Accesibilidad' },
+];
+
 /** Cómo se escribe la prop en Vue cuando difiere del contrato. */
 function vueSpelling(status: string): string {
   if (status.startsWith('alias:')) return `v-model (${status.slice(6)})`;
@@ -23,24 +33,30 @@ function vueSpelling(status: string): string {
 }
 ---
 
-<Base title={c.name} current={c.slug}>
+<Base
+  title={c.name}
+  current={c.slug}
+  side
+  crumbs={[{ label: 'Componentes', href: '/components/' }, { label: c.name }]}
+  toc={toc}
+>
   <h1>{c.name}</h1>
-  <p class="lead">Componente de {categoryLabel(c.category).toLowerCase()}.</p>
+  <p class="lead">{note?.use ?? `Componente de ${categoryLabel(c.category).toLowerCase()}.`}</p>
   <ul class="badges">
+    <li>{categoryLabel(c.category)}</li>
     <li>{c.tier}</li>
     <li>{c.engine === 'zag' ? 'Motor Zag.js' : 'Nativo'}</li>
     <li>Vue {c.frameworks.vue ? '✓' : '✗'}</li>
     <li>React {c.frameworks.react ? '✓' : '✗'}</li>
     <li><a href={c.apgPattern}>Patrón WAI-ARIA</a></li>
     <li><a href={`/components/${c.slug}.json`}>JSON</a></li>
-    <li><a href={`/playground/#c=${c.slug}`} data-playground>Abrir en Playground</a></li>
+    <li class="go"><a href={`/playground/#c=${c.slug}`} data-playground>Abrir en Playground</a></li>
   </ul>
 
   {
-    note && (
+    hasGuidance && note && (
       <>
-        <h2>Cuándo usarlo</h2>
-        <p>{note.use}</p>
+        <h2 id="guia">Cuándo usarlo</h2>
         {note.instead && (
           <ul>
             {note.instead.map(([slug, why]) => (
@@ -67,28 +83,34 @@ function vueSpelling(status: string): string {
   {
     examples.length > 0 && (
       <>
-        <h2>Ejemplos</h2>
+        <h2 id="ejemplos">Ejemplos</h2>
         {examples.map((e) => (
           <section class="example" aria-label={e.id}>
             <h3>{e.id}</h3>
             <div class="code-pair">
-              <div data-fw="vue">
-                <p class="fw">Vue</p>
+              <div class="frame" data-fw="vue">
                 <div class="demo">
                   <VueDemo client:visible slug={c.slug} id={e.id} />
                 </div>
                 <details>
-                  <summary>Código</summary>
+                  <summary>
+                    <span class="fw-dot" data-for="vue" />
+                    Vue
+                    <em>Código</em>
+                  </summary>
                   <pre><code>{e.vue}</code></pre>
                 </details>
               </div>
-              <div data-fw="react">
-                <p class="fw">React</p>
+              <div class="frame" data-fw="react">
                 <div class="demo">
                   <ReactDemo client:visible slug={c.slug} id={e.id} />
                 </div>
                 <details>
-                  <summary>Código</summary>
+                  <summary>
+                    <span class="fw-dot" data-for="react" />
+                    React
+                    <em>Código</em>
+                  </summary>
                   <pre><code>{e.react}</code></pre>
                 </details>
               </div>
@@ -99,7 +121,7 @@ function vueSpelling(status: string): string {
     )
   }
 
-  <h2>Uso</h2>
+  <h2 id="uso">Uso</h2>
   <div class="code-pair">
     <div data-fw="vue">
       <h3>Vue · <code>{c.names.vue}</code></h3>
@@ -111,7 +133,7 @@ function vueSpelling(status: string): string {
     </div>
   </div>
 
-  <h2>Anatomía</h2>
+  <h2 id="anatomia">Anatomía</h2>
   <ul class="badges">
     {
       c.anatomy.map((p) => (
@@ -130,7 +152,8 @@ function vueSpelling(status: string): string {
     )
   }
 
-  <h2>Props</h2>
+  <h2 id="props">Props</h2>
+  <div class="table-scroll">
   <table class="api">
     <thead>
       <tr>
@@ -160,10 +183,11 @@ function vueSpelling(status: string): string {
       }
     </tbody>
   </table>
+  </div>
 
-  <h2>Comportamiento y accesibilidad</h2>
+  <h2 id="accesibilidad">Comportamiento y accesibilidad</h2>
   <p>Cada línea es una prueba que se ejecuta contra el componente de Vue y el de React. Los enunciados de las pruebas se mantienen en inglés.</p>
-  <ul>
+  <ul class="checks">
     {c.behaviours.map((b) => <li>{b.describe}</li>)}
   </ul>
 </Base>

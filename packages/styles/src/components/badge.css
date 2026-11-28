@@ -12,12 +12,12 @@
     padding-inline: var(--_padding-x);
     block-size: var(--_height);
     border: 1px solid var(--_border);
-    border-radius: var(--t-badge-radius, var(--tessen-radius-full));
+    border-radius: var(--t-badge-radius, var(--tessen-radius-sm));
     background: var(--t-badge-bg, var(--_bg));
     color: var(--t-badge-fg, var(--_fg));
     font-family: var(--tessen-font-family-sans);
     font-size: var(--_font-size);
-    font-weight: var(--tessen-font-weight-medium);
+    font-weight: var(--tessen-font-weight-semibold);
     line-height: 1;
     white-space: nowrap;
 

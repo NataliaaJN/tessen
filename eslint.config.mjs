@@ -4,7 +4,7 @@ export default [
   ...base,
   {
     // Plain browser scripts and a Node script that evaluates code in the page.
-    files: ['apps/docs/public/*.js', 'tooling/e2e/docs-smoke.mjs'],
+    files: ['apps/*/public/*.js', 'apps/shared/*.js', 'tooling/e2e/docs-smoke.mjs'],
     languageOptions: {
       globals: {
         document: 'readonly',

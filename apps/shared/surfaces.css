@@ -1,0 +1,107 @@
+/* Surfaces shared by the three apps (docs, playground, theme studio).
+ * A surface repaints the semantic --tessen-* tokens, so chrome and components change together.
+ * `data-surface` goes on <html> next to `data-tessen-theme`. These rules are unlayered on purpose:
+ * they must win over the layered token defaults. Without `data-surface` the apps use Grafito. */
+
+:root,
+:root[data-surface='grafito'] {
+  --x-bg: #0f1115;
+  --x-side: #0b0d11;
+  --x-panel: #16191f;
+  --x-raised: #1d2128;
+  --x-sunken: #0a0c0f;
+  --x-ink: #f3f5f8;
+  --x-muted: #aab2c0;
+  --x-faint: #8a93a3;
+}
+:root[data-surface='pizarra'] {
+  --x-bg: #262d3a;
+  --x-side: #212733;
+  --x-panel: #2d3544;
+  --x-raised: #374053;
+  --x-sunken: #1e2430;
+  --x-ink: #f2f4f9;
+  --x-muted: #c3cad8;
+  --x-faint: #b0b9ca;
+}
+:root[data-surface='medianoche'] {
+  --x-bg: #070b17;
+  --x-side: #050812;
+  --x-panel: #0d1325;
+  --x-raised: #141c33;
+  --x-sunken: #03050c;
+  --x-ink: #edf2fc;
+  --x-muted: #a8b4cf;
+  --x-faint: #8795b4;
+}
+:root[data-surface='porcelana'] {
+  --x-bg: #f6f7f9;
+  --x-side: #ffffff;
+  --x-panel: #ffffff;
+  --x-raised: #ffffff;
+  --x-sunken: #eceef2;
+  --x-ink: #14171d;
+  --x-muted: #4a515e;
+  --x-faint: #5d6472;
+}
+:root[data-surface='bruma'] {
+  --x-bg: #e8ebf2;
+  --x-side: #dfe3ec;
+  --x-panel: #f3f5f9;
+  --x-raised: #fcfdff;
+  --x-sunken: #dce0e9;
+  --x-ink: #1c2333;
+  --x-muted: #424b61;
+  --x-faint: #4e576c;
+}
+
+:root {
+  --x-line: color-mix(in srgb, var(--x-ink) 9%, transparent);
+  --x-line-2: color-mix(in srgb, var(--x-ink) 17%, transparent);
+  --x-hover: color-mix(in srgb, var(--x-ink) 6%, transparent);
+  --x-accent: var(--tessen-color-action-primary-default);
+  --x-on-accent: var(--tessen-color-action-primary-on);
+  --x-accent-ink: var(--tessen-color-text-link);
+  --x-accent-soft: color-mix(in srgb, var(--x-accent) 13%, transparent);
+  --x-glass: color-mix(in srgb, var(--x-panel) 78%, transparent);
+  --x-light: color-mix(in srgb, white 7%, transparent);
+  --x-shadow: 0 24px 60px -28px rgb(0 0 0 / 0.7);
+  --x-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+:root[data-surface='porcelana'],
+:root[data-surface='bruma'] {
+  --x-light: rgb(255 255 255 / 0.8);
+  --x-shadow: 0 24px 50px -30px rgb(23 31 54 / 0.35);
+}
+
+/* Repaint the component tokens with the surface. Specificity beats the theme package export. */
+:root:root {
+  --tessen-color-surface-canvas: var(--x-bg);
+  --tessen-color-surface-default: var(--x-panel);
+  --tessen-color-surface-raised: var(--x-raised);
+  --tessen-color-surface-sunken: var(--x-sunken);
+  --tessen-color-surface-overlay: var(--x-raised);
+  --tessen-color-text-primary: var(--x-ink);
+  --tessen-color-text-secondary: var(--x-muted);
+  --tessen-color-text-tertiary: var(--x-faint);
+  --tessen-color-border-subtle: var(--x-line);
+  --tessen-color-border-default: var(--x-line-2);
+  --tessen-color-input-background: color-mix(in srgb, var(--x-sunken) 55%, var(--x-panel));
+  --tessen-color-action-neutral-default: color-mix(in srgb, var(--x-ink) 8%, var(--x-raised));
+  --tessen-color-action-neutral-hover: color-mix(in srgb, var(--x-ink) 13%, var(--x-raised));
+  --tessen-color-action-neutral-active: color-mix(in srgb, var(--x-ink) 18%, var(--x-raised));
+}
+
+/* ---------- Brand lockup, shared by every app ---------- */
+.mark-dark {
+  display: block;
+}
+.mark-light {
+  display: none;
+}
+:root[data-tessen-theme='light'] .mark-dark {
+  display: none;
+}
+:root[data-tessen-theme='light'] .mark-light {
+  display: block;
+}

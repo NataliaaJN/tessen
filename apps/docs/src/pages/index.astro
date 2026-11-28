@@ -1,32 +1,172 @@
 ---
 import Base from '../layouts/Base.astro';
-import { components, byCategory, categoryLabel } from '../lib/data';
+import ComponentPreview from '../components/ComponentPreview';
+import Fan from '../components/Fan.astro';
+import HeroShowcase from '../components/HeroShowcase';
+import Icon from '../components/Icon.astro';
+import { components } from '../lib/data';
+
+const teaser = ['select', 'switch', 'slider', 'tabs', 'avatar', 'button-group'].flatMap((slug) =>
+  components.filter((c) => c.slug === slug),
+);
+const vue = `<script setup lang="ts">
+import { TButton, TSwitch } from '@tessen-ui/vue';
+import { ref } from 'vue';
+
+const sync = ref(true);
+<\/script>
+
+<template>
+  <TSwitch v-model="sync">Sincronizar</TSwitch>
+  <TButton variant="primary">Guardar</TButton>
+</template>`;
+const react = `import { Button, Switch } from '@tessen-ui/react';
+import { useState } from 'react';
+
+export function Settings() {
+  const [sync, setSync] = useState(true);
+  return (
+    <>
+      <Switch checked={sync} onCheckedChange={setSync}>
+        Sincronizar
+      </Switch>
+      <Button variant="primary">Guardar</Button>
+    </>
+  );
+}`;
 ---
 
-<Base title="Tessen">
-  <h1>Tessen</h1>
-  <p class="lead">
-    Un solo sistema de diseño para Vue 3 y React. Cada componente tiene un único contrato: las
-    mismas props, comportamiento y accesibilidad en ambos frameworks, y el mismo CSS y tokens.
-  </p>
-  <ul class="badges">
-    <li>{components.length} componentes</li>
-    <li>Vue ≥ 3.5.2</li>
-    <li>React ≥ 18.3</li>
-    <li>Listo para SSR</li>
-  </ul>
-  <p><a href="/components/">Ver todos los componentes →</a></p>
-  <h2>Por dónde empezar</h2>
-  <ul class="cards">
-    {
-      byCategory().map(([category, list]) => (
-        <li>
-          <a href={`/components/${list[0]!.slug}/`}>
-            {categoryLabel(category)}
-            <small>{list.length} componentes</small>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+<Base title="Inicio" current="home" bare>
+  <section class="intro" aria-labelledby="intro-title">
+    <div>
+      <h1 id="intro-title">Un abanico de componentes para Vue y React.</h1>
+      <p class="lead">
+        {components.length} componentes accesibles con un solo contrato, el mismo CSS y temas que
+        cambian en directo.
+      </p>
+    </div>
+    <div class="cta-row">
+      <a class="t-button" data-variant="primary" data-size="lg" href="/get-started/">Empezar</a>
+      <a class="t-button" data-variant="secondary" data-size="lg" href="/components/">
+        Ver componentes
+      </a>
+    </div>
+  </section>
+
+  <div class="desk">
+    <section class="slab fan-panel" aria-label="Abanico interactivo">
+      <Fan />
+      <div class="fan-controls">
+        <label>
+          <span>Apertura <output data-fan-out>100 %</output></span>
+          <input type="range" min="12" max="100" value="100" data-fan-spread />
+        </label>
+        <p>El material toma el acento que elijas.</p>
+      </div>
+    </section>
+
+    <section class="slab air" aria-label="Tema en directo">
+      <h2>Atmósfera</h2>
+      <h3>Acento <output data-appearance-accent-out></output></h3>
+      <div class="swatch-row" data-appearance-swatches></div>
+      <h3>Superficie <output data-surface-name>Grafito</output></h3>
+      <div class="surface-row">
+        {
+          ['grafito', 'pizarra', 'medianoche', 'porcelana', 'bruma'].map((id) => (
+            <button type="button" class="surface" data-set-surface={id} aria-pressed="false" aria-label={id} title={id}>
+              <span class="thumb" data-thumb={id} aria-hidden="true">
+                <i />
+                <b />
+                <b />
+              </span>
+            </button>
+          ))
+        }
+      </div>
+      <label class="range-row">
+        <span>Radio de esquina <output data-appearance-radius-out></output></span>
+        <input type="range" min="0" max="18" step="1" data-appearance-radius />
+      </label>
+      <div class="air-sample">
+        <button type="button" class="t-button" data-variant="primary" data-size="md">Primario</button>
+        <button type="button" class="t-button" data-variant="secondary" data-size="md">Segundo</button>
+        <button type="button" class="t-button" data-variant="outline" data-size="md">Contorno</button>
+      </div>
+    </section>
+  </div>
+
+  <section class="band" aria-labelledby="live">
+    <div class="band-head">
+      <div>
+        <h2 id="live">Así se ve en una aplicación</h2>
+        <p>Todo lo de abajo son componentes reales. Úsalos, o inspecciona cómo están hechos.</p>
+      </div>
+      <button type="button" class="chip-toggle" data-inspect-toggle aria-pressed="false">
+        <Icon name="inspect" size={16} />
+        Inspeccionar
+      </button>
+    </div>
+    <div class="slab window" data-inspect-target>
+      <HeroShowcase client:visible />
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="contract">
+    <div class="band-head">
+      <div>
+        <h2 id="contract">Se escribe en tu framework</h2>
+        <p>Mismas props y mismo comportamiento. Si Vue y React difieren, es un error.</p>
+      </div>
+    </div>
+    <div class="code-pair">
+      <figure class="editor" data-fw="vue">
+        <figcaption><span class="fw-dot" data-for="vue"></span>Settings.vue</figcaption>
+        <pre><code>{vue}</code></pre>
+      </figure>
+      <figure class="editor" data-fw="react">
+        <figcaption><span class="fw-dot" data-for="react"></span>Settings.tsx</figcaption>
+        <pre><code>{react}</code></pre>
+      </figure>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="pieces">
+    <div class="band-head">
+      <div>
+        <h2 id="pieces">Piezas para tocar</h2>
+        <p>Una muestra del catálogo.</p>
+      </div>
+      <a class="t-button" data-variant="secondary" data-size="md" href="/components/">
+        Ver los {components.length}
+      </a>
+    </div>
+    <ul class="catalog">
+      {
+        teaser.map((c) => (
+          <li class="piece">
+            <div class="piece-stage">
+              <ComponentPreview slug={c.slug} client:visible />
+            </div>
+            <a class="piece-name" href={`/components/${c.slug}/`}>
+              {c.name}
+              <Icon name="arrow" size={15} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="band tools" aria-label="Herramientas">
+    <a class="slab tool" href="/playground/">
+      <Icon name="play" size={26} />
+      <h2>Playground</h2>
+      <p>Cambia props, fuerza estados y copia el código para Vue o React.</p>
+    </a>
+    <a class="slab tool" href="/studio/">
+      <Icon name="palette" size={26} />
+      <h2>Theme Studio</h2>
+      <p>Diseña tu tema, audita el contraste y expórtalo.</p>
+    </a>
+  </section>
 </Base>

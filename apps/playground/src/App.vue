@@ -12,7 +12,12 @@ import { FORCED_STATES, WIDTHS, initialState } from './features/state/model.ts';
 import type { ForcedState, FrameworkView, Width } from './features/state/model.ts';
 import { decodeState, encodeState } from './features/state/url.ts';
 
+const base = import.meta.env.BASE_URL;
 const state = reactive(decodeState(location.hash));
+// A fresh visit previews in the same light or dark mode as the app around it.
+if (!location.hash.includes('s=') && document.documentElement.dataset.tessenTheme === 'dark') {
+  state.mode = 'dark';
+}
 const recipe = computed(() => recipeBySlug(state.slug) ?? recipes[0]!);
 const scene = computed(() => recipe.value.build(state.values));
 const vueCode = computed(() => renderScene(scene.value, 'vue'));
@@ -131,7 +136,23 @@ const shown = computed(() =>
   <div class="app">
     <a class="skip" href="#main">Saltar al contenido</a>
     <header class="bar">
-      <a class="brand" href="/">Tessen <span>Playground</span></a>
+      <a class="brand" href="/" aria-label="Tessen, inicio">
+        <img
+          class="mark mark-light"
+          :src="`${base}tessen-mark.svg`"
+          alt=""
+          width="32"
+          height="32"
+        />
+        <img
+          class="mark mark-dark"
+          :src="`${base}tessen-mark-on-dark.svg`"
+          alt=""
+          width="32"
+          height="32"
+        />
+        tessen <span>playground</span>
+      </a>
       <div class="bar-field">
         <label for="component" class="sr-only">Componente</label>
         <TNativeSelect

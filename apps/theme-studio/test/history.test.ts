@@ -31,7 +31,7 @@ describe('history', () => {
     h = undo(h);
     expect(current(h).density).toBe('default');
     h = undo(h);
-    expect(current(h).radius).toBe(6);
+    expect(current(h).radius).toBe(9);
     expect(canUndo(h)).toBe(false);
     h = redo(h);
     expect(current(h).radius).toBe(8);

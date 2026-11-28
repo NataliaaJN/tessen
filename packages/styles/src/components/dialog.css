@@ -55,6 +55,7 @@
     max-block-size: 100%;
     padding: var(--tessen-space-6);
     border-radius: var(--t-dialog-radius, var(--tessen-radius-xl));
+    border: 1px solid color-mix(in srgb, var(--tessen-color-text-primary) 12%, transparent);
     background: var(--tessen-color-surface-overlay);
     box-shadow: var(--tessen-elevation-modal);
     color: var(--tessen-color-text-primary);
